@@ -9,6 +9,7 @@ import {styles} from './styles';
 import {IconButton, TextButton, IconPress} from './buttons';
 import SoundPlayer from 'react-native-sound-player';
 import {
+  faBook,
   faEnvelope,
   faMusic,
   faPause,
@@ -36,14 +37,19 @@ const Toolbar = () => {
     }
   };
 
-  const renderPlayPauseButton = () => {
+  const renderPlayer = () => {
     const icon = paused ? faPlay : faPause;
-    return <IconPress icon={icon} onPress={() => togglePlay()} />;
+    return (
+      <View style={styles.centerView}>
+        <IconPress icon={icon} onPress={() => togglePlay()} />
+      </View>
+    );
   };
 
   const renderButtons = () => {
     return (
       <View style={styles.centerView}>
+        <IconButton url="https://ansiklopedi.subadapcocuk.org/" icon={faBook} />
         <IconButton url="https://subadapcocuk.org/" icon={faMusic} />
         <IconButton
           url="https://www.facebook.com/subadapcocuk"
@@ -68,7 +74,7 @@ const Toolbar = () => {
 
   return (
     <>
-      {renderPlayPauseButton()}
+      {renderPlayer()}
       {renderButtons()}
     </>
   );

@@ -7,20 +7,38 @@ const PURPLE = '#6B1FBF';
 
 export const songStyle = selected => {
   return {
-    backgroundColor: selected ? BLUE : GRAY,
-    flexDirection: 'row',
-    alignItems: 'center',
-    height: 100,
+    backgroundColor: selected ? PINK : 'white',
     borderRadius: 5,
-    padding: 10,
+    padding: 5,
   };
 };
 
 export const styles = StyleSheet.create({
-  album: {
+  albumView: {
+    borderColor: PURPLE,
+    borderWidth: 2,
+    borderRadius: 5,
+  },
+  albumImage: {
+    height: 150,
+    width: 150,
+  },
+  headerView: {
+    flexDirection: 'row',
+    padding: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: PURPLE,
+    alignItems: 'center',
+  },
+  titleView: {
+    width: 0,
+    flexGrow: 1,
     flex: 1,
+  },
+  songs: {
     flexWrap: 'wrap',
     flexDirection: 'row',
+    justifyContent: 'center',
   },
   container: {
     flex: 1,
@@ -44,7 +62,6 @@ export const styles = StyleSheet.create({
   textLink: {
     color: PURPLE,
     textDecorationLine: 'underline',
-    fontSize: 25,
   },
   header: {
     position: 'absolute',
@@ -74,8 +91,18 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     margin: 40,
   },
+  songView: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    margin: 5,
+    padding: 5,
+  },
+  songImage: {
+    height: 125,
+    width: 125,
+  },
   title: {
-    color: BLUE,
+    color: PURPLE,
     fontSize: 25,
     textAlign: 'center',
   },
