@@ -10,7 +10,7 @@ import {styles} from './styles';
 import SoundPlayer from 'react-native-sound-player';
 import {getSongs} from '../api/data';
 
-const Album = ({no, name, page, image}) => {
+const Album = ({no, name, page, image, releaseYear}) => {
   const [selected, setSelected] = useState(-1);
 
   const songs = getSongs(no);
@@ -36,7 +36,8 @@ const Album = ({no, name, page, image}) => {
       <View style={styles.headerView}>
         <Image style={styles.albumImage} source={{uri: image}} />
         <View style={styles.titleView}>
-          <Text style={styles.title} onPress={() => Linking.openURL(page)}>
+          <Text style={styles.albumYear}>{releaseYear}</Text>
+          <Text style={styles.albumTitle} onPress={() => Linking.openURL(page)}>
             {name}
           </Text>
         </View>

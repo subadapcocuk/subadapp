@@ -4,6 +4,7 @@ const GRAY = '#E0E0E0';
 const PINK = '#D42E94';
 const BLUE = '#529DD6';
 const PURPLE = '#6B1FBF';
+const WHITE = '#FFFFFF';
 
 export const songStyle = selected => {
   return {
@@ -14,8 +15,19 @@ export const songStyle = selected => {
 };
 
 export const styles = StyleSheet.create({
+  albumTitle: {
+    color: BLUE,
+    fontSize: 32,
+    textAlign: 'center',
+  },
+  albumYear: {
+    color: BLUE,
+    fontSize: 24,
+    textAlign: 'center',
+  },
   albumView: {
-    borderColor: PURPLE,
+    borderColor: BLUE,
+    backgroundColor:WHITE,
     borderWidth: 2,
     borderRadius: 5,
   },
@@ -26,8 +38,7 @@ export const styles = StyleSheet.create({
   headerView: {
     flexDirection: 'row',
     padding: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: PURPLE,
+    borderBottomColor: BLUE,
     alignItems: 'center',
   },
   titleView: {
@@ -60,8 +71,7 @@ export const styles = StyleSheet.create({
     margin: 5,
   },
   textLink: {
-    color: PURPLE,
-    textDecorationLine: 'underline',
+    color: BLUE,
   },
   header: {
     position: 'absolute',
@@ -100,10 +110,5 @@ export const styles = StyleSheet.create({
   songImage: {
     height: 125,
     width: 125,
-  },
-  title: {
-    color: PURPLE,
-    fontSize: 25,
-    textAlign: 'center',
   },
 });
