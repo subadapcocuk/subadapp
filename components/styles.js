@@ -1,10 +1,12 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
 
-const GRAY = '#E0E0E0';
-const PINK = '#D42E94';
-const BLUE = '#529DD6';
-const PURPLE = '#6B1FBF';
-const WHITE = '#FFFFFF';
+export const GRAY = '#E0E0E0';
+export const PINK = '#D42E94';
+export const BLUE = '#529DD6';
+export const PURPLE = '#6B1FBF';
+export const WHITE = '#FFFFFF';
+
+var deviceWidth = Dimensions.get('window').width;
 
 export const songStyle = selected => {
   return {
@@ -15,6 +17,11 @@ export const songStyle = selected => {
 };
 
 export const styles = StyleSheet.create({
+  albumsView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   albumTitle: {
     color: BLUE,
     fontSize: 32,
@@ -26,10 +33,10 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
   },
   albumView: {
-    borderColor: BLUE,
-    backgroundColor:WHITE,
-    borderWidth: 2,
-    borderRadius: 5,
+    width: deviceWidth,
+    justifyContent: 'center',
+    alignItems: 'center',
+    //flexDirection: 'row',
   },
   albumImage: {
     height: 150,

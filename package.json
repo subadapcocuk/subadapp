@@ -12,14 +12,14 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2",
     "@fortawesome/free-brands-svg-icons": "^5.15",
-    "@fortawesome/free-regular-svg-icons": "^5.15.4",
+    "@fortawesome/free-regular-svg-icons": "^5.15",
     "@fortawesome/free-solid-svg-icons": "^5.15",
     "@fortawesome/react-native-fontawesome": "^0.2",
     "lodash": "^4.17",
     "react": "^17.0",
     "react-native": "^0.65",
     "react-native-sound-player": "^0.11",
-    "react-native-svg": "^12.1.1"
+    "react-native-svg": "^12.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12",

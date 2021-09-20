@@ -787,7 +787,7 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "^0.2.36"
 
-"@fortawesome/free-regular-svg-icons@^5.15.4":
+"@fortawesome/free-regular-svg-icons@^5.15":
   version "5.15.4"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-5.15.4.tgz#b97edab436954333bbeac09cfc40c6a951081a02"
   integrity sha512-9VNNnU3CXHy9XednJ3wzQp6SwNwT3XaM26oS4Rp391GsxVYA+0oDR2J194YCIWf7jNRCYKjUCOduxdceLrx+xw==
@@ -5352,7 +5352,7 @@ react-native-sound-player@^0.11:
   resolved "https://registry.yarnpkg.com/react-native-sound-player/-/react-native-sound-player-0.11.1.tgz#5df2b017c1574fe77f164c1248b24ebe1920f2ad"
   integrity sha512-hXf0qrVWzNniYo0BWvjloGKQIi0tc81H4FghxnPmyAVG6WWx+zq3k9twrOc6Ced8b6AdxCzmJfmjb4RZH0Y+Tg==
 
-react-native-svg@^12.1.1:
+react-native-svg@^12.1:
   version "12.1.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.1.tgz#5f292410b8bcc07bbc52b2da7ceb22caf5bcaaee"
   integrity sha512-NIAJ8jCnXGCqGWXkkJ1GTzO4a3Md5at5sagYV8Vh4MXYnL4z5Rh428Wahjhh+LIjx40EE5xM5YtwyJBqOIba2Q==

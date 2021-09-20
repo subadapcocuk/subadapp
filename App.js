@@ -4,32 +4,18 @@
  */
 
 import React from 'react';
-import {ScrollView, StatusBar, useColorScheme} from 'react-native';
-import {getAlbums} from './api/data';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import Album from './components/album';
+import {View, StatusBar} from 'react-native';
 import Toolbar from './components/toolbar';
+import {styles} from './components/styles';
+import Player from './components/player';
 
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  const albums = getAlbums();
-
   return (
-    <>
-      <ScrollView style={backgroundStyle}>
-        {albums &&
-          albums.map((album, index) => (
-            <Album key={`subadap_album_${index}`} {...album} />
-          ))}
-      </ScrollView>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+    <View style={styles.albumsView}>
+      <Player />
+      <StatusBar />
       <Toolbar />
-    </>
+    </View>
   );
 };
 

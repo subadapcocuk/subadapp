@@ -12,7 +12,7 @@ const Song = ({song, playSong, selected}) => {
     <View style={styles.songView}>
       <TouchableOpacity
         style={songStyle(selected)}
-        onPress={() => playSong(song.no)}>
+        onPress={() => playSong(song)}>
         <Image style={styles.songImage} source={{uri: song.image}} />
       </TouchableOpacity>
       <Text style={styles.textLink} onPress={() => Linking.openURL(song.page)}>

@@ -3,18 +3,11 @@
  * @flow strict-local
  */
 
-import React, {useState} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {styles} from './styles';
-import {IconButton, TextButton, IconPress} from './buttons';
-import SoundPlayer from 'react-native-sound-player';
-import {
-  faBook,
-  faEnvelope,
-  faMusic,
-  faPause,
-  faPlay,
-} from '@fortawesome/free-solid-svg-icons';
+import {IconButton, TextButton} from './buttons';
+import {faBook, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faInstagram,
@@ -22,32 +15,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 
 const Toolbar = () => {
-  const [paused, setPaused] = useState(false);
-
-  const togglePlay = () => {
-    try {
-      if (paused) {
-        SoundPlayer.play();
-      } else {
-        SoundPlayer.pause();
-      }
-      setPaused(!paused);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const renderPlayer = () => {
-    const icon = paused ? faPlay : faPause;
-    return (
-      <View style={styles.centerView}>
-        <IconPress icon={icon} onPress={() => togglePlay()} />
-      </View>
-    );
-  };
-
-  const renderButtons = () => {
-    return (
+  return (
+    <>
       <View style={styles.centerView}>
         <IconButton url="https://ansiklopedi.subadapcocuk.org/" icon={faBook} />
         <IconButton url="https://subadapcocuk.org/" icon={faMusic} />
@@ -69,13 +38,6 @@ const Toolbar = () => {
           text="🄯"
         />
       </View>
-    );
-  };
-
-  return (
-    <>
-      {renderPlayer()}
-      {renderButtons()}
     </>
   );
 };
