@@ -36,7 +36,6 @@ export const styles = StyleSheet.create({
     width: deviceWidth,
     justifyContent: 'center',
     alignItems: 'center',
-    //flexDirection: 'row',
   },
   albumImage: {
     height: 150,
@@ -47,6 +46,10 @@ export const styles = StyleSheet.create({
     padding: 5,
     borderBottomColor: BLUE,
     alignItems: 'center',
+  },
+  link: {
+    textDecorationLine: 'underline',
+    color: BLUE,
   },
   titleView: {
     width: 0,

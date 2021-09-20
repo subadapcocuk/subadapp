@@ -45,3 +45,11 @@ export const TextButton = ({url, text}) => {
     </TouchableOpacity>
   );
 };
+
+export const TextPress = ({onPress, text}) => {
+  return (
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      <Text style={styles.icon}>{text}</Text>
+    </TouchableOpacity>
+  );
+};

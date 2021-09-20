@@ -3,20 +3,23 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import {View} from 'react-native';
 import {styles} from './styles';
-import {IconButton, TextButton} from './buttons';
+import {IconButton, TextButton, TextPress} from './buttons';
 import {faBook, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
 import {
   faFacebook,
   faInstagram,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import About from './about';
 
 const Toolbar = () => {
+  const [about, setAbout] = useState(false);
   return (
     <>
+    <About visible={about} close={() => setAbout(false)}/>
       <View style={styles.centerView}>
         <IconButton url="https://ansiklopedi.subadapcocuk.org/" icon={faBook} />
         <IconButton url="https://subadapcocuk.org/" icon={faMusic} />
@@ -37,6 +40,7 @@ const Toolbar = () => {
           url="http://ansiklopedi.subadapcocuk.org/index.php/Copyleft"
           text="🄯"
         />
+        <TextPress onPress={() => setAbout(true)} text="?" />
       </View>
     </>
   );
