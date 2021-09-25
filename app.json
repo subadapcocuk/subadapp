@@ -1,4 +1,33 @@
 {
-  "name": "SubadapMuzikKutusu",
-  "displayName": "Şubadap Müzik Kutusu"
+  "expo": {
+    "name": "subadap-player",
+    "slug": "subadap-player",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "subadap.player"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }

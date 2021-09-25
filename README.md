@@ -4,13 +4,15 @@
 
 ## Geliştirme
 
-Geliştirme ortamının kurulması için [Setting up the development environment](https://reactnative.dev/docs/environment-setup) yazısına bakılabilir. Komut satırı işlemleri için `React Native CLI Quickstart` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir. Aşağıdaki betikleri projenin olduğu dizinde kullanabilirsiniz:
+Geliştirme ortamı olarak [Expo](https://expo.dev/) kullanılıyor, kurulması için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için `expo-cli` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir. Aşağıdaki betikleri projenin olduğu dizinde kullanabilirsiniz:
 
 - `yarn install`: Gerekli paketleri kurar, sadece `yarn` olarak da kullanabilirsiniz.
-- `yarn start`: Metro sunucusunu başlatır.
+- `yarn start`: Expo sunucusunu başlatır.
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
 - `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
-- `yarn apk`: APK oluşturur, oluşturulan APK [android/app/build/outputs/bundle/release/](./android/app/build/outputs/bundle/release/) dizini altındadır.
+- `yarn web`: Tarayıcıda görüntülemek için.
+- `expo build:android`: Android paketi oluşturur. Oluşturulan APK [android/app/build/outputs/apk/release/](./android/app/build/outputs/apk/release) dizini altındadır.
+- `expo build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
 
 Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için [data/songs.xlsx](./data/songs.xlsx) dosyasından yararlanılabilir.
@@ -19,6 +21,23 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 - Simgeler için [FontAwesome](https://github.com/FortAwesome/react-native-fontawesome) ve sağladığı ücretsiz simgeler
 - Şarkıların MP3 biçimindeki dosyalarını çalmak için [React Native Sound Player](https://github.com/johnsonsu/react-native-sound-player)
+
+## Test etme
+
+Test etmeden önce aşağıdaki araçların kurulması gerekiyor:
+
+- [nodejs](https://nodejs.org/en/download/)
+- [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
+- [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
+
+Yerelde test etmek için aşağıdaki komutlar kullanılabilir:
+
+```
+yarn
+yarn start
+```
+
+Açılacak pencereden telefonda karekod okutularak uygulama denenebilir.
 
 ## Şubadap Çocuk
 

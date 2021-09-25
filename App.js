@@ -1,22 +1,16 @@
-/**
- * @format
- * @flow strict-local
- */
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import { View } from "react-native";
+import Toolbar from "./components/toolbar";
+import { styles } from "./components/styles";
+import Player from "./components/player";
 
-import React from 'react';
-import {View, StatusBar} from 'react-native';
-import Toolbar from './components/toolbar';
-import {styles} from './components/styles';
-import Player from './components/player';
-
-const App = () => {
+export default function App() {
   return (
     <View style={styles.albumsView}>
       <Player />
-      <StatusBar />
       <Toolbar />
+      <StatusBar style="auto" />
     </View>
   );
-};
-
-export default App;
+}
