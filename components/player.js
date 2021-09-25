@@ -17,6 +17,16 @@ const Player = () => {
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState();
 
+  Audio.setAudioModeAsync({
+    allowsRecordingIOS: false,
+    staysActiveInBackground: true,
+    interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
+    playsInSilentModeIOS: true,
+    shouldDuckAndroid: true,
+    interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+    playThroughEarpieceAndroid: false
+});
+
   const onPlayPausePressed = () => {
     if (player != null) {
       if (status.isPlaying) {
