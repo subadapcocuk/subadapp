@@ -19,12 +19,12 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 ### Kullanılan Önemli Kütüphaneler
 
-- Simgeler için [FontAwesome](https://github.com/FortAwesome/react-native-fontawesome) ve sağladığı ücretsiz simgeler
-- Şarkıların MP3 biçimindeki dosyalarını çalmak için [React Native Sound Player](https://github.com/johnsonsu/react-native-sound-player)
+- [FontAwesome](https://github.com/FortAwesome/react-native-fontawesome) tarafından sunulan ücretsiz simgeler kullanılıyor
+- [Expo AV](https://docs.expo.dev/versions/latest/sdk/av/) ortam dosyaları için kullanılıyor
 
 ## Yayınlama ve test etme
 
-Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve şu bağlantıya denenmeye hazır son sürümü itiyor: <https://expo.dev/@tekrei/subadap-player>
+Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve şu bağlantıya denenmeye hazır son sürümü itiyor: <https://expo.dev/@tekrei/subadap-player>. Bu yayınlama görevi Expo tarafından sunulan [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows) yararlanılarak eklendi.
 
 Yerelde test etmeden önce ise aşağıdaki araçların kurulması gerekiyor:
 
