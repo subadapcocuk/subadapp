@@ -3,23 +3,29 @@
  * @flow strict-local
  */
 
-import React, { useState } from 'react';
-import {View} from 'react-native';
-import {styles} from './styles';
-import {IconButton, TextButton, TextPress} from './buttons';
-import {faBook, faEnvelope, faMusic} from '@fortawesome/free-solid-svg-icons';
+import React, { useState } from "react";
+import { View } from "react-native";
+import { styles } from "./styles";
+import { IconButton, IconPress } from "./buttons";
+import {
+  faBook,
+  faCopyright,
+  faEnvelope,
+  faMusic,
+  faQuestion,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faFacebook,
   faInstagram,
   faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
-import About from './about';
+} from "@fortawesome/free-brands-svg-icons";
+import About from "./about";
 
 const Toolbar = () => {
   const [about, setAbout] = useState(false);
   return (
     <>
-    <About visible={about} close={() => setAbout(false)}/>
+      <About visible={about} close={() => setAbout(false)} />
       <View style={styles.centerView}>
         <IconButton url="https://ansiklopedi.subadapcocuk.org/" icon={faBook} />
         <IconButton url="https://subadapcocuk.org/" icon={faMusic} />
@@ -36,11 +42,13 @@ const Toolbar = () => {
           url="https://subadapcocuk.org/iletisim/"
           icon={faEnvelope}
         />
-        <TextButton
-          url="http://ansiklopedi.subadapcocuk.org/index.php/Copyleft"
-          text="🄯"
-        />
-        <TextPress onPress={() => setAbout(true)} text="?" />
+        <View style={{ transform: [{ rotate: "180deg" }] }}>
+          <IconButton
+            url="http://ansiklopedi.subadapcocuk.org/index.php/Copyleft"
+            icon={faCopyright}
+          />
+        </View>
+        <IconPress onPress={() => setAbout(true)} icon={faQuestion} />
       </View>
     </>
   );
