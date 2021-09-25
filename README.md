@@ -1,8 +1,8 @@
 # Şubadap Müzik Çalar
 
-[Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player), [Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen ve [Apache Lisansı 2.0](./LICENSE) kapsamında yayınlanan bir [React Native](https://reactnative.dev/) uygulamasıdır.
+[Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player), [Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen ve [Apache Lisansı 2.0](./LICENSE) kapsamında yayınlanan bir [Expo](https://expo.dev/) kullanılarak geliştirilen bir [React](https://reactnative.dev/) uygulamasıdır.
 
-[![Expo Publish](https://github.com/kinefi/subadap-player/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadap-player/actions/workflows/main.yml) (<https://expo.dev/@kinefi/subadap-player>)
+[![Expo Publish](https://github.com/kinefi/subadap-player/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadap-player/actions/workflows/main.yml) <https://expo.dev/@kinefi/subadap-player>
 
 ## Geliştirme
 
