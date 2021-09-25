@@ -1,18 +1,28 @@
 # Şubadap Müzik Çalar
 
-[Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player), [Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen ve [Apache Lisansı 2.0](./LICENSE) kapsamında yayınlanan bir [Expo](https://expo.dev/) kullanılarak geliştirilen bir [React](https://reactnative.dev/) uygulamasıdır.
-
 [![Expo Publish](https://github.com/kinefi/subadap-player/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadap-player/actions/workflows/main.yml) <https://expo.dev/@kinefi/subadap-player>
+
+[Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player), [Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen ve [Apache Lisansı 2.0](./LICENSE) kapsamında yayınlanan bir uygulamadır. 
 
 ## Geliştirme
 
-Geliştirme ortamı olarak [Expo](https://expo.dev/) kullanılıyor, kurulması için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için `expo-cli` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir. Aşağıdaki betikleri projenin olduğu dizinde kullanabilirsiniz:
+[Expo](https://expo.dev/) kullanılarak geliştirilen bir [React Native](https://reactnative.dev/) uygulamasıdır.
+
+Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için `expo-cli` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
+
+Özetle aşağıdaki uygulamaları sırayla kurmak gerekiyor:
+- [node](https://nodejs.org/en/download/)
+- [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
+- [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
+
+Ortam hazır olduktan sonra aşağıdaki betikleri projenin olduğu dizinde kullanabilirsiniz:
 
 - `yarn install`: Gerekli paketleri kurar, sadece `yarn` olarak da kullanabilirsiniz.
 - `yarn start`: Expo sunucusunu başlatır.
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
 - `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
+- `expo publish`: Mevcut sürümü [Expo projesine](https://expo.dev/@kinefi/subadap-player) gönderir.
 - `expo build:android`: Android paketi oluşturur.
 - `expo build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
@@ -28,20 +38,15 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player) itiyor. Bu yayınlama görevi Expo tarafından sunulan [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows) yararlanılarak eklendi.
 
-Yerelde test etmeden önce ise aşağıdaki araçların kurulması gerekiyor:
-
-- [nodejs](https://nodejs.org/en/download/)
-- [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
-- [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
-
-Daha sonra aşağıdaki komutlar kullanılabilir:
+Yerelde test etmek için şu komutlar kullanılabilir:
 
 ```
 yarn
 yarn start
 ```
+⚠️ Bu komutların çalışması için yukarıda bağlantıları verilen `node`, `yarn` ve `expo-cli` araçlarının kurulu olması gerekiyor.
 
-Açılacak pencereden telefonda karekod okutularak uygulama denenebilir.
+Komut satırındaki yönergelere uyulabilir veya açılacak pencereden telefonda karekod okutularak uygulama denenebilir.
 
 ## Şubadap Çocuk
 
