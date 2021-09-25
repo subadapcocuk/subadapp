@@ -37,6 +37,12 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  webview: {
+    width: deviceWidth,
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
   albumImage: {
     height: 150,
     width: 150,
