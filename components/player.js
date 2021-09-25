@@ -1,8 +1,3 @@
-/**
- * @format
- * @flow strict-local
- */
-
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Audio } from "expo-av";
@@ -24,8 +19,8 @@ const Player = () => {
     playsInSilentModeIOS: true,
     shouldDuckAndroid: true,
     interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-    playThroughEarpieceAndroid: false
-});
+    playThroughEarpieceAndroid: false,
+  });
 
   const onPlayPausePressed = () => {
     if (player != null) {

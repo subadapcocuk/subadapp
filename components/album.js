@@ -1,15 +1,10 @@
-/**
- * @format
- * @flow strict-local
- */
+import React, { useState } from "react";
+import { View, Text, Linking, ScrollView, Image } from "react-native";
+import Song from "./song";
+import { styles } from "./styles";
+import { getSongs } from "../api/data";
 
-import React, {useState} from 'react';
-import {View, Text, Linking, ScrollView, Image} from 'react-native';
-import Song from './song';
-import {styles} from './styles';
-import {getSongs} from '../api/data';
-
-const Album = ({no, name, page, image, releaseYear, playSong, stopSong}) => {
+const Album = ({ no, name, page, image, releaseYear, playSong, stopSong }) => {
   const [selected, setSelected] = useState(-1);
   const songs = getSongs(no);
 
@@ -17,18 +12,19 @@ const Album = ({no, name, page, image, releaseYear, playSong, stopSong}) => {
     <ScrollView>
       <View style={styles.albumView}>
         <View style={styles.headerView}>
-          <Image style={styles.albumImage} source={{uri: image}} />
+          <Image style={styles.albumImage} source={{ uri: image }} />
           <View style={styles.titleView}>
             <Text style={styles.albumYear}>{releaseYear}</Text>
             <Text
               style={styles.albumTitle}
-              onPress={() => Linking.openURL(page)}>
+              onPress={() => Linking.openURL(page)}
+            >
               {name}
             </Text>
           </View>
         </View>
         <View style={styles.songs}>
-          {songs.map(song => (
+          {songs.map((song) => (
             <Song
               key={`subadap_sarki_${no}_${song.no}`}
               song={song}

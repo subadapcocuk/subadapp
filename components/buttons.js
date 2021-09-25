@@ -1,18 +1,14 @@
-/**
- * @format
- * @flow strict-local
- */
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { Linking, Text, TouchableOpacity } from "react-native";
+import { styles, BLUE } from "./styles";
 
-import React from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
-import {Linking, Text, TouchableOpacity} from 'react-native';
-import {styles, BLUE} from './styles';
-
-export const IconButton = ({url, icon, color = BLUE}) => {
+export const IconButton = ({ url, icon, color = BLUE }) => {
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => Linking.openURL(url)}>
+      onPress={() => Linking.openURL(url)}
+    >
       <FontAwesomeIcon
         icon={icon}
         style={styles.icon}
@@ -23,7 +19,7 @@ export const IconButton = ({url, icon, color = BLUE}) => {
   );
 };
 
-export const IconPress = ({onPress, icon, color = BLUE}) => {
+export const IconPress = ({ onPress, icon, color = BLUE }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <FontAwesomeIcon
@@ -36,17 +32,18 @@ export const IconPress = ({onPress, icon, color = BLUE}) => {
   );
 };
 
-export const TextButton = ({url, text}) => {
+export const TextButton = ({ url, text }) => {
   return (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => Linking.openURL(url)}>
+      onPress={() => Linking.openURL(url)}
+    >
       <Text style={styles.icon}>{text}</Text>
     </TouchableOpacity>
   );
 };
 
-export const TextPress = ({onPress, text}) => {
+export const TextPress = ({ onPress, text }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <Text style={styles.icon}>{text}</Text>
