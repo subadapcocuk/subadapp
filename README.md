@@ -11,7 +11,7 @@ Geliştirme ortamı olarak [Expo](https://expo.dev/) kullanılıyor, kurulması 
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
 - `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
-- `expo build:android`: Android paketi oluşturur. Oluşturulan APK [android/app/build/outputs/apk/release/](./android/app/build/outputs/apk/release) dizini altındadır.
+- `expo build:android`: Android paketi oluşturur.
 - `expo build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
 
