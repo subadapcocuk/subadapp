@@ -22,9 +22,9 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 - Simgeler için [FontAwesome](https://github.com/FortAwesome/react-native-fontawesome) ve sağladığı ücretsiz simgeler
 - Şarkıların MP3 biçimindeki dosyalarını çalmak için [React Native Sound Player](https://github.com/johnsonsu/react-native-sound-player)
 
-## Test etme
+## Yayınlama ve test etme
 
-Ana dala eklenen son hali şu bağlantıda denenmeye açık bir şekilde sunuluyor: <https://expo.dev/@tekrei/subadap-player>
+Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve şu bağlantıya denenmeye hazır son sürümü itiyor: <https://expo.dev/@tekrei/subadap-player>
 
 Yerelde test etmeden önce ise aşağıdaki araçların kurulması gerekiyor:
 
