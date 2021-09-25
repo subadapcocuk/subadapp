@@ -24,7 +24,7 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 ## Yayınlama ve test etme
 
-Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve Expo'ya [denenmeye hazır son sürümü](https://expo.dev/@tekrei/subadap-player) itiyor. Bu yayınlama görevi Expo tarafından sunulan [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows) yararlanılarak eklendi.
+Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player) itiyor. Bu yayınlama görevi Expo tarafından sunulan [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows) yararlanılarak eklendi.
 
 Yerelde test etmeden önce ise aşağıdaki araçların kurulması gerekiyor:
 
