@@ -24,13 +24,15 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 ## Test etme
 
-Test etmeden önce aşağıdaki araçların kurulması gerekiyor:
+Ana dala eklenen son hali şu bağlantıda denenmeye açık bir şekilde sunuluyor: <https://expo.dev/@tekrei/subadap-player>
+
+Yerelde test etmeden önce ise aşağıdaki araçların kurulması gerekiyor:
 
 - [nodejs](https://nodejs.org/en/download/)
 - [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
 
-Yerelde test etmek için aşağıdaki komutlar kullanılabilir:
+Daha sonra aşağıdaki komutlar kullanılabilir:
 
 ```
 yarn
