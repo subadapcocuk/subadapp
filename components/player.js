@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import { Audio } from "expo-av";
-import { faPause, faPlay, faStop } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPause,
+  faPlay,
+  faReply,
+  faStop,
+} from "@fortawesome/free-solid-svg-icons";
 import { getAlbums } from "../api/data";
 import Album from "./album";
 import { styles, BLUE, GRAY } from "./styles";
@@ -32,6 +37,16 @@ const Player = () => {
     }
   };
 
+  const onLoopPressed = () => {
+    if (player != null) {
+      player.setIsLoopingAsync(!status.isLooping);
+    }
+  };
+
+  const onStopPressed = () => {
+    player && player.stopAsync();
+  };
+
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
@@ -56,7 +71,7 @@ const Player = () => {
           shouldCorrectPitch: status.shouldCorrectPitch,
           volume: status.volume,
           isMuted: status.muted,
-          //isLooping: status.loopingType === LOOPING_TYPE_ONE
+          isLooping: status.loopingType,
         },
         onPlaybackStatusUpdate
       );
@@ -64,10 +79,6 @@ const Player = () => {
     } catch (error) {
       console.error(error);
     }
-  };
-
-  const onStopPressed = () => {
-    player && player.stopAsync();
   };
 
   const albums = getAlbums();
@@ -96,6 +107,11 @@ const Player = () => {
           icon={faStop}
           color={status.isPlaying ? BLUE : GRAY}
           onPress={() => onStopPressed()}
+        />
+        <IconPress
+          icon={faReply}
+          color={status.isLooping ? BLUE : GRAY}
+          onPress={() => onLoopPressed()}
         />
       </View>
     </>
