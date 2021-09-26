@@ -25,8 +25,8 @@ export default function App() {
           javaScriptEnabled
         />
       )}
-      {!url && <Player />}
-      <Toolbar openUrl={openUrl} />
+      {!url && <Player {...{openUrl}} />}
+      <Toolbar {...{openUrl}} />
       <StatusBar style="auto" />
     </SafeAreaView>
   );

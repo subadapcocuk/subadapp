@@ -12,7 +12,7 @@ import Album from "./album";
 import { styles, BLUE, GRAY } from "./styles";
 import { IconPress } from "./buttons";
 
-const Player = () => {
+const Player = ({ openUrl }) => {
   //TODO: Kapsamlı playlist: https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState();
@@ -27,7 +27,7 @@ const Player = () => {
     playThroughEarpieceAndroid: false,
   });
 
-  const onPlayPausePressed = () => {
+  const playPause = () => {
     if (player != null) {
       if (status.isPlaying) {
         player.pauseAsync();
@@ -37,13 +37,13 @@ const Player = () => {
     }
   };
 
-  const onLoopPressed = () => {
+  const toggleLoop = () => {
     if (player != null) {
       player.setIsLoopingAsync(!status.isLooping);
     }
   };
 
-  const onStopPressed = () => {
+  const stopSong = () => {
     player && player.stopAsync();
   };
 
@@ -90,28 +90,25 @@ const Player = () => {
           albums.map((album, index) => (
             <Album
               key={`subadap_album_${index}`}
-              {...album}
-              playSong={playSong}
-              stopSong={onStopPressed}
+              {...{ album, playSong, openUrl, stopSong }}
             />
           ))}
       </ScrollView>
       <View style={styles.centerView}>
-        {/*<IconPress icon={faRedo} onPress={() => toggleRepeat()} />*/}
         <IconPress
           icon={status.isPlaying ? faPause : faPlay}
           color={BLUE}
-          onPress={() => onPlayPausePressed()}
+          onPress={() => playPause()}
         />
         <IconPress
           icon={faStop}
           color={status.isPlaying ? BLUE : GRAY}
-          onPress={() => onStopPressed()}
+          onPress={() => stopSong()}
         />
         <IconPress
           icon={faReply}
           color={status.isLooping ? BLUE : GRAY}
-          onPress={() => onLoopPressed()}
+          onPress={() => toggleLoop()}
         />
       </View>
     </>

@@ -1,7 +1,8 @@
 import React from "react";
 import Dialog from "react-native-dialog";
-import { Linking, Text } from "react-native";
+import { Text } from "react-native";
 import { styles } from "./styles";
+import * as WebBrowser from "expo-web-browser";
 
 const About = ({ visible, close }) => {
   return (
@@ -9,14 +10,18 @@ const About = ({ visible, close }) => {
       <Dialog.Title>Şubadap Çocuk Müzik Çalar</Dialog.Title>
       <Dialog.Description>
         <Text
-          onPress={() => Linking.openURL("https://subadapcocuk.org")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://subadapcocuk.org")
+          }
           style={styles.link}
         >
           Şubadap Çocuk
         </Text>{" "}
         için{" "}
         <Text
-          onPress={() => Linking.openURL("https://github.com/kinefi")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://github.com/kinefi")
+          }
           style={styles.link}
         >
           Kinefi
@@ -24,7 +29,7 @@ const About = ({ visible, close }) => {
         tarafından geliştirilmiştir.{" "}
         <Text
           onPress={() =>
-            Linking.openURL(
+            WebBrowser.openBrowserAsync(
               "https://github.com/kinefi/subadap-player/blob/main/LICENSE"
             )
           }
@@ -35,7 +40,9 @@ const About = ({ visible, close }) => {
         kapsamında yayınlanan{" "}
         <Text
           onPress={() =>
-            Linking.openURL("https://github.com/kinefi/subadap-player")
+            WebBrowser.openBrowserAsync(
+              "https://github.com/kinefi/subadap-player"
+            )
           }
           style={styles.link}
         >
@@ -44,7 +51,7 @@ const About = ({ visible, close }) => {
         . Tüm şarkılara, kitaplara ve ek bilgilere ulaşmak için{" "}
         <Text
           onPress={() =>
-            Linking.openURL("https://ansiklopedi.subadapcocuk.org")
+            WebBrowser.openBrowserAsync("https://ansiklopedi.subadapcocuk.org")
           }
           style={styles.link}
         >
