@@ -5,6 +5,7 @@ export const PINK = "#D42E94";
 export const BLUE = "#529DD6";
 export const PURPLE = "#6B1FBF";
 export const WHITE = "#FFFFFF";
+export const GREEN = "#009688";
 
 var deviceWidth = Dimensions.get("window").width;
 
@@ -126,5 +127,18 @@ export const styles = StyleSheet.create({
   songImage: {
     height: 125,
     width: 125,
+  },
+  activityIndicatorStyle: {
+    flex: 1,
+    position: "absolute",
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: "auto",
+    marginBottom: "auto",
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    justifyContent: "center",
   },
 });

@@ -26,15 +26,18 @@ const Toolbar = ({ openUrl }) => {
         <IconPress onPress={() => openUrl(null)} icon={faMusic} />
         <IconButton url="https://ansiklopedi.subadapcocuk.org/" icon={faBook} />
         <IconButton url="https://subadapcocuk.org/" icon={faLink} />
-        <IconButton
-          url="https://www.facebook.com/subadapcocuk"
+        <IconPress
+          onPress={() => openUrl("https://www.facebook.com/subadapcocuk")}
           icon={faFacebook}
         />
-        <IconButton
-          url="https://www.instagram.com/subadapcocuk"
+        <IconPress
+          onPress={() => openUrl("https://www.instagram.com/subadapcocuk")}
           icon={faInstagram}
         />
-        <IconButton url="https://twitter.com/subadap" icon={faTwitter} />
+        <IconPress
+          onPress={() => openUrl("https://twitter.com/subadap")}
+          icon={faTwitter}
+        />
         <IconPress
           onPress={() => openUrl("https://subadapcocuk.org/iletisim/")}
           icon={faEnvelope}
