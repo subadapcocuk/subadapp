@@ -20,6 +20,7 @@
     "web": "expo start --web",
     "apk": "expo build:android -t apk",
     "arc": "expo build:ios -t archive",
+    "version": "standard-version",
     "eject": "expo eject"
   },
   "dependencies": {
