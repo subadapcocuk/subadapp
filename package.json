@@ -1,5 +1,18 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "license": "Apache-2.0",
+  "version": "0.1.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kinefi/subadap-player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kinefi/subadap-player/issues"
+  },
+  "funding": {
+    "type": "Şubadap Çocuk Kreosus",
+    "url": "https://www.kreosus.com/subadapcocuk"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -35,7 +48,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9",
-    "expo-cli": "^4.12"
-  },
-  "private": true
+    "expo-cli": "^4.12",
+    "standard-version": "^7.1",
+    "standard-version-expo": "^1.0"
+  }
 }
