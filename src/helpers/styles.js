@@ -1,5 +1,4 @@
 import { StyleSheet, Dimensions } from "react-native";
-
 export const GRAY = "#E0E0E0";
 export const PINK = "#D42E94";
 export const BLUE = "#529DD6";
@@ -7,7 +6,7 @@ export const PURPLE = "#6B1FBF";
 export const WHITE = "#FFFFFF";
 export const GREEN = "#009688";
 
-var deviceWidth = Dimensions.get("window").width;
+const deviceWidth = Dimensions.get("window").width;
 
 export const songStyle = (selected) => {
   return {
@@ -76,6 +75,9 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     color: BLUE,
   },
+  menu: {
+    flex: 1,
+  },
   horizontal: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -106,10 +108,9 @@ export const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    justifyContent: "center",
+    //justifyContent: "center",
     height: 50,
-    width: 50,
-    borderRadius: 5,
+    flexDirection: "row",
   },
   playButton: {
     flexDirection: "row",

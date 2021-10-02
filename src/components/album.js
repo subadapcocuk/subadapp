@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import Song from "./song";
-import { styles } from "./styles";
+import { styles } from "../helpers/styles";
 import { getSongs } from "../api/data";
 
 const Album = ({ album, playSong, stopSong, openUrl }) => {
