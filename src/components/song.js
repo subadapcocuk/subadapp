@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity, View, Text } from "react-native";
-import { styles, songStyle } from "./styles";
+import { styles, songStyle } from "../helpers/styles";;
 
 const Song = ({ song, playSong, selected, openUrl }) => {
   return (

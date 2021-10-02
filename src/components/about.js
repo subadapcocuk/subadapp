@@ -1,8 +1,8 @@
 import React from "react";
 import Dialog from "react-native-dialog";
 import { Text } from "react-native";
-import { styles } from "./styles";
 import * as WebBrowser from "expo-web-browser";
+import { styles } from "../helpers/styles";
 
 const About = ({ visible, close }) => {
   return (

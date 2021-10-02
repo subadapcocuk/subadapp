@@ -1,5 +1,5 @@
-import albums from '../data/albums.json';
-import songs from '../data/songs.json';
+import albums from '../../data/albums.json';
+import songs from '../../data/songs.json';
 
 export const getAlbums = () => {
   return albums;

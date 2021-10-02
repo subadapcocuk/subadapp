@@ -9,7 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getAlbums } from "../api/data";
 import Album from "./album";
-import { styles, BLUE, GRAY } from "./styles";
+import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
 
 const Player = ({ openUrl }) => {
