@@ -50,7 +50,7 @@
   "devDependencies": {
     "@babel/core": "^7.9",
     "expo-cli": "^4.12",
-    "standard-version": "^7.1",
+    "standard-version": "^8.0",
     "standard-version-expo": "^1.0"
   }
 }
