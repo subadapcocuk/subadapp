@@ -13,6 +13,7 @@
 Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için `expo-cli` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
 
 Özetle aşağıdaki uygulamaları sırayla kurmak gerekiyor:
+
 - [node](https://nodejs.org/en/download/)
 - [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
@@ -40,12 +41,20 @@ Tüm [albümler](./data/albums.json) ve [şarkılar](./data/songs.json) JSON ola
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player) itiyor. Bu yayınlama görevi Expo tarafından sunulan [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows) yararlanılarak eklendi.
 
+Sürüm değiştirmek için:
+
+```bash
+yarn standard-version --release-as <patch, minor, major>
+git push --follow-tags origin develop
+```
+
 Yerelde test etmek için şu komutlar kullanılabilir:
 
-```
+```bash
 yarn
 yarn start
 ```
+
 ⚠️ Bu komutların çalışması için yukarıda bağlantıları verilen `node`, `yarn` ve `expo-cli` araçlarının kurulu olması gerekiyor.
 
 Komut satırındaki yönergelere uyulabilir veya açılacak pencereden telefonda karekod okutularak uygulama denenebilir.
