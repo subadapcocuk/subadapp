@@ -1,6 +1,13 @@
 import React from "react";
-import { NavigationService } from "./src/services/navigation";
+import { StatusBar } from "expo-status-bar";
+import { ContextProvider } from "./src/services/context";
+import { Main } from "./src/main";
 
 export default function App() {
-  return <NavigationService />;
+  return (
+    <ContextProvider>
+      <Main />
+      <StatusBar style="auto" />
+    </ContextProvider>
+  );
 }

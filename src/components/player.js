@@ -7,12 +7,13 @@ import {
   faReply,
   faStop,
 } from "@fortawesome/free-solid-svg-icons";
-import { getAlbums } from "../api/data";
 import Album from "./album";
 import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
+import { useAppContext } from "../services/context";
 
 const Player = ({ openUrl }) => {
+  const { albums } = useAppContext();
   //TODO: Kapsamlı playlist: https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState();
@@ -81,8 +82,6 @@ const Player = ({ openUrl }) => {
     }
   };
 
-  const albums = getAlbums();
-
   return (
     <>
       <ScrollView horizontal pagingEnabled>
@@ -90,7 +89,7 @@ const Player = ({ openUrl }) => {
           albums.map((album, index) => (
             <Album
               key={`subadap_album_${index}`}
-              {...{ album, playSong, openUrl, stopSong }}
+              {...{ album, playSong, stopSong, openUrl }}
             />
           ))}
       </ScrollView>

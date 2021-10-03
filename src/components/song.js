@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, TouchableOpacity, View, Text } from "react-native";
-import { styles, songStyle } from "../helpers/styles";;
+import { styles, songStyle } from "../helpers/styles";
+import { useAppContext } from "../services/context";
 
 const Song = ({ song, playSong, selected, openUrl }) => {
   return (
@@ -11,10 +12,7 @@ const Song = ({ song, playSong, selected, openUrl }) => {
       >
         <Image style={styles.songImage} source={{ uri: song.image }} />
       </TouchableOpacity>
-      <Text
-        style={styles.textLink}
-        onPress={() => openUrl(song.page)}
-      >
+      <Text style={styles.textLink} onPress={() => openUrl(song.page)}>
         {song.no} - {song.name}
       </Text>
     </View>

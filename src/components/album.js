@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import Song from "./song";
-import { styles } from "../helpers/styles";
-import { getSongs } from "../api/data";
+import { styles } from "../helpers/";
+import { useAppContext } from "../services/context";
 
 const Album = ({ album, playSong, stopSong, openUrl }) => {
+  const { getSongs } = useAppContext();
   const [selected, setSelected] = useState(-1);
   const songs = getSongs(album.no);
 
