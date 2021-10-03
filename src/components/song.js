@@ -3,12 +3,18 @@ import { Image, TouchableOpacity, View, Text } from "react-native";
 import { styles, songStyle } from "../helpers/styles";
 import { useAppContext } from "../services/context";
 
-const Song = ({ song, playSong, selected, openUrl }) => {
+const Song = ({ song, openUrl }) => {
+  const { addSong, playlist } = useAppContext();
+
+  const selected =
+    playlist.findIndex((o) => o.albumNo === song.albumNo && o.no === song.no) >
+    -1;
+
   return (
     <View style={styles.songView}>
       <TouchableOpacity
         style={songStyle(selected)}
-        onPress={() => playSong(song)}
+        onPress={() => addSong(song)}
       >
         <Image style={styles.songImage} source={{ uri: song.image }} />
       </TouchableOpacity>
