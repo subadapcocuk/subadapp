@@ -15,21 +15,30 @@ import { getAlbums, getSongs } from "../api/data";
 import { Swipeable } from "react-native-gesture-handler";
 
 const Player = () => {
+  // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
-  const [player, setPlayer] = useState();
   const [currentSong, setCurrentSong] = useState(-1);
   const [playlist, setPlaylist] = useState([]);
+
+  const player = React.useRef(new Audio.Sound());
+
+  const onPlaybackStatusUpdate = (status) => {
+    setStatus(status);
+    if (status.didJustFinish) {
+      playSong();
+    }
+  };
+
+  player.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
 
   const songs = getSongs();
   const albums = getAlbums();
 
   const addSong = (song) => {
-    console.log("add song");
     setPlaylist([...playlist, song]);
   };
 
   const removeSong = (song) => {
-    console.log("remove song");
     setPlaylist(playlist.filter((o) => o !== song));
   };
 
@@ -64,12 +73,13 @@ const Player = () => {
       [];
   });
 
-  const playPause = () => {
-    if (player != null) {
-      if (status.isPlaying) {
-        player.pauseAsync();
+  const playPause = async () => {
+    const result = await player.current.getStatusAsync();
+    if (result.isLoaded) {
+      if (result.isPlaying) {
+        player.current.pauseAsync();
       } else {
-        player.playAsync();
+        player.current.playAsync();
       }
     } else {
       playSong();
@@ -77,37 +87,27 @@ const Player = () => {
   };
 
   const toggleLoop = () => {
-    player && player.setIsLoopingAsync(!status.isLooping);
+    player.current.setIsLoopingAsync(!status.isLooping);
   };
 
   const stopPlayer = () => {
-    player && player.stopAsync();
-  };
-
-  const onPlaybackStatusUpdate = (status) => {
-    if (status.isLoaded) {
-      setStatus(status);
-    }
-    if (status.didJustFinish && !status.isLooping) {
-      playSong();
-      setStatus(status);
-    }
+    player.current.stopAsync();
   };
 
   useEffect(() => {
     console.log("currentSong", currentSong);
     console.log("current playlist", playlist);
-  }, [currentSong]);
+  }, [currentSong, playlist]);
 
   const playSong = async () => {
     try {
       //unload previous song
-      player && (await player.unloadAsync());
+      await player.current.unloadAsync();
       const nextSong = currentSong < playlist.length ? currentSong + 1 : 0;
       const song = songs[playlist[nextSong]];
       setCurrentSong(nextSong);
       if (song) {
-        const { sound } = await Audio.Sound.createAsync(
+        await player.current.loadAsync(
           { uri: song.url },
           {
             shouldPlay: true,
@@ -116,10 +116,8 @@ const Player = () => {
             volume: status.volume,
             isMuted: status.muted,
             isLooping: status.loopingType,
-          },
-          onPlaybackStatusUpdate
+          }
         );
-        setPlayer(sound);
       } else {
         Alert.alert("Çalma listesi boş", "Lütfen listeye şarkı ekleyin!");
       }
@@ -187,7 +185,7 @@ const Player = () => {
             {getSongTitle(songs[playlist[currentSong]])}
           </Text>
         )}
-        {status?.positionMillis > 0 && (
+        {status && (
           <Progress.Bar
             style={{ width: "100%" }}
             color={PURPLE}
