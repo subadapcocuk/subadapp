@@ -42,8 +42,13 @@ export const Menu = ({ navigation }) => {
       <View>
         <IconPress
           onPress={() => navigation.navigate("Home")}
-          icon={faMusic}
+          icon={faHome}
           text="Albümler"
+        />
+        <IconPress
+          onPress={() => navigation.navigate("Playlist")}
+          icon={faMusic}
+          text="Çalma Listesi"
         />
         <IconPress
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org/")}

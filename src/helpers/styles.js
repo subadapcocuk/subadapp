@@ -10,9 +10,20 @@ const deviceWidth = Dimensions.get("window").width;
 
 export const songStyle = (selected) => {
   return {
-    backgroundColor: selected ? PINK : "white",
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: selected ? PURPLE : "white",
     borderRadius: 5,
-    padding: 5,
+    alignItems: "center",
+    padding: 10,
+  };
+};
+
+export const songText = (selected) => {
+  return {
+    color: selected ? "white" : PURPLE,
+    borderRadius: 5,
+    padding: 10,
   };
 };
 
@@ -46,6 +57,25 @@ export const styles = StyleSheet.create({
   albumImage: {
     height: 150,
     width: 150,
+  },
+  bottomView: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    position: "absolute",
+    bottom: 0,
+  },
+  playlistButtons: {
+    flexDirection: "row",
+    alignSelf: "stretch",
+    justifyContent: "space-around",
+    width: "100%",
+  },
+  topView: {
+    justifyContent: "space-around",
+    width: "100%",
+    position: "absolute",
+    top: 0,
   },
   headerView: {
     flexDirection: "row",
@@ -118,6 +148,22 @@ export const styles = StyleSheet.create({
     height: 120,
     borderRadius: 5,
     margin: 40,
+  },
+  playlistSongView: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  playlistImage: {
+    height: 50,
+    width: 50,
+  },
+  songStyle :{
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderRadius: 5,
+    alignItems: "center",
+    padding: 10,
   },
   songView: {
     flexDirection: "column",

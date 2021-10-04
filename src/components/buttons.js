@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Text, TouchableOpacity } from "react-native";
-import { styles, BLUE } from "../helpers/styles";
+import { styles, PURPLE } from "../helpers/styles";
 
 export const IconPress = ({
   onPress,
   icon,
-  color = BLUE,
+  color = PURPLE,
   size = 24,
   text = null,
 }) => {

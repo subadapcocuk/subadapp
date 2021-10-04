@@ -5,7 +5,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import "react-native-gesture-handler";
 import "react-native-get-random-values";
 import Menu from "../components/menu";
-import { Page, Home } from "../screens/";
+import { Page, Playlist, Home } from "../screens/";
 
 const Drawer = createDrawerNavigator();
 
@@ -18,6 +18,11 @@ export const NavigationService = () => {
         //screenOptions={{ headerShown: false }}
       >
         <Drawer.Screen name="Home" component={Home} options={{ title: "" }} />
+        <Drawer.Screen
+          name="Playlist"
+          component={Playlist}
+          options={{ title: "" }}
+        />
         <Drawer.Screen name="Page" component={Page} options={{ title: "" }} />
       </Drawer.Navigator>
     </NavigationContainer>

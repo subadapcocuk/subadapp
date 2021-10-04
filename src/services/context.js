@@ -21,16 +21,6 @@ export const ContextProvider = ({ children }) => {
     setPlaylist([]);
   };
 
-  const getNextSong = () => {
-    if (playlist.length > 0) {
-      const song = playlist[0];
-      setPlaylist(playlist.slice(1));
-      return song;
-    } else {
-      return null;
-    }
-  };
-
   const getSongs = (albumNo) => {
     return songs.filter((s) => s.albumNo === albumNo);
   };
@@ -43,7 +33,6 @@ export const ContextProvider = ({ children }) => {
         playlist,
         addSong,
         removeSong,
-        getNextSong,
         getSongs,
         setLoading,
         clearPlaylist,
