@@ -41,14 +41,14 @@ export const Menu = ({ navigation }) => {
       {/*<Text style={{ fontSize: 24 }}>Şubadap Müzik Çalar</Text>*/}
       <View>
         <IconPress
-          onPress={() => navigation.navigate("Home")}
-          icon={faHome}
-          text="Albümler"
-        />
-        <IconPress
           onPress={() => navigation.navigate("Playlist")}
           icon={faMusic}
           text="Tüm Şarkılar"
+        />
+        <IconPress
+          onPress={() => navigation.navigate("Albums")}
+          icon={faHome}
+          text="Albümler"
         />
         <IconPress
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org/")}
