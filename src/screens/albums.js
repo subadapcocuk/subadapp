@@ -3,7 +3,7 @@ import { ScrollView } from "react-native";
 import { getAlbums } from "../api/data";
 import Album from "../components/album";
 
-export const Home = ({ navigation }) => {
+export const Albums = ({ navigation }) => {
   const openUrl = (url) => {
     navigation.navigate("Page", { url });
   };
@@ -17,4 +17,4 @@ export const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default Albums;
