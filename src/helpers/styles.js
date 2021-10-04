@@ -28,11 +28,6 @@ export const songText = (selected) => {
 };
 
 export const styles = StyleSheet.create({
-  albumsView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   albumTitle: {
     color: BLUE,
     fontSize: 32,
@@ -62,6 +57,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
+    backgroundColor: "white",
     position: "absolute",
     bottom: 0,
   },
@@ -157,19 +153,14 @@ export const styles = StyleSheet.create({
     height: 50,
     width: 50,
   },
-  songStyle :{
-    flex: 1,
-    flexDirection: "row",
+  songStyle: {
+    flexDirection: "column",
     backgroundColor: "white",
     borderRadius: 5,
-    alignItems: "center",
-    padding: 10,
-  },
-  songView: {
-    flexDirection: "column",
-    alignItems: "center",
     margin: 5,
     padding: 5,
+    alignItems: "center",
+    padding: 10,
   },
   songImage: {
     height: 125,

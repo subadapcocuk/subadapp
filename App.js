@@ -1,13 +1,14 @@
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { ContextProvider } from "./src/services/context";
-import { Main } from "./src/main";
+import { NavigationService } from "./src/services/navigation";
+import "react-native-gesture-handler";
+import "react-native-get-random-values";
 
 export default function App() {
   return (
-    <ContextProvider>
-      <Main />
+    <>
+      <NavigationService />
       <StatusBar style="auto" />
-    </ContextProvider>
+    </>
   );
 }

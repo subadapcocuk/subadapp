@@ -2,10 +2,9 @@ import React from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import Song from "./song";
 import { styles } from "../helpers/";
-import { useAppContext } from "../services/context";
+import { getSongs } from "../api/data";
 
 const Album = ({ album, openUrl }) => {
-  const { getSongs } = useAppContext();
   const songs = getSongs(album.no);
 
   return (

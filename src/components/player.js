@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, Text, Image, TouchableOpacity } from "react-native";
+import { Alert, View, Text, Image, FlatList } from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -9,15 +9,33 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, BLUE, GRAY, songStyle, songText, PURPLE } from "../helpers/styles";
+import { styles, GRAY, songStyle, songText, PURPLE } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { useAppContext } from "../services/context";
+import { getAlbums, getSongs } from "../api/data";
+import { Swipeable } from "react-native-gesture-handler";
 
 const Player = () => {
-  const { albums, clearPlaylist, playlist } = useAppContext();
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState();
   const [currentSong, setCurrentSong] = useState(-1);
+  const [playlist, setPlaylist] = useState([]);
+
+  const songs = getSongs();
+  const albums = getAlbums();
+
+  const addSong = (song) => {
+    console.log("add song");
+    setPlaylist([...playlist, song]);
+  };
+
+  const removeSong = (song) => {
+    console.log("remove song");
+    setPlaylist(playlist.filter((o) => o !== song));
+  };
+
+  const clearPlaylist = () => {
+    setPlaylist([]);
+  };
 
   const getAlbumTitle = (no) => {
     try {
@@ -78,6 +96,7 @@ const Player = () => {
 
   useEffect(() => {
     console.log("currentSong", currentSong);
+    console.log("current playlist", playlist);
   }, [currentSong]);
 
   const playSong = async () => {
@@ -85,10 +104,9 @@ const Player = () => {
       //unload previous song
       player && (await player.unloadAsync());
       const nextSong = currentSong < playlist.length ? currentSong + 1 : 0;
-      const song = playlist[nextSong];
+      const song = songs[playlist[nextSong]];
       setCurrentSong(nextSong);
       if (song) {
-        console.log("Loading song");
         const { sound } = await Audio.Sound.createAsync(
           { uri: song.url },
           {
@@ -110,61 +128,75 @@ const Player = () => {
     }
   };
 
+  const Song = ({ song, selected = false }) => {
+    return (
+      <View style={songStyle(selected)}>
+        <Image style={styles.playlistImage} source={{ uri: song.image }} />
+        <Text style={songText(selected)}>{getSongTitle(song)}</Text>
+      </View>
+    );
+  };
+
+  const renderSong = ({ item, index }) => {
+    return (
+      <Swipeable
+        renderLeftActions={() => <Song song={item} selected />}
+        onSwipeableLeftOpen={() => addSong(index)}
+        onSwipeableClose={() => removeSong(index)}
+      >
+        <Song song={item} />
+      </Swipeable>
+    );
+  };
+
+  const PlayerButtons = () => (
+    <View style={styles.playlistButtons}>
+      <IconPress
+        icon={status.isPlaying ? faPause : faPlay}
+        color={PURPLE}
+        onPress={() => playPause()}
+      />
+      <IconPress
+        icon={faStop}
+        color={status.isPlaying ? PURPLE : GRAY}
+        onPress={() => stopPlayer()}
+      />
+      <IconPress
+        icon={faReply}
+        color={status.isLooping ? PURPLE : GRAY}
+        onPress={() => toggleLoop()}
+      />
+      <IconPress
+        icon={faTrash}
+        color={PURPLE}
+        onPress={() => clearPlaylist()}
+      />
+    </View>
+  );
+
   return (
     <>
-      <View style={styles.topView}>
-        {playlist.map((song, index) => {
-          return (
-            <TouchableOpacity
-              key={`playlist_sarki_${index}_${song.no}`}
-              style={songStyle(currentSong === index)}
-            >
-              <Image
-                style={styles.playlistImage}
-                source={{ uri: song.image }}
-              />
-              <Text style={songText(currentSong === index)}>
-                {getSongTitle(song)}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      <FlatList
+        data={songs}
+        keyExtractor={(item) => item.name}
+        renderItem={renderSong}
+      />
       <View style={styles.bottomView}>
-        {currentSong > -1 && <Text style={{fontSize: 18, color: PURPLE}}>{getSongTitle(playlist[currentSong])}</Text>}
-        <Progress.Bar
-          style={{ width: "100%" }}
-          color={PURPLE}
-          width={null}
-          height={32}
-          progress={
-            status?.positionMillis > 0
-              ? status.positionMillis / status.durationMillis
-              : 0
-          }
-        />
-        <View style={styles.playlistButtons}>
-          <IconPress
-            icon={status.isPlaying ? faPause : faPlay}
+        {currentSong > -1 && (
+          <Text style={{ fontSize: 18, color: PURPLE }}>
+            {getSongTitle(songs[playlist[currentSong]])}
+          </Text>
+        )}
+        {status?.positionMillis > 0 && (
+          <Progress.Bar
+            style={{ width: "100%" }}
             color={PURPLE}
-            onPress={() => playPause()}
+            width={null}
+            height={32}
+            progress={status.positionMillis / status.durationMillis}
           />
-          <IconPress
-            icon={faStop}
-            color={status.isPlaying ? PURPLE : GRAY}
-            onPress={() => stopPlayer()}
-          />
-          <IconPress
-            icon={faReply}
-            color={status.isLooping ? PURPLE : GRAY}
-            onPress={() => toggleLoop()}
-          />
-          <IconPress
-            icon={faTrash}
-            color={PURPLE}
-            onPress={() => clearPlaylist()}
-          />
-        </View>
+        )}
+        <PlayerButtons />
       </View>
     </>
   );
