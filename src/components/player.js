@@ -1,5 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, Text, Image, FlatList } from "react-native";
+import {
+  Alert,
+  View,
+  Text,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -9,10 +17,9 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, GRAY, songStyle, songText, PURPLE } from "../helpers/styles";
+import { styles, GRAY, songStyle, songText, PURPLE, deviceWidth } from "../helpers/styles";
 import { IconPress } from "./buttons";
 import { getAlbums, getSongs } from "../api/data";
-import { Swipeable } from "react-native-gesture-handler";
 
 const Player = () => {
   // https://github.com/expo/playlist-example/blob/master/App.js
@@ -34,12 +41,20 @@ const Player = () => {
   const songs = getSongs();
   const albums = getAlbums();
 
-  const addSong = (song) => {
-    setPlaylist([...playlist, song]);
+  const addSong = (index) => {
+    setPlaylist([...playlist, index]);
   };
 
-  const removeSong = (song) => {
-    setPlaylist(playlist.filter((o) => o !== song));
+  const removeSong = (index) => {
+    setPlaylist(playlist.filter((o) => o !== index));
+  };
+
+  const toggleSong = (index) => {
+    if (playlist.find((item) => item === index)) {
+      removeSong(index);
+    } else {
+      addSong(index);
+    }
   };
 
   const clearPlaylist = () => {
@@ -136,14 +151,11 @@ const Player = () => {
   };
 
   const renderSong = ({ item, index }) => {
+    const inPlaylist = playlist.find((item) => item === index) !== undefined;
     return (
-      <Swipeable
-        renderLeftActions={() => <Song song={item} selected />}
-        onSwipeableLeftOpen={() => addSong(index)}
-        onSwipeableClose={() => removeSong(index)}
-      >
-        <Song song={item} />
-      </Swipeable>
+      <TouchableOpacity onPress={() => toggleSong(index)}>
+        <Song song={item} selected={inPlaylist} />
+      </TouchableOpacity>
     );
   };
 
@@ -174,18 +186,26 @@ const Player = () => {
 
   return (
     <>
-      <FlatList
-        data={songs}
-        keyExtractor={(item) => item.name}
-        renderItem={renderSong}
-      />
+      <ScrollView horizontal pagingEnabled>
+        <FlatList
+          style={{ width: deviceWidth }}
+          data={songs}
+          keyExtractor={(item) => item.name}
+          renderItem={renderSong}
+        />
+        <ScrollView>
+          <View style={{ width: deviceWidth }}>
+            <Text>Şarkı ayrıntısı</Text>
+          </View>
+        </ScrollView>
+      </ScrollView>
       <View style={styles.bottomView}>
         {currentSong > -1 && (
           <Text style={{ fontSize: 18, color: PURPLE }}>
             {getSongTitle(songs[playlist[currentSong]])}
           </Text>
         )}
-        {status && (
+        {status.positionMillis > 0 && (
           <Progress.Bar
             style={{ width: "100%" }}
             color={PURPLE}

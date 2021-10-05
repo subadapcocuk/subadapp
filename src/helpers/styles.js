@@ -6,7 +6,7 @@ export const PURPLE = "#6B1FBF";
 export const WHITE = "#FFFFFF";
 export const GREEN = "#009688";
 
-const deviceWidth = Dimensions.get("window").width;
+export const deviceWidth = Dimensions.get("window").width;
 
 export const songStyle = (selected) => {
   return {
