@@ -1,59 +1,55 @@
 import React, { useEffect, useState } from "react";
-import {
-  Alert,
-  View,
-  Text,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  ScrollView,
-} from "react-native";
+import { Alert, View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
   faPlay,
   faReply,
+  faSort,
+  faStepBackward,
+  faStepForward,
   faStop,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, GRAY, songStyle, songText, PURPLE, deviceWidth } from "../helpers/styles";
+import { styles, GRAY, PURPLE, deviceWidth } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { getAlbums, getSongs } from "../api/data";
+import { getSongs, getSongTitle } from "../api/data";
+import { SongItem, SongDetail } from "./song";
 
-const Player = () => {
+const Player = ({ openUrl }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
-  const [currentSong, setCurrentSong] = useState(-1);
   const [playlist, setPlaylist] = useState([]);
+  const [order, setOrder] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const player = React.useRef(new Audio.Sound());
 
   const onPlaybackStatusUpdate = (status) => {
-    setStatus(status);
+    if (status.isLoaded) {
+      setStatus(status);
+    }
     if (status.didJustFinish) {
       playSong();
     }
   };
 
-  player.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-
   const songs = getSongs();
-  const albums = getAlbums();
 
-  const addSong = (index) => {
-    setPlaylist([...playlist, index]);
+  const addSong = (no) => {
+    setPlaylist([...playlist, no]);
   };
 
-  const removeSong = (index) => {
-    setPlaylist(playlist.filter((o) => o !== index));
+  const removeSong = (no) => {
+    setPlaylist(playlist.filter((o) => o !== no));
   };
 
-  const toggleSong = (index) => {
-    if (playlist.find((item) => item === index)) {
-      removeSong(index);
+  const toggleSong = (no) => {
+    if (playlist.find((n) => n === no)) {
+      removeSong(no);
     } else {
-      addSong(index);
+      addSong(no);
     }
   };
 
@@ -61,18 +57,18 @@ const Player = () => {
     setPlaylist([]);
   };
 
-  const getAlbumTitle = (no) => {
-    try {
-      const album = albums.filter((a) => a.no === no)[0];
-      return `${album.name} - ${album.releaseYear}`;
-    } catch (e) {
-      console.error(e);
-      return "";
-    }
+  const sortPlaylist = () => {
+    setOrder(order < 3 ? order + 1 : 0);
   };
 
-  const getSongTitle = (song) => {
-    return `${song.name} (${getAlbumTitle(song.albumNo)})`;
+  const previousTrack = () => {
+    setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : playlist.length - 1);
+    playSong();
+  };
+
+  const nextTrack = () => {
+    setCurrentIndex(currentIndex < playlist.length - 1 ? currentIndex + 1 : 0);
+    playSong();
   };
 
   useEffect(() => {
@@ -110,17 +106,15 @@ const Player = () => {
   };
 
   useEffect(() => {
-    console.log("currentSong", currentSong);
+    console.log("currentIndex", currentIndex);
     console.log("current playlist", playlist);
-  }, [currentSong, playlist]);
+  }, [currentIndex, playlist]);
 
   const playSong = async () => {
     try {
       //unload previous song
       await player.current.unloadAsync();
-      const nextSong = currentSong < playlist.length ? currentSong + 1 : 0;
-      const song = songs[playlist[nextSong]];
-      setCurrentSong(nextSong);
+      const song = songs[playlist[currentIndex]];
       if (song) {
         await player.current.loadAsync(
           { uri: song.url },
@@ -131,7 +125,12 @@ const Player = () => {
             volume: status.volume,
             isMuted: status.muted,
             isLooping: status.loopingType,
+            progressUpdateIntervalMillis: 1000,
           }
+        );
+        player.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+        setCurrentIndex(
+          currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
         );
       } else {
         Alert.alert("Çalma listesi boş", "Lütfen listeye şarkı ekleyin!");
@@ -141,26 +140,13 @@ const Player = () => {
     }
   };
 
-  const Song = ({ song, selected = false }) => {
-    return (
-      <View style={songStyle(selected)}>
-        <Image style={styles.playlistImage} source={{ uri: song.image }} />
-        <Text style={songText(selected)}>{getSongTitle(song)}</Text>
-      </View>
-    );
-  };
-
-  const renderSong = ({ item, index }) => {
-    const inPlaylist = playlist.find((item) => item === index) !== undefined;
-    return (
-      <TouchableOpacity onPress={() => toggleSong(index)}>
-        <Song song={item} selected={inPlaylist} />
-      </TouchableOpacity>
-    );
-  };
-
   const PlayerButtons = () => (
     <View style={styles.playlistButtons}>
+      <IconPress
+        icon={faStepBackward}
+        color={PURPLE}
+        onPress={() => previousTrack()}
+      />
       <IconPress
         icon={status.isPlaying ? faPause : faPlay}
         color={PURPLE}
@@ -172,10 +158,16 @@ const Player = () => {
         onPress={() => stopPlayer()}
       />
       <IconPress
+        icon={faStepForward}
+        color={PURPLE}
+        onPress={() => nextTrack()}
+      />
+      <IconPress
         icon={faReply}
         color={status.isLooping ? PURPLE : GRAY}
         onPress={() => toggleLoop()}
       />
+      <IconPress icon={faSort} color={PURPLE} onPress={() => sortPlaylist()} />
       <IconPress
         icon={faTrash}
         color={PURPLE}
@@ -184,28 +176,46 @@ const Player = () => {
     </View>
   );
 
+  const sortSongs = () => {
+    switch (order) {
+      case 0:
+        return songs.slice().sort((a, b) => a.name > b.name);
+      case 1:
+        return songs.slice().sort((a, b) => a.name < b.name);
+      case 2:
+        return songs.slice().sort((a, b) => a.albumNo < b.albumNo);
+      default:
+        return songs;
+    }
+  };
+
+  const song = songs.find((s) => s.no === playlist[currentIndex]);
+
   return (
     <>
       <ScrollView horizontal pagingEnabled>
-        <FlatList
-          style={{ width: deviceWidth }}
-          data={songs}
-          keyExtractor={(item) => item.name}
-          renderItem={renderSong}
-        />
-        <ScrollView>
-          <View style={{ width: deviceWidth }}>
-            <Text>Şarkı ayrıntısı</Text>
-          </View>
+        <ScrollView style={{ width: deviceWidth }}>
+          {sortSongs().map((s) => {
+            const inPlaylist = playlist.find((no) => no === s.no) !== undefined;
+            return (
+              <TouchableOpacity
+                key={`subadap_sarki_${s.no}_${s.name}`}
+                onPress={() => toggleSong(s.no)}
+              >
+                <SongItem song={s} selected={inPlaylist} />
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
+        <SongDetail {...{ song, openUrl }} />
       </ScrollView>
       <View style={styles.bottomView}>
-        {currentSong > -1 && (
+        {song && (
           <Text style={{ fontSize: 18, color: PURPLE }}>
-            {getSongTitle(songs[playlist[currentSong]])}
+            {getSongTitle(song)}
           </Text>
         )}
-        {status.positionMillis > 0 && (
+        {/*status.positionMillis > 0 && (
           <Progress.Bar
             style={{ width: "100%" }}
             color={PURPLE}
@@ -213,7 +223,7 @@ const Player = () => {
             height={32}
             progress={status.positionMillis / status.durationMillis}
           />
-        )}
+        )*/}
         <PlayerButtons />
       </View>
     </>

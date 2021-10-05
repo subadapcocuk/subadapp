@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { WebView } from "react-native-webview";
 import { styles } from "../helpers/styles";
 
