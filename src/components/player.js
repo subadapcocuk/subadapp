@@ -23,15 +23,33 @@ const Player = ({ openUrl }) => {
   const [playlist, setPlaylist] = useState([]);
   const [order, setOrder] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [player, setPlayer] = useState(new Audio.Sound());
 
-  const player = React.useRef(new Audio.Sound());
+  useEffect(() => {
+    Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
+      staysActiveInBackground: true,
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
+      playsInSilentModeIOS: true,
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      playThroughEarpieceAndroid: false,
+    }),
+      [];
+  });
+
+  useEffect(() => {
+    playSong();
+  }, [currentIndex]);
 
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
     }
-    if (status.didJustFinish) {
-      playSong();
+    if (status.didJustFinish && !status.isLooping) {
+      setCurrentIndex(
+        currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
+      );
     }
   };
 
@@ -54,6 +72,7 @@ const Player = ({ openUrl }) => {
   };
 
   const clearPlaylist = () => {
+    stopPlayer();
     setPlaylist([]);
   };
 
@@ -63,34 +82,19 @@ const Player = ({ openUrl }) => {
 
   const previousTrack = () => {
     setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : playlist.length - 1);
-    playSong();
   };
 
   const nextTrack = () => {
     setCurrentIndex(currentIndex < playlist.length - 1 ? currentIndex + 1 : 0);
-    playSong();
   };
 
-  useEffect(() => {
-    Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      staysActiveInBackground: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-      playThroughEarpieceAndroid: false,
-    }),
-      [];
-  });
-
   const playPause = async () => {
-    const result = await player.current.getStatusAsync();
+    const result = await player.getStatusAsync();
     if (result.isLoaded) {
       if (result.isPlaying) {
-        player.current.pauseAsync();
+        player.pauseAsync();
       } else {
-        player.current.playAsync();
+        player.playAsync();
       }
     } else {
       playSong();
@@ -98,25 +102,21 @@ const Player = ({ openUrl }) => {
   };
 
   const toggleLoop = () => {
-    player.current.setIsLoopingAsync(!status.isLooping);
+    player.setIsLoopingAsync(!status.isLooping);
   };
 
   const stopPlayer = () => {
-    player.current.stopAsync();
+    player.stopAsync();
   };
 
-  useEffect(() => {
-    console.log("currentIndex", currentIndex);
-    console.log("current playlist", playlist);
-  }, [currentIndex, playlist]);
+  const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
   const playSong = async () => {
     try {
       //unload previous song
-      await player.current.unloadAsync();
-      const song = songs[playlist[currentIndex]];
+      await player.unloadAsync();
       if (song) {
-        await player.current.loadAsync(
+        await player.loadAsync(
           { uri: song.url },
           {
             shouldPlay: true,
@@ -124,14 +124,11 @@ const Player = ({ openUrl }) => {
             shouldCorrectPitch: status.shouldCorrectPitch,
             volume: status.volume,
             isMuted: status.muted,
-            isLooping: status.loopingType,
+            isLooping: status.isLooping,
             progressUpdateIntervalMillis: 1000,
           }
         );
-        player.current.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-        setCurrentIndex(
-          currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
-        );
+        player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
       } else {
         Alert.alert("Çalma listesi boş", "Lütfen listeye şarkı ekleyin!");
       }
@@ -189,8 +186,6 @@ const Player = ({ openUrl }) => {
     }
   };
 
-  const song = songs.find((s) => s.no === playlist[currentIndex]);
-
   return (
     <>
       <ScrollView horizontal pagingEnabled>
@@ -215,7 +210,7 @@ const Player = ({ openUrl }) => {
             {getSongTitle(song)}
           </Text>
         )}
-        {/*status.positionMillis > 0 && (
+        {status.positionMillis > 0 && (
           <Progress.Bar
             style={{ width: "100%" }}
             color={PURPLE}
@@ -223,7 +218,7 @@ const Player = ({ openUrl }) => {
             height={32}
             progress={status.positionMillis / status.durationMillis}
           />
-        )*/}
+        )}
         <PlayerButtons />
       </View>
     </>
