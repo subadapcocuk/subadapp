@@ -7,6 +7,6 @@ Dikkate değer değişiklikler buradan izlenebilir.
 - Playlist eklendi
 - Çalan şarkı ayrıntı ekranı eklendi
 
-### [0.1.5](https://github.com/kinefi/subadap-player/compare/v0.1.4...v0.1.5) (2021-10-02)
+### 0.1.5 (2021-10-02)
 
 - Sürüm yönetimi başlangıcı
