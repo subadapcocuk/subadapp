@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, ScrollView, Image } from "react-native";
 import Song from "./song";
-import { styles } from "../helpers/styles";
+import { styles } from "../helpers/";
 import { getSongs } from "../api/data";
 
-const Album = ({ album, playSong, stopSong, openUrl }) => {
-  const [selected, setSelected] = useState(-1);
+const Album = ({ album, openUrl }) => {
   const songs = getSongs(album.no);
 
   return (
@@ -25,16 +24,6 @@ const Album = ({ album, playSong, stopSong, openUrl }) => {
             <Song
               key={`subadap_sarki_${album.no}_${song.no}`}
               {...{ song, openUrl }}
-              playSong={() => {
-                if (selected === song.no) {
-                  setSelected(-1);
-                  stopSong();
-                } else {
-                  setSelected(song.no);
-                  playSong(song.url);
-                }
-              }}
-              selected={selected === song.no}
             />
           ))}
         </View>

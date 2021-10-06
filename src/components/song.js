@@ -1,24 +1,47 @@
 import React from "react";
-import { Image, TouchableOpacity, View, Text } from "react-native";
-import { styles, songStyle } from "../helpers/styles";;
+import { Image, ScrollView, TouchableOpacity, Text, View } from "react-native";
+import { getSongTitle } from "../api/data";
+import { styles, songStyle, songText, deviceWidth } from "../helpers/styles";
 
-const Song = ({ song, playSong, selected, openUrl }) => {
+export const Song = ({ song, openUrl }) => {
   return (
-    <View style={styles.songView}>
-      <TouchableOpacity
-        style={songStyle(selected)}
-        onPress={() => playSong(song)}
-      >
-        <Image style={styles.songImage} source={{ uri: song.image }} />
-      </TouchableOpacity>
-      <Text
-        style={styles.textLink}
-        onPress={() => openUrl(song.page)}
-      >
+    <TouchableOpacity
+      style={styles.songStyle}
+      onPress={() => openUrl(song.page)}
+    >
+      <Image style={styles.songImage} source={{ uri: song.image }} />
+      <Text>
         {song.no} - {song.name}
       </Text>
+    </TouchableOpacity>
+  );
+};
+
+export const SongItem = ({ song, selected = false }) => {
+  return (
+    <View style={songStyle(selected)}>
+      <Image style={styles.playlistImage} source={{ uri: song.image }} />
+      <Text style={songText(selected)}>{getSongTitle(song)}</Text>
     </View>
   );
 };
 
-export default Song;
+export const SongDetail = ({ song, openUrl }) => {
+  return (
+    <ScrollView style={{ width: deviceWidth }}>
+      {song ? (
+        <TouchableOpacity
+          style={styles.songStyle}
+          onPress={() => openUrl(song.page)}
+        >
+          <Image style={styles.albumImage} source={{ uri: song.image }} />
+          <Text>
+            {song.no} - {song.name}
+          </Text>
+        </TouchableOpacity>
+      ) : (
+        <Text style={styles.albumTitle}>Şu an şarkı çalmıyor</Text>
+      )}
+    </ScrollView>
+  );
+};

@@ -8,7 +8,7 @@ import {
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { IconPress } from "../components/buttons";
 import About from "../components/about";
 import {
@@ -24,7 +24,7 @@ export const Menu = ({ navigation }) => {
   const insets = useSafeAreaInsets();
 
   const openUrl = (url) => {
-    navigation.navigate("Home", { url });
+    navigation.navigate("Page", { url });
   };
 
   return (
@@ -40,7 +40,16 @@ export const Menu = ({ navigation }) => {
       </View>
       {/*<Text style={{ fontSize: 24 }}>Şubadap Müzik Çalar</Text>*/}
       <View>
-        <IconPress onPress={() => openUrl()} icon={faMusic} text="Albümler" />
+        <IconPress
+          onPress={() => navigation.navigate("Playlist")}
+          icon={faMusic}
+          text="Tüm Şarkılar"
+        />
+        <IconPress
+          onPress={() => navigation.navigate("Albums")}
+          icon={faHome}
+          text="Albümler"
+        />
         <IconPress
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org/")}
           icon={faBook}
