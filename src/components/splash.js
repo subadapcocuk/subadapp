@@ -1,26 +1,25 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { StatusBar } from "expo-status-bar";
-import { Asset } from "expo-asset";
-import { NavigationService } from "./src/services/navigation";
-import "react-native-gesture-handler";
-import "react-native-get-random-values";
 import AppLoading from "expo-app-loading";
+import { Asset } from "expo-asset";
 import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
+import React from "react";
 import { Animated, StyleSheet, View } from "react-native";
 
-export const AnimatedAppLoader = ({ children, image }) => {
-  const [isSplashReady, setSplashReady] = useState(false);
+export const AnimatedAppLoader = ({
+  children,
+  image = { uri: Constants.manifest.splash.image },
+}) => {
+  const [isSplashReady, setSplashReady] = React.useState(false);
 
-  const startAsync = useMemo(
+  const startAsync = React.useMemo(
     // If you use a local image with require(...), use `Asset.fromModule`
     () => () => {
-      Asset.fromModule(image).downloadAsync();
+      Asset.fromModule("../../assets/splash.png").downloadAsync();
     },
     [image]
   );
 
-  const onFinish = useMemo(() => {
+  const onFinish = React.useMemo(() => {
     setSplashReady(true);
   }, []);
 
@@ -40,28 +39,31 @@ export const AnimatedAppLoader = ({ children, image }) => {
 };
 
 const AnimatedSplashScreen = ({ children, image }) => {
-  const animation = useMemo(() => new Animated.Value(1), []);
-  const [isAppReady, setAppReady] = useState(false);
-  const [isSplashAnimationComplete, setAnimationComplete] = useState(false);
+  const animation = React.useMemo(() => new Animated.Value(1), []);
+  const [isAppReady, setAppReady] = React.useState(false);
+  const [isSplashAnimationComplete, setAnimationComplete] =
+    React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (isAppReady) {
       Animated.timing(animation, {
         toValue: 0,
-        duration: 2000,
+        duration: 200,
         useNativeDriver: true,
       }).start(() => setAnimationComplete(true));
     }
   }, [isAppReady]);
 
-  const onImageLoaded = useMemo(() => async () => {
+  console.log(isAppReady, isSplashAnimationComplete);
+
+  const onImageLoaded = React.useMemo(() => async () => {
     try {
       await SplashScreen.hideAsync();
       const cacheAssets = Asset.loadAsync([
-        require("./assets/adaptive-icon.png"),
-        require("./assets/favicon.png"),
-        require("./assets/icon.png"),
-        require("./assets/splash.png"),
+        require("../../assets/adaptive-icon.png"),
+        require("../../assets/favicon.png"),
+        require("../../assets/icon.png"),
+        require("../../assets/splash.png"),
       ]);
       return Promise.all([cacheAssets]);
     } catch (e) {
@@ -105,24 +107,3 @@ const AnimatedSplashScreen = ({ children, image }) => {
     </View>
   );
 };
-export default function App() {
-  return (
-    <AnimatedAppLoader image={require("./assets/subadap.png")}>
-      <NavigationService />
-      <StatusBar style="auto" />
-    </AnimatedAppLoader>
-  );
-
-  /*!appIsReady ? (
-    <AppLoading
-      startAsync={loadResources}
-      onError={console.warn}
-      onFinish={() => setAppIsReady(true)}
-    />
-  ) : (
-    <>
-      <NavigationService />
-      <StatusBar style="auto" />
-    </>
-  );*/
-}
