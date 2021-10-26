@@ -7,14 +7,14 @@ export const IconPress = ({
   onPress,
   icon,
   color = PURPLE,
-  size = 48,
+  size = 32,
   text = null,
 }) => {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
       {text && (
-        <Text style={{ fontSize: 24 }}>
+        <Text style={{ fontSize: 16 }}>
           {"\t"}
           {text}
         </Text>
