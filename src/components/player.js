@@ -202,7 +202,18 @@ const Player = ({ openUrl }) => {
             );
           })}
         </ScrollView>
-        <SongDetail {...{ song, openUrl }} />
+
+        <ScrollView style={{ width: deviceWidth }}>
+          <SongDetail {...{ song, openUrl }} />
+          {playlist.map((no) => (
+            <SongItem
+              key={`subadap_playlist_${no}`}
+              song={songs.filter((s) => s.no === no)[0]}
+              image={false}
+              selected={no === song.no}
+            />
+          ))}
+        </ScrollView>
       </ScrollView>
       <View style={styles.bottomView}>
         {song && (
