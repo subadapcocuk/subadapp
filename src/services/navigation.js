@@ -11,9 +11,13 @@ export const NavigationService = () => {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        drawerStyle={{ width: Dimensions.get("window").width * 0.72 }}
         drawerContent={(props) => <Menu {...props} />}
-        //screenOptions={{ headerShown: false }}
+        screenOptions={{
+          //headerShown: false,
+          drawerStyle: {
+            width: Dimensions.get("window").width / 2,
+          },
+        }}
       >
         <Drawer.Screen
           name="Playlist"
