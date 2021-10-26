@@ -23,7 +23,8 @@ export const songText = (selected) => {
   return {
     color: selected ? "white" : PURPLE,
     borderRadius: 5,
-    padding: 10,
+    padding: 5,
+    fontSize: 18,
   };
 };
 
