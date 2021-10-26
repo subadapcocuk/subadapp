@@ -17,10 +17,10 @@ export const Song = ({ song, openUrl }) => {
   );
 };
 
-export const SongItem = ({ song, selected = false }) => {
+export const SongItem = ({ song, selected = false, image = true }) => {
   return (
     <View style={songStyle(selected)}>
-      <Image style={styles.playlistImage} source={{ uri: song.image }} />
+      {image && <Image style={styles.playlistImage} source={{ uri: song.image }} />}
       <Text style={songText(selected)}>{song.name}</Text>
     </View>
   );
@@ -28,7 +28,7 @@ export const SongItem = ({ song, selected = false }) => {
 
 export const SongDetail = ({ song, openUrl }) => {
   return (
-    <ScrollView style={{ width: deviceWidth }}>
+    <>
       {song ? (
         <TouchableOpacity
           style={styles.songStyle}
@@ -41,6 +41,6 @@ export const SongDetail = ({ song, openUrl }) => {
       ) : (
         <Text style={styles.albumTitle}>Şu an şarkı çalmıyor</Text>
       )}
-    </ScrollView>
+    </>
   );
 };
