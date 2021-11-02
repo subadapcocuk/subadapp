@@ -14,7 +14,7 @@ import {
 import * as Progress from "react-native-progress";
 import { styles, GRAY, PURPLE, deviceWidth } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { getSongs, getSongTitle } from "../api/data";
+import { getSongs } from "../api/data";
 import { SongItem, SongDetail } from "./song";
 
 const Player = ({ openUrl }) => {
@@ -217,9 +217,7 @@ const Player = ({ openUrl }) => {
       </ScrollView>
       <View style={styles.bottomView}>
         {song && (
-          <Text style={{ fontSize: 18, color: PURPLE }}>
-            {getSongTitle(song)}
-          </Text>
+          <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>
         )}
         {status.positionMillis > 0 && (
           <Progress.Bar
