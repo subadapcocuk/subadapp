@@ -20,7 +20,9 @@ export const Song = ({ song, openUrl }) => {
 export const SongItem = ({ song, selected = false, image = true }) => {
   return (
     <View style={songStyle(selected)}>
-      {image && <Image style={styles.playlistImage} source={{ uri: song.image }} />}
+      {image && (
+        <Image style={styles.playlistImage} source={{ uri: song.image }} />
+      )}
       <Text style={songText(selected)}>{song.name}</Text>
     </View>
   );

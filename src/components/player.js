@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Alert, View, Text, ScrollView, TouchableOpacity } from "react-native";
+import { SwipeableRow } from "./swipeable";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -193,11 +194,10 @@ const Player = ({ openUrl }) => {
           {sortSongs().map((s) => {
             const inPlaylist = playlist.find((no) => no === s.no) !== undefined;
             return (
-              <TouchableOpacity
-                key={`subadap_sarki_${s.no}_${s.name}`}
-                onPress={() => toggleSong(s.no)}
-              >
-                <SongItem song={s} selected={inPlaylist} />
+              <TouchableOpacity key={`subadap_sarki_${s.no}_${s.name}`}>
+                <SwipeableRow onLeftOpen={() => toggleSong(s.no)}>
+                  <SongItem song={s} selected={inPlaylist} />
+                </SwipeableRow>
               </TouchableOpacity>
             );
           })}
@@ -206,12 +206,15 @@ const Player = ({ openUrl }) => {
         <ScrollView style={{ width: deviceWidth }}>
           <SongDetail {...{ song, openUrl }} />
           {playlist.map((no) => (
-            <SongItem
-              key={`subadap_playlist_${no}`}
-              song={songs.filter((s) => s.no === no)[0]}
-              image={false}
-              selected={no === song.no}
-            />
+            <TouchableOpacity key={`subadap_playlist_${no}`}>
+              <SwipeableRow onRightOpen={() => toggleSong(no)}>
+                <SongItem
+                  song={songs.filter((s) => s.no === no)[0]}
+                  image={false}
+                  selected={no === song.no}
+                />
+              </SwipeableRow>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </ScrollView>
