@@ -24,24 +24,21 @@ export const SongItem = ({
   toggle,
   image = true,
   play = false,
-}) => {
-  console.log(song)
-  return (
-    <SwipeableRow
-      onLeftOpen={() => toggle(song.no)}
-      onPress={() => {
-        play && play();
-      }}
-    >
-      <View style={songStyle(selected)}>
-        {image && (
-          <Image style={styles.playlistImage} source={{ uri: song.image }} />
-        )}
-        <Text style={songText(selected)}>{song.name}</Text>
-      </View>
-    </SwipeableRow>
-  );
-};
+}) => (
+  <SwipeableRow
+    onLeftOpen={() => toggle(song.no)}
+    onPress={() => {
+      play && play();
+    }}
+  >
+    <View style={songStyle(selected)}>
+      {image && (
+        <Image style={styles.playlistImage} source={{ uri: song.image }} />
+      )}
+      <Text style={songText(selected)}>{song.name}</Text>
+    </View>
+  </SwipeableRow>
+);
 
 export const SongDetail = ({ song, openUrl }) => {
   return (

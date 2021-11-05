@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, FlatList, Text, ScrollView, View } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -12,17 +12,18 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, GRAY, PURPLE, deviceWidth } from "../helpers/styles";
+import { styles, GRAY, PURPLE } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { getSongs } from "../api/data";
-import { SongItem, SongDetail } from "./song";
 
-const Player = ({ openUrl }) => {
+const Player = ({
+  song,
+  clearPlaylist,
+  sortPlaylist,
+  previousTrack,
+  nextTrack,
+}) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
-  const [playlist, setPlaylist] = useState([]);
-  const [order, setOrder] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [player, setPlayer] = useState(new Audio.Sound());
 
   useEffect(() => {
@@ -40,52 +41,15 @@ const Player = ({ openUrl }) => {
 
   useEffect(() => {
     playSong();
-  }, [currentIndex]);
+  }, [song]);
 
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
     }
     if (status.didJustFinish && !status.isLooping) {
-      setCurrentIndex(
-        currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
-      );
+      nextTrack();
     }
-  };
-
-  const songs = getSongs();
-
-  const addSong = (no) => {
-    setPlaylist([...playlist, no]);
-  };
-
-  const removeSong = (no) => {
-    setPlaylist(playlist.filter((o) => o !== no));
-  };
-
-  const toggleSong = (no) => {
-    if (playlist.find((n) => n === no)) {
-      removeSong(no);
-    } else {
-      addSong(no);
-    }
-  };
-
-  const clearPlaylist = () => {
-    stopPlayer();
-    setPlaylist([]);
-  };
-
-  const sortPlaylist = () => {
-    setOrder(order < 3 ? order + 1 : 0);
-  };
-
-  const previousTrack = () => {
-    setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : playlist.length - 1);
-  };
-
-  const nextTrack = () => {
-    setCurrentIndex(currentIndex < playlist.length - 1 ? currentIndex + 1 : 0);
   };
 
   const playPause = async () => {
@@ -108,8 +72,6 @@ const Player = ({ openUrl }) => {
   const stopPlayer = () => {
     player.stopAsync();
   };
-
-  const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
   const playSong = async () => {
     try {
@@ -173,75 +135,20 @@ const Player = ({ openUrl }) => {
     </View>
   );
 
-  const sortSongs = () => {
-    switch (order) {
-      case 0:
-        return songs.slice().sort((a, b) => a.name > b.name);
-      case 1:
-        return songs.slice().sort((a, b) => a.name < b.name);
-      case 2:
-        return songs.slice().sort((a, b) => a.albumNo < b.albumNo);
-      default:
-        return songs;
-    }
-  };
-
-  const PlaylistDetail = () => (
-    <View style={{ width: deviceWidth }}>
-      <SongDetail {...{ song, openUrl }} />
-      <FlatList
-        keyExtractor={(item) => item}
-        style={{ width: deviceWidth }}
-        data={playlist}
-        renderItem={({ item }) => (
-          <SongItem
-            song={songs.filter((s) => item === s.no)[0]}
-            selected={item.no === song.no}
-            toggle={toggleSong}
-            play={playSong}
-          />
-        )}
-      />
-    </View>
-  );
-
-  const Songlist = () => (
-    <FlatList
-      keyExtractor={(item) => item.no}
-      style={{ width: deviceWidth }}
-      data={sortSongs()}
-      renderItem={({ item }) => (
-        <SongItem
-          song={item}
-          selected={playlist.find((no) => no === item.no) !== undefined}
-          toggle={toggleSong}
+  return (
+    <View style={styles.bottomView}>
+      {song && <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>}
+      {status.positionMillis > 0 && (
+        <Progress.Bar
+          style={{ width: "100%" }}
+          color={PURPLE}
+          width={null}
+          height={32}
+          progress={status.positionMillis / status.durationMillis}
         />
       )}
-    />
-  );
-
-  return (
-    <>
-      <ScrollView horizontal pagingEnabled>
-        <Songlist />
-        <PlaylistDetail />
-      </ScrollView>
-      <View style={styles.bottomView}>
-        {song && (
-          <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>
-        )}
-        {status.positionMillis > 0 && (
-          <Progress.Bar
-            style={{ width: "100%" }}
-            color={PURPLE}
-            width={null}
-            height={32}
-            progress={status.positionMillis / status.durationMillis}
-          />
-        )}
-        <PlayerButtons />
-      </View>
-    </>
+      <PlayerButtons />
+    </View>
   );
 };
 

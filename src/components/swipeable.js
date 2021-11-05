@@ -1,11 +1,16 @@
 import React from "react";
-import { Animated, StyleSheet, View } from "react-native";
+import { Animated, StyleSheet, View, TouchableOpacity } from "react-native";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-export const SwipeableRow = ({ children, onLeftOpen, onRightOpen }) => {
+export const SwipeableRow = ({
+  children,
+  onLeftOpen,
+  onRightOpen,
+  onPress,
+}) => {
   renderLeftActions = (_progress, dragX) => {
     const scale = dragX.interpolate({
       inputRange: [0, 100],
@@ -38,8 +43,12 @@ export const SwipeableRow = ({ children, onLeftOpen, onRightOpen }) => {
       enableTrackpadTwoFingerGesture
       {...(onLeftOpen && { onSwipeableLeftOpen, renderLeftActions })}
       {...(onRightOpen && { onSwipeableRightOpen, renderRightActions })}
+      useNativeAnimations
     >
-      {children}
+      {onPress && (
+        <TouchableOpacity {...{ onPress }}>{children}</TouchableOpacity>
+      )}
+      {!onPress && children}
     </Swipeable>
   );
 };

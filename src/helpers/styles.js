@@ -15,7 +15,7 @@ export const songStyle = (selected) => {
     backgroundColor: selected ? PURPLE : "white",
     borderRadius: 5,
     alignItems: "center",
-    padding: 10,
+    padding: 5,
   };
 };
 
