@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import { ActivityIndicator, View } from "react-native";
 import { WebView } from "react-native-webview";
-import { styles } from "../helpers/styles";
+import { styles, PURPLE } from "../helpers/styles";
 
 export const Page = ({ route }) => {
   const [loading, setLoading] = useState(false);

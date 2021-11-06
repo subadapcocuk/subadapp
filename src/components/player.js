@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { Alert, Text, View } from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -12,17 +12,18 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, GRAY, PURPLE, deviceWidth } from "../helpers/styles";
+import { styles, GRAY, PURPLE } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { getSongs } from "../api/data";
-import { SongItem, SongDetail } from "./song";
 
-const Player = ({ openUrl }) => {
+const Player = ({
+  song,
+  clearPlaylist,
+  sortPlaylist,
+  previousTrack,
+  nextTrack,
+}) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
-  const [playlist, setPlaylist] = useState([]);
-  const [order, setOrder] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [player, setPlayer] = useState(new Audio.Sound());
 
   useEffect(() => {
@@ -40,52 +41,15 @@ const Player = ({ openUrl }) => {
 
   useEffect(() => {
     playSong();
-  }, [currentIndex]);
+  }, [song]);
 
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
     }
     if (status.didJustFinish && !status.isLooping) {
-      setCurrentIndex(
-        currentIndex < playlist.length - 1 ? currentIndex + 1 : 0
-      );
+      nextTrack();
     }
-  };
-
-  const songs = getSongs();
-
-  const addSong = (no) => {
-    setPlaylist([...playlist, no]);
-  };
-
-  const removeSong = (no) => {
-    setPlaylist(playlist.filter((o) => o !== no));
-  };
-
-  const toggleSong = (no) => {
-    if (playlist.find((n) => n === no)) {
-      removeSong(no);
-    } else {
-      addSong(no);
-    }
-  };
-
-  const clearPlaylist = () => {
-    stopPlayer();
-    setPlaylist([]);
-  };
-
-  const sortPlaylist = () => {
-    setOrder(order < 3 ? order + 1 : 0);
-  };
-
-  const previousTrack = () => {
-    setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : playlist.length - 1);
-  };
-
-  const nextTrack = () => {
-    setCurrentIndex(currentIndex < playlist.length - 1 ? currentIndex + 1 : 0);
   };
 
   const playPause = async () => {
@@ -109,8 +73,6 @@ const Player = ({ openUrl }) => {
     player.stopAsync();
   };
 
-  const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
-
   const playSong = async () => {
     try {
       //unload previous song
@@ -129,8 +91,6 @@ const Player = ({ openUrl }) => {
           }
         );
         player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-      } else {
-        Alert.alert("Çalma listesi boş", "Lütfen listeye şarkı ekleyin!");
       }
     } catch (error) {
       console.error(error);
@@ -173,64 +133,20 @@ const Player = ({ openUrl }) => {
     </View>
   );
 
-  const sortSongs = () => {
-    switch (order) {
-      case 0:
-        return songs.slice().sort((a, b) => a.name > b.name);
-      case 1:
-        return songs.slice().sort((a, b) => a.name < b.name);
-      case 2:
-        return songs.slice().sort((a, b) => a.albumNo < b.albumNo);
-      default:
-        return songs;
-    }
-  };
-
   return (
-    <>
-      <ScrollView horizontal pagingEnabled>
-        <ScrollView style={{ width: deviceWidth }}>
-          {sortSongs().map((s) => {
-            const inPlaylist = playlist.find((no) => no === s.no) !== undefined;
-            return (
-              <TouchableOpacity
-                key={`subadap_sarki_${s.no}_${s.name}`}
-                onPress={() => toggleSong(s.no)}
-              >
-                <SongItem song={s} selected={inPlaylist} />
-              </TouchableOpacity>
-            );
-          })}
-        </ScrollView>
-
-        <ScrollView style={{ width: deviceWidth }}>
-          <SongDetail {...{ song, openUrl }} />
-          {playlist.map((no) => (
-            <SongItem
-              key={`subadap_playlist_${no}`}
-              song={songs.filter((s) => s.no === no)[0]}
-              image={false}
-              selected={no === song.no}
-            />
-          ))}
-        </ScrollView>
-      </ScrollView>
-      <View style={styles.bottomView}>
-        {song && (
-          <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>
-        )}
-        {status.positionMillis > 0 && (
-          <Progress.Bar
-            style={{ width: "100%" }}
-            color={PURPLE}
-            width={null}
-            height={32}
-            progress={status.positionMillis / status.durationMillis}
-          />
-        )}
-        <PlayerButtons />
-      </View>
-    </>
+    <View style={styles.bottomView}>
+      {song && <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>}
+      {status.positionMillis > 0 && (
+        <Progress.Bar
+          style={{ width: "100%" }}
+          color={PURPLE}
+          width={null}
+          height={32}
+          progress={status.positionMillis / status.durationMillis}
+        />
+      )}
+      <PlayerButtons />
+    </View>
   );
 };
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView, Image } from "react-native";
-import Song from "./song";
+import { Song } from "./song";
 import { styles } from "../helpers/";
 import { getSongs } from "../api/data";
 
