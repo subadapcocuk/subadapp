@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { FlatList, ScrollView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
 import { deviceWidth } from "../helpers/styles";
 import { getSongs } from "../api/data";
+import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState([]);
   const [order, setOrder] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
 
   const songs = getSongs();
 
@@ -98,14 +100,22 @@ export const Playlist = ({ navigation }) => {
 
   return (
     <>
-      <ScrollView horizontal pagingEnabled nestedScrollEnabled>
-        <Songlist />
-        <PlaylistDetail />
-      </ScrollView>
+      <Tabs
+        value={tabIndex}
+        onChange={setTabIndex}
+        titles={["Şarkılar", "Çalma Listesi"]}
+      />
+      <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
+        <TabViewItem selected={tabIndex === 0}>
+          <Songlist />
+        </TabViewItem>
+        <TabViewItem selected={tabIndex === 1}>
+          <PlaylistDetail />
+        </TabViewItem>
+      </AnimatedTabView>
       <Player
         {...{
           song,
-          setCurrentIndex,
           clearPlaylist,
           sortPlaylist,
           previousTrack,

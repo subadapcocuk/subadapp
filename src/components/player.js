@@ -91,8 +91,6 @@ const Player = ({
           }
         );
         player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-      } else {
-        Alert.alert("Çalma listesi boş", "Lütfen listeye şarkı ekleyin!");
       }
     } catch (error) {
       console.error(error);

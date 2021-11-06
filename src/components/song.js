@@ -27,9 +27,7 @@ export const SongItem = ({
 }) => (
   <SwipeableRow
     onLeftOpen={() => toggle(song.no)}
-    onPress={() => {
-      play && play();
-    }}
+    onPress={play}
   >
     <View style={songStyle(selected)}>
       {image && (

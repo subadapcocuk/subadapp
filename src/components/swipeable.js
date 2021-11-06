@@ -1,9 +1,7 @@
 import React from "react";
-import { Animated, StyleSheet, View, TouchableOpacity } from "react-native";
+import { Animated, StyleSheet, TouchableOpacity } from "react-native";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
-
-const AnimatedView = Animated.createAnimatedComponent(View);
 
 export const SwipeableRow = ({
   children,
@@ -17,7 +15,7 @@ export const SwipeableRow = ({
       outputRange: [0, 1],
       extrapolate: "clamp",
     });
-    return <AnimatedView style={[styles.action, { transform: [{ scale }] }]} />;
+    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
   };
 
   renderRightActions = (_progress, dragX) => {
@@ -26,7 +24,7 @@ export const SwipeableRow = ({
       outputRange: [1, 0],
       extrapolate: "clamp",
     });
-    return <AnimatedView style={[styles.action, { transform: [{ scale }] }]} />;
+    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
   };
 
   onSwipeableRightOpen = () => {

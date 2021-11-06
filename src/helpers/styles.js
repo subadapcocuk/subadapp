@@ -8,6 +8,25 @@ export const GREEN = "#009688";
 
 export const deviceWidth = Dimensions.get("window").width;
 
+export const tabItemButtonStyle = (currentTab) => {
+  return {
+    backgroundColor: currentTab ? PURPLE : WHITE,
+    borderRadius: 10,
+    padding: 0,
+    marginBottom: 0
+  };
+};
+
+export const tabItemTitleStyle = (currentTab) => {
+  return {
+    color: currentTab ? WHITE : PURPLE,
+    textTransform: "capitalize",
+    paddingTop: 5,
+    paddingBottom: 5
+  };
+};
+
+
 export const songStyle = (selected) => {
   return {
     flex: 1,
@@ -67,6 +86,13 @@ export const styles = StyleSheet.create({
     alignSelf: "stretch",
     justifyContent: "space-around",
     width: "100%",
+  },
+  tabItemContainer: {
+    backgroundColor: WHITE,
+    borderRadius: 10
+  },
+  tabViewItem: {
+    width: "100%"
   },
   topView: {
     justifyContent: "space-around",
