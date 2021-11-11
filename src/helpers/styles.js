@@ -10,28 +10,27 @@ export const deviceWidth = Dimensions.get("window").width;
 
 export const tabItemButtonStyle = (currentTab) => {
   return {
-    backgroundColor: currentTab ? PURPLE : WHITE,
+    backgroundColor: currentTab ? BLUE : WHITE,
     borderRadius: 10,
     padding: 0,
-    marginBottom: 0
+    marginBottom: 0,
   };
 };
 
 export const tabItemTitleStyle = (currentTab) => {
   return {
-    color: currentTab ? WHITE : PURPLE,
+    color: currentTab ? WHITE : BLUE,
     textTransform: "capitalize",
     paddingTop: 5,
-    paddingBottom: 5
+    paddingBottom: 5,
   };
 };
-
 
 export const songStyle = (selected) => {
   return {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: selected ? PURPLE : "white",
+    backgroundColor: selected ? BLUE : "white",
     borderRadius: 5,
     alignItems: "center",
     padding: 5,
@@ -40,7 +39,7 @@ export const songStyle = (selected) => {
 
 export const songText = (selected) => {
   return {
-    color: selected ? "white" : PURPLE,
+    color: selected ? "white" : BLUE,
     borderRadius: 5,
     padding: 5,
     fontSize: 18,
@@ -62,6 +61,11 @@ export const styles = StyleSheet.create({
     width: deviceWidth,
     justifyContent: "center",
     alignItems: "center",
+  },
+  menuLabel: {
+    color: BLUE,
+    fontSize: 16,
+    padding:0
   },
   webview: {
     width: deviceWidth,
@@ -89,10 +93,10 @@ export const styles = StyleSheet.create({
   },
   tabItemContainer: {
     backgroundColor: WHITE,
-    borderRadius: 10
+    borderRadius: 10,
   },
   tabViewItem: {
-    width: "100%"
+    width: "100%",
   },
   topView: {
     justifyContent: "space-around",
@@ -205,5 +209,11 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: "center",
+  },
+  zeroMargin: {
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
   },
 });

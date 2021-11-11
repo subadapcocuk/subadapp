@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import { Audio } from "expo-av";
 import {
   faPause,
@@ -12,7 +12,7 @@ import {
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import * as Progress from "react-native-progress";
-import { styles, GRAY, PURPLE } from "../helpers/styles";
+import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
 
 const Player = ({
@@ -99,47 +99,34 @@ const Player = ({
 
   const PlayerButtons = () => (
     <View style={styles.playlistButtons}>
-      <IconPress
-        icon={faStepBackward}
-        color={PURPLE}
-        onPress={() => previousTrack()}
-      />
+      <IconPress icon={faStepBackward} onPress={() => previousTrack()} />
       <IconPress
         icon={status.isPlaying ? faPause : faPlay}
-        color={PURPLE}
         onPress={() => playPause()}
       />
       <IconPress
         icon={faStop}
-        color={status.isPlaying ? PURPLE : GRAY}
+        color={status.isPlaying ? BLUE : GRAY}
         onPress={() => stopPlayer()}
       />
-      <IconPress
-        icon={faStepForward}
-        color={PURPLE}
-        onPress={() => nextTrack()}
-      />
+      <IconPress icon={faStepForward} onPress={() => nextTrack()} />
       <IconPress
         icon={faReply}
-        color={status.isLooping ? PURPLE : GRAY}
+        color={status.isLooping ? BLUE : GRAY}
         onPress={() => toggleLoop()}
       />
-      <IconPress icon={faSort} color={PURPLE} onPress={() => sortPlaylist()} />
-      <IconPress
-        icon={faTrash}
-        color={PURPLE}
-        onPress={() => clearPlaylist()}
-      />
+      <IconPress icon={faSort} onPress={() => sortPlaylist()} />
+      <IconPress icon={faTrash} onPress={() => clearPlaylist()} />
     </View>
   );
 
   return (
     <View style={styles.bottomView}>
-      {song && <Text style={{ fontSize: 18, color: PURPLE }}>{song.name}</Text>}
+      {song && <Text style={styles.albumTitle}>{song.name}</Text>}
       {status.positionMillis > 0 && (
         <Progress.Bar
           style={{ width: "100%" }}
-          color={PURPLE}
+          color={BLUE}
           width={null}
           height={32}
           progress={status.positionMillis / status.durationMillis}
