@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import React, { useCallback, useState } from "react";
+import { FlatList, ScrollView } from "react-native";
 import Toast from "react-native-root-toast";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
@@ -69,18 +69,15 @@ export const Playlist = ({ navigation }) => {
     </ScrollView>
   );
 
-  const Songlist = () => (
-    <ScrollView>
-      {sortSongs().map((item, index) => (
-        <SongItem
-          key={`playlist_${index}`}
-          song={item}
-          selected={playlist.find((no) => no === item.no) !== undefined}
-          onLeftOpen={() => toggleSong(item)}
-        />
-      ))}
-    </ScrollView>
+  const renderSong = ({ item }) => (
+    <SongItem
+      song={item}
+      selected={playlist.find((no) => no === item.no) !== undefined}
+      onLeftOpen={() => toggleSong(item)}
+    />
   );
+
+  const songKeyExtractor = useCallback((item) => item.no, []);
 
   const clearPlaylist = () => {
     setPlaylist([]);
@@ -107,7 +104,11 @@ export const Playlist = ({ navigation }) => {
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
-          <Songlist />
+          <FlatList
+            keyExtractor={songKeyExtractor}
+            data={sortSongs()}
+            renderItem={renderSong}
+          />
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
           <PlaylistDetail />
