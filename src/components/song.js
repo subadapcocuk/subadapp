@@ -16,11 +16,12 @@ export const Song = ({ song, openUrl }) => (
 export const SongItem = ({
   song,
   selected,
-  toggle,
+  onLeftOpen,
+  onRightOpen,
   image = true,
-  play = false,
+  onPress = false,
 }) => (
-  <SwipeableRow onLeftOpen={() => toggle(song.no)} onPress={play}>
+  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress }}>
     <View style={songStyle(selected)}>
       {image && (
         <Image style={styles.playlistImage} source={{ uri: song.image }} />
@@ -33,7 +34,7 @@ export const SongItem = ({
 export const SongDetail = ({ song, openUrl }) => {
   return (
     <>
-      {song ? (
+      {song && (
         <TouchableOpacity
           style={styles.songStyle}
           onPress={() => openUrl(song.page)}
@@ -42,8 +43,6 @@ export const SongDetail = ({ song, openUrl }) => {
           <Text style={{ fontSize: 32 }}>{song.name}</Text>
           <Text style={{ fontSize: 16 }}>{getAlbumTitle(song.albumNo)}</Text>
         </TouchableOpacity>
-      ) : (
-        <Text style={styles.albumTitle}>Şu an şarkı çalmıyor</Text>
       )}
     </>
   );

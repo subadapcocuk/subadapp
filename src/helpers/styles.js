@@ -82,25 +82,24 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: "white",
-    position: "absolute",
     bottom: 0,
   },
   playlistButtons: {
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
   },
   tabItemContainer: {
     backgroundColor: WHITE,
     borderRadius: 10,
   },
   tabViewItem: {
-    width: "100%",
+    width: deviceWidth,
   },
   topView: {
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
     position: "absolute",
     top: 0,
   },
@@ -122,10 +121,6 @@ export const styles = StyleSheet.create({
   songs: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
-  },
-  container: {
-    flex: 1,
     justifyContent: "center",
   },
   icon: {

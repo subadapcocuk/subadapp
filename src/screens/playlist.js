@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import React, { useCallback, useState } from "react";
+import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
+import Toast from "react-native-root-toast";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
-import { deviceWidth } from "../helpers/styles";
 import { getSongs } from "../api/data";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 
@@ -26,11 +26,13 @@ export const Playlist = ({ navigation }) => {
     navigation.navigate("Page", { url });
   };
 
-  const toggleSong = (no) => {
+  const toggleSong = ({ name, no }) => {
     if (playlist.find((n) => n === no)) {
       removeSong(no);
+      Toast.show(`${name} listeden kaldırıldı`);
     } else {
       addSong(no);
+      Toast.show(`${name} listeye eklendi`);
     }
   };
 
@@ -49,38 +51,15 @@ export const Playlist = ({ navigation }) => {
 
   const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
-  const PlaylistDetail = () => (
-    <View style={{ width: deviceWidth }}>
-      <SongDetail {...{ song, openUrl }} />
-      <FlatList
-        keyExtractor={(item) => item}
-        data={playlist}
-        renderItem={({ item, index }) => (
-          <SongItem
-            song={songs.filter((s) => item === s.no)[0]}
-            selected={item === song.no}
-            toggle={toggleSong}
-            play={() => setCurrentIndex(index)}
-          />
-        )}
-      />
-    </View>
-  );
-
-  const Songlist = () => (
-    <FlatList
-      keyExtractor={(item) => item.no}
-      style={{ width: deviceWidth }}
-      data={sortSongs()}
-      renderItem={({ item }) => (
-        <SongItem
-          song={item}
-          selected={playlist.find((no) => no === item.no) !== undefined}
-          toggle={toggleSong}
-        />
-      )}
+  const renderSong = ({ item }) => (
+    <SongItem
+      song={item}
+      selected={playlist.find((no) => no === item.no) !== undefined}
+      onLeftOpen={() => toggleSong(item)}
     />
   );
+
+  const songKeyExtractor = useCallback((item) => item.no, []);
 
   const clearPlaylist = () => {
     setPlaylist([]);
@@ -107,10 +86,28 @@ export const Playlist = ({ navigation }) => {
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
-          <Songlist />
+          <FlatList
+            keyExtractor={songKeyExtractor}
+            data={sortSongs()}
+            renderItem={renderSong}
+          />
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
-          <PlaylistDetail />
+          <ScrollView>
+            <SongDetail {...{ song, openUrl }} />
+            {playlist.map((no, index) => {
+              const item = songs.filter((s) => no === s.no)[0];
+              return (
+                <SongItem
+                  key={`playlist_detail_${index}`}
+                  song={item}
+                  selected={no === song.no}
+                  onRightOpen={() => toggleSong(item)}
+                  onPress={() => setCurrentIndex(index)}
+                />
+              );
+            })}
+          </ScrollView>
         </TabViewItem>
       </AnimatedTabView>
       <Player

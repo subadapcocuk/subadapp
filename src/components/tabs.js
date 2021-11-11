@@ -1,22 +1,19 @@
 import React from "react";
-import { View } from "react-native";
 import { Tab, TabView } from "react-native-elements";
 import { styles, tabItemButtonStyle, tabItemTitleStyle } from "../helpers";
 
 export const Tabs = ({ titles, value, onChange }) => (
-  <View style={styles.viewTab}>
-    <Tab style={styles.tab} value={value} onChange={onChange} disableIndicator>
-      {titles.map((title, index) => (
-        <Tab.Item
-          key={`${title}_${index}`}
-          title={title}
-          buttonStyle={tabItemButtonStyle(value == index)}
-          containerStyle={styles.tabItemContainer}
-          titleStyle={tabItemTitleStyle(value == index)}
-        />
-      ))}
-    </Tab>
-  </View>
+  <Tab value={value} onChange={onChange} disableIndicator>
+    {titles.map((title, index) => (
+      <Tab.Item
+        key={`${title}_${index}`}
+        title={title}
+        buttonStyle={tabItemButtonStyle(value == index)}
+        containerStyle={styles.tabItemContainer}
+        titleStyle={tabItemTitleStyle(value == index)}
+      />
+    ))}
+  </Tab>
 );
 
 export const AnimatedTabView = ({ value, children }) => (
