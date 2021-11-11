@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
 import {
   faBook,
   faDonate,
@@ -30,9 +30,7 @@ export const Menu = (props) => {
   return (
     <>
       <DrawerContentScrollView {...props}>
-        <DrawerItemList {...props} />
         <IconDrawerItem
-          style={{ alignSelf: "flex-end" }}
           onPress={navigation.closeDrawer}
           icon={faTimes}
         />
@@ -59,7 +57,7 @@ export const Menu = (props) => {
         <IconDrawerItem
           onPress={() => openUrl("https://www.kreosus.com/subadapcocuk")}
           icon={faDonate}
-          label="Kreosus'ta Bağış Yap"
+          label="Kreosus"
         />
         <IconDrawerItem
           onPress={() => openUrl("https://www.facebook.com/subadapcocuk")}
@@ -91,7 +89,7 @@ export const Menu = (props) => {
         <IconDrawerItem
           onPress={() => setAbout(true)}
           icon={faQuestion}
-          label="Uygulama Hakkında"
+          label="Hakkında"
         />
       </DrawerContentScrollView>
       <About visible={about} close={() => setAbout(false)} />

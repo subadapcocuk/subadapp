@@ -24,7 +24,7 @@ export const IconPress = ({
   );
 };
 
-export const IconDrawerItem = ({ onPress, icon, label, style }) => (
+export const IconDrawerItem = ({ onPress, icon, style, label = "" }) => (
   <DrawerItem
     icon={({ color, size }) => (
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
