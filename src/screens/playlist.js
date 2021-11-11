@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import { Alert, FlatList } from "react-native";
+import { Alert, ScrollView } from "react-native";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
-import { deviceWidth } from "../helpers/styles";
 import { getSongs } from "../api/data";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
-import { ScrollView } from "react-native-gesture-handler";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState([]);
@@ -53,37 +51,34 @@ export const Playlist = ({ navigation }) => {
   const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
   const PlaylistDetail = () => (
-    <>
+    <ScrollView>
       <SongDetail {...{ song, openUrl }} />
-      <FlatList
-        keyExtractor={(item) => item}
-        style={{ width: deviceWidth }}
-        data={playlist}
-        renderItem={({ item, index }) => (
+      {playlist.map((no, index) => {
+        const item = songs.filter((s) => no === s.no)[0];
+        return (
           <SongItem
-            song={songs.filter((s) => item === s.no)[0]}
-            selected={item === song.no}
-            onRightOpen={() => toggleSong(song)}
+            key={`playlist_detail_${index}`}
+            song={item}
+            selected={no === song.no}
+            onRightOpen={() => toggleSong(item)}
             onPress={() => setCurrentIndex(index)}
           />
-        )}
-      />
-    </>
+        );
+      })}
+    </ScrollView>
   );
 
   const Songlist = () => (
-    <FlatList
-      keyExtractor={(item) => item.no}
-      style={{ width: deviceWidth }}
-      data={sortSongs()}
-      renderItem={({ item }) => (
+    <ScrollView>
+      {sortSongs().map((item, index) => (
         <SongItem
+          key={`playlist_${index}`}
           song={item}
           selected={playlist.find((no) => no === item.no) !== undefined}
           onLeftOpen={() => toggleSong(item)}
         />
-      )}
-    />
+      ))}
+    </ScrollView>
   );
 
   const clearPlaylist = () => {

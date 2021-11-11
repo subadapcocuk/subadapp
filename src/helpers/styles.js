@@ -89,18 +89,18 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
   },
   tabItemContainer: {
     backgroundColor: WHITE,
     borderRadius: 10,
   },
   tabViewItem: {
-    width: "100%",
+    width: deviceWidth,
   },
   topView: {
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
     position: "absolute",
     top: 0,
   },

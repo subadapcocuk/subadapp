@@ -34,7 +34,7 @@ export const SongItem = ({
 export const SongDetail = ({ song, openUrl }) => {
   return (
     <>
-      {song ? (
+      {song && (
         <TouchableOpacity
           style={styles.songStyle}
           onPress={() => openUrl(song.page)}
@@ -43,8 +43,6 @@ export const SongDetail = ({ song, openUrl }) => {
           <Text style={{ fontSize: 32 }}>{song.name}</Text>
           <Text style={{ fontSize: 16 }}>{getAlbumTitle(song.albumNo)}</Text>
         </TouchableOpacity>
-      ) : (
-        <Text style={styles.albumTitle}>Şu an şarkı çalmıyor</Text>
       )}
     </>
   );
