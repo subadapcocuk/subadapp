@@ -16,11 +16,12 @@ export const Song = ({ song, openUrl }) => (
 export const SongItem = ({
   song,
   selected,
-  toggle,
+  onLeftOpen,
+  onRightOpen,
   image = true,
-  play = false,
+  onPress = false,
 }) => (
-  <SwipeableRow onLeftOpen={() => toggle(song.no)} onPress={play}>
+  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress }}>
     <View style={songStyle(selected)}>
       {image && (
         <Image style={styles.playlistImage} source={{ uri: song.image }} />

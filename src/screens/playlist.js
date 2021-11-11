@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FlatList, View } from "react-native";
+import { Alert, FlatList } from "react-native";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
 import { deviceWidth } from "../helpers/styles";
 import { getSongs } from "../api/data";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
+import { ScrollView } from "react-native-gesture-handler";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState([]);
@@ -26,11 +27,13 @@ export const Playlist = ({ navigation }) => {
     navigation.navigate("Page", { url });
   };
 
-  const toggleSong = (no) => {
+  const toggleSong = ({ name, no }) => {
     if (playlist.find((n) => n === no)) {
       removeSong(no);
+      Alert.alert(`${name} listeden kaldırıldı`);
     } else {
       addSong(no);
+      Alert.alert(`${name} listeye eklendi`);
     }
   };
 
@@ -50,21 +53,22 @@ export const Playlist = ({ navigation }) => {
   const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
   const PlaylistDetail = () => (
-    <View style={{ width: deviceWidth }}>
+    <>
       <SongDetail {...{ song, openUrl }} />
       <FlatList
         keyExtractor={(item) => item}
+        style={{ width: deviceWidth }}
         data={playlist}
         renderItem={({ item, index }) => (
           <SongItem
             song={songs.filter((s) => item === s.no)[0]}
             selected={item === song.no}
-            toggle={toggleSong}
-            play={() => setCurrentIndex(index)}
+            onRightOpen={() => toggleSong(song)}
+            onPress={() => setCurrentIndex(index)}
           />
         )}
       />
-    </View>
+    </>
   );
 
   const Songlist = () => (
@@ -76,7 +80,7 @@ export const Playlist = ({ navigation }) => {
         <SongItem
           song={item}
           selected={playlist.find((no) => no === item.no) !== undefined}
-          toggle={toggleSong}
+          onLeftOpen={() => toggleSong(item)}
         />
       )}
     />
