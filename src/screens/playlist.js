@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Alert, ScrollView } from "react-native";
+import { ScrollView } from "react-native";
+import Toast from "react-native-root-toast";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
 import { getSongs } from "../api/data";
@@ -28,10 +29,10 @@ export const Playlist = ({ navigation }) => {
   const toggleSong = ({ name, no }) => {
     if (playlist.find((n) => n === no)) {
       removeSong(no);
-      Alert.alert(`${name} listeden kaldırıldı`);
+      Toast.show(`${name} listeden kaldırıldı`);
     } else {
       addSong(no);
-      Alert.alert(`${name} listeye eklendi`);
+      Toast.show(`${name} listeye eklendi`);
     }
   };
 
