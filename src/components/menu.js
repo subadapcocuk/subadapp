@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { DrawerContentScrollView, DrawerItemList } from "@react-navigation/drawer";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
   faBook,
   faDonate,
@@ -7,7 +7,6 @@ import {
   faHome,
   faMusic,
   faQuestion,
-  faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCreativeCommonsNc,
@@ -17,10 +16,11 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const Menu = (props) => {
   const [about, setAbout] = useState(false);
-
+  const insets = useSafeAreaInsets();
   const { navigation } = props;
 
   const openUrl = (url) => {
@@ -29,11 +29,13 @@ export const Menu = (props) => {
 
   return (
     <>
-      <DrawerContentScrollView {...props}>
-        <IconDrawerItem
-          onPress={navigation.closeDrawer}
-          icon={faTimes}
-        />
+      <DrawerContentScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          justifyContent: "center",
+        }}
+        {...props}
+      >
         <IconDrawerItem
           icon={faMusic}
           label="Tüm Şarkılar"
