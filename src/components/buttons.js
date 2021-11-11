@@ -1,5 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { DrawerItem } from "@react-navigation/drawer";
 import { Text, TouchableOpacity } from "react-native";
 import { styles, PURPLE } from "../helpers/styles";
 
@@ -22,3 +23,12 @@ export const IconPress = ({
     </TouchableOpacity>
   );
 };
+
+export const IconDrawerItem = ({ onPress, icon, label, style }) => (
+  <DrawerItem
+    icon={({ color, size }) => (
+      <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
+    )}
+    {...{ style, label, onPress }}
+  />
+);

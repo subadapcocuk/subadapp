@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import { DrawerContentScrollView } from "@react-navigation/drawer";
 import {
   faBook,
   faDonate,
@@ -7,99 +9,93 @@ import {
   faQuestion,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
-import React, { useState } from "react";
-import { View } from "react-native";
-import { IconPress } from "../components/buttons";
-import About from "../components/about";
 import {
   faCreativeCommonsNc,
   faFacebook,
   faInstagram,
   faTwitter,
 } from "@fortawesome/free-brands-svg-icons";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { IconDrawerItem } from "../components/buttons";
+import About from "../components/about";
 
-export const Menu = ({ navigation }) => {
+export const Menu = (props) => {
   const [about, setAbout] = useState(false);
-  const insets = useSafeAreaInsets();
+
+  const { navigation } = props;
 
   const openUrl = (url) => {
     navigation.navigate("Page", { url });
   };
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: insets.top,
-        border: 10,
-      }}
-    >
-      <View style={{ alignSelf: "flex-end" }}>
-        <IconPress onPress={navigation.closeDrawer} icon={faTimes} />
-      </View>
-      {/*<Text style={{ fontSize: 24 }}>Şubadap Müzik Çalar</Text>*/}
-      <View>
-        <IconPress
-          onPress={() => navigation.navigate("Playlist")}
-          icon={faMusic}
-          text="Tüm Şarkılar"
+    <>
+      <DrawerContentScrollView {...props}>
+        <DrawerItemList {...props} />
+        <IconDrawerItem
+          style={{ alignSelf: "flex-end" }}
+          onPress={navigation.closeDrawer}
+          icon={faTimes}
         />
-        <IconPress
+        <IconDrawerItem
+          icon={faMusic}
+          label="Tüm Şarkılar"
+          onPress={() => navigation.navigate("Playlist")}
+        />
+        <IconDrawerItem
           onPress={() => navigation.navigate("Albums")}
           icon={faHome}
-          text="Albümler"
+          label="Albümler"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org/")}
           icon={faBook}
-          text={"Ansiklopedi"}
+          label={"Ansiklopedi"}
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://subadapcocuk.org/")}
           icon={faHome}
-          text="Şubadap Sitesi"
+          label="Şubadap Sitesi"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://www.kreosus.com/subadapcocuk")}
           icon={faDonate}
-          text="Kreos'ta Bağış Yap"
+          label="Kreosus'ta Bağış Yap"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://www.facebook.com/subadapcocuk")}
           icon={faFacebook}
-          text="Facebook"
+          label="Facebook"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://www.instagram.com/subadapcocuk")}
           icon={faInstagram}
-          text="Instagram"
+          label="Instagram"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://twitter.com/subadap")}
           icon={faTwitter}
-          text="Twitter"
+          label="Twitter"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => openUrl("https://subadapcocuk.org/iletisim/")}
           icon={faEnvelope}
-          text="İletişim"
+          label="İletişim"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() =>
             openUrl("http://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
           }
           icon={faCreativeCommonsNc}
-          text="Copyleft"
+          label="Copyleft"
         />
-        <IconPress
+        <IconDrawerItem
           onPress={() => setAbout(true)}
           icon={faQuestion}
-          text="Uygulama Hakkında"
+          label="Uygulama Hakkında"
         />
-      </View>
+      </DrawerContentScrollView>
       <About visible={about} close={() => setAbout(false)} />
-    </View>
+    </>
   );
 };
 
