@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { FlatList, ScrollView } from "react-native";
+import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
 import Toast from "react-native-root-toast";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
@@ -51,24 +51,6 @@ export const Playlist = ({ navigation }) => {
 
   const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
 
-  const PlaylistDetail = () => (
-    <ScrollView>
-      <SongDetail {...{ song, openUrl }} />
-      {playlist.map((no, index) => {
-        const item = songs.filter((s) => no === s.no)[0];
-        return (
-          <SongItem
-            key={`playlist_detail_${index}`}
-            song={item}
-            selected={no === song.no}
-            onRightOpen={() => toggleSong(item)}
-            onPress={() => setCurrentIndex(index)}
-          />
-        );
-      })}
-    </ScrollView>
-  );
-
   const renderSong = ({ item }) => (
     <SongItem
       song={item}
@@ -111,7 +93,21 @@ export const Playlist = ({ navigation }) => {
           />
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
-          <PlaylistDetail />
+          <ScrollView>
+            <SongDetail {...{ song, openUrl }} />
+            {playlist.map((no, index) => {
+              const item = songs.filter((s) => no === s.no)[0];
+              return (
+                <SongItem
+                  key={`playlist_detail_${index}`}
+                  song={item}
+                  selected={no === song.no}
+                  onRightOpen={() => toggleSong(item)}
+                  onPress={() => setCurrentIndex(index)}
+                />
+              );
+            })}
+          </ScrollView>
         </TabViewItem>
       </AnimatedTabView>
       <Player

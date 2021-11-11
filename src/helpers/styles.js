@@ -82,7 +82,6 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: "white",
-    position: "absolute",
     bottom: 0,
   },
   playlistButtons: {
@@ -122,10 +121,6 @@ export const styles = StyleSheet.create({
   songs: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
-  },
-  container: {
-    flex: 1,
     justifyContent: "center",
   },
   icon: {
