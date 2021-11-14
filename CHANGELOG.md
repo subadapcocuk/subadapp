@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/kinefi/subadap-player/compare/v0.5.0...v0.6.0) (2021-11-14)
+
+- Rastgele çalma özelliği eklendi [#20](https://github.com/kinefi/subadap-player/issues/20)
+
 ## [0.5.0](https://github.com/kinefi/subadap-player/compare/v0.4.0...v0.5.0) (2021-11-14)
 
 - Çalma çubuğu etkileşimli hale getirildi [#24](https://github.com/kinefi/subadap-player/issues/24)
