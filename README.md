@@ -44,7 +44,7 @@ Ana (`main`) dala gönderilen/itilen kod olması durumunda [`publish` görevi](.
 Sürüm değiştirmek için:
 
 ```bash
-yarn standard-version --release-as <patch, minor, major>
+yarn release <patch, minor, major>
 git push --follow-tags origin develop
 ```
 

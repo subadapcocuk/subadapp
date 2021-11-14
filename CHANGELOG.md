@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/kinefi/subadap-player/compare/v0.4.0...v0.5.0) (2021-11-14)
+
+- Çalma çubuğu etkileşimli hale getirildi [#24](https://github.com/kinefi/subadap-player/issues/24)
+
 ## [0.4.0](https://github.com/kinefi/subadap-player/compare/v0.3.0...v0.4.0) (2021-11-11)
 
 - Çalma listesi düzeltmeleri yapıldı [#30](https://github.com/kinefi/subadap-player/issues/30)
