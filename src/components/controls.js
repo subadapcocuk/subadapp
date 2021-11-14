@@ -3,6 +3,7 @@ import { View } from "react-native";
 import {
   faPause,
   faPlay,
+  faRandom,
   faReply,
   faSort,
   faStepBackward,
@@ -23,26 +24,25 @@ const PlayerControls = ({
   clearPlaylist,
   sortPlaylist,
   toggleLoop,
+  toggleRandom,
 }) => (
   <View style={styles.playlistButtons}>
-    <IconPress icon={faStepBackward} onPress={() => previousTrack()} />
-    <IconPress
-      icon={isPlaying ? faPause : faPlay}
-      onPress={() => playPause()}
-    />
+    <IconPress icon={faStepBackward} onPress={previousTrack} />
+    <IconPress icon={isPlaying ? faPause : faPlay} onPress={playPause} />
     <IconPress
       icon={faStop}
       color={isPlaying ? BLUE : GRAY}
-      onPress={() => stopPlayer()}
+      onPress={stopPlayer}
     />
-    <IconPress icon={faStepForward} onPress={() => nextTrack()} />
+    <IconPress icon={faStepForward} onPress={nextTrack} />
     <IconPress
       icon={faReply}
       color={isLooping ? BLUE : GRAY}
-      onPress={() => toggleLoop()}
+      onPress={toggleLoop}
     />
-    <IconPress icon={faSort} onPress={() => sortPlaylist()} />
-    <IconPress icon={faTrash} onPress={() => clearPlaylist()} />
+    <IconPress icon={faRandom} onPress={toggleRandom} />
+    <IconPress icon={faSort} onPress={sortPlaylist} />
+    <IconPress icon={faTrash} onPress={clearPlaylist} />
   </View>
 );
 

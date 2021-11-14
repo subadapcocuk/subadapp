@@ -11,6 +11,7 @@ const Player = ({
   sortPlaylist,
   previousTrack,
   nextTrack,
+  toggleRandom,
 }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
@@ -95,18 +96,15 @@ const Player = ({
       <PlayerControls
         isPlaying={status.isPlaying}
         isLooping={status.isLooping}
-        toggleLoop={() => {
-          player.setIsLoopingAsync(!status.isLooping);
-        }}
-        stopPlayer={() => {
-          player.stopAsync();
-        }}
+        toggleLoop={() => player.setIsLoopingAsync(!status.isLooping)}
+        stopPlayer={() => player.stopAsync()}
         {...{
-          previousTrack,
-          playPause,
-          nextTrack,
           clearPlaylist,
+          nextTrack,
+          playPause,
+          previousTrack,
           sortPlaylist,
+          toggleRandom,
         }}
       />
     </View>

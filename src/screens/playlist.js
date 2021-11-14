@@ -1,22 +1,20 @@
-import React, { useCallback, useState } from "react";
-import { FlatList, ScrollView } from "react-native";
+import React, { useState } from "react";
+import { ScrollView } from "react-native";
 import Toast from "react-native-root-toast";
-import Player from "../components/player";
-import { SongItem, SongDetail } from "../components/song";
 import { getSongs } from "../api/data";
+import { randomInt } from "../helpers/";
+import Player from "../components/player";
+import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState([]);
+  const [random, setRandom] = useState(false);
   const [order, setOrder] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [current, setCurrent] = useState({ song: null, index: -1 });
   const [tabIndex, setTabIndex] = useState(0);
 
   const songs = getSongs();
-
-  const openUrl = (url) => {
-    navigation.navigate("Page", { url });
-  };
 
   const toggleSong = ({ name, no }) => {
     if (playlist.find((n) => n === no)) {
@@ -41,17 +39,37 @@ export const Playlist = ({ navigation }) => {
     }
   };
 
-  const song = songs.filter((s) => s.no === playlist[currentIndex])[0];
+  const randomTrack = () => {
+    let index = -1;
+    let song = null;
+    if (playlist.length > 0) {
+      index = randomInt(playlist.length);
+      song = songs.filter((s) => s.no === playlist[index])[0];
+    } else {
+      song = songs[randomInt(songs.length)];
+    }
+    setCurrent({ ...{ index, song } });
+  };
 
-  const renderSong = ({ item }) => (
-    <SongItem
-      song={item}
-      selected={playlist.find((no) => no === item.no) !== undefined}
-      onLeftOpen={() => toggleSong(item)}
-    />
-  );
+  const previousTrack = () => {
+    if (random) {
+      randomTrack();
+    } else {
+      const index = current.index > 0 ? current.index - 1 : playlist.length - 1;
+      const song = songs.filter((s) => s.no === playlist[index])[0];
+      setCurrent({ ...{ index, song } });
+    }
+  };
 
-  const songKeyExtractor = useCallback((item) => item.no, []);
+  const nextTrack = () => {
+    if (random) {
+      randomTrack();
+    } else {
+      const index = current.index + 1 < playlist.length ? current.index + 1 : 0;
+      const song = songs.filter((s) => s.no === playlist[index])[0];
+      setCurrent({ ...{ index, song } });
+    }
+  };
 
   return (
     <>
@@ -62,22 +80,32 @@ export const Playlist = ({ navigation }) => {
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
-          <FlatList
-            keyExtractor={songKeyExtractor}
-            data={sortSongs()}
-            renderItem={renderSong}
-          />
+          <ScrollView>
+            {sortSongs().map((item) => (
+              <SongItem
+                key={`playlist_song_${item.no}`}
+                song={item}
+                selected={playlist.find((no) => no === item.no) !== undefined}
+                onLeftOpen={() => toggleSong(item)}
+              />
+            ))}
+          </ScrollView>
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
           <ScrollView>
-            <SongDetail {...{ song, openUrl }} />
+            <SongDetail
+              song={current.song}
+              openUrl={(url) => {
+                navigation.navigate("Page", { url });
+              }}
+            />
             {playlist.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
               return (
                 <SongItem
-                  key={`playlist_detail_${index}`}
+                  key={`playlist_detail_${no}`}
                   song={item}
-                  selected={no === song.no}
+                  selected={no === current?.song?.no}
                   onRightOpen={() => toggleSong(item)}
                   onPress={() => setCurrentIndex(index)}
                 />
@@ -87,21 +115,12 @@ export const Playlist = ({ navigation }) => {
         </TabViewItem>
       </AnimatedTabView>
       <Player
-        song={song}
-        clearPlaylist={() => {
-          setPlaylist([]);
-        }}
+        song={current?.song}
+        toggleRandom={() => setRandom(!random)}
+        clearPlaylist={() => setPlaylist([])}
         sortPlaylist={() => setOrder(order < 3 ? order + 1 : 0)}
-        previousTrack={() => {
-          setCurrentIndex(
-            currentIndex > 0 ? currentIndex - 1 : playlist.length - 1
-          );
-        }}
-        nextTrack={() => {
-          setCurrentIndex(
-            currentIndex + 1 < playlist.length ? currentIndex + 1 : 0
-          );
-        }}
+        previousTrack={previousTrack}
+        nextTrack={nextTrack}
       />
     </>
   );
