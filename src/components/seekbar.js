@@ -14,29 +14,34 @@ const minutesAndSeconds = (position) => [
   pad(Math.floor((position / 1000) % 60, 2), 2),
 ];
 
-const SeekBar = ({ isPlaying, trackLength, currentPosition, onSeek, onSlidingStart }) => {
+const SeekBar = ({
+  isPlaying,
+  trackLength,
+  currentPosition,
+  onSeek,
+  onSlidingStart,
+}) => {
   const elapsed = minutesAndSeconds(currentPosition);
   const remaining = minutesAndSeconds(trackLength - currentPosition);
   return (
     <View style={styles.deviceWidth}>
-      <View style={{ flexDirection: "row" }}>
+      <View style={{ flexDirection: "row", alignItems: "center" }}>
         <Text style={styles.text}>{elapsed[0] + ":" + elapsed[1]}</Text>
-        <View style={{ flex: 1 }} />
+        <Slider
+          style={styles.slider}
+          disabled={!isPlaying}
+          maximumValue={Math.max(trackLength, 1, currentPosition + 1)}
+          onSlidingStart={onSlidingStart}
+          onSlidingComplete={onSeek}
+          value={currentPosition}
+          minimumTrackTintColor={BLUE}
+          maximumTrackTintColor={GRAY}
+          thumbTintColor={isPlaying ? BLUE : GRAY}
+        />
         <Text style={styles.text}>
           {trackLength > 1 && "-" + remaining[0] + ":" + remaining[1]}
         </Text>
       </View>
-      <Slider
-        style={styles.slider}
-        disabled={!isPlaying}
-        maximumValue={Math.max(trackLength, 1, currentPosition + 1)}
-        onSlidingStart={onSlidingStart}
-        onSlidingComplete={onSeek}
-        value={currentPosition}
-        minimumTrackTintColor={BLUE}
-        maximumTrackTintColor={GRAY}
-        thumbTintColor={isPlaying ? BLUE : GRAY}
-      />
     </View>
   );
 };

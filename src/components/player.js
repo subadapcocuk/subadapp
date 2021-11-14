@@ -7,8 +7,8 @@ import SeekBar from "./seekbar";
 
 const Player = ({
   song,
-  clearPlaylist,
-  sortPlaylist,
+  clear,
+  sort,
   previousTrack,
   nextTrack,
   randomTrack,
@@ -16,6 +16,7 @@ const Player = ({
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
+  const [random, setRandom] = useState(false);
 
   useEffect(() => {
     Audio.setAudioModeAsync({
@@ -39,7 +40,23 @@ const Player = ({
       setStatus(status);
     }
     if (status.didJustFinish && !status.isLooping) {
+      onForward();
+    }
+  };
+
+  const onForward = () => {
+    if (random) {
+      randomTrack();
+    } else {
       nextTrack();
+    }
+  };
+
+  const onBackward = () => {
+    if (random) {
+      randomTrack();
+    } else {
+      previousTrack();
     }
   };
 
@@ -48,7 +65,7 @@ const Player = ({
     result.isLoaded && player.setPositionAsync(positionMillis);
   };
 
-  const playPause = async (random) => {
+  const onPlay = async () => {
     const result = await player.getStatusAsync();
     if (result.isLoaded) {
       if (result.isPlaying) {
@@ -89,7 +106,7 @@ const Player = ({
     }
   };
 
-  const stopPlayer = async () => {
+  const onStop = async () => {
     try {
       const result = await player.getStatusAsync();
       if (result.isLoaded) {
@@ -111,15 +128,16 @@ const Player = ({
       <PlayerControls
         isPlaying={status.isPlaying}
         isLooping={status.isLooping}
-        toggleLoop={() => player.setIsLoopingAsync(!status.isLooping)}
+        isRandom={random}
+        onSort={sort}
+        onClear={clear}
+        onLoop={() => player.setIsLoopingAsync(!status.isLooping)}
+        onRandom={() => setRandom(!random)}
         {...{
-          clearPlaylist,
-          playPause,
-          sortPlaylist,
-          stopPlayer,
-          randomTrack,
-          previousTrack,
-          nextTrack,
+          onBackward,
+          onForward,
+          onPlay,
+          onStop,
         }}
       />
     </View>

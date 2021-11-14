@@ -15,62 +15,40 @@ import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
 
 const PlayerControls = ({
-  clearPlaylist,
   isLooping,
   isPlaying,
-  nextTrack,
-  playPause,
-  previousTrack,
-  randomTrack,
-  sortPlaylist,
-  stopPlayer,
-  toggleLoop,
+  isRandom,
+  onBackward,
+  onClear,
+  onForward,
+  onPlay,
+  onSort,
+  onStop,
+  onLoop,
+  onRandom,
 }) => {
-  const [random, setRandom] = useState(false);
-
   return (
     <View style={styles.playlistButtons}>
-      <IconPress
-        icon={faStepBackward}
-        onPress={() => {
-          if (random) {
-            randomTrack();
-          } else {
-            previousTrack();
-          }
-        }}
-      />
-      <IconPress
-        icon={isPlaying ? faPause : faPlay}
-        onPress={() => playPause(random)}
-      />
+      <IconPress icon={faStepBackward} onPress={onBackward} />
+      <IconPress icon={isPlaying ? faPause : faPlay} onPress={onPlay} />
       <IconPress
         icon={faStop}
         color={isPlaying ? BLUE : GRAY}
-        onPress={stopPlayer}
+        onPress={onStop}
       />
-      <IconPress
-        icon={faStepForward}
-        onPress={() => {
-          if (random) {
-            randomTrack();
-          } else {
-            nextTrack();
-          }
-        }}
-      />
+      <IconPress icon={faStepForward} onPress={onForward} />
       <IconPress
         icon={faReply}
         color={isLooping ? BLUE : GRAY}
-        onPress={toggleLoop}
+        onPress={onLoop}
       />
       <IconPress
-        color={random ? BLUE : GRAY}
+        color={isRandom ? BLUE : GRAY}
         icon={faRandom}
-        onPress={() => setRandom(!random)}
+        onPress={onRandom}
       />
-      <IconPress icon={faSort} onPress={sortPlaylist} />
-      <IconPress icon={faTrash} onPress={clearPlaylist} />
+      <IconPress icon={faSort} onPress={onSort} />
+      <IconPress icon={faTrash} onPress={onClear} />
     </View>
   );
 };

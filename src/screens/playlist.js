@@ -110,11 +110,9 @@ export const Playlist = ({ navigation }) => {
       </AnimatedTabView>
       <Player
         song={current?.song}
-        clearPlaylist={() => setPlaylist([])}
-        sortPlaylist={() => setOrder(order < 3 ? order + 1 : 0)}
-        previousTrack={previousTrack}
-        nextTrack={nextTrack}
-        randomTrack={randomTrack}
+        clear={() => setPlaylist([])}
+        sort={() => setOrder(order < 3 ? order + 1 : 0)}
+        {...{ nextTrack, previousTrack, randomTrack }}
       />
     </>
   );
