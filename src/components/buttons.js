@@ -1,8 +1,8 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { DrawerItem } from "@react-navigation/drawer";
 import { Text, TouchableOpacity } from "react-native";
-import { styles, BLUE } from "../helpers/styles";
+import { DrawerItem } from "@react-navigation/drawer";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { BLUE, styles } from "../helpers/styles";
 
 export const IconPress = ({
   onPress,
@@ -14,12 +14,7 @@ export const IconPress = ({
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
-      {text && (
-        <Text style={{ fontSize: 16 }}>
-          {"\t"}
-          {text}
-        </Text>
-      )}
+      {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
     </TouchableOpacity>
   );
 };

@@ -53,7 +53,8 @@ export const styles = StyleSheet.create({
   },
   slider: {
     marginTop: 0,
-    height: 50
+    height: 50,
+    flexGrow: 1,
   },
   albumTitle: {
     color: BLUE,
