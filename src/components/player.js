@@ -60,14 +60,6 @@ const Player = ({
     }
   };
 
-  const toggleLoop = () => {
-    player.setIsLoopingAsync(!status.isLooping);
-  };
-
-  const stopPlayer = () => {
-    player.stopAsync();
-  };
-
   const playSong = async () => {
     try {
       //unload previous song
@@ -103,14 +95,18 @@ const Player = ({
       <PlayerControls
         isPlaying={status.isPlaying}
         isLooping={status.isLooping}
+        toggleLoop={() => {
+          player.setIsLoopingAsync(!status.isLooping);
+        }}
+        stopPlayer={() => {
+          player.stopAsync();
+        }}
         {...{
           previousTrack,
           playPause,
-          stopPlayer,
           nextTrack,
           clearPlaylist,
           sortPlaylist,
-          toggleLoop,
         }}
       />
     </View>

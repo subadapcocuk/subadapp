@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import { FlatList, SafeAreaView, ScrollView, View } from "react-native";
+import { FlatList, ScrollView } from "react-native";
 import Toast from "react-native-root-toast";
 import Player from "../components/player";
 import { SongItem, SongDetail } from "../components/song";
@@ -53,22 +53,6 @@ export const Playlist = ({ navigation }) => {
 
   const songKeyExtractor = useCallback((item) => item.no, []);
 
-  const clearPlaylist = () => {
-    setPlaylist([]);
-  };
-
-  const sortPlaylist = () => {
-    setOrder(order < 3 ? order + 1 : 0);
-  };
-
-  const previousTrack = () => {
-    setCurrentIndex(currentIndex > 0 ? currentIndex - 1 : playlist.length - 1);
-  };
-
-  const nextTrack = () => {
-    setCurrentIndex(currentIndex + 1 < playlist.length ? currentIndex + 1 : 0);
-  };
-
   return (
     <>
       <Tabs
@@ -103,12 +87,20 @@ export const Playlist = ({ navigation }) => {
         </TabViewItem>
       </AnimatedTabView>
       <Player
-        {...{
-          song,
-          clearPlaylist,
-          sortPlaylist,
-          previousTrack,
-          nextTrack,
+        song={song}
+        clearPlaylist={() => {
+          setPlaylist([]);
+        }}
+        sortPlaylist={() => setOrder(order < 3 ? order + 1 : 0)}
+        previousTrack={() => {
+          setCurrentIndex(
+            currentIndex > 0 ? currentIndex - 1 : playlist.length - 1
+          );
+        }}
+        nextTrack={() => {
+          setCurrentIndex(
+            currentIndex + 1 < playlist.length ? currentIndex + 1 : 0
+          );
         }}
       />
     </>
