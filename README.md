@@ -10,11 +10,11 @@
 
 [Expo](https://expo.dev/) kullanılarak geliştirilen bir [React Native](https://reactnative.dev/) uygulamasıdır.
 
-Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için `expo-cli` ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
+Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut satırı işlemleri için [expo-cli](https://docs.expo.dev/workflow/expo-cli/) ve paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
 
 Özetle aşağıdaki uygulamaları sırayla kurmak gerekiyor:
 
-- [node](https://nodejs.org/en/download/)
+- [node](https://nodejs.org/en/download/) (kurmak için [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
 - [yarn](https://classic.yarnpkg.com/en/docs/install): `npm install --global yarn`
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/): `npm install -g expo-cli`
 
