@@ -47,6 +47,14 @@ export const songText = (selected) => {
 };
 
 export const styles = StyleSheet.create({
+  text: {
+    color: BLUE,
+    textAlign: "center"
+  },
+  slider: {
+    marginTop: 0,
+    height: 50
+  },
   albumTitle: {
     color: BLUE,
     fontSize: 32,
@@ -65,7 +73,7 @@ export const styles = StyleSheet.create({
   menuLabel: {
     color: BLUE,
     fontSize: 16,
-    padding:0
+    padding: 0,
   },
   webview: {
     width: deviceWidth,
@@ -94,7 +102,7 @@ export const styles = StyleSheet.create({
     backgroundColor: WHITE,
     borderRadius: 10,
   },
-  tabViewItem: {
+  deviceWidth: {
     width: deviceWidth,
   },
   topView: {
@@ -160,7 +168,6 @@ export const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    //justifyContent: "center",
     height: 50,
     flexDirection: "row",
   },

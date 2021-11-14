@@ -11,9 +11,9 @@ import {
   faStop,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import * as Progress from "react-native-progress";
 import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
+import SeekBar from "./seekbar";
 
 const Player = ({
   song,
@@ -97,6 +97,10 @@ const Player = ({
     }
   };
 
+  const onSeek = () => {
+    console.log("onSeek");
+  };
+
   const PlayerButtons = () => (
     <View style={styles.playlistButtons}>
       <IconPress icon={faStepBackward} onPress={() => previousTrack()} />
@@ -122,14 +126,15 @@ const Player = ({
 
   return (
     <View style={styles.bottomView}>
-      {song && <Text style={styles.albumTitle}>{song.name}</Text>}
+      {song && (
+        <Text style={styles.text}>{song.name}</Text>
+      )}
       {status.positionMillis > 0 && (
-        <Progress.Bar
-          style={{ width: "100%" }}
-          color={BLUE}
-          width={null}
-          height={32}
-          progress={status.positionMillis / status.durationMillis}
+        <SeekBar
+          onSeek={onSeek}
+          trackLength={status.durationMillis}
+          onSlidingStart={() => console.log("sliding started")}
+          currentPosition={status.positionMillis}
         />
       )}
       <PlayerButtons />

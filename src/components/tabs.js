@@ -29,7 +29,7 @@ export const AnimatedTabView = ({ value, children }) => (
 export const TabViewItem = ({ selected, children }) =>
   selected && (
     <TabView.Item
-      style={styles.tabViewItem}
+      style={styles.deviceWidth}
       //Fix from: https://github.com/react-native-elements/react-native-elements/issues/3091#issuecomment-866226005
       onMoveShouldSetResponder={(e) => e.stopPropagation()}
     >
