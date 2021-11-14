@@ -9,7 +9,6 @@ import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState([]);
-  const [random, setRandom] = useState(false);
   const [order, setOrder] = useState(0);
   const [current, setCurrent] = useState({ song: null, index: -1 });
   const [tabIndex, setTabIndex] = useState(0);
@@ -40,35 +39,30 @@ export const Playlist = ({ navigation }) => {
   };
 
   const randomTrack = () => {
-    let index = -1;
-    let song = null;
     if (playlist.length > 0) {
-      index = randomInt(playlist.length);
-      song = songs.filter((s) => s.no === playlist[index])[0];
+      const index = randomInt(playlist.length);
+      setCurrent({
+        index: index,
+        song: songs.filter((s) => s.no === playlist[index])[0],
+      });
     } else {
-      song = songs[randomInt(songs.length)];
+      setCurrent({
+        song: songs[randomInt(songs.length)],
+        index: -1,
+      });
     }
-    setCurrent({ ...{ index, song } });
   };
 
   const previousTrack = () => {
-    if (random) {
-      randomTrack();
-    } else {
-      const index = current.index > 0 ? current.index - 1 : playlist.length - 1;
-      const song = songs.filter((s) => s.no === playlist[index])[0];
-      setCurrent({ ...{ index, song } });
-    }
+    const index = current.index > 0 ? current.index - 1 : playlist.length - 1;
+    const song = songs.filter((s) => s.no === playlist[index])[0];
+    setCurrent({ ...{ index, song } });
   };
 
   const nextTrack = () => {
-    if (random) {
-      randomTrack();
-    } else {
-      const index = current.index + 1 < playlist.length ? current.index + 1 : 0;
-      const song = songs.filter((s) => s.no === playlist[index])[0];
-      setCurrent({ ...{ index, song } });
-    }
+    const index = current.index + 1 < playlist.length ? current.index + 1 : 0;
+    const song = songs.filter((s) => s.no === playlist[index])[0];
+    setCurrent({ ...{ index, song } });
   };
 
   return (
@@ -107,7 +101,7 @@ export const Playlist = ({ navigation }) => {
                   song={item}
                   selected={no === current?.song?.no}
                   onRightOpen={() => toggleSong(item)}
-                  onPress={() => setCurrentIndex(index)}
+                  onPress={() => setCurrent({ song: item, index: index })}
                 />
               );
             })}
@@ -116,11 +110,11 @@ export const Playlist = ({ navigation }) => {
       </AnimatedTabView>
       <Player
         song={current?.song}
-        toggleRandom={() => setRandom(!random)}
         clearPlaylist={() => setPlaylist([])}
         sortPlaylist={() => setOrder(order < 3 ? order + 1 : 0)}
         previousTrack={previousTrack}
         nextTrack={nextTrack}
+        randomTrack={randomTrack}
       />
     </>
   );

@@ -11,7 +11,7 @@ const Player = ({
   sortPlaylist,
   previousTrack,
   nextTrack,
-  toggleRandom,
+  randomTrack,
 }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
@@ -48,7 +48,7 @@ const Player = ({
     result.isLoaded && player.setPositionAsync(positionMillis);
   };
 
-  const playPause = async () => {
+  const playPause = async (random) => {
     const result = await player.getStatusAsync();
     if (result.isLoaded) {
       if (result.isPlaying) {
@@ -57,7 +57,11 @@ const Player = ({
         player.playAsync();
       }
     } else {
-      playSong();
+      if (random) {
+        randomTrack();
+      } else {
+        playSong();
+      }
     }
   };
 
@@ -80,8 +84,19 @@ const Player = ({
         );
         player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
       }
-    } catch (error) {
-      console.error(error);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const stopPlayer = async () => {
+    try {
+      const result = await player.getStatusAsync();
+      if (result.isLoaded) {
+        await player.stopAsync();
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
 
@@ -97,14 +112,14 @@ const Player = ({
         isPlaying={status.isPlaying}
         isLooping={status.isLooping}
         toggleLoop={() => player.setIsLoopingAsync(!status.isLooping)}
-        stopPlayer={() => player.stopAsync()}
         {...{
           clearPlaylist,
-          nextTrack,
           playPause,
-          previousTrack,
           sortPlaylist,
-          toggleRandom,
+          stopPlayer,
+          randomTrack,
+          previousTrack,
+          nextTrack,
         }}
       />
     </View>
