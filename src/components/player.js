@@ -1,18 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { Audio } from "expo-av";
-import {
-  faPause,
-  faPlay,
-  faReply,
-  faSort,
-  faStepBackward,
-  faStepForward,
-  faStop,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import { styles, BLUE, GRAY } from "../helpers/styles";
-import { IconPress } from "./buttons";
+import { styles } from "../helpers/styles";
+import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
 const Player = ({
@@ -50,6 +40,11 @@ const Player = ({
     if (status.didJustFinish && !status.isLooping) {
       nextTrack();
     }
+  };
+
+  const onSeek = async (positionMillis) => {
+    const result = await player.getStatusAsync();
+    result.isLoaded && player.setPositionAsync(positionMillis);
   };
 
   const playPause = async () => {
@@ -97,47 +92,27 @@ const Player = ({
     }
   };
 
-  const onSeek = () => {
-    console.log("onSeek");
-  };
-
-  const PlayerButtons = () => (
-    <View style={styles.playlistButtons}>
-      <IconPress icon={faStepBackward} onPress={() => previousTrack()} />
-      <IconPress
-        icon={status.isPlaying ? faPause : faPlay}
-        onPress={() => playPause()}
-      />
-      <IconPress
-        icon={faStop}
-        color={status.isPlaying ? BLUE : GRAY}
-        onPress={() => stopPlayer()}
-      />
-      <IconPress icon={faStepForward} onPress={() => nextTrack()} />
-      <IconPress
-        icon={faReply}
-        color={status.isLooping ? BLUE : GRAY}
-        onPress={() => toggleLoop()}
-      />
-      <IconPress icon={faSort} onPress={() => sortPlaylist()} />
-      <IconPress icon={faTrash} onPress={() => clearPlaylist()} />
-    </View>
-  );
-
   return (
     <View style={styles.bottomView}>
-      {song && (
-        <Text style={styles.text}>{song.name}</Text>
-      )}
-      {status.positionMillis > 0 && (
-        <SeekBar
-          onSeek={onSeek}
-          trackLength={status.durationMillis}
-          onSlidingStart={() => console.log("sliding started")}
-          currentPosition={status.positionMillis}
-        />
-      )}
-      <PlayerButtons />
+      <SeekBar
+        isPlaying={status.isLoaded}
+        onSeek={onSeek}
+        trackLength={status.positionMillis ? status.durationMillis : 1}
+        currentPosition={status.positionMillis ? status.positionMillis : 0}
+      />
+      <PlayerControls
+        isPlaying={status.isPlaying}
+        isLooping={status.isLooping}
+        {...{
+          previousTrack,
+          playPause,
+          stopPlayer,
+          nextTrack,
+          clearPlaylist,
+          sortPlaylist,
+          toggleLoop,
+        }}
+      />
     </View>
   );
 };

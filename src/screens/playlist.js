@@ -14,24 +14,16 @@ export const Playlist = ({ navigation }) => {
 
   const songs = getSongs();
 
-  const addSong = (no) => {
-    setPlaylist([...playlist, no]);
-  };
-
-  const removeSong = (no) => {
-    setPlaylist(playlist.filter((o) => o !== no));
-  };
-
   const openUrl = (url) => {
     navigation.navigate("Page", { url });
   };
 
   const toggleSong = ({ name, no }) => {
     if (playlist.find((n) => n === no)) {
-      removeSong(no);
+      setPlaylist(playlist.filter((o) => o !== no));
       Toast.show(`${name} listeden kaldırıldı`);
     } else {
-      addSong(no);
+      setPlaylist([...playlist, no]);
       Toast.show(`${name} listeye eklendi`);
     }
   };
@@ -74,7 +66,7 @@ export const Playlist = ({ navigation }) => {
   };
 
   const nextTrack = () => {
-    setCurrentIndex(currentIndex < playlist.length - 1 ? currentIndex + 1 : 0);
+    setCurrentIndex(currentIndex + 1 < playlist.length ? currentIndex + 1 : 0);
   };
 
   return (

@@ -29,7 +29,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15",
     "@fortawesome/free-solid-svg-icons": "^5.15",
     "@fortawesome/react-native-fontawesome": "^0.2",
-    "@react-native-community/slider": "^4.1",
+    "@react-native-community/slider": "4.1.7",
     "@react-navigation/drawer": "^6.1",
     "@react-navigation/native": "^6.0",
     "expo": "^43",
