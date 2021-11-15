@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, ScrollView, Image } from "react-native";
-import Song from "./song";
-import { styles } from "../helpers/";
+import { Image, ScrollView, Text, View } from "react-native";
 import { getSongs } from "../api/data";
+import { styles } from "../helpers/";
+import { Song } from "./song";
 
 const Album = ({ album, openUrl }) => {
   const songs = getSongs(album.no);

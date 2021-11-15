@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/kinefi/subadap-player/compare/v0.5.0...v0.6.0) (2021-11-14)
+
+- Rastgele çalma özelliği eklendi [#20](https://github.com/kinefi/subadap-player/issues/20)
+
+## [0.5.0](https://github.com/kinefi/subadap-player/compare/v0.4.0...v0.5.0) (2021-11-14)
+
+- Çalma çubuğu etkileşimli hale getirildi [#24](https://github.com/kinefi/subadap-player/issues/24)
+
+## [0.4.0](https://github.com/kinefi/subadap-player/compare/v0.3.0...v0.4.0) (2021-11-11)
+
+- Çalma listesi düzeltmeleri yapıldı [#30](https://github.com/kinefi/subadap-player/issues/30)
+- Yan panel hataları düzeltildi [#31](https://github.com/kinefi/subadap-player/issues/31)
+
+## [0.3.0](https://github.com/kinefi/subadap-player/compare/v0.2.1...v0.3.0) (2021-11-06)
+
+- Çalma listesi iyileştirildi [#25](https://github.com/kinefi/subadap-player/issues/25)
+- Menüdeki geçişler düzeltildi [#26](https://github.com/kinefi/subadap-player/issues/26)
+- Albüm adı ve yılı kaldırıldı [#27](https://github.com/kinefi/subadap-player/issues/27)
+
 ### [0.2.1](https://github.com/kinefi/subadap-player/compare/v0.2.0...v0.2.1) (2021-10-26)
 
 - Daha küçük menü öğeleri [#15](https://github.com/kinefi/subadap-player/issues/15)

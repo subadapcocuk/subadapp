@@ -8,20 +8,38 @@ export const GREEN = "#009688";
 
 export const deviceWidth = Dimensions.get("window").width;
 
+export const tabItemButtonStyle = (currentTab) => {
+  return {
+    backgroundColor: currentTab ? BLUE : WHITE,
+    borderRadius: 10,
+    padding: 0,
+    marginBottom: 0,
+  };
+};
+
+export const tabItemTitleStyle = (currentTab) => {
+  return {
+    color: currentTab ? WHITE : BLUE,
+    textTransform: "capitalize",
+    paddingTop: 5,
+    paddingBottom: 5,
+  };
+};
+
 export const songStyle = (selected) => {
   return {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: selected ? PURPLE : "white",
+    backgroundColor: selected ? BLUE : "white",
     borderRadius: 5,
     alignItems: "center",
-    padding: 10,
+    padding: 5,
   };
 };
 
 export const songText = (selected) => {
   return {
-    color: selected ? "white" : PURPLE,
+    color: selected ? "white" : BLUE,
     borderRadius: 5,
     padding: 5,
     fontSize: 18,
@@ -29,6 +47,15 @@ export const songText = (selected) => {
 };
 
 export const styles = StyleSheet.create({
+  text: {
+    color: BLUE,
+    textAlign: "center"
+  },
+  slider: {
+    marginTop: 0,
+    height: 50,
+    flexGrow: 1,
+  },
   albumTitle: {
     color: BLUE,
     fontSize: 32,
@@ -43,6 +70,11 @@ export const styles = StyleSheet.create({
     width: deviceWidth,
     justifyContent: "center",
     alignItems: "center",
+  },
+  menuLabel: {
+    color: BLUE,
+    fontSize: 16,
+    padding: 0,
   },
   webview: {
     width: deviceWidth,
@@ -59,18 +91,24 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: "white",
-    position: "absolute",
     bottom: 0,
   },
   playlistButtons: {
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
+  },
+  tabItemContainer: {
+    backgroundColor: WHITE,
+    borderRadius: 10,
+  },
+  deviceWidth: {
+    width: deviceWidth,
   },
   topView: {
     justifyContent: "space-around",
-    width: "100%",
+    width: deviceWidth,
     position: "absolute",
     top: 0,
   },
@@ -92,10 +130,6 @@ export const styles = StyleSheet.create({
   songs: {
     flexWrap: "wrap",
     flexDirection: "row",
-    justifyContent: "center",
-  },
-  container: {
-    flex: 1,
     justifyContent: "center",
   },
   icon: {
@@ -135,7 +169,6 @@ export const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    //justifyContent: "center",
     height: 50,
     flexDirection: "row",
   },
@@ -179,5 +212,11 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: "center",
+  },
+  zeroMargin: {
+    marginTop: 0,
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
   },
 });

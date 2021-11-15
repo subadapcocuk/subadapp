@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Asset } from "expo-asset";
 import { NavigationService } from "./src/services/navigation";
+import { RootSiblingParent } from "react-native-root-siblings";
 import "react-native-gesture-handler";
 import "react-native-get-random-values";
 import AppLoading from "expo-app-loading";
@@ -108,8 +109,10 @@ const AnimatedSplashScreen = ({ children, image }) => {
 export default function App() {
   return (
     <AnimatedAppLoader image={require("./assets/subadap.png")}>
-      <NavigationService />
-      <StatusBar style="auto" />
+      <RootSiblingParent>
+        <NavigationService />
+        <StatusBar style="auto" />
+      </RootSiblingParent>
     </AnimatedAppLoader>
   );
 
@@ -120,9 +123,9 @@ export default function App() {
       onFinish={() => setAppIsReady(true)}
     />
   ) : (
-    <>
+    <RootSiblingParent>
       <NavigationService />
       <StatusBar style="auto" />
-    </>
+    </RootSiblingParent>
   );*/
 }
