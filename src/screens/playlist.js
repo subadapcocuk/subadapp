@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, TextInput } from "react-native";
 import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
 import { randomInt } from "../helpers/";
@@ -17,6 +17,7 @@ export const Playlist = ({ navigation }) => {
   });
   const [order, setOrder] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
+  const [filter, setFilter] = useState("");
 
   const songs = getSongs();
 
@@ -48,16 +49,20 @@ export const Playlist = ({ navigation }) => {
     "yeni albümden eski albüme",
     "eski albümden yeni albüme",
   ];
+
   const sortSongs = () => {
+    const filtered = songs.filter((s) =>
+      s.name.toLowerCase().includes(filter.toLowerCase())
+    );
     switch (order) {
       case 0:
-        return songs.slice().sort((a, b) => a.name > b.name);
+        return filtered.sort((a, b) => a.name > b.name);
       case 1:
-        return songs.slice().sort((a, b) => a.name < b.name);
+        return filtered.sort((a, b) => a.name < b.name);
       case 2:
-        return songs.slice().sort((a, b) => a.albumNo < b.albumNo);
+        return filtered.sort((a, b) => a.albumNo < b.albumNo);
       default:
-        return songs;
+        return filtered;
     }
   };
 
@@ -107,6 +112,13 @@ export const Playlist = ({ navigation }) => {
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
           <>
+            <TextInput
+              style={{ height: 40 }}
+              caretHidden={true}
+              placeholder={"Listede arama yapın"}
+              onChangeText={setFilter}
+              value={filter}
+            />
             <IconPress
               icon={faSort}
               onPress={() => setOrder(order < 3 ? order + 1 : 0)}
