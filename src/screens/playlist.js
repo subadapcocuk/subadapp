@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
-import { randomInt, styles } from "../helpers/";
+import { randomInt, styles, LoopType } from "../helpers/";
 import Player from "../components/player";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -122,17 +122,25 @@ export const Playlist = ({ navigation }) => {
   };
 
   const previousTrack = () => {
-    const index =
-      playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
-    const current = songs.filter((s) => s.no === playlist.list[index])[0];
-    setPlaylist({ ...playlist, ...{ index, current } });
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
   };
 
   const nextTrack = () => {
-    const index =
-      playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
-    const current = songs.filter((s) => s.no === playlist.list[index])[0];
-    setPlaylist({ ...playlist, ...{ index, current } });
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
   };
 
   const clearAndPlay = (song) => {
@@ -193,7 +201,7 @@ export const Playlist = ({ navigation }) => {
                 <IconPress
                   {...LOOP_TYPES[loop]}
                   onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
-                  style={{width: "50%"}}
+                  style={{ width: "50%" }}
                 />
                 <IconPress
                   icon={faTrash}
@@ -222,6 +230,7 @@ export const Playlist = ({ navigation }) => {
       </AnimatedTabView>
       <Player
         song={playlist?.current}
+        loopType={loop}
         {...{ nextTrack, previousTrack, randomTrack }}
       />
     </>
