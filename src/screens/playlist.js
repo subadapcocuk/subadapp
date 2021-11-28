@@ -42,7 +42,12 @@ export const Playlist = ({ navigation }) => {
     Toast.show("Çalma listesi temizlendi");
   };
 
-  const ORDER = ["alfabetik", "ters alfabetik", "yeni albümden eski albüme", "eski albümden yeni albüme"];
+  const ORDER = [
+    "alfabetik",
+    "ters alfabetik",
+    "yeni albümden eski albüme",
+    "eski albümden yeni albüme",
+  ];
   const sortSongs = () => {
     switch (order) {
       case 0:
@@ -61,11 +66,12 @@ export const Playlist = ({ navigation }) => {
       const index = randomInt(playlist.list.length);
       setPlaylist({
         ...playlist,
-        index: index,
         current: songs.filter((s) => s.no === playlist.list[index])[0],
+        index: index,
       });
     } else {
       setPlaylist({
+        ...playlist,
         current: songs[randomInt(songs.length)],
         index: -1,
       });
@@ -124,13 +130,15 @@ export const Playlist = ({ navigation }) => {
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
           <ScrollView>
-            <SongDetail
-              song={playlist.current}
-              openUrl={(url) => {
-                navigation.navigate("Page", { url });
-              }}
-            />
-            {playlist.current && (
+            {playlist?.current && (
+              <SongDetail
+                song={playlist.current}
+                openUrl={(url) => {
+                  navigation.navigate("Page", { url });
+                }}
+              />
+            )}
+            {playlist.list.length > 0 && (
               <IconPress
                 icon={faTrash}
                 size={24}
@@ -138,7 +146,7 @@ export const Playlist = ({ navigation }) => {
                 text="Listeyi temizle"
               />
             )}
-            {playlist.list.map((no, index) => {
+            {playlist?.list.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
               return (
                 <SongItem

@@ -9,7 +9,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
-  const [random, setRandom] = useState(false);
+  const [random, setRandom] = useState(true);
 
   useEffect(() => {
     Audio.setAudioModeAsync({
@@ -119,7 +119,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
         currentPosition={status.positionMillis ? status.positionMillis : 0}
       />
       <PlayerControls
-        isPlaying={status.isPlaying}
+        isPlaying={song && status.isPlaying}
         isLooping={status.isLooping}
         isRandom={random}
         onLoop={() => player.setIsLoopingAsync(!status.isLooping)}
