@@ -1,15 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { View } from "react-native";
 import {
   faPause,
   faPlay,
   faRandom,
   faReply,
-  faSort,
   faStepBackward,
   faStepForward,
-  faStop,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { styles, BLUE, GRAY } from "../helpers/styles";
 import { IconPress } from "./buttons";
@@ -19,22 +16,18 @@ const PlayerControls = ({
   isPlaying,
   isRandom,
   onBackward,
-  onClear,
   onForward,
   onPlay,
-  onSort,
-  onStop,
   onLoop,
   onRandom,
 }) => {
   return (
     <View style={styles.playlistButtons}>
       <IconPress icon={faStepBackward} onPress={onBackward} />
-      <IconPress icon={isPlaying ? faPause : faPlay} onPress={onPlay} />
       <IconPress
-        icon={faStop}
-        color={isPlaying ? BLUE : GRAY}
-        onPress={onStop}
+        icon={isPlaying ? faPause : faPlay}
+        onPress={onPlay}
+        size={48}
       />
       <IconPress icon={faStepForward} onPress={onForward} />
       <IconPress
@@ -47,8 +40,6 @@ const PlayerControls = ({
         icon={faRandom}
         onPress={onRandom}
       />
-      <IconPress icon={faSort} onPress={onSort} />
-      <IconPress icon={faTrash} onPress={onClear} />
     </View>
   );
 };

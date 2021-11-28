@@ -5,14 +5,7 @@ import { styles } from "../helpers/styles";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-const Player = ({
-  song,
-  clear,
-  sort,
-  previousTrack,
-  nextTrack,
-  randomTrack,
-}) => {
+const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
@@ -129,8 +122,6 @@ const Player = ({
         isPlaying={status.isPlaying}
         isLooping={status.isLooping}
         isRandom={random}
-        onSort={sort}
-        onClear={clear}
         onLoop={() => player.setIsLoopingAsync(!status.isLooping)}
         onRandom={() => setRandom(!random)}
         {...{

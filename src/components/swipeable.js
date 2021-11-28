@@ -15,7 +15,9 @@ export const SwipeableRow = ({
       outputRange: [0, 1],
       extrapolate: "clamp",
     });
-    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
+    return (
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
+    );
   };
 
   renderRightActions = (_progress, dragX) => {
@@ -24,7 +26,9 @@ export const SwipeableRow = ({
       outputRange: [1, 0],
       extrapolate: "clamp",
     });
-    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
+    return (
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
+    );
   };
 
   onSwipeableRightOpen = () => {
