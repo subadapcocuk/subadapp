@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
-import { styles } from "../helpers/styles";
+import { styles, LoopType } from "../helpers/";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
+const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
-  const [random, setRandom] = useState(true);
 
   useEffect(() => {
     Audio.setAudioModeAsync({
@@ -28,28 +27,20 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
     playSong();
   }, [song]);
 
+  useEffect(() => {
+    player
+      .setIsLoopingAsync(loopType === LoopType.RepeatSong)
+      .then()
+      .catch(() => console.log("not loaded"));
+    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+  }, [loopType]);
+
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
     }
     if (status.didJustFinish && !status.isLooping) {
-      onForward();
-    }
-  };
-
-  const onForward = () => {
-    if (random) {
-      randomTrack();
-    } else {
       nextTrack();
-    }
-  };
-
-  const onBackward = () => {
-    if (random) {
-      randomTrack();
-    } else {
-      previousTrack();
     }
   };
 
@@ -67,7 +58,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
         player.playAsync();
       }
     } else {
-      if (random) {
+      if (loopType === LoopType.RandomList) {
         randomTrack();
       } else {
         playSong();
@@ -88,7 +79,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
             shouldCorrectPitch: status.shouldCorrectPitch,
             volume: status.volume,
             isMuted: status.muted,
-            isLooping: status.isLooping,
+            isLooping: loopType === LoopType.RepeatSong,
             progressUpdateIntervalMillis: 1000,
           }
         );
@@ -120,13 +111,9 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack }) => {
       />
       <PlayerControls
         isPlaying={song && status.isPlaying}
-        isLooping={status.isLooping}
-        isRandom={random}
-        onLoop={() => player.setIsLoopingAsync(!status.isLooping)}
-        onRandom={() => setRandom(!random)}
+        onForward={nextTrack}
+        onBackward={previousTrack}
         {...{
-          onBackward,
-          onForward,
           onPlay,
           onStop,
         }}

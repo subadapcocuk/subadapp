@@ -49,7 +49,7 @@ export const songText = (selected) => {
 export const styles = StyleSheet.create({
   text: {
     color: BLUE,
-    textAlign: "center"
+    textAlign: "center",
   },
   slider: {
     marginTop: 0,
@@ -135,6 +135,7 @@ export const styles = StyleSheet.create({
   icon: {
     fontSize: 32,
     color: BLUE,
+    margin:5,
   },
   menu: {
     flex: 1,
@@ -212,6 +213,14 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: "center",
+  },
+  textInput: {
+    color: BLUE,
+    borderColor: BLUE,
+    borderWidth: 1,
+    height: 40,
+    padding: 5,
+    width: "85%",
   },
   zeroMargin: {
     marginTop: 0,

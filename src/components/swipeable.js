@@ -9,7 +9,7 @@ export const SwipeableRow = ({
   onRightOpen,
   onPress,
 }) => {
-  renderLeftActions = (_progress, dragX) => {
+  const renderLeftActions = (_progress, dragX) => {
     const scale = dragX.interpolate({
       inputRange: [0, 100],
       outputRange: [0, 1],
@@ -20,7 +20,7 @@ export const SwipeableRow = ({
     );
   };
 
-  renderRightActions = (_progress, dragX) => {
+  const renderRightActions = (_progress, dragX) => {
     const scale = dragX.interpolate({
       inputRange: [-100, 0],
       outputRange: [1, 0],
@@ -31,11 +31,11 @@ export const SwipeableRow = ({
     );
   };
 
-  onSwipeableRightOpen = () => {
+  const onSwipeableRightOpen = () => {
     onRightOpen && onRightOpen();
   };
 
-  onSwipeableLeftOpen = () => {
+  const onSwipeableLeftOpen = () => {
     onLeftOpen && onLeftOpen();
   };
 
