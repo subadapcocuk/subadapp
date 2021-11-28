@@ -113,7 +113,7 @@ export const Playlist = ({ navigation }) => {
               text={`Sırayı Değiştir (şu an ${ORDER[order]})`}
               size={24}
             />
-            <ScrollView>
+            <ScrollView persistentScrollbar>
               {sortSongs().map((item) => (
                 <SongItem
                   key={`playlist_song_${item.no}`}
@@ -129,7 +129,7 @@ export const Playlist = ({ navigation }) => {
           </>
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
-          <ScrollView>
+          <ScrollView persistentScrollbar>
             {playlist?.current && (
               <SongDetail
                 song={playlist.current}
