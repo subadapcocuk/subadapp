@@ -1,13 +1,23 @@
 import React, { useState } from "react";
-import { ScrollView, TextInput } from "react-native";
+import { ScrollView, View } from "react-native";
 import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
-import { randomInt } from "../helpers/";
+import { randomInt, styles } from "../helpers/";
 import Player from "../components/player";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
-import { faSort, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { IconPress } from "../components/buttons";
+import {
+  faFilter,
+  faRandom,
+  faReplyAll,
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortDown,
+  faSortUp,
+  faTrash,
+  faUndoAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { IconPress, TextInputIcon } from "../components/buttons";
 
 export const Playlist = ({ navigation }) => {
   const [playlist, setPlaylist] = useState({
@@ -16,6 +26,7 @@ export const Playlist = ({ navigation }) => {
     index: -1,
   });
   const [order, setOrder] = useState(0);
+  const [loop, setLoop] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
 
@@ -43,11 +54,23 @@ export const Playlist = ({ navigation }) => {
     Toast.show("Çalma listesi temizlendi");
   };
 
-  const ORDER = [
-    "alfabetik",
-    "ters alfabetik",
-    "yeni albümden eski albüme",
-    "eski albümden yeni albüme",
+  const ORDER_TYPES = [
+    {
+      icon: faSortAlphaDown,
+      text: "A'dan Z'ye",
+    },
+    {
+      icon: faSortAlphaUp,
+      text: "Z'den A'ya",
+    },
+    {
+      icon: faSortDown,
+      text: "yeniden eskiye",
+    },
+    {
+      icon: faSortUp,
+      text: "eskiden yeniye",
+    },
   ];
 
   const sortSongs = () => {
@@ -65,6 +88,21 @@ export const Playlist = ({ navigation }) => {
         return filtered;
     }
   };
+
+  const LOOP_TYPES = [
+    {
+      icon: faRandom,
+      text: "liste rastgele çalınıyor",
+    },
+    {
+      icon: faReplyAll,
+      text: "liste sırayla çalınıyor",
+    },
+    {
+      icon: faUndoAlt,
+      text: "şarkı tekrarlanıyor",
+    },
+  ];
 
   const randomTrack = () => {
     if (playlist.list.length > 0) {
@@ -112,19 +150,19 @@ export const Playlist = ({ navigation }) => {
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
           <>
-            <TextInput
-              style={{ height: 40 }}
-              caretHidden={true}
-              placeholder={"Listede arama yapın"}
-              onChangeText={setFilter}
-              value={filter}
-            />
-            <IconPress
-              icon={faSort}
-              onPress={() => setOrder(order < 3 ? order + 1 : 0)}
-              text={`Sırayı Değiştir (şu an ${ORDER[order]})`}
-              size={24}
-            />
+            <View style={styles.button}>
+              <TextInputIcon
+                icon={faFilter}
+                placeholder={"listeyi süzün"}
+                onChangeText={setFilter}
+                value={filter}
+                style={{ width: "65%" }}
+              />
+              <IconPress
+                {...ORDER_TYPES[order]}
+                onPress={() => setOrder(order < 3 ? order + 1 : 0)}
+              />
+            </View>
             <ScrollView persistentScrollbar>
               {sortSongs().map((item) => (
                 <SongItem
@@ -151,12 +189,19 @@ export const Playlist = ({ navigation }) => {
               />
             )}
             {playlist.list.length > 0 && (
-              <IconPress
-                icon={faTrash}
-                size={24}
-                onPress={clearPlaylist}
-                text="Listeyi temizle"
-              />
+              <View style={styles.button}>
+                <IconPress
+                  {...LOOP_TYPES[loop]}
+                  onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
+                  style={{width: "50%"}}
+                />
+                <IconPress
+                  icon={faTrash}
+                  size={24}
+                  onPress={clearPlaylist}
+                  text="listeyi temizle"
+                />
+              </View>
             )}
             {playlist?.list.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
