@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
 import { SwipeableRow } from "./swipeable";
-import { getAlbumTitle } from "../api/data";
 import { styles, songStyle, songText } from "../helpers/styles";
 
 export const Song = ({ song, openUrl }) => (
@@ -41,7 +40,6 @@ export const SongDetail = ({ song, openUrl }) => {
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
           <Text style={{ fontSize: 32 }}>{song.name}</Text>
-          <Text style={{ fontSize: 16 }}>{getAlbumTitle(song.albumNo)}</Text>
         </TouchableOpacity>
       )}
     </>
