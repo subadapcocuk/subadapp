@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/kinefi/subadap-player/compare/v0.6.0...v0.7.0) (2021-11-28)
+
+Bu sürümde şarkı ve oynatma listesinde düzeltmeler yapıldı [#36](https://github.com/kinefi/subadap-player/issues/36):
+
+- Oynatıcı düğmeleri düzenlendi
+- Oynat düğmesiyle rastgele çalma düzeltildi
+- Albüm ismi ve yılı çalan şarkı ayrıntısından kaldırıldı
+- Oynat düğmesi büyütüldü ve oynat/duraklat geçişi düzeltildi
+- Şarkı listesine tıklama etkileşimi eklendi, bir şarkıya tıklanınca oynatma listesi temizleniyor ve tıklanan şarkı çalınıyor
+
 ## [0.6.0](https://github.com/kinefi/subadap-player/compare/v0.5.0...v0.6.0) (2021-11-14)
 
 - Rastgele çalma özelliği eklendi [#20](https://github.com/kinefi/subadap-player/issues/20)
