@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.8.0](https://github.com/kinefi/subadap-player/compare/v0.7.0...v0.8.0) (2021-11-28)
+
+- Şarkı süzme eklendi
+- Oynatma çubuğundaki bazı düğmeler listelerin üstüne taşındı
+- Loop seçenekleri düzenlendi [#39](https://github.com/kinefi/subadap-player/issues/39)
+
 ## [0.7.0](https://github.com/kinefi/subadap-player/compare/v0.6.0...v0.7.0) (2021-11-28)
 
 Bu sürümde şarkı ve oynatma listesinde düzeltmeler yapıldı [#36](https://github.com/kinefi/subadap-player/issues/36):
