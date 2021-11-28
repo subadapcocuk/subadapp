@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file. See [standa
 - Şarkı süzme eklendi
 - Oynatma çubuğundaki bazı düğmeler listelerin üstüne taşındı
 - Loop seçenekleri düzenlendi [#39](https://github.com/kinefi/subadap-player/issues/39)
+- Kaydırma çubukları sürekli gösteriliyor [#40](https://github.com/kinefi/subadap-player/issues/40)
 
 ## [0.7.0](https://github.com/kinefi/subadap-player/compare/v0.6.0...v0.7.0) (2021-11-28)
 
