@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
-import { randomInt, styles, LoopType } from "../helpers/";
+import { randomInt, styles, LoopType, turkishCompare } from "../helpers/";
 import Player from "../components/player";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -79,14 +79,13 @@ export const Playlist = ({ navigation }) => {
     );
     switch (order) {
       case 0:
-        return filtered.sort((a, b) => a.name > b.name);
+        return filtered.sort((a, b) => turkishCompare(a.name, b.name));
       case 1:
-        return filtered.sort((a, b) => a.name < b.name);
+        return filtered.sort((a, b) => -turkishCompare(a.name, b.name));
       case 2:
         return filtered.sort((a, b) => a.albumNo < b.albumNo);
-      default:
-        return filtered;
     }
+    return filtered;
   };
 
   const LOOP_TYPES = [
