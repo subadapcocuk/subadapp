@@ -22,7 +22,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.8.0"
+      "buildNumber": "0.8.0",
+      "bundleIdentifier": "subadap.player"
     },
     "android": {
       "adaptiveIcon": {

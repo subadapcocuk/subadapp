@@ -18,8 +18,9 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "apk": "expo build:android -t apk",
-    "arc": "expo build:ios -t archive",
+    "build:android": "eas build --platform android --non-interactive",
+    "build:ios": "eas build --platform ios --non-interactive",
+    "build:all": "eas build --platform all --non-interactive",
     "release": "standard-version --release-as ",
     "eject": "expo eject"
   },
@@ -54,6 +55,7 @@
   "devDependencies": {
     "@babel/core": "^7.12.9",
     "expo-cli": "^4.13",
+    "eas-cli": "^0.38",
     "standard-version": "^9.3",
     "standard-version-expo": "^1.0"
   }
