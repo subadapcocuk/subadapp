@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { BLUE, styles } from "../helpers/styles";
 
 export const IconPress = ({
-  onPress,
   icon,
+  onPress = null,
   color = BLUE,
   size = 24,
   text = null,
@@ -28,6 +28,21 @@ export const IconDrawerItem = ({ onPress, icon = null, label = null }) => (
     onPress={onPress}
   />
 );
+
+export const IconText = ({
+  icon,
+  color = BLUE,
+  size = 24,
+  text = null,
+  style = {},
+}) => {
+  return (
+    <View style={[styles.button, style]}>
+      <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
+      {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
+    </View>
+  );
+};
 
 export const TextInputIcon = (props) => {
   const { style, ...rest } = props;

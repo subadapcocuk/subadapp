@@ -1,7 +1,9 @@
 import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
-import { styles, songStyle, songText } from "../helpers/styles";
+import { styles, songStyle, songText, WHITE, BLUE } from "../helpers/styles";
+import { IconText } from "./buttons";
 
 export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
@@ -20,12 +22,22 @@ export const SongItem = ({
   image = true,
   onPress = false,
 }) => (
-  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress }}>
+  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress, selected }}>
     <View style={songStyle(selected)}>
+      {onRightOpen && (
+        <IconText icon={faArrowLeft} color={selected ? WHITE : BLUE} />
+      )}
       {image && (
         <Image style={styles.playlistImage} source={{ uri: song.image }} />
       )}
       <Text style={songText(selected)}>{song.name}</Text>
+      {onLeftOpen && (
+        <IconText
+          icon={faArrowRight}
+          color={selected ? WHITE : BLUE}
+          style={{ marginLeft: "auto" }}
+        />
+      )}
     </View>
   </SwipeableRow>
 );

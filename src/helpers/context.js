@@ -23,7 +23,6 @@ export const ContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (playlist) {
-      console.log(`Saving playlist to storage`);
       AsyncStorage.setItem(SUBADAP_PLAYLIST, JSON.stringify(playlist));
     }
   }, [playlist]);
