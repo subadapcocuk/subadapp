@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
-import { randomInt, styles, LoopType, turkishCompare } from "../helpers/";
+import {
+  randomInt,
+  styles,
+  LoopType,
+  turkishCompare,
+  useAppContext,
+} from "../helpers/";
 import Player from "../components/player";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -20,15 +26,11 @@ import {
 import { IconPress, TextInputIcon } from "../components/buttons";
 
 export const Playlist = ({ navigation }) => {
-  const [playlist, setPlaylist] = useState({
-    list: [],
-    current: null,
-    index: -1,
-  });
   const [order, setOrder] = useState(0);
   const [loop, setLoop] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
+  const { playlist, setPlaylist } = useAppContext();
 
   const songs = getSongs();
 

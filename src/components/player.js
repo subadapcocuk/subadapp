@@ -31,7 +31,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
     player
       .setIsLoopingAsync(loopType === LoopType.RepeatSong)
       .then()
-      .catch(() => console.log("not loaded"));
+      .catch(() => console.log("player is not loaded"));
     player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
   }, [loopType]);
 
