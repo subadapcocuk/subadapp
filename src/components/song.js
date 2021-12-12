@@ -3,7 +3,7 @@ import { Image, TouchableOpacity, Text, View } from "react-native";
 import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
 import { styles, songStyle, songText, WHITE, BLUE } from "../helpers/styles";
-import { IconText } from "./buttons";
+import { IconPress, IconText } from "./buttons";
 
 export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
@@ -25,14 +25,19 @@ export const SongItem = ({
   <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress, selected }}>
     <View style={songStyle(selected)}>
       {onRightOpen && (
-        <IconText icon={faArrowLeft} color={selected ? WHITE : BLUE} />
+        <IconPress
+          onPress={onRightOpen}
+          icon={faArrowLeft}
+          color={selected ? WHITE : BLUE}
+        />
       )}
       {image && (
         <Image style={styles.playlistImage} source={{ uri: song.image }} />
       )}
       <Text style={songText(selected)}>{song.name}</Text>
       {onLeftOpen && (
-        <IconText
+        <IconPress
+          onPress={onLeftOpen}
           icon={faArrowRight}
           color={selected ? WHITE : BLUE}
           style={{ marginLeft: "auto" }}
@@ -51,7 +56,7 @@ export const SongDetail = ({ song, openUrl }) => {
           onPress={() => openUrl(song.page)}
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
-          <Text style={{ fontSize: 32 }}>{song.name}</Text>
+          <Text style={{ fontSize: 24 }}>{song.name}</Text>
         </TouchableOpacity>
       )}
     </>

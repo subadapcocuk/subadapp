@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
-import { getSongs } from "../api/data";
+import { getSongs, savePlaylist } from "../api/data";
 import {
   randomInt,
   styles,
@@ -14,8 +14,10 @@ import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 import {
   faFilter,
+  faFolderOpen,
   faRandom,
   faReplyAll,
+  faSave,
   faSortAlphaDown,
   faSortAlphaUp,
   faSortDown,
@@ -24,12 +26,16 @@ import {
   faUndoAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { IconPress, TextInputIcon } from "../components/buttons";
+import PromptDialog from "../components/prompt";
+import Playlists from "../components/playlists";
 
 export const Playlist = ({ navigation }) => {
   const [order, setOrder] = useState(0);
   const [loop, setLoop] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
+  const [saveDialogVisible, setSaveDialogVisible] = useState(false);
+  const [openDialogVisible, setOpenDialogVisible] = useState(false);
   const { playlist, setPlaylist } = useAppContext();
 
   const songs = getSongs();
@@ -54,6 +60,27 @@ export const Playlist = ({ navigation }) => {
       index: -1,
     });
     Toast.show("Çalma listesi temizlendi");
+  };
+
+  const handleSavePlaylist = (playlistName) => {
+    if (playlistName) {
+      savePlaylist(playlistName, playlist.list);
+      Toast.show(`Çalma listesi ${playlistName} kaydedildi`);
+    }
+    setSaveDialogVisible(false);
+  };
+
+  const handleOpenPlaylist = (name, playlist) => {
+    if (playlist) {
+      setPlaylist({
+        name: name,
+        list: playlist,
+        current: null,
+        index: -1,
+      });
+      Toast.show(`Çalma listesi ${name} açıldı`);
+    }
+    setOpenDialogVisible(false);
   };
 
   const ORDER_TYPES = [
@@ -93,15 +120,15 @@ export const Playlist = ({ navigation }) => {
   const LOOP_TYPES = [
     {
       icon: faRandom,
-      text: "liste rastgele çalınıyor",
+      text: "liste rastgele",
     },
     {
       icon: faReplyAll,
-      text: "liste sırayla çalınıyor",
+      text: "liste sırayla",
     },
     {
       icon: faUndoAlt,
-      text: "şarkı tekrarlanıyor",
+      text: "şarkı sürekli",
     },
   ];
 
@@ -197,21 +224,32 @@ export const Playlist = ({ navigation }) => {
                 }}
               />
             )}
-            {playlist.list.length > 0 && (
-              <View style={styles.button}>
-                <IconPress
-                  {...LOOP_TYPES[loop]}
-                  onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
-                  style={{ width: "50%" }}
-                />
-                <IconPress
-                  icon={faTrash}
-                  size={24}
-                  onPress={clearPlaylist}
-                  text="listeyi temizle"
-                />
-              </View>
-            )}
+            {playlist.name && <Text>{playlist.name}</Text>}
+            <View style={styles.button}>
+              <IconPress
+                icon={faFolderOpen}
+                size={24}
+                onPress={() => setOpenDialogVisible(true)}
+                text="aç"
+              />
+              <IconPress
+                icon={faSave}
+                size={24}
+                onPress={() => setSaveDialogVisible(true)}
+                text="kaydet"
+              />
+              <IconPress
+                icon={faTrash}
+                size={24}
+                onPress={clearPlaylist}
+                text="temizle"
+              />
+              <IconPress
+                {...LOOP_TYPES[loop]}
+                onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
+                style={{ marginLeft: "auto" }}
+              />
+            </View>
             {playlist?.list.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
               return (
@@ -229,6 +267,13 @@ export const Playlist = ({ navigation }) => {
           </ScrollView>
         </TabViewItem>
       </AnimatedTabView>
+      <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
+      <PromptDialog
+        description="Lütfen çalma listesinin adını giriniz"
+        initialValue={playlist?.name}
+        save={handleSavePlaylist}
+        visible={saveDialogVisible}
+      />
       <Player
         song={playlist?.current}
         loopType={loop}
