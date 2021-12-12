@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.9.0](https://github.com/kinefi/subadap-player/compare/v0.8.0...v0.9.0) (2021-12-12)
+
+- Mevcut çalma listesi saklanıyor, program açıldığında geri geliyor [#44](https://github.com/kinefi/subadap-player/issues/44)
+- Çalma listesi kaydetme eklendi [#45](https://github.com/kinefi/subadap-player/issues/45)
+- Çalma listesi düzenleme düğmeleri eklendi [#47](https://github.com/kinefi/subadap-player/issues/47)
+- Şarkıların alfabetik sıralaması düzeltildi [#48](https://github.com/kinefi/subadap-player/issues/48)
+- Splash resminin boyutu düzeltildi [#49](https://github.com/kinefi/subadap-player/issues/49)
+
 ## [0.8.0](https://github.com/kinefi/subadap-player/compare/v0.7.0...v0.8.0) (2021-11-28)
 
 - Şarkı süzme eklendi
