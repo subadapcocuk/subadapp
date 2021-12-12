@@ -6,6 +6,8 @@
 
 [Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player), [Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen ve [Apache Lisansı 2.0](https://github.com/kinefi/subadap-player/blob/develop/LICENSE) kapsamında yayınlanan bir uygulamadır.
 
+Sürümler ve değişiklikler için [değişiklik günlüğüne](./CHANGELOG.md) bakabilirsiniz.
+
 ## Geliştirme
 
 [Expo](https://expo.dev/) kullanılarak geliştirilen bir [React Native](https://reactnative.dev/) uygulamasıdır.
