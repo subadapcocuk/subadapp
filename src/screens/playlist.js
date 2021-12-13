@@ -59,13 +59,13 @@ export const Playlist = ({ navigation }) => {
       current: null,
       index: -1,
     });
-    Toast.show("Çalma listesi temizlendi");
+    Toast.show("Liste temizlendi");
   };
 
   const handleSavePlaylist = (playlistName) => {
     if (playlistName) {
       savePlaylist(playlistName, playlist.list);
-      Toast.show(`Çalma listesi ${playlistName} kaydedildi`);
+      Toast.show(`${playlistName} listesi kaydedildi`);
     }
     setSaveDialogVisible(false);
   };
@@ -78,7 +78,7 @@ export const Playlist = ({ navigation }) => {
         current: null,
         index: -1,
       });
-      Toast.show(`Çalma listesi ${name} açıldı`);
+      Toast.show(`${name} listesi açıldı`);
     }
     setOpenDialogVisible(false);
   };
@@ -173,7 +173,7 @@ export const Playlist = ({ navigation }) => {
 
   const clearAndPlay = (song) => {
     setPlaylist({ list: [song.no], current: song, index: 0 });
-    Toast.show(`Çalma listesi temizlendi ve ${song.name} şarkısı eklendi`);
+    Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
   return (
@@ -189,7 +189,7 @@ export const Playlist = ({ navigation }) => {
             <View style={styles.button}>
               <TextInputIcon
                 icon={faFilter}
-                placeholder={"listeyi süzün"}
+                placeholder={"şarkı ara"}
                 onChangeText={setFilter}
                 value={filter}
                 style={{ width: "65%" }}
@@ -230,13 +230,13 @@ export const Playlist = ({ navigation }) => {
                 icon={faFolderOpen}
                 size={24}
                 onPress={() => setOpenDialogVisible(true)}
-                text="aç"
+                text="liste aç"
               />
               <IconPress
                 icon={faSave}
                 size={24}
                 onPress={() => setSaveDialogVisible(true)}
-                text="kaydet"
+                text="liste kaydet"
               />
               <IconPress
                 icon={faTrash}
@@ -269,7 +269,7 @@ export const Playlist = ({ navigation }) => {
       </AnimatedTabView>
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
       <PromptDialog
-        description="Lütfen çalma listesinin adını giriniz"
+        description="Lütfen listenin adını giriniz"
         initialValue={playlist?.name}
         save={handleSavePlaylist}
         visible={saveDialogVisible}
