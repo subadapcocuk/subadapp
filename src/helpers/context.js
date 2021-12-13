@@ -6,6 +6,7 @@ export const AppContext = React.createContext();
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
 
 export const ContextProvider = ({ children }) => {
+  const [loop, setLoop] = useState(0);
   const [playlist, setPlaylist] = useState({
     list: [],
     current: null,
@@ -28,7 +29,7 @@ export const ContextProvider = ({ children }) => {
   }, [playlist]);
 
   return (
-    <AppContext.Provider value={{ playlist, setPlaylist }}>
+    <AppContext.Provider value={{ playlist, setPlaylist, loop, setLoop }}>
       {children}
     </AppContext.Provider>
   );

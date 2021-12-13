@@ -1,14 +1,57 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
-import { styles, LoopType } from "../helpers/";
+import { getSongs } from "../api/data";
+import { styles, LoopType, randomInt, useAppContext } from "../helpers/";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
+const Player = () => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
+  const { playlist, setPlaylist, loop } = useAppContext();
+
+  const songs = getSongs();
+
+  const randomTrack = () => {
+    if (playlist.list.length > 0) {
+      const index = randomInt(playlist.list.length);
+      setPlaylist({
+        ...playlist,
+        current: songs.filter((s) => s.no === playlist.list[index])[0],
+        index: index,
+      });
+    } else {
+      setPlaylist({
+        ...playlist,
+        current: songs[randomInt(songs.length)],
+        index: -1,
+      });
+    }
+  };
+
+  const previousTrack = () => {
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
+  };
+
+  const nextTrack = () => {
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
+  };
 
   useEffect(() => {
     Audio.setAudioModeAsync({
@@ -25,15 +68,15 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
 
   useEffect(() => {
     playSong();
-  }, [song]);
+  }, [playlist?.current]);
 
   useEffect(() => {
     player
-      .setIsLoopingAsync(loopType === LoopType.RepeatSong)
+      .setIsLoopingAsync(loop === LoopType.RepeatSong)
       .then()
       .catch(() => console.log("player is not loaded"));
     player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-  }, [loopType]);
+  }, [loop]);
 
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
@@ -58,7 +101,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
         player.playAsync();
       }
     } else {
-      if (loopType === LoopType.RandomList) {
+      if (loop === LoopType.RandomList) {
         randomTrack();
       } else {
         playSong();
@@ -70,16 +113,16 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
     try {
       //unload previous song
       await player.unloadAsync();
-      if (song) {
+      if (playlist?.current) {
         await player.loadAsync(
-          { uri: song.url },
+          { uri: playlist.current.url },
           {
             shouldPlay: true,
             rate: status.rate,
             shouldCorrectPitch: status.shouldCorrectPitch,
             volume: status.volume,
             isMuted: status.muted,
-            isLooping: loopType === LoopType.RepeatSong,
+            isLooping: loop === LoopType.RepeatSong,
             progressUpdateIntervalMillis: 1000,
           }
         );
@@ -110,7 +153,7 @@ const Player = ({ song, previousTrack, nextTrack, randomTrack, loopType }) => {
         currentPosition={status.positionMillis ? status.positionMillis : 0}
       />
       <PlayerControls
-        isPlaying={song && status.isPlaying}
+        isPlaying={playlist?.current && status.isPlaying}
         onForward={nextTrack}
         onBackward={previousTrack}
         {...{

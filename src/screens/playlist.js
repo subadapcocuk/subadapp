@@ -1,17 +1,6 @@
 import React, { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
-import { getSongs, savePlaylist } from "../api/data";
-import {
-  randomInt,
-  styles,
-  LoopType,
-  turkishCompare,
-  useAppContext,
-} from "../helpers/";
-import Player from "../components/player";
-import { SongDetail, SongItem } from "../components/song";
-import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 import {
   faFilter,
   faFolderOpen,
@@ -25,18 +14,21 @@ import {
   faTrash,
   faUndoAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { getSongs, savePlaylist } from "../api/data";
+import { styles, turkishCompare, useAppContext } from "../helpers/";
+import { SongDetail, SongItem } from "../components/song";
+import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 import { IconPress, TextInputIcon } from "../components/buttons";
 import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
 
 export const Playlist = ({ navigation }) => {
   const [order, setOrder] = useState(0);
-  const [loop, setLoop] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist } = useAppContext();
+  const { playlist, setPlaylist, loop, setLoop } = useAppContext();
 
   const songs = getSongs();
 
@@ -131,45 +123,6 @@ export const Playlist = ({ navigation }) => {
       text: "şarkı sürekli",
     },
   ];
-
-  const randomTrack = () => {
-    if (playlist.list.length > 0) {
-      const index = randomInt(playlist.list.length);
-      setPlaylist({
-        ...playlist,
-        current: songs.filter((s) => s.no === playlist.list[index])[0],
-        index: index,
-      });
-    } else {
-      setPlaylist({
-        ...playlist,
-        current: songs[randomInt(songs.length)],
-        index: -1,
-      });
-    }
-  };
-
-  const previousTrack = () => {
-    if (loop === LoopType.RandomList) {
-      randomTrack();
-    } else if (loop === LoopType.FollowList) {
-      const index =
-        playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
-      const current = songs.filter((s) => s.no === playlist.list[index])[0];
-      setPlaylist({ ...playlist, ...{ index, current } });
-    }
-  };
-
-  const nextTrack = () => {
-    if (loop === LoopType.RandomList) {
-      randomTrack();
-    } else if (loop === LoopType.FollowList) {
-      const index =
-        playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
-      const current = songs.filter((s) => s.no === playlist.list[index])[0];
-      setPlaylist({ ...playlist, ...{ index, current } });
-    }
-  };
 
   const clearAndPlay = (song) => {
     setPlaylist({ list: [song.no], current: song, index: 0 });
@@ -273,11 +226,6 @@ export const Playlist = ({ navigation }) => {
         initialValue={playlist?.name}
         save={handleSavePlaylist}
         visible={saveDialogVisible}
-      />
-      <Player
-        song={playlist?.current}
-        loopType={loop}
-        {...{ nextTrack, previousTrack, randomTrack }}
       />
     </>
   );
