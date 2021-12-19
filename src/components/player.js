@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
+import Toast from "react-native-root-toast";
 import { getSongs } from "../api/data";
 import { styles, LoopType, randomInt, useAppContext } from "../helpers/";
 import PlayerControls from "./controls";
@@ -55,13 +56,11 @@ const Player = () => {
 
   useEffect(() => {
     Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
       staysActiveInBackground: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
       playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
+      // asagidaki ayarlarla diger uygulamalarin sesi azaltılıyor
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-      playThroughEarpieceAndroid: false,
     }),
       [];
   });
@@ -74,7 +73,9 @@ const Player = () => {
     player
       .setIsLoopingAsync(loop === LoopType.RepeatSong)
       .then()
-      .catch(() => console.log("player is not loaded"));
+      .catch((e) => {
+        console.debug(e);
+      });
     player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
   }, [loop]);
 
@@ -129,17 +130,7 @@ const Player = () => {
         player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
       }
     } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const onStop = async () => {
-    try {
-      const result = await player.getStatusAsync();
-      if (result.isLoaded) {
-        await player.stopAsync();
-      }
-    } catch (e) {
+      Toast.show(`Bir hata oluştu: ${e}`);
       console.error(e);
     }
   };
@@ -156,10 +147,7 @@ const Player = () => {
         isPlaying={playlist?.current && status.isPlaying}
         onForward={nextTrack}
         onBackward={previousTrack}
-        {...{
-          onPlay,
-          onStop,
-        }}
+        onPlay={onPlay}
       />
     </View>
   );

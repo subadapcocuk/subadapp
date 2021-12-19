@@ -42,5 +42,8 @@ export const deletePlaylist = async (name) => {
 
 export const getPlaylists = async () => {
   const value = await AsyncStorage.getItem(SUBADAP_PLAYLISTS);
-  return JSON.parse(value);
+  if (value) {
+    return JSON.parse(value);
+  }
+  return {};
 };
