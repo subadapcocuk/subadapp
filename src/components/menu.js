@@ -13,6 +13,7 @@ import {
   faFacebook,
   faInstagram,
   faTwitter,
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
@@ -60,6 +61,11 @@ export const Menu = (props) => {
           onPress={() => openUrl("https://www.kreosus.com/subadapcocuk")}
           icon={faDonate}
           label="Kreosus"
+        />
+        <IconDrawerItem
+          onPress={() => openUrl("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")}
+          icon={faYoutube}
+          label="Youtube"
         />
         <IconDrawerItem
           onPress={() => openUrl("https://www.facebook.com/subadapcocuk")}

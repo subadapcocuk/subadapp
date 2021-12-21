@@ -1,7 +1,9 @@
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Animated, StyleSheet, TouchableOpacity } from "react-native";
 
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { IconText } from "./buttons";
 
 export const SwipeableRow = ({
   children,
@@ -9,29 +11,37 @@ export const SwipeableRow = ({
   onRightOpen,
   onPress,
 }) => {
-  renderLeftActions = (_progress, dragX) => {
+  const renderLeftActions = (_progress, dragX) => {
     const scale = dragX.interpolate({
       inputRange: [0, 100],
       outputRange: [0, 1],
       extrapolate: "clamp",
     });
-    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
+    return (
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]}>
+        <IconText icon={faArrowRight} />
+      </Animated.View>
+    );
   };
 
-  renderRightActions = (_progress, dragX) => {
+  const renderRightActions = (_progress, dragX) => {
     const scale = dragX.interpolate({
       inputRange: [-100, 0],
       outputRange: [1, 0],
       extrapolate: "clamp",
     });
-    return <Animated.View style={[styles.action, { transform: [{ scale }] }]} />;
+    return (
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]}>
+        <IconText icon={faArrowLeft} style={{ alignSelf: "flex-end" }} />
+      </Animated.View>
+    );
   };
 
-  onSwipeableRightOpen = () => {
+  const onSwipeableRightOpen = () => {
     onRightOpen && onRightOpen();
   };
 
-  onSwipeableLeftOpen = () => {
+  const onSwipeableLeftOpen = () => {
     onLeftOpen && onLeftOpen();
   };
 

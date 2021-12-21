@@ -1,18 +1,19 @@
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { DrawerItem } from "@react-navigation/drawer";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { BLUE, styles } from "../helpers/styles";
 
 export const IconPress = ({
-  onPress,
   icon,
+  onPress = null,
   color = BLUE,
-  size = 32,
+  size = 24,
   text = null,
+  style = {},
 }) => {
   return (
-    <TouchableOpacity style={styles.button} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
       {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
     </TouchableOpacity>
@@ -27,3 +28,41 @@ export const IconDrawerItem = ({ onPress, icon = null, label = null }) => (
     onPress={onPress}
   />
 );
+
+export const IconText = ({
+  icon,
+  color = BLUE,
+  size = 24,
+  text = null,
+  style = {},
+}) => {
+  return (
+    <View style={[styles.button, style]}>
+      <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
+      {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
+    </View>
+  );
+};
+
+export const TextInputIcon = (props) => {
+  const { style, ...rest } = props;
+  return (
+    <View style={[styles.button, style]}>
+      {rest?.icon && (
+        <FontAwesomeIcon
+          style={styles.icon}
+          icon={rest.icon}
+          color={BLUE}
+          size={24}
+        />
+      )}
+      <TextInput
+        style={styles.textInput}
+        selectionColor={BLUE}
+        selectTextOnFocus
+        caretHidden={true}
+        {...rest}
+      />
+    </View>
+  );
+};

@@ -1,8 +1,9 @@
 import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
+import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
-import { getAlbumTitle } from "../api/data";
-import { styles, songStyle, songText } from "../helpers/styles";
+import { styles, songStyle, songText, WHITE, BLUE } from "../helpers/styles";
+import { IconPress, IconText } from "./buttons";
 
 export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
@@ -21,12 +22,27 @@ export const SongItem = ({
   image = true,
   onPress = false,
 }) => (
-  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress }}>
+  <SwipeableRow {...{ onLeftOpen, onRightOpen, onPress, selected }}>
     <View style={songStyle(selected)}>
+      {onRightOpen && (
+        <IconPress
+          onPress={onRightOpen}
+          icon={faArrowLeft}
+          color={selected ? WHITE : BLUE}
+        />
+      )}
       {image && (
         <Image style={styles.playlistImage} source={{ uri: song.image }} />
       )}
       <Text style={songText(selected)}>{song.name}</Text>
+      {onLeftOpen && (
+        <IconPress
+          onPress={onLeftOpen}
+          icon={faArrowRight}
+          color={selected ? WHITE : BLUE}
+          style={{ marginLeft: "auto" }}
+        />
+      )}
     </View>
   </SwipeableRow>
 );
@@ -40,8 +56,7 @@ export const SongDetail = ({ song, openUrl }) => {
           onPress={() => openUrl(song.page)}
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
-          <Text style={{ fontSize: 32 }}>{song.name}</Text>
-          <Text style={{ fontSize: 16 }}>{getAlbumTitle(song.albumNo)}</Text>
+          <Text style={{ fontSize: 24 }}>{song.name}</Text>
         </TouchableOpacity>
       )}
     </>

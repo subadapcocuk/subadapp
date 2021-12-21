@@ -1,68 +1,132 @@
 import React, { useState } from "react";
-import { ScrollView } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
-import { getSongs } from "../api/data";
-import { randomInt } from "../helpers/";
-import Player from "../components/player";
+import {
+  faFilter,
+  faFolderOpen,
+  faRandom,
+  faReplyAll,
+  faSave,
+  faSortAlphaDown,
+  faSortAlphaUp,
+  faSortDown,
+  faSortUp,
+  faTrash,
+  faUndoAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { getSongs, savePlaylist } from "../api/data";
+import { styles, turkishCompare, useAppContext } from "../helpers/";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
+import { IconPress, TextInputIcon } from "../components/buttons";
+import PromptDialog from "../components/prompt";
+import Playlists from "../components/playlists";
 
 export const Playlist = ({ navigation }) => {
-  const [playlist, setPlaylist] = useState([]);
   const [order, setOrder] = useState(0);
-  const [current, setCurrent] = useState({ song: null, index: -1 });
   const [tabIndex, setTabIndex] = useState(0);
+  const [filter, setFilter] = useState("");
+  const [saveDialogVisible, setSaveDialogVisible] = useState(false);
+  const [openDialogVisible, setOpenDialogVisible] = useState(false);
+  const { playlist, setPlaylist, loop, setLoop } = useAppContext();
 
   const songs = getSongs();
 
   const toggleSong = ({ name, no }) => {
-    if (playlist.find((n) => n === no)) {
-      setPlaylist(playlist.filter((o) => o !== no));
+    if (playlist.list.find((n) => n === no)) {
+      setPlaylist({
+        ...playlist,
+        list: [...playlist.list.filter((o) => o !== no)],
+      });
       Toast.show(`${name} listeden kaldırıldı`);
     } else {
-      setPlaylist([...playlist, no]);
+      setPlaylist({ ...playlist, list: [...playlist.list, no] });
       Toast.show(`${name} listeye eklendi`);
     }
   };
 
-  const sortSongs = () => {
-    switch (order) {
-      case 0:
-        return songs.slice().sort((a, b) => a.name > b.name);
-      case 1:
-        return songs.slice().sort((a, b) => a.name < b.name);
-      case 2:
-        return songs.slice().sort((a, b) => a.albumNo < b.albumNo);
-      default:
-        return songs;
-    }
+  const clearPlaylist = () => {
+    setPlaylist({
+      list: [],
+      current: null,
+      index: -1,
+    });
+    Toast.show("Liste temizlendi");
   };
 
-  const randomTrack = () => {
-    if (playlist.length > 0) {
-      const index = randomInt(playlist.length);
-      setCurrent({
-        index: index,
-        song: songs.filter((s) => s.no === playlist[index])[0],
-      });
-    } else {
-      setCurrent({
-        song: songs[randomInt(songs.length)],
+  const handleSavePlaylist = (playlistName) => {
+    if (playlistName) {
+      savePlaylist(playlistName, playlist.list);
+      Toast.show(`${playlistName} listesi kaydedildi`);
+    }
+    setSaveDialogVisible(false);
+  };
+
+  const handleOpenPlaylist = (name, playlist) => {
+    if (playlist) {
+      setPlaylist({
+        name: name,
+        list: playlist,
+        current: null,
         index: -1,
       });
+      Toast.show(`${name} listesi açıldı`);
     }
+    setOpenDialogVisible(false);
   };
 
-  const previousTrack = () => {
-    const index = current.index > 0 ? current.index - 1 : playlist.length - 1;
-    const song = songs.filter((s) => s.no === playlist[index])[0];
-    setCurrent({ ...{ index, song } });
+  const ORDER_TYPES = [
+    {
+      icon: faSortAlphaDown,
+      text: "A'dan Z'ye",
+    },
+    {
+      icon: faSortAlphaUp,
+      text: "Z'den A'ya",
+    },
+    {
+      icon: faSortDown,
+      text: "yeniden eskiye",
+    },
+    {
+      icon: faSortUp,
+      text: "eskiden yeniye",
+    },
+  ];
+
+  const sortSongs = () => {
+    const filtered = songs.filter((s) =>
+      s.name.toLowerCase().includes(filter.toLowerCase())
+    );
+    switch (order) {
+      case 0:
+        return filtered.sort((a, b) => turkishCompare(a.name, b.name));
+      case 1:
+        return filtered.sort((a, b) => -turkishCompare(a.name, b.name));
+      case 2:
+        return filtered.sort((a, b) => a.albumNo < b.albumNo);
+    }
+    return filtered;
   };
 
-  const nextTrack = () => {
-    const index = current.index + 1 < playlist.length ? current.index + 1 : 0;
-    const song = songs.filter((s) => s.no === playlist[index])[0];
-    setCurrent({ ...{ index, song } });
+  const LOOP_TYPES = [
+    {
+      icon: faRandom,
+      text: "liste rastgele",
+    },
+    {
+      icon: faReplyAll,
+      text: "liste sırayla",
+    },
+    {
+      icon: faUndoAlt,
+      text: "şarkı sürekli",
+    },
+  ];
+
+  const clearAndPlay = (song) => {
+    setPlaylist({ list: [song.no], current: song, index: 0 });
+    Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
   return (
@@ -74,45 +138,94 @@ export const Playlist = ({ navigation }) => {
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
-          <ScrollView>
-            {sortSongs().map((item) => (
-              <SongItem
-                key={`playlist_song_${item.no}`}
-                song={item}
-                selected={playlist.find((no) => no === item.no) !== undefined}
-                onLeftOpen={() => toggleSong(item)}
+          <>
+            <View style={styles.button}>
+              <TextInputIcon
+                icon={faFilter}
+                placeholder={"şarkı ara"}
+                onChangeText={setFilter}
+                value={filter}
+                style={{ width: "65%" }}
               />
-            ))}
-          </ScrollView>
+              <IconPress
+                {...ORDER_TYPES[order]}
+                onPress={() => setOrder(order < 3 ? order + 1 : 0)}
+              />
+            </View>
+            <ScrollView persistentScrollbar>
+              {sortSongs().map((item) => (
+                <SongItem
+                  key={`playlist_song_${item.no}`}
+                  song={item}
+                  selected={
+                    playlist.list.find((no) => no === item.no) !== undefined
+                  }
+                  onLeftOpen={() => toggleSong(item)}
+                  onPress={() => clearAndPlay(item)}
+                />
+              ))}
+            </ScrollView>
+          </>
         </TabViewItem>
         <TabViewItem selected={tabIndex === 1}>
-          <ScrollView>
-            <SongDetail
-              song={current.song}
-              openUrl={(url) => {
-                navigation.navigate("Page", { url });
-              }}
-            />
-            {playlist.map((no, index) => {
+          <ScrollView persistentScrollbar>
+            {playlist?.current && (
+              <SongDetail
+                song={playlist.current}
+                openUrl={(url) => {
+                  navigation.navigate("Page", { url });
+                }}
+              />
+            )}
+            {playlist.name && <Text>{playlist.name}</Text>}
+            <View style={styles.button}>
+              <IconPress
+                icon={faFolderOpen}
+                size={24}
+                onPress={() => setOpenDialogVisible(true)}
+                text="liste aç"
+              />
+              <IconPress
+                icon={faSave}
+                size={24}
+                onPress={() => setSaveDialogVisible(true)}
+                text="liste kaydet"
+              />
+              <IconPress
+                icon={faTrash}
+                size={24}
+                onPress={clearPlaylist}
+                text="temizle"
+              />
+              <IconPress
+                {...LOOP_TYPES[loop]}
+                onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
+                style={{ marginLeft: "auto" }}
+              />
+            </View>
+            {playlist?.list.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
               return (
                 <SongItem
                   key={`playlist_detail_${no}`}
                   song={item}
-                  selected={no === current?.song?.no}
+                  selected={no === playlist?.current?.no}
                   onRightOpen={() => toggleSong(item)}
-                  onPress={() => setCurrent({ song: item, index: index })}
+                  onPress={() =>
+                    setPlaylist({ ...playlist, current: item, index: index })
+                  }
                 />
               );
             })}
           </ScrollView>
         </TabViewItem>
       </AnimatedTabView>
-      <Player
-        song={current?.song}
-        clear={() => setPlaylist([])}
-        sort={() => setOrder(order < 3 ? order + 1 : 0)}
-        {...{ nextTrack, previousTrack, randomTrack }}
+      <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
+      <PromptDialog
+        description="Lütfen listenin adını giriniz"
+        initialValue={playlist?.name}
+        save={handleSavePlaylist}
+        visible={saveDialogVisible}
       />
     </>
   );

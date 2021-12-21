@@ -3,12 +3,14 @@ import { StatusBar } from "expo-status-bar";
 import { Asset } from "expo-asset";
 import { NavigationService } from "./src/services/navigation";
 import { RootSiblingParent } from "react-native-root-siblings";
-import "react-native-gesture-handler";
 import "react-native-get-random-values";
 import AppLoading from "expo-app-loading";
 import Constants from "expo-constants";
 import * as SplashScreen from "expo-splash-screen";
 import { Animated, StyleSheet, View } from "react-native";
+import { NavigationService } from "./src/services/navigation";
+import { ContextProvider } from "./src/helpers/context";
+import Player from "./src/components/player";
 
 export const AnimatedAppLoader = ({ children, image }) => {
   const [isSplashReady, setSplashReady] = useState(false);
@@ -109,10 +111,13 @@ const AnimatedSplashScreen = ({ children, image }) => {
 export default function App() {
   return (
     <AnimatedAppLoader image={require("./assets/subadap.png")}>
-      <RootSiblingParent>
-        <NavigationService />
-        <StatusBar style="auto" />
-      </RootSiblingParent>
+      <ContextProvider>
+        <RootSiblingParent>
+          <NavigationService />
+          <Player />
+          <StatusBar style="auto" />
+        </RootSiblingParent>
+      </ContextProvider>
     </AnimatedAppLoader>
   );
 

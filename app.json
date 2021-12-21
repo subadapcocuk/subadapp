@@ -2,7 +2,7 @@
   "expo": {
     "name": "Şubadap Müzik Çalar",
     "slug": "subadap-player",
-    "version": "0.6.0",
+    "version": "0.9.2",
     "description": "",
     "githubUrl": "https://github.com/kinefi/subadap-player",
     "owner": "kinefi",
@@ -22,7 +22,8 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.6.0"
+      "buildNumber": "0.9.2",
+      "bundleIdentifier": "subadap.player"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +31,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "subadap.player",
-      "versionCode": 430000600
+      "versionCode": 430000902
     },
     "web": {
       "favicon": "./assets/favicon.png"

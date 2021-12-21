@@ -27,14 +27,7 @@ export const tabItemTitleStyle = (currentTab) => {
 };
 
 export const songStyle = (selected) => {
-  return {
-    flex: 1,
-    flexDirection: "row",
-    backgroundColor: selected ? BLUE : "white",
-    borderRadius: 5,
-    alignItems: "center",
-    padding: 5,
-  };
+  return { ...styles.itemStyle, backgroundColor: selected ? BLUE : "white" };
 };
 
 export const songText = (selected) => {
@@ -47,9 +40,17 @@ export const songText = (selected) => {
 };
 
 export const styles = StyleSheet.create({
+  itemStyle: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderRadius: 5,
+    alignItems: "center",
+    padding: 5,
+  },
   text: {
     color: BLUE,
-    textAlign: "center"
+    textAlign: "center",
   },
   slider: {
     marginTop: 0,
@@ -83,8 +84,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   albumImage: {
-    height: 150,
-    width: 150,
+    height: 100,
+    width: 100,
   },
   bottomView: {
     justifyContent: "center",
@@ -135,6 +136,7 @@ export const styles = StyleSheet.create({
   icon: {
     fontSize: 32,
     color: BLUE,
+    margin: 5,
   },
   menu: {
     flex: 1,
@@ -212,6 +214,14 @@ export const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: "center",
+  },
+  textInput: {
+    color: BLUE,
+    borderColor: BLUE,
+    borderWidth: 1,
+    height: 40,
+    padding: 5,
+    width: "85%",
   },
   zeroMargin: {
     marginTop: 0,

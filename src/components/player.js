@@ -1,62 +1,90 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
-import { styles } from "../helpers/styles";
+import Toast from "react-native-root-toast";
+import { getSongs } from "../api/data";
+import { styles, LoopType, randomInt, useAppContext } from "../helpers/";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-const Player = ({
-  song,
-  clear,
-  sort,
-  previousTrack,
-  nextTrack,
-  randomTrack,
-}) => {
+const Player = () => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
-  const [random, setRandom] = useState(false);
+  const { playlist, setPlaylist, loop } = useAppContext();
+
+  const songs = getSongs();
+
+  const randomTrack = () => {
+    if (playlist.list.length > 0) {
+      const index = randomInt(playlist.list.length);
+      setPlaylist({
+        ...playlist,
+        current: songs.filter((s) => s.no === playlist.list[index])[0],
+        index: index,
+      });
+    } else {
+      setPlaylist({
+        ...playlist,
+        current: songs[randomInt(songs.length)],
+        index: -1,
+      });
+    }
+  };
+
+  const previousTrack = () => {
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
+  };
+
+  const nextTrack = () => {
+    if (loop === LoopType.RandomList) {
+      randomTrack();
+    } else if (loop === LoopType.FollowList) {
+      const index =
+        playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
+      const current = songs.filter((s) => s.no === playlist.list[index])[0];
+      setPlaylist({ ...playlist, ...{ index, current } });
+    }
+  };
 
   useEffect(() => {
     Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
       staysActiveInBackground: true,
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
       playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
+      // asagidaki ayarlarla diger uygulamalarin sesi azaltılıyor
+      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
       interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
-      playThroughEarpieceAndroid: false,
     }),
       [];
   });
 
   useEffect(() => {
     playSong();
-  }, [song]);
+  }, [playlist?.current]);
+
+  useEffect(() => {
+    player
+      .setIsLoopingAsync(loop === LoopType.RepeatSong)
+      .then()
+      .catch((e) => {
+        console.debug(e);
+      });
+    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+  }, [loop]);
 
   const onPlaybackStatusUpdate = (status) => {
     if (status.isLoaded) {
       setStatus(status);
     }
     if (status.didJustFinish && !status.isLooping) {
-      onForward();
-    }
-  };
-
-  const onForward = () => {
-    if (random) {
-      randomTrack();
-    } else {
       nextTrack();
-    }
-  };
-
-  const onBackward = () => {
-    if (random) {
-      randomTrack();
-    } else {
-      previousTrack();
     }
   };
 
@@ -74,7 +102,7 @@ const Player = ({
         player.playAsync();
       }
     } else {
-      if (random) {
+      if (loop === LoopType.RandomList) {
         randomTrack();
       } else {
         playSong();
@@ -86,33 +114,23 @@ const Player = ({
     try {
       //unload previous song
       await player.unloadAsync();
-      if (song) {
+      if (playlist?.current) {
         await player.loadAsync(
-          { uri: song.url },
+          { uri: playlist.current.url },
           {
             shouldPlay: true,
             rate: status.rate,
             shouldCorrectPitch: status.shouldCorrectPitch,
             volume: status.volume,
             isMuted: status.muted,
-            isLooping: status.isLooping,
+            isLooping: loop === LoopType.RepeatSong,
             progressUpdateIntervalMillis: 1000,
           }
         );
         player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
       }
     } catch (e) {
-      console.error(e);
-    }
-  };
-
-  const onStop = async () => {
-    try {
-      const result = await player.getStatusAsync();
-      if (result.isLoaded) {
-        await player.stopAsync();
-      }
-    } catch (e) {
+      Toast.show(`Bir hata oluştu: ${e}`);
       console.error(e);
     }
   };
@@ -126,19 +144,10 @@ const Player = ({
         currentPosition={status.positionMillis ? status.positionMillis : 0}
       />
       <PlayerControls
-        isPlaying={status.isPlaying}
-        isLooping={status.isLooping}
-        isRandom={random}
-        onSort={sort}
-        onClear={clear}
-        onLoop={() => player.setIsLoopingAsync(!status.isLooping)}
-        onRandom={() => setRandom(!random)}
-        {...{
-          onBackward,
-          onForward,
-          onPlay,
-          onStop,
-        }}
+        isPlaying={playlist?.current && status.isPlaying}
+        onForward={nextTrack}
+        onBackward={previousTrack}
+        onPlay={onPlay}
       />
     </View>
   );

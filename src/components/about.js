@@ -59,7 +59,7 @@ const About = ({ visible, close }) => {
         </Text>
         'ne bakabilirsiniz.
       </Dialog.Description>
-      <Dialog.Button label="OK" onPress={close} />
+      <Dialog.Button label="Tamam" onPress={close} />
     </Dialog.Container>
   );
 };
