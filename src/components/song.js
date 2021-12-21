@@ -53,7 +53,7 @@ export const SongDetail = ({ song, openUrl }) => {
       {song && (
         <TouchableOpacity
           style={styles.songStyle}
-          onPress={() => openUrl(song.page)}
+          onPress={() => openUrl(`${song.page}#Şarkı_Sözleri`)}
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
           <Text style={{ fontSize: 24 }}>{song.name}</Text>
