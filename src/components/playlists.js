@@ -1,9 +1,8 @@
 import { faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import Dialog from "react-native-dialog";
-import { deletePlaylist, getPlaylists } from "../api/data";
-import { styles } from "../helpers";
+import { styles, deletePlaylist, getPlaylists } from "../helpers";
 import { IconPress } from "./buttons";
 
 const Playlists = ({ visible, open }) => {

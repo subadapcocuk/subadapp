@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
 import Toast from "react-native-root-toast";
-import { getSongs } from "../api/data";
 import { styles, LoopType, randomInt, useAppContext } from "../helpers/";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
@@ -11,9 +10,7 @@ const Player = () => {
   // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
-  const { playlist, setPlaylist, loop } = useAppContext();
-
-  const songs = getSongs();
+  const { playlist, setPlaylist, loop, songs } = useAppContext();
 
   const randomTrack = () => {
     if (playlist.list.length > 0) {
