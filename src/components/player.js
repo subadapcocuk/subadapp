@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { View } from "react-native";
 import { Audio } from "expo-av";
 import Toast from "react-native-root-toast";
-import { styles, LoopType, randomInt, useAppContext } from "../helpers/";
+import { styles, LoopType, randomInt, useAppContext } from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 

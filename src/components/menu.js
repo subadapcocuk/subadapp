@@ -48,12 +48,12 @@ export const Menu = (props) => {
           label="Albümler"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org/")}
+          onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org")}
           icon={faBook}
           label={"Ansiklopedi"}
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://subadapcocuk.org/")}
+          onPress={() => openUrl("https://subadapcocuk.org")}
           icon={faHome}
           label="Şubadap Sitesi"
         />
@@ -83,7 +83,7 @@ export const Menu = (props) => {
           label="Twitter"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://subadapcocuk.org/iletisim/")}
+          onPress={() => openUrl("https://subadapcocuk.org/iletisim")}
           icon={faEnvelope}
           label="İletişim"
         />
