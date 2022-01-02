@@ -1,11 +1,11 @@
 import React from "react";
 import { Image, ScrollView, Text, View } from "react-native";
-import { getSongs } from "../api/data";
-import { styles } from "../helpers/";
+import { styles, useAppContext } from "../helpers";
 import { Song } from "./song";
 
 const Album = ({ album, openUrl }) => {
-  const songs = getSongs(album.no);
+  const { songs } = useAppContext();
+  const albumSongs = songs.filter((s) => s.albumNo === album.no);
 
   return (
     <ScrollView>
@@ -20,7 +20,7 @@ const Album = ({ album, openUrl }) => {
           </View>
         </View>
         <View style={styles.songs}>
-          {songs.map((song) => (
+          {albumSongs.map((song) => (
             <Song
               key={`subadap_sarki_${album.no}_${song.no}`}
               {...{ song, openUrl }}

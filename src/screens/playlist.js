@@ -14,8 +14,12 @@ import {
   faTrash,
   faUndoAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { getSongs, savePlaylist } from "../api/data";
-import { styles, turkishCompare, useAppContext } from "../helpers/";
+import {
+  styles,
+  turkishCompare,
+  useAppContext,
+  savePlaylist,
+} from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 import { IconPress, TextInputIcon } from "../components/buttons";
@@ -28,9 +32,7 @@ export const Playlist = ({ navigation }) => {
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist, loop, setLoop } = useAppContext();
-
-  const songs = getSongs();
+  const { playlist, setPlaylist, loop, setLoop, songs } = useAppContext();
 
   const toggleSong = ({ name, no }) => {
     if (playlist.list.find((n) => n === no)) {

@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
-import { Page, Playlist, Albums } from "../screens/";
+import { Page, Playlist, Albums } from "../screens";
 
 const Drawer = createDrawerNavigator();
 
