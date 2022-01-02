@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.4](https://github.com/kinefi/subadap-player/compare/v0.9.3...v0.9.4) (2022-01-02)
+
+- Şarkı ve albüm dosyaları vikiye taşındı [#56](https://github.com/kinefi/subadap-player/issues/56)
+
 ### [0.9.3](https://github.com/kinefi/subadap-player/compare/v0.9.2...v0.9.3) (2021-12-22)
 
 - Çalma listesinde şarkının resmi şarkı sözleri bölümünü açıyor [#51](https://github.com/kinefi/subadap-player/issues/51)
