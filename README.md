@@ -30,7 +30,8 @@ paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
 - [yarn](https://classic.yarnpkg.com/en/docs/install):
   `npm install --global yarn`
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/):
-  `npm install -g expo-cli`
+  `npm install -g expo-cli` (bu aracı kurmanız zorunlu değil, sonraki adımda
+  geliştirme bağımlılığı olarak kurulacaktır)
 
 Ortam hazır olduktan sonra aşağıdaki betikleri projenin olduğu dizinde
 kullanabilirsiniz:
@@ -45,7 +46,7 @@ kullanabilirsiniz:
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `expo publish`: Mevcut sürümü
   [Expo projesine](https://expo.dev/@kinefi/subadap-player) gönderir.
-- `expo build:android`: Android paketi oluşturur.
+- `expo build:android`: Android paketi oluşturur. APK dosyasını yerelde kaydetmesi için `--local` argümanıyla çalıştırın.
 - `expo build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
   pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
@@ -67,11 +68,11 @@ JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak i
 ## Yayınlama ve test etme
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda
-[`publish` görevi](.github/workflows/main.yml#L7) otomatik olarak çalışıyor ve
+[`publish` görevi](.github/workflows/main.yml#L34) otomatik olarak çalışıyor ve
 Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player)
 itiyor. Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
-yararlanılarak eklendi.
+yararlanılarak eklendi. APK dosyası da [`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak oluşturulup bir sürüm yayınlanıyor.
 
 Sürüm değiştirmek için:
 
