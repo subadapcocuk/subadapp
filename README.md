@@ -5,13 +5,29 @@
 [![Licensed by Apache](https://img.shields.io/badge/License-Apache%202.0-success.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
 
 [Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player),
-[Kinefi](https://github.com/kinefi) tarafından özgür yazılım olarak geliştirilen
-ve
+[Kinefi](https://github.com/kinefi) tarafından
+[Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
+geliştirilen ve
 [Apache Lisansı 2.0](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
 kapsamında yayınlanan bir uygulamadır.
 
+## Sürümler ve değişiklikler
+
 Sürümler ve değişiklikler için [değişiklik günlüğüne](./CHANGELOG.md)
 bakabilirsiniz.
+
+## Hata bildirimi
+
+Bu uygulama tamamen özgür yazılım olarak gönüllü bir şekilde geliştirilmektedir.
+Dolayısıyla indirip kullanmanız durumunda hata içerebileceğini ve kullanmanın
+tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
+
+- Hata bildirimlerini şu bağlantıdan yapabilirsiniz:
+  <https://github.com/kinefi/subadap-player/issues>
+- Mevcut geliştirme ve sonraki sürüm hedeflerini projeler sayfasında
+  görebilirsiniz: <https://github.com/kinefi/subadap-player/projects/>
+- Fikirleriniz, sorularınız, genel düşünceleriniz varsa tartışma kısmına
+  bakabilirsiniz: <https://github.com/kinefi/subadap-player/discussions>
 
 ## Geliştirme
 
@@ -46,7 +62,8 @@ kullanabilirsiniz:
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `expo publish`: Mevcut sürümü
   [Expo projesine](https://expo.dev/@kinefi/subadap-player) gönderir.
-- `expo build:android`: Android paketi oluşturur. APK dosyasını yerelde kaydetmesi için `--local` argümanıyla çalıştırın.
+- `expo build:android`: Android paketi oluşturur. APK dosyasını yerelde
+  kaydetmesi için `--local` argümanıyla çalıştırın.
 - `expo build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
   pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
@@ -72,7 +89,9 @@ Ana (`main`) dala gönderilen/itilen kod olması durumunda
 Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player)
 itiyor. Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
-yararlanılarak eklendi. APK dosyası da [`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak oluşturulup bir sürüm yayınlanıyor.
+yararlanılarak eklendi. APK dosyası da
+[`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak
+oluşturulup bir sürüm yayınlanıyor.
 
 Sürüm değiştirmek için:
 
@@ -116,3 +135,11 @@ kitaplar, vb.
 yayınlamaktadır. Şarkılar doğrudan uygulamada yer almıyor, İnternet üzerinden
 akış şeklinde çalıyor. Dolayısıyla uygulamayı kullanabilmek için İnternet
 bağlantısı gerekmektedir.
+
+## Lisans Bildirimi
+
+[Apache Lisansı 2.0](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
+kullanılan kütüphanelerle uyumlu olan bir
+[Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
+tercih edilmiştir. Bu lisans
+[GNU GPL'nin 3. sürümüyle de uyumludur](https://www.gnu.org/licenses/license-list.tr.html#apache2).
