@@ -4,10 +4,11 @@
   "version": "0.9.4",
   "repository": {
     "type": "git",
-    "url": "https://github.com/kinefi/subadap-player.git"
+    "url": "https://github.com/kinefi/subadapp.git"
   },
   "bugs": {
-    "url": "https://github.com/kinefi/subadap-player/issues"
+    "url": "https://github.com/kinefi/subadapp/issues",
+    "email": "subadapcocuk+subadapp@gmail.com"
   },
   "funding": {
     "type": "Şubadap Çocuk Kreosus",
@@ -21,6 +22,7 @@
     "build:android": "eas build --platform android --non-interactive",
     "build:ios": "eas build --platform ios --non-interactive",
     "build:all": "eas build --platform all --non-interactive",
+    "license:generate": "yarn npm-license-crawler -onlyDirectDependencies -json ./assets/licenses.json",
     "release": "standard-version --release-as ",
     "eject": "expo eject"
   },
@@ -37,6 +39,7 @@
     "@react-navigation/native": "^6.0",
     "expo": "^44",
     "expo-av": "~10.2.0",
+    "expo-constants": "~13.0.0",
     "expo-status-bar": "~1.2.0",
     "expo-web-browser": "~10.1.0",
     "lodash": "^4.17",
@@ -59,6 +62,7 @@
     "@babel/core": "^7.12.9",
     "eas-cli": "^0.42",
     "expo-cli": "^5.0",
+    "npm-license-crawler": "^0.2",
     "standard-version": "^9.3",
     "standard-version-expo": "^1.0"
   }

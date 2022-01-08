@@ -2,13 +2,15 @@ import React from "react";
 import { Text } from "react-native";
 import Dialog from "react-native-dialog";
 import * as WebBrowser from "expo-web-browser";
+import Constants from "expo-constants";
 import { styles } from "../helpers/styles";
 
 const About = ({ visible, close }) => {
   return (
     <Dialog.Container visible={visible} onBackdropPress={close}>
-      <Dialog.Title>Şubadap Çocuk Müzik Çalar</Dialog.Title>
+      <Dialog.Title>ŞUBADAPP</Dialog.Title>
       <Dialog.Description>
+        ŞUBADAPP (Sürüm {Constants.manifest.version})
         <Text
           onPress={() =>
             WebBrowser.openBrowserAsync("https://subadapcocuk.org")
@@ -30,7 +32,7 @@ const About = ({ visible, close }) => {
         <Text
           onPress={() =>
             WebBrowser.openBrowserAsync(
-              "https://github.com/kinefi/subadap-player/blob/main/LICENSE"
+              "https://github.com/kinefi/subadapp/blob/main/LICENSE"
             )
           }
           style={styles.link}
@@ -40,9 +42,7 @@ const About = ({ visible, close }) => {
         kapsamında yayınlanan{" "}
         <Text
           onPress={() =>
-            WebBrowser.openBrowserAsync(
-              "https://github.com/kinefi/subadap-player"
-            )
+            WebBrowser.openBrowserAsync("https://github.com/kinefi/subadapp")
           }
           style={styles.link}
         >
