@@ -30,7 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "subadapp",
+      "package": "org.subadapp",
       "versionCode": 440000904
     },
     "web": {

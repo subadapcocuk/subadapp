@@ -93,10 +93,10 @@ yararlanılarak eklendi. APK dosyası da
 [`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak
 oluşturulup bir sürüm yayınlanıyor.
 
-Sürüm yükseltmeden önce lisans listesini güncelleyin:
+Sürüm yükseltmeden önce lisans listesini güncelleyip gözden geçirebilirsiniz:
 
 ```bash
-yarn license:generate
+yarn license:check
 ```
 
 Daha sonra sürümü değiştirin:

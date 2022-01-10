@@ -8,9 +8,9 @@ import { styles } from "../helpers/styles";
 const About = ({ visible, close }) => {
   return (
     <Dialog.Container visible={visible} onBackdropPress={close}>
-      <Dialog.Title>ŞUBADAPP</Dialog.Title>
+      <Dialog.Title>ŞUBADAPP (Sürüm {Constants.manifest.version})</Dialog.Title>
       <Dialog.Description>
-        ŞUBADAPP (Sürüm {Constants.manifest.version})
+        ŞUBADAPP,{" "}
         <Text
           onPress={() =>
             WebBrowser.openBrowserAsync("https://subadapcocuk.org")
