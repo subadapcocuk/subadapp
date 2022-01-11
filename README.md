@@ -1,10 +1,12 @@
 # ŞUBADAPP
 
+[![Latest Release](https://img.shields.io/github/release/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/releases/latest)
 [![Expo Publish](https://github.com/kinefi/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadapp/actions/workflows/main.yml)
 [![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@kinefi/subadapp)
-[![Licensed by Apache](https://img.shields.io/badge/License-Apache%202.0-success.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
+[![Licensed by Apache](https://img.shields.io/github/license/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
+[![Issues](https://img.shields.io/github/issues/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/issues)
 
-[ŞUBADAPP](https://github.com/kinefi/subadapp),
+[ŞUBADAPP](https://github.com/kinefi/subadapp), 
 [Kinefi](https://github.com/kinefi) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve
