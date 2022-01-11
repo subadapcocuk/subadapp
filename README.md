@@ -151,3 +151,6 @@ uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
 [GNU GPL'nin 3. sürümüyle de uyumludur](https://www.gnu.org/licenses/license-list.tr.html#apache2).
+
+## İlgili Bağlantılar
+- [Sürüm indirme istatistikleri](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
