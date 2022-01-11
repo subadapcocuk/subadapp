@@ -5,6 +5,7 @@
 [![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@kinefi/subadapp)
 [![Licensed by Apache](https://img.shields.io/github/license/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
 [![Issues](https://img.shields.io/github/issues/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/issues)
+[![Github All Releases Downloads](https://img.shields.io/github/downloads/kinefi/subadapp/total.svg)](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
 
 [ŞUBADAPP](https://github.com/kinefi/subadapp), 
 [Kinefi](https://github.com/kinefi) tarafından
@@ -151,6 +152,3 @@ uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
 [GNU GPL'nin 3. sürümüyle de uyumludur](https://www.gnu.org/licenses/license-list.tr.html#apache2).
-
-## İlgili Bağlantılar
-- [Sürüm indirme istatistikleri](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
