@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.9.5](https://github.com/kinefi/subadapp/compare/v0.9.4...v0.9.5) (2022-01-12)
+
+- Uygulama adı değiştirildi [#59](https://github.com/kinefi/subadapp/issues/59)
+- Kullanılan kütüphanelerin lisansını listeleme eklendi [#60](https://github.com/kinefi/subadapp/issues/60)
+
 ### [0.9.4](https://github.com/kinefi/subadapp/compare/v0.9.3...v0.9.4) (2022-01-02)
 
 - Şarkı ve albüm dosyaları vikiye taşındı [#56](https://github.com/kinefi/subadapp/issues/56)
