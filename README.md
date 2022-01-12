@@ -1,14 +1,18 @@
-# Şubadap Müzik Çalar
+# ŞUBADAPP
 
-[![Expo Publish](https://github.com/kinefi/subadap-player/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadap-player/actions/workflows/main.yml)
-[![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@kinefi/subadap-player)
-[![Licensed by Apache](https://img.shields.io/badge/License-Apache%202.0-success.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
+[![Latest Release](https://img.shields.io/github/release/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/releases/latest)
+[![Latest Release Download](https://img.shields.io/github/downloads/kinefi/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/releases/latest)
+[![Expo Publish](https://github.com/kinefi/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadapp/actions/workflows/main.yml)
+[![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@kinefi/subadapp)
+[![Licensed by Apache](https://img.shields.io/github/license/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
+[![Issues](https://img.shields.io/github/issues/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/issues)
+[![Github All Releases Downloads](https://img.shields.io/github/downloads/kinefi/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
 
-[Şubadap Müzik Çalar](https://github.com/kinefi/subadap-player),
+[ŞUBADAPP](https://github.com/kinefi/subadapp), 
 [Kinefi](https://github.com/kinefi) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve
-[Apache Lisansı 2.0](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
+[Apache Lisansı 2.0](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
 kapsamında yayınlanan bir uygulamadır.
 
 ## Sürümler ve değişiklikler
@@ -23,11 +27,11 @@ Dolayısıyla indirip kullanmanız durumunda hata içerebileceğini ve kullanman
 tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 
 - Hata bildirimlerini şu bağlantıdan yapabilirsiniz:
-  <https://github.com/kinefi/subadap-player/issues>
+  <https://github.com/kinefi/subadapp/issues>
 - Mevcut geliştirme ve sonraki sürüm hedeflerini projeler sayfasında
-  görebilirsiniz: <https://github.com/kinefi/subadap-player/projects/>
+  görebilirsiniz: <https://github.com/kinefi/subadapp/projects/>
 - Fikirleriniz, sorularınız, genel düşünceleriniz varsa tartışma kısmına
-  bakabilirsiniz: <https://github.com/kinefi/subadap-player/discussions>
+  bakabilirsiniz: <https://github.com/kinefi/subadapp/discussions>
 
 ## Geliştirme
 
@@ -61,7 +65,7 @@ kullanabilirsiniz:
   gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `expo publish`: Mevcut sürümü
-  [Expo projesine](https://expo.dev/@kinefi/subadap-player) gönderir.
+  [Expo projesine](https://expo.dev/@kinefi/subadapp) gönderir.
 - `expo build:android`: Android paketi oluşturur. APK dosyasını yerelde
   kaydetmesi için `--local` argümanıyla çalıştırın.
 - `expo build:ios`: IOS paket oluşturur.
@@ -86,14 +90,20 @@ JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak i
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda
 [`publish` görevi](.github/workflows/main.yml#L34) otomatik olarak çalışıyor ve
-Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadap-player)
-itiyor. Bu yayınlama görevi Expo tarafından sunulan
+Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadapp) itiyor.
+Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
 yararlanılarak eklendi. APK dosyası da
 [`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak
 oluşturulup bir sürüm yayınlanıyor.
 
-Sürüm değiştirmek için:
+Sürüm yükseltmeden önce lisans listesini güncelleyip gözden geçirebilirsiniz:
+
+```bash
+yarn license:check
+```
+
+Daha sonra sürümü değiştirin:
 
 ```bash
 yarn release <patch, minor, major>
@@ -138,8 +148,8 @@ bağlantısı gerekmektedir.
 
 ## Lisans Bildirimi
 
-[Apache Lisansı 2.0](https://github.com/kinefi/subadap-player/blob/develop/LICENSE)
-kullanılan kütüphanelerle uyumlu olan bir
+[Apache Lisansı 2.0](https://github.com/kinefi/subadapp/blob/develop/LICENSE),
+uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
 [GNU GPL'nin 3. sürümüyle de uyumludur](https://www.gnu.org/licenses/license-list.tr.html#apache2).
