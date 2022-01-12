@@ -60,7 +60,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
-    "eas-cli": "^0.42",
+    "eas-cli": "^0.44",
     "expo-cli": "^5.0",
     "license-checker": "^25",
     "standard-version": "^9.3",
