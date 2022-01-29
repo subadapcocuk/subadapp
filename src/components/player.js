@@ -14,7 +14,7 @@ const Player = () => {
 
   const randomTrack = () => {
     if (playlist.list.length > 0) {
-      const index = randomInt(playlist.list.length);
+      const index = randomInt(playlist.list.length, playlist.index);
       setPlaylist({
         ...playlist,
         current: songs.filter((s) => s.no === playlist.list[index])[0],
