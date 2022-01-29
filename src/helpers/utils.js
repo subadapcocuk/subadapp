@@ -1,6 +1,12 @@
 import { deburr } from "lodash";
 
-export const randomInt = (length) => Math.floor(Math.random() * length);
+export const randomInt = (length, previous) => {
+  let current = Math.floor(Math.random() * length);
+  while (current === previous) {
+    current = Math.floor(Math.random() * length);
+  }
+  return current;
+};
 
 export const LoopType = {
   RandomList: 0,
