@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { confirm } from "./";
+import { confirm } from "./dialog";
 
 const SUBADAP_PLAYLISTS = "SUBADAP::PLAYLISTS";
 

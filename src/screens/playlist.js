@@ -170,7 +170,7 @@ export const Playlist = ({ navigation }) => {
                   selected={
                     playlist.list.find((no) => no === item.no) !== undefined
                   }
-                  onLeftOpen={() => toggleSong(item)}
+                  onSwipe={() => toggleSong(item)}
                   onPress={() => clearAndPlay(item)}
                 />
               ))}
@@ -231,8 +231,8 @@ export const Playlist = ({ navigation }) => {
                 <SongItem
                   key={`playlist_detail_${no}`}
                   song={item}
-                  selected={no === playlist?.current?.no}
-                  onRightOpen={() => toggleSong(item)}
+                  playing={no === playlist?.current?.no}
+                  onSwipe={() => toggleSong(item)}
                   onPress={() =>
                     setPlaylist({ ...playlist, current: item, index: index })
                   }
