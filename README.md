@@ -9,7 +9,7 @@
 [![Github All Releases Downloads](https://img.shields.io/github/downloads/kinefi/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
 [![CodeQL](https://github.com/kinefi/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/kinefi/subadapp/actions/workflows/codeql-analysis.yml)
 
-[ŞUBADAPP](https://github.com/kinefi/subadapp), 
+[ŞUBADAPP](https://github.com/kinefi/subadapp),
 [Kinefi](https://github.com/kinefi) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve

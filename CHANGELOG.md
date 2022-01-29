@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.10.0](https://github.com/kinefi/subadapp/compare/v0.9.6...v0.10.0) (2022-01-29)
+
+- Önceki ve sonraki şarkılar rastgele seçilirken boşa tıklama hatası giderildi [#53](https://github.com/kinefi/subadapp/issues/53)
+
 ### [0.9.6](https://github.com/kinefi/subadapp/compare/v0.9.5...v0.9.6) (2022-01-29)
 
 - Döngü tipi liste haline getirildi [#58](https://github.com/kinefi/subadapp/issues/58)
