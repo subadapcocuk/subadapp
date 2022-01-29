@@ -16,6 +16,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Picker } from "@react-native-picker/picker";
 import {
+  confirm,
   styles,
   turkishCompare,
   useAppContext,
@@ -128,8 +129,14 @@ export const Playlist = ({ navigation }) => {
   ];
 
   const clearAndPlay = (song) => {
-    setPlaylist({ list: [song.no], current: song, index: 0 });
-    Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
+    confirm(
+      "Liste temizleme uyarısı",
+      "Liste temizlenecek bu şarkı listeye eklenerek çalınacak, devam etmek istediğinizden emin misiniz?",
+      () => {
+        setPlaylist({ list: [song.no], current: song, index: 0 });
+        Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
+      }
+    );
   };
 
   return (
