@@ -187,23 +187,25 @@ export const Playlist = ({ navigation }) => {
                 }}
               />
             )}
-            {playlist.name && <Text>{playlist.name}</Text>}
+            {playlist?.name && (
+              <Text>Şu an açık olan liste: {playlist.name}</Text>
+            )}
             <View style={styles.centerView}>
               <IconPress
                 icon={faFolderOpen}
-                size={24}
+                size={20}
                 onPress={() => setOpenDialogVisible(true)}
                 text="liste aç"
               />
               <IconPress
                 icon={faSave}
-                size={24}
+                size={20}
                 onPress={() => setSaveDialogVisible(true)}
                 text="liste kaydet"
               />
               <IconPress
                 icon={faTrash}
-                size={24}
+                size={20}
                 onPress={clearPlaylist}
                 text="temizle"
               />
@@ -241,12 +243,13 @@ export const Playlist = ({ navigation }) => {
         </TabViewItem>
       </AnimatedTabView>
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
-      <PromptDialog
-        description="Lütfen listenin adını giriniz"
-        initialValue={playlist?.name}
-        save={handleSavePlaylist}
-        visible={saveDialogVisible}
-      />
+      {saveDialogVisible && (
+        <PromptDialog
+          description="Lütfen listenin adını giriniz"
+          initialValue={playlist?.name}
+          save={handleSavePlaylist}
+        />
+      )}
     </>
   );
 };

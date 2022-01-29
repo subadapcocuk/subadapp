@@ -3,10 +3,10 @@ import Dialog from "react-native-dialog";
 
 export default function PromptDialog({
   save,
-  visible = false,
+  visible = true,
   title = "Kaydet",
   description = "Bilgiyi girin",
-  initialValue = ""
+  initialValue = "",
 }) {
   const [value, setValue] = useState(initialValue);
 
