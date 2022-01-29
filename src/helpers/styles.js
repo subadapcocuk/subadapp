@@ -84,8 +84,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   albumImage: {
-    height: 100,
-    width: 100,
+    height: 75,
+    width: 75,
   },
   bottomView: {
     justifyContent: "center",
@@ -150,7 +150,6 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
-    margin: 5,
   },
   textLink: {
     color: BLUE,
@@ -171,7 +170,6 @@ export const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    height: 50,
     flexDirection: "row",
   },
   playButton: {
@@ -190,13 +188,9 @@ export const styles = StyleSheet.create({
     width: 50,
   },
   songStyle: {
-    flexDirection: "column",
-    backgroundColor: "white",
-    borderRadius: 5,
-    margin: 5,
-    padding: 5,
+    flexDirection: "row",
     alignItems: "center",
-    padding: 10,
+    justifyContent: "center",
   },
   songImage: {
     height: 125,

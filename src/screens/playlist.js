@@ -14,6 +14,7 @@ import {
   faTrash,
   faUndoAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { Picker } from "@react-native-picker/picker";
 import {
   styles,
   turkishCompare,
@@ -114,15 +115,15 @@ export const Playlist = ({ navigation }) => {
   const LOOP_TYPES = [
     {
       icon: faRandom,
-      text: "liste rastgele",
+      text: "listeyi rastgele çal",
     },
     {
       icon: faReplyAll,
-      text: "liste sırayla",
+      text: "listeyi sırayla çal",
     },
     {
       icon: faUndoAlt,
-      text: "şarkı sürekli",
+      text: "aynı şarkıyı çal",
     },
   ];
 
@@ -141,7 +142,7 @@ export const Playlist = ({ navigation }) => {
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
         <TabViewItem selected={tabIndex === 0}>
           <>
-            <View style={styles.button}>
+            <View style={styles.centerView}>
               <TextInputIcon
                 icon={faFilter}
                 placeholder={"şarkı ara"}
@@ -180,7 +181,7 @@ export const Playlist = ({ navigation }) => {
               />
             )}
             {playlist.name && <Text>{playlist.name}</Text>}
-            <View style={styles.button}>
+            <View style={styles.centerView}>
               <IconPress
                 icon={faFolderOpen}
                 size={24}
@@ -199,12 +200,22 @@ export const Playlist = ({ navigation }) => {
                 onPress={clearPlaylist}
                 text="temizle"
               />
-              <IconPress
-                {...LOOP_TYPES[loop]}
-                onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
-                style={{ marginLeft: "auto" }}
-              />
             </View>
+            <Picker
+              style={{ margin: "auto" }}
+              selectedValue={loop}
+              onValueChange={(value) => {
+                setLoop(value);
+              }}
+            >
+              {LOOP_TYPES.map((item, index) => (
+                <Picker.Item
+                  key={`LoopType_${item.text}_${index}`}
+                  label={item.text}
+                  value={index}
+                />
+              ))}
+            </Picker>
             {playlist?.list.map((no, index) => {
               const item = songs.filter((s) => no === s.no)[0];
               return (
