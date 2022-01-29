@@ -1,9 +1,6 @@
-import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 import { Animated, StyleSheet, TouchableOpacity } from "react-native";
-
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import { IconText } from "./buttons";
 
 export const SwipeableRow = ({
   children,
@@ -18,9 +15,7 @@ export const SwipeableRow = ({
       extrapolate: "clamp",
     });
     return (
-      <Animated.View style={[styles.action, { transform: [{ scale }] }]}>
-        <IconText icon={faArrowRight} />
-      </Animated.View>
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
     );
   };
 
@@ -31,9 +26,7 @@ export const SwipeableRow = ({
       extrapolate: "clamp",
     });
     return (
-      <Animated.View style={[styles.action, { transform: [{ scale }] }]}>
-        <IconText icon={faArrowLeft} style={{ alignSelf: "flex-end" }} />
-      </Animated.View>
+      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
     );
   };
 
