@@ -3,7 +3,7 @@ import { Dimensions } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
-import { Page, Playlist, Albums } from "../screens";
+import { Page, Playlist } from "../screens";
 
 const Drawer = createDrawerNavigator();
 
@@ -24,11 +24,11 @@ export const NavigationService = () => {
           component={Playlist}
           options={{ title: "" }}
         />
-        <Drawer.Screen
+        {/*<Drawer.Screen
           name="Albums"
           component={Albums}
           options={{ title: "" }}
-        />
+        />*/}        
         <Drawer.Screen name="Page" component={Page} options={{ title: "" }} />
       </Drawer.Navigator>
     </NavigationContainer>
