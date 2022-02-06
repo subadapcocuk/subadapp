@@ -38,7 +38,7 @@ export const Menu = (props) => {
         <IconDrawerItem
           icon={faMusic}
           label="Tüm Şarkılar"
-          onPress={() => navigation.navigate("Playlist")}
+          onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
         {/*<IconDrawerItem
           onPress={() => navigation.navigate("Albums")}
