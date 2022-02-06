@@ -49,7 +49,7 @@ export const SongDetail = ({ song, openUrl }) => {
           onPress={() => openUrl(`${song.page}#Şarkı_Sözleri`)}
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
-          <Text style={{ fontSize: 18 }}>{song.name}</Text>
+          <Text style={{ fontSize: 18 }}>{song.name} Şarkı Sözleri</Text>
         </TouchableOpacity>
       )}
     </>
