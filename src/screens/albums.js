@@ -3,6 +3,7 @@ import { ScrollView } from "react-native";
 import Album from "../components/album";
 import { useAppContext } from "../helpers";
 
+//TODO Deprecated, remove if not needed anymore
 export const Albums = ({ navigation }) => {
   const { albums } = useAppContext();
 

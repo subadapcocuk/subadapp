@@ -4,12 +4,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AppContext = React.createContext();
 
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
-const ALBUMS = "https://ansiklopedi.subadapcocuk.org/albums.json";
+//const ALBUMS = "https://ansiklopedi.subadapcocuk.org/albums.json";
 const SONGS = "https://ansiklopedi.subadapcocuk.org/songs.json";
 
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
-  const [albums, setAlbums] = useState([]);
+  //const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
   const [playlist, setPlaylist] = useState({
     list: [],
@@ -26,11 +26,11 @@ export const ContextProvider = ({ children }) => {
     });
   }, []);
 
-  useEffect(() => {
+  /*useEffect(() => {
     fetch(ALBUMS)
       .then((response) => response.json())
       .then((data) => setAlbums(data));
-  }, []);
+  }, []);*/
 
   useEffect(() => {
     fetch(SONGS)
@@ -46,7 +46,7 @@ export const ContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ albums, songs, playlist, setPlaylist, loop, setLoop }}
+      value={{ songs, playlist, setPlaylist, loop, setLoop }}
     >
       {children}
     </AppContext.Provider>

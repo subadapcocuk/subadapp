@@ -17,11 +17,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export const Menu = (props) => {
   const [about, setAbout] = useState(false);
-  const insets = useSafeAreaInsets();
   const { navigation } = props;
 
   const openUrl = (url) => {
@@ -42,11 +40,11 @@ export const Menu = (props) => {
           label="Tüm Şarkılar"
           onPress={() => navigation.navigate("Playlist")}
         />
-        <IconDrawerItem
+        {/*<IconDrawerItem
           onPress={() => navigation.navigate("Albums")}
           icon={faHome}
           label="Albümler"
-        />
+        />*/}
         <IconDrawerItem
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org")}
           icon={faBook}
@@ -63,7 +61,9 @@ export const Menu = (props) => {
           label="Kreosus"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")}
+          onPress={() =>
+            openUrl("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")
+          }
           icon={faYoutube}
           label="Youtube"
         />
