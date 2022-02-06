@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
 import {
@@ -28,13 +28,18 @@ import { IconPress, TextInputIcon } from "../components/buttons";
 import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
 
-export const Playlist = ({ navigation }) => {
+export const Playlist = ({ navigation, route }) => {
   const [order, setOrder] = useState(0);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
   const { playlist, setPlaylist, loop, setLoop, songs } = useAppContext();
+
+  useEffect(() => {
+    if (tabIndex !== route.params?.tabIndex)
+      setTabIndex(route.params?.tabIndex);
+  }, [route.params]);
 
   const toggleSong = ({ name, no }) => {
     if (playlist.list.find((n) => n === no)) {
