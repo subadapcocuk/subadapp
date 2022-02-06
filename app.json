@@ -2,7 +2,7 @@
   "expo": {
     "name": "ŞUBADAPP",
     "slug": "subadapp",
-    "version": "0.10.0",
+    "version": "0.10.1",
     "description": "",
     "githubUrl": "https://github.com/kinefi/subadapp",
     "owner": "kinefi",
@@ -22,7 +22,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.10.0",
+      "buildNumber": "0.10.1",
       "bundleIdentifier": "subadapp"
     },
     "android": {
@@ -31,7 +31,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "org.subadapp",
-      "versionCode": 440001000
+      "versionCode": 440001001
     },
     "web": {
       "favicon": "./assets/favicon.png"

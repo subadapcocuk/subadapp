@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.10.1](https://github.com/kinefi/subadapp/compare/v0.10.0...v0.10.1) (2022-02-06)
+
+- Çalma listesine şarkı isminin yanına şarkı sözleri ifadesi eklendi [#73](https://github.com/kinefi/subadapp/issues/73)
+- Albümler sayfası kaldırıldı [#72](https://github.com/kinefi/subadapp/issues/72)
+- Tüm şarkılara tıklanınca tüm şarkılar görüntüleniyor [#71](https://github.com/kinefi/subadapp/issues/71)
+
 ## [0.10.0](https://github.com/kinefi/subadapp/compare/v0.9.6...v0.10.0) (2022-01-29)
 
 - Önceki ve sonraki şarkılar rastgele seçilirken boşa tıklama hatası giderildi [#53](https://github.com/kinefi/subadapp/issues/53)
