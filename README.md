@@ -1,19 +1,19 @@
 # ŞUBADAPP
 
-[![Latest Release](https://img.shields.io/github/release/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/releases/latest)
-[![Latest Release Download](https://img.shields.io/github/downloads/kinefi/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/releases/latest)
-[![Expo Publish](https://github.com/kinefi/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/kinefi/subadapp/actions/workflows/main.yml)
-[![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@kinefi/subadapp)
-[![Licensed by Apache](https://img.shields.io/github/license/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
-[![Issues](https://img.shields.io/github/issues/kinefi/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/kinefi/subadapp/issues)
-[![Github All Releases Downloads](https://img.shields.io/github/downloads/kinefi/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=kinefi&repository=subadapp&page=1&per_page=5)
-[![CodeQL](https://github.com/kinefi/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/kinefi/subadapp/actions/workflows/codeql-analysis.yml)
+[![Latest Release](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
+[![Latest Release Download](https://img.shields.io/github/downloads/subadapcocuk/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
+[![Expo Publish](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
+[![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@subadap-coocuk/subadapp)
+[![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE)
+[![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
+[![Github All Releases Downloads](https://img.shields.io/github/downloads/subadapcocuk/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=subadapcocuk&repository=subadapp&page=1&per_page=5)
+[![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
-[ŞUBADAPP](https://github.com/kinefi/subadapp),
-[Kinefi](https://github.com/kinefi) tarafından
+[ŞUBADAPP](https://github.com/subadapcocuk/subadapp),
+[Şubadap Çocuk](https://github.com/subadapcocuk) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve
-[Apache Lisansı 2.0](https://github.com/kinefi/subadapp/blob/develop/LICENSE)
+[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE)
 kapsamında yayınlanan bir uygulamadır.
 
 ## Sürümler ve değişiklikler
@@ -28,11 +28,11 @@ Dolayısıyla indirip kullanmanız durumunda hata içerebileceğini ve kullanman
 tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 
 - Hata bildirimlerini şu bağlantıdan yapabilirsiniz:
-  <https://github.com/kinefi/subadapp/issues>
+  <https://github.com/subadapcocuk/subadapp/issues>
 - Mevcut geliştirme ve sonraki sürüm hedeflerini projeler sayfasında
-  görebilirsiniz: <https://github.com/kinefi/subadapp/projects/>
+  görebilirsiniz: <https://github.com/subadapcocuk/subadapp/projects/>
 - Fikirleriniz, sorularınız, genel düşünceleriniz varsa tartışma kısmına
-  bakabilirsiniz: <https://github.com/kinefi/subadapp/discussions>
+  bakabilirsiniz: <https://github.com/subadapcocuk/subadapp/discussions>
 
 ## Geliştirme
 
@@ -65,11 +65,9 @@ kullanabilirsiniz:
 - `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
   gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
-- `expo publish`: Mevcut sürümü
-  [Expo projesine](https://expo.dev/@kinefi/subadapp) gönderir.
-- `expo build:android`: Android paketi oluşturur. APK dosyasını yerelde
+- `yarn build:android`: Android paketi oluşturur. APK dosyasını yerelde
   kaydetmesi için `--local` argümanıyla çalıştırın.
-- `expo build:ios`: IOS paket oluşturur.
+- `yarn build:ios`: IOS paket oluşturur.
 - `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
   pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
 
@@ -91,7 +89,7 @@ JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak i
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda
 [`publish` görevi](.github/workflows/main.yml#L34) otomatik olarak çalışıyor ve
-Expo'ya [denenmeye hazır son sürümü](https://expo.io/@kinefi/subadapp) itiyor.
+Expo'ya [denenmeye hazır son sürümü](https://expo.io/@subadapcocuk/subadapp) itiyor.
 Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
 yararlanılarak eklendi. APK dosyası da
@@ -149,7 +147,7 @@ bağlantısı gerekmektedir.
 
 ## Lisans Bildirimi
 
-[Apache Lisansı 2.0](https://github.com/kinefi/subadapp/blob/develop/LICENSE),
+[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE),
 uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
