@@ -16,23 +16,11 @@ const About = ({ visible, close }) => {
             WebBrowser.openBrowserAsync("https://subadapcocuk.org")
           }
           style={styles.link}
-        >
-          Şubadap Çocuk
-        </Text>{" "}
-        için{" "}
-        <Text
-          onPress={() =>
-            WebBrowser.openBrowserAsync("https://github.com/kinefi")
-          }
-          style={styles.link}
-        >
-          Kinefi
-        </Text>{" "}
-        tarafından geliştirilmiştir.{" "}
+        >Şubadap Çocuk</Text> için geliştirilmiştir.{" "}
         <Text
           onPress={() =>
             WebBrowser.openBrowserAsync(
-              "https://github.com/kinefi/subadapp/blob/main/LICENSE"
+              "https://github.com/subadapcocuk/subadapp/blob/main/LICENSE"
             )
           }
           style={styles.link}
@@ -42,7 +30,7 @@ const About = ({ visible, close }) => {
         kapsamında yayınlanan{" "}
         <Text
           onPress={() =>
-            WebBrowser.openBrowserAsync("https://github.com/kinefi/subadapp")
+            WebBrowser.openBrowserAsync("https://github.com/subadapcocuk/subadapp")
           }
           style={styles.link}
         >

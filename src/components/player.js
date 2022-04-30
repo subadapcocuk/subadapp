@@ -56,8 +56,9 @@ const Player = () => {
       staysActiveInBackground: true,
       playsInSilentModeIOS: true,
       // asagidaki ayarlarla diger uygulamalarin sesi azaltılıyor
-      interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
-      interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      // TODO: with release 45 find correct values
+      //interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
+      //interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
     }),
       [];
   });
