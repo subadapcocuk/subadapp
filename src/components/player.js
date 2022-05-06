@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View } from "react-native";
-import { Audio } from "expo-av";
+import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import Toast from "react-native-root-toast";
 import { styles, LoopType, randomInt, useAppContext } from "../helpers";
 import PlayerControls from "./controls";
@@ -55,10 +55,9 @@ const Player = () => {
     Audio.setAudioModeAsync({
       staysActiveInBackground: true,
       playsInSilentModeIOS: true,
-      // asagidaki ayarlarla diger uygulamalarin sesi azaltılıyor
-      // TODO: with release 45 find correct values
-      //interruptionModeIOS: Audio.INTERRUPTION_MODE_IOS_DUCK_OTHERS,
-      //interruptionModeAndroid: Audio.INTERRUPTION_MODE_ANDROID_DUCK_OTHERS,
+      // reduce sound of other apps
+      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
+      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
     }),
       [];
   });
@@ -68,13 +67,17 @@ const Player = () => {
   }, [playlist?.current]);
 
   useEffect(() => {
-    player
-      .setIsLoopingAsync(loop === LoopType.RepeatSong)
-      .then()
-      .catch((e) => {
-        console.debug(e);
-      });
-    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+    try {
+      player
+        .setIsLoopingAsync(loop === LoopType.RepeatSong)
+        .then()
+        .catch((e) => {
+          console.debug(e);
+        });
+      player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+    } catch(e) {
+      console.warning(e)
+    }
   }, [loop]);
 
   const onPlaybackStatusUpdate = (status) => {
