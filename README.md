@@ -88,7 +88,7 @@ JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak i
 ## Yayınlama ve test etme
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda
-[`publish` görevi](.github/workflows/main.yml#L34) otomatik olarak çalışıyor ve
+[`publish` görevi](.github/workflows/main.yml#L34) elle başlatılabiliyor ve
 Expo'ya [denenmeye hazır son sürümü](https://expo.io/@subadapcocuk/subadapp) itiyor.
 Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
