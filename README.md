@@ -4,7 +4,7 @@
 [![Latest Release Download](https://img.shields.io/github/downloads/subadapcocuk/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Expo Publish](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
 [![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@subadap-coocuk/subadapp)
-[![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE)
+[![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
 [![Github All Releases Downloads](https://img.shields.io/github/downloads/subadapcocuk/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=subadapcocuk&repository=subadapp&page=1&per_page=5)
 [![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
@@ -13,7 +13,7 @@
 [Şubadap Çocuk](https://github.com/subadapcocuk) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve
-[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE)
+[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE)
 kapsamında yayınlanan bir uygulamadır.
 
 ## Sürümler ve değişiklikler
@@ -106,7 +106,7 @@ Daha sonra sürümü değiştirin:
 
 ```bash
 yarn release <patch, minor, major>
-git push --follow-tags origin develop
+git push --follow-tags origin main
 ```
 
 Yerelde test etmek için şu komutlar kullanılabilir:
@@ -147,7 +147,7 @@ bağlantısı gerekmektedir.
 
 ## Lisans Bildirimi
 
-[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/develop/LICENSE),
+[Apache Lisansı 2.0](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE),
 uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
