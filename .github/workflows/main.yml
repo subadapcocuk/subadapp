@@ -25,11 +25,11 @@ jobs:
         run: yarn install
       - name: Build packages
         run: yarn build:android --local
-      - name: Rename APK
-        run: mv build-*.apk subadapmuzik-${{ steps.currenttag.outputs.tag }}.apk
+      - name: Rename AAB
+        run: mv build-*.aab subadapmuzik-${{ steps.currenttag.outputs.tag }}.aab
       - uses: softprops/action-gh-release@v1
         with:
-          files: subadapmuzik-${{ steps.currenttag.outputs.tag }}.apk
+          files: subadapmuzik-${{ steps.currenttag.outputs.tag }}.aab
           tag_name: ${{ steps.currenttag.outputs.tag }}
 
   publish:
