@@ -18,8 +18,6 @@ export const Page = ({ route }) => {
       <WebView
         style={styles.webview}
         source={{ uri: url }}
-        //onNavigationStateChange={(navState) => console.log(navState)}
-        //startInLoadingState={true}
         scalesPageToFit={true}
         javaScriptEnabled={true}
         domStorageEnabled={true}

@@ -1,4 +1,4 @@
-# ŞUBADAPP
+# ŞubadApp
 
 [![Latest Release](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Latest Release Download](https://img.shields.io/github/downloads/subadapcocuk/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
@@ -9,7 +9,7 @@
 [![Github All Releases Downloads](https://img.shields.io/github/downloads/subadapcocuk/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=subadapcocuk&repository=subadapp&page=1&per_page=5)
 [![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
-[ŞUBADAPP](https://github.com/subadapcocuk/subadapp),
+[ŞubadApp](https://github.com/subadapcocuk/subadapp),
 [Şubadap Çocuk](https://github.com/subadapcocuk) tarafından
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) olarak
 geliştirilen ve

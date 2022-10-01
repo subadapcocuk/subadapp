@@ -4,12 +4,10 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AppContext = React.createContext();
 
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
-//const ALBUMS = "https://ansiklopedi.subadapcocuk.org/albums.json";
 const SONGS = "https://ansiklopedi.subadapcocuk.org/songs.json";
 
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
-  //const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
   const [playlist, setPlaylist] = useState({
     list: [],
@@ -20,20 +18,18 @@ export const ContextProvider = ({ children }) => {
   useEffect(() => {
     AsyncStorage.getItem(SUBADAP_PLAYLIST).then((value) => {
       if (value) {
-        console.log(`Reading playlist from storage: ${value}`);
+        console.debug(`Reading playlist from storage: ${value}`);
         setPlaylist(JSON.parse(value));
       }
     });
   }, []);
 
-  /*useEffect(() => {
-    fetch(ALBUMS)
-      .then((response) => response.json())
-      .then((data) => setAlbums(data));
-  }, []);*/
-
   useEffect(() => {
-    fetch(SONGS)
+    fetch(SONGS, {
+      headers: {
+        "Cache-Control": "no-cache",
+      },
+    })
       .then((response) => response.json())
       .then((data) => setSongs(data));
   }, []);

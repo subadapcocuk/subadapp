@@ -39,6 +39,7 @@ export const Playlist = ({ navigation, route }) => {
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
       setTabIndex(route.params?.tabIndex);
+    if(!tabIndex) setTabIndex(0);
   }, [route.params]);
 
   const toggleSong = ({ name, no }) => {
@@ -156,7 +157,6 @@ export const Playlist = ({ navigation, route }) => {
           <>
             <View style={styles.centerView}>
               <TextInputIcon
-                icon={faFilter}
                 placeholder={"şarkı ara"}
                 onChangeText={setFilter}
                 value={filter}

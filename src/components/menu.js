@@ -40,11 +40,6 @@ export const Menu = (props) => {
           label="Tüm Şarkılar"
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
-        {/*<IconDrawerItem
-          onPress={() => navigation.navigate("Albums")}
-          icon={faHome}
-          label="Albümler"
-        />*/}
         <IconDrawerItem
           onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org")}
           icon={faBook}
