@@ -2,7 +2,7 @@
   "expo": {
     "name": "ŞubadApp",
     "slug": "subadapp",
-    "version": "0.11.0",
+    "version": "0.11.1",
     "description": "",
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
     "owner": "subadap-cocuk",
@@ -22,7 +22,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.11.0",
+      "buildNumber": "0.11.1",
       "bundleIdentifier": "subadapp"
     },
     "android": {
@@ -31,7 +31,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "org.subadapp",
-      "versionCode": 460001100
+      "versionCode": 460001101
     },
     "web": {
       "favicon": "./assets/favicon.png"
