@@ -8,18 +8,11 @@ export const GREEN = "#009688";
 
 export const deviceWidth = Dimensions.get("window").width;
 
-export const tabItemButtonStyle = (currentTab) => {
-  return {
-    backgroundColor: currentTab ? BLUE : WHITE,
-    borderRadius: 10,
-    padding: 0,
-    marginBottom: 0,
-  };
-};
-
 export const tabItemTitleStyle = (currentTab) => {
   return {
     color: currentTab ? WHITE : BLUE,
+    backgroundColor: currentTab ? BLUE : WHITE,
+    borderRadius: 5,
     textTransform: "capitalize",
     paddingTop: 5,
     paddingBottom: 5,

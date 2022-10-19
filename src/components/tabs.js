@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab, TabView } from "react-native-elements";
-import { styles, tabItemButtonStyle, tabItemTitleStyle } from "../helpers";
+import { styles, tabItemTitleStyle } from "../helpers";
 
 export const Tabs = ({ titles, value, onChange }) => (
   <Tab value={value} onChange={onChange} disableIndicator>
@@ -8,7 +8,6 @@ export const Tabs = ({ titles, value, onChange }) => (
       <Tab.Item
         key={`${title}_${index}`}
         title={title}
-        buttonStyle={tabItemButtonStyle(value == index)}
         containerStyle={styles.tabItemContainer}
         titleStyle={tabItemTitleStyle(value == index)}
       />
@@ -19,7 +18,7 @@ export const Tabs = ({ titles, value, onChange }) => (
 export const AnimatedTabView = ({ value, children }) => (
   <TabView
     value={value}
-    animationConfig={{ duration: 100, useNativeDriver: true }}
+    animationConfig={{ duration: 50, useNativeDriver: true }}
     animationType="spring"
   >
     {children}

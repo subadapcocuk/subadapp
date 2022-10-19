@@ -7,7 +7,6 @@ import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
 const Player = () => {
-  // https://github.com/expo/playlist-example/blob/master/App.js
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
   const { playlist, setPlaylist, loop, songs } = useAppContext();

@@ -15,6 +15,7 @@ import {
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
+import * as WebBrowser from "expo-web-browser";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
 
@@ -51,29 +52,41 @@ export const Menu = (props) => {
           label="Şubadap Sitesi"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://www.kreosus.com/subadapcocuk")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://www.kreosus.com/subadapcocuk")
+          }
           icon={faDonate}
           label="Kreosus"
         />
         <IconDrawerItem
           onPress={() =>
-            openUrl("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")
+            WebBrowser.openBrowserAsync(
+              "https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk"
+            )
           }
           icon={faYoutube}
           label="Youtube"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://www.facebook.com/subadapcocuk")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://www.facebook.com/subadapcocuk")
+          }
           icon={faFacebook}
           label="Facebook"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://www.instagram.com/subadapcocuk")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(
+              "https://www.instagram.com/subadapcocuk"
+            )
+          }
           icon={faInstagram}
           label="Instagram"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://twitter.com/subadap")}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://twitter.com/subadap")
+          }
           icon={faTwitter}
           label="Twitter"
         />

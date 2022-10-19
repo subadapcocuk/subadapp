@@ -12,6 +12,10 @@ export const NavigationService = () => {
       <Drawer.Navigator
         drawerContent={(props) => <Menu {...props} />}
         screenOptions={{
+          //headerShown: false,
+          headerStyle: {
+            height: 15,
+          },
           drawerStyle: {
             width: 215,
           },
@@ -21,7 +25,7 @@ export const NavigationService = () => {
           name="Playlist"
           component={Playlist}
           options={{ title: "" }}
-        />     
+        />
         <Drawer.Screen name="Page" component={Page} options={{ title: "" }} />
       </Drawer.Navigator>
     </NavigationContainer>
