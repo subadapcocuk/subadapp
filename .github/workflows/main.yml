@@ -26,25 +26,25 @@ jobs:
       - name: Build packages
         run: yarn build:android --local
       - name: Rename AAB
-        run: mv build-*.aab subadapmuzik-${{ steps.currenttag.outputs.tag }}.aab
+        run: mv build-*.aab subadapp-${{ steps.currenttag.outputs.tag }}.aab
       - uses: softprops/action-gh-release@v1
         with:
-          files: subadapmuzik-${{ steps.currenttag.outputs.tag }}.aab
+          files: subadapp-${{ steps.currenttag.outputs.tag }}.aab
           tag_name: ${{ steps.currenttag.outputs.tag }}
 
-  publish:
-    name: Publish
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "lts/*"
-      - uses: expo/expo-github-action@v6
-        with:
-          expo-version: 4.x
-          token: ${{ secrets.EXPO_TOKEN }}
-      - name: Install dependencies
-        run: yarn install
-      - name: Publish the app
-        run: expo publish
+  #publish:
+  #  name: Publish
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v2
+  #    - uses: actions/setup-node@v2
+  #      with:
+  #        node-version: "lts/*"
+  #    - uses: expo/expo-github-action@v6
+  #      with:
+  #        expo-version: 4.x
+  #        token: ${{ secrets.EXPO_TOKEN }}
+  #    - name: Install dependencies
+  #      run: yarn install
+  #    - name: Publish the app
+  #      run: expo publish
