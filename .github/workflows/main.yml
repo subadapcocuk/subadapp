@@ -1,4 +1,4 @@
-name: Expo
+name: Local Build and Release
 
 on:
   workflow_dispatch:
