@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.12.0](https://github.com/subadapcocuk/subadapp/compare/v0.11.1...v0.12.0) (2022-11-04)
 
-- Görsel arayüzde kimi düzenlemeler yapıldı
+- Görsel arayüzde kimi düzenlemeler yapıldı [#83](https://github.com/subadapcocuk/subadapp/issues/83)
 
 ### [0.11.2](https://github.com/subadapcocuk/subadapp/compare/v0.11.1...v0.11.2) (2022-10-19)
 
