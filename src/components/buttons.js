@@ -13,7 +13,7 @@ export const IconPress = ({
   style = {},
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} onPress={onPress} accessibilityLabel={text}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
       {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
     </TouchableOpacity>
@@ -26,18 +26,19 @@ export const IconDrawerItem = ({ onPress, icon = null, label = null }) => (
     icon={() => icon && <FontAwesomeIcon color={BLUE} size={28} icon={icon} />}
     label={() => label && <Text style={styles.menuLabel}>{label}</Text>}
     onPress={onPress}
+    accessibilityLabel={label}
   />
 );
 
 export const IconText = ({
   icon,
   color = BLUE,
-  size = 24,
+  size = 28,
   text = null,
   style = {},
 }) => {
   return (
-    <View style={[styles.button, style]}>
+    <View style={[styles.button, style]} accessibilityLabel={text}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
       {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
     </View>
@@ -47,13 +48,13 @@ export const IconText = ({
 export const TextInputIcon = (props) => {
   const { style, ...rest } = props;
   return (
-    <View style={[styles.button, style]}>
+    <View style={[styles.button, style]} accessibilityLabel={rest.value}>
       {rest?.icon && (
         <FontAwesomeIcon
           style={styles.icon}
           icon={rest.icon}
           color={BLUE}
-          size={24}
+          size={28}
         />
       )}
       <TextInput

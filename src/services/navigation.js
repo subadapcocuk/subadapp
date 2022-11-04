@@ -14,7 +14,7 @@ export const NavigationService = () => {
         screenOptions={{
           //headerShown: false,
           headerStyle: {
-            height: 15,
+            height: 25,
           },
           drawerStyle: {
             width: 215,

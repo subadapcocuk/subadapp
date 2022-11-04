@@ -138,9 +138,9 @@ akordiyon, trompet ve mandolin çalgılarıyla yer almaktadır.
 
 Uygulamada kullanılan ve bağlantı verilen tüm şarkılar, resimler, sayfalar,
 kitaplar, vb.
-[Şubadap Çocuk Ansiklopedisi](http://ansiklopedi.subadapcocuk.org/index.php/%C5%9Eubadap_%C3%87ocuk_Ansiklopedisi)ndedir.
+[Şubadap Çocuk Ansiklopedisi](https://ansiklopedi.subadapcocuk.org/index.php/%C5%9Eubadap_%C3%87ocuk_Ansiklopedisi)ndedir.
 [Şubadap Çocuk](https://subadapcocuk.org) yaptığı tüm üretimleri
-[Copyleft](http://ansiklopedi.subadapcocuk.org/index.php/Copyleft) kapsamında
+[Copyleft](https://ansiklopedi.subadapcocuk.org/index.php/Copyleft) kapsamında
 yayınlamaktadır. Şarkılar doğrudan uygulamada yer almıyor, İnternet üzerinden
 akış şeklinde çalıyor. Dolayısıyla uygulamayı kullanabilmek için İnternet
 bağlantısı gerekmektedir.
