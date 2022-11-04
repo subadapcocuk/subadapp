@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
 import {
-  faFilter,
   faFolderOpen,
   faRandom,
   faReplyAll,
   faSave,
   faSortAlphaDown,
-  faSortAlphaUp,
+  faSortAlphaDownAlt,
   faSortDown,
   faSortUp,
   faTrash,
@@ -39,7 +38,7 @@ export const Playlist = ({ navigation, route }) => {
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
       setTabIndex(route.params?.tabIndex);
-    if(!tabIndex) setTabIndex(0);
+    if (!tabIndex) setTabIndex(0);
   }, [route.params]);
 
   const toggleSong = ({ name, no }) => {
@@ -88,19 +87,19 @@ export const Playlist = ({ navigation, route }) => {
   const ORDER_TYPES = [
     {
       icon: faSortAlphaDown,
-      text: "A'dan Z'ye",
+      text: "A ➜ Z",
     },
     {
-      icon: faSortAlphaUp,
-      text: "Z'den A'ya",
+      icon: faSortAlphaDownAlt,
+      text: "Z ➜ A",
     },
     {
       icon: faSortDown,
-      text: "yeniden eskiye",
+      text: "yeni ➜ eski",
     },
     {
       icon: faSortUp,
-      text: "eskiden yeniye",
+      text: "eski ➜ yeni",
     },
   ];
 
@@ -198,19 +197,16 @@ export const Playlist = ({ navigation, route }) => {
             <View style={styles.centerView}>
               <IconPress
                 icon={faFolderOpen}
-                size={20}
                 onPress={() => setOpenDialogVisible(true)}
-                text="liste aç"
+                text="aç"
               />
               <IconPress
                 icon={faSave}
-                size={20}
                 onPress={() => setSaveDialogVisible(true)}
-                text="liste kaydet"
+                text="kaydet"
               />
               <IconPress
                 icon={faTrash}
-                size={20}
                 onPress={clearPlaylist}
                 text="temizle"
               />
@@ -227,6 +223,7 @@ export const Playlist = ({ navigation, route }) => {
                   key={`LoopType_${item.text}_${index}`}
                   label={item.text}
                   value={index}
+                  style={{ fontSize: 20 }}
                 />
               ))}
             </Picker>

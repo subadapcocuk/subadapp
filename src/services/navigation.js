@@ -14,10 +14,10 @@ export const NavigationService = () => {
         screenOptions={{
           //headerShown: false,
           headerStyle: {
-            height: 25,
+            height: 40,
           },
           drawerStyle: {
-            width: 215,
+            width: 250,
           },
         }}
       >

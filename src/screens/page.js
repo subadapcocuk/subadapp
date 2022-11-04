@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 import { WebView } from "react-native-webview";
-import { styles, BLUE } from "../helpers/styles";
+import { styles, PINK } from "../helpers/styles";
 
 export const Page = ({ route }) => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export const Page = ({ route }) => {
     <>
       {loading && (
         <View style={styles.activityIndicatorStyle}>
-          <ActivityIndicator color={BLUE} size="large" />
+          <ActivityIndicator color={PINK} size="large" />
         </View>
       )}
       <WebView
