@@ -2,7 +2,7 @@ import React from "react";
 
 import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
-import { styles, BLUE, GRAY } from "../helpers/styles";
+import { styles, PINK, GRAY } from "../helpers/styles";
 
 function pad(n, width, z = 0) {
   n = n + "";
@@ -34,9 +34,9 @@ const SeekBar = ({
           onSlidingStart={onSlidingStart}
           onSlidingComplete={onSeek}
           value={currentPosition}
-          minimumTrackTintColor={BLUE}
+          minimumTrackTintColor={PINK}
           maximumTrackTintColor={GRAY}
-          thumbTintColor={isPlaying ? BLUE : GRAY}
+          thumbTintColor={isPlaying ? PINK : GRAY}
         />
         <Text style={styles.text}>
           {trackLength > 1 && "-" + remaining[0] + ":" + remaining[1]}

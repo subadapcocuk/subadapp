@@ -1,7 +1,6 @@
 import { StyleSheet, Dimensions } from "react-native";
-export const GRAY = "#E0E0E0";
-export const PINK = "#D42E94";
-export const BLUE = "#529DD6";
+export const GRAY = "#F0F0F0";
+export const PINK = "#EE2786";
 export const PURPLE = "#6B1FBF";
 export const WHITE = "#FFFFFF";
 export const GREEN = "#009688";
@@ -10,25 +9,24 @@ export const deviceWidth = Dimensions.get("window").width;
 
 export const tabItemTitleStyle = (currentTab) => {
   return {
-    color: currentTab ? WHITE : BLUE,
-    backgroundColor: currentTab ? BLUE : WHITE,
+    color: currentTab ? WHITE : PINK,
+    backgroundColor: currentTab ? PINK : WHITE,
     borderRadius: 5,
     textTransform: "capitalize",
-    paddingTop: 5,
-    paddingBottom: 5,
+    fontSize:25,
   };
 };
 
 export const songStyle = (selected) => {
-  return { ...styles.itemStyle, backgroundColor: selected ? BLUE : "white" };
+  return { ...styles.itemStyle, backgroundColor: selected ? PINK : "white" };
 };
 
 export const songText = (selected) => {
   return {
-    color: selected ? "white" : BLUE,
+    color: selected ? "white" : PINK,
     borderRadius: 5,
     padding: 5,
-    fontSize: 18,
+    fontSize: 20,
   };
 };
 
@@ -42,8 +40,9 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   text: {
-    color: BLUE,
+    color: PINK,
     textAlign: "center",
+    fontSize:20,
   },
   slider: {
     marginTop: 0,
@@ -51,12 +50,12 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
   },
   albumTitle: {
-    color: BLUE,
+    color: PINK,
     fontSize: 32,
     textAlign: "center",
   },
   albumYear: {
-    color: BLUE,
+    color: PINK,
     fontSize: 24,
     textAlign: "center",
   },
@@ -66,8 +65,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   menuLabel: {
-    color: BLUE,
-    fontSize: 16,
+    color: PINK,
+    fontSize: 20,
     padding: 0,
   },
   webview: {
@@ -77,8 +76,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   albumImage: {
-    height: 75,
-    width: 75,
+    height: 100,
+    width: 100,
   },
   bottomView: {
     justifyContent: "center",
@@ -109,12 +108,12 @@ export const styles = StyleSheet.create({
   headerView: {
     flexDirection: "row",
     padding: 5,
-    borderBottomColor: BLUE,
+    borderBottomColor: PINK,
     alignItems: "center",
   },
   link: {
     textDecorationLine: "underline",
-    color: BLUE,
+    color: PINK,
   },
   titleView: {
     width: 0,
@@ -128,7 +127,7 @@ export const styles = StyleSheet.create({
   },
   icon: {
     fontSize: 32,
-    color: BLUE,
+    color: PINK,
     margin: 5,
   },
   menu: {
@@ -145,7 +144,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   textLink: {
-    color: BLUE,
+    color: PINK,
   },
   header: {
     position: "absolute",
@@ -203,8 +202,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textInput: {
-    color: BLUE,
-    borderColor: BLUE,
+    color: PINK,
+    borderColor: PINK,
     borderWidth: 1,
     height: 40,
     padding: 5,

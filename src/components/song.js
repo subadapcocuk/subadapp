@@ -2,7 +2,7 @@ import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
-import { styles, songStyle, songText, WHITE, BLUE } from "../helpers/styles";
+import { styles, songStyle, songText, WHITE, PINK } from "../helpers/styles";
 import { IconPress } from "./buttons";
 
 export const Song = ({ song, openUrl }) => (
@@ -32,7 +32,7 @@ export const SongItem = ({
         <IconPress
           onPress={onSwipe}
           icon={selected ? faMinus : faPlus}
-          color={selected && playing ? WHITE : BLUE}
+          color={selected && playing ? WHITE : PINK}
           style={{ marginLeft: "auto" }}
         />
       )}
@@ -49,7 +49,7 @@ export const SongDetail = ({ song, openUrl }) => {
           onPress={() => openUrl(`${song.page}#Şarkı_Sözleri`)}
         >
           <Image style={styles.albumImage} source={{ uri: song.image }} />
-          <Text style={{ fontSize: 18 }}>{song.name} Şarkı Sözleri</Text>
+          <Text style={{ fontSize: 20 }}>{song.name} Şarkı Sözleri</Text>
         </TouchableOpacity>
       )}
     </>

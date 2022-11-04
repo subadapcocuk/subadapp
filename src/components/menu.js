@@ -97,7 +97,7 @@ export const Menu = (props) => {
         />
         <IconDrawerItem
           onPress={() =>
-            openUrl("http://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
+            openUrl("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
           }
           icon={faCreativeCommonsNc}
           label="Copyleft"
