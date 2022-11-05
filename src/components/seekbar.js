@@ -2,7 +2,7 @@ import React from "react";
 
 import { View, Text } from "react-native";
 import Slider from "@react-native-community/slider";
-import { styles, PINK, GRAY } from "../helpers/styles";
+import { styles, GRAY, FOREGROUND } from "../helpers/styles";
 
 function pad(n, width, z = 0) {
   n = n + "";
@@ -26,7 +26,7 @@ const SeekBar = ({
   return (
     <View style={styles.deviceWidth}>
       <View style={{ flexDirection: "row", alignItems: "center" }}>
-        <Text style={styles.text}>{elapsed[0] + ":" + elapsed[1]}</Text>
+        <Text style={styles.icon}>{elapsed[0] + ":" + elapsed[1]}</Text>
         <Slider
           style={styles.slider}
           disabled={!isPlaying}
@@ -34,11 +34,12 @@ const SeekBar = ({
           onSlidingStart={onSlidingStart}
           onSlidingComplete={onSeek}
           value={currentPosition}
-          minimumTrackTintColor={PINK}
+          minimumTrackTintColor={FOREGROUND}
           maximumTrackTintColor={GRAY}
-          thumbTintColor={isPlaying ? PINK : GRAY}
+          thumbTintColor={isPlaying ? FOREGROUND : GRAY}
+          accessibilityLabel={"şarkı çalma çubuğu"}
         />
-        <Text style={styles.text}>
+        <Text style={styles.icon}>
           {trackLength > 1 && "-" + remaining[0] + ":" + remaining[1]}
         </Text>
       </View>

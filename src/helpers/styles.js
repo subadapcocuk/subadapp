@@ -1,16 +1,15 @@
 import { StyleSheet, Dimensions } from "react-native";
 export const GRAY = "#F0F0F0";
-export const PINK = "#EE2786";
-export const PURPLE = "#6B1FBF";
-export const WHITE = "#FFFFFF";
-export const GREEN = "#009688";
+export const FOREGROUND = "#3D0C71";
+export const BACKGROUND = "#FFFFFF";
+export const BLACK = "#000000";
 
 export const deviceWidth = Dimensions.get("window").width;
 
 export const tabItemTitleStyle = (currentTab) => {
   return {
-    color: currentTab ? WHITE : PINK,
-    backgroundColor: currentTab ? PINK : WHITE,
+    color: currentTab ? BACKGROUND : FOREGROUND,
+    backgroundColor: currentTab ? FOREGROUND : BACKGROUND,
     borderRadius: 5,
     textTransform: "capitalize",
     fontSize:25,
@@ -18,15 +17,15 @@ export const tabItemTitleStyle = (currentTab) => {
 };
 
 export const songStyle = (selected) => {
-  return { ...styles.itemStyle, backgroundColor: selected ? PINK : "white" };
+  return { ...styles.itemStyle, backgroundColor: selected ? FOREGROUND : BACKGROUND };
 };
 
 export const songText = (selected) => {
   return {
-    color: selected ? "white" : PINK,
+    color: selected ? BACKGROUND : BLACK,
     borderRadius: 5,
     padding: 5,
-    fontSize: 20,
+    fontSize: 22,
   };
 };
 
@@ -34,14 +33,13 @@ export const styles = StyleSheet.create({
   itemStyle: {
     flex: 1,
     flexDirection: "row",
-    backgroundColor: "white",
+    backgroundColor: BACKGROUND,
     borderRadius: 5,
     alignItems: "center",
     padding: 5,
   },
   text: {
-    color: PINK,
-    textAlign: "center",
+    color: BLACK,
     fontSize:20,
   },
   slider: {
@@ -50,12 +48,12 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
   },
   albumTitle: {
-    color: PINK,
+    color: BLACK,
     fontSize: 32,
     textAlign: "center",
   },
   albumYear: {
-    color: PINK,
+    color: BLACK,
     fontSize: 24,
     textAlign: "center",
   },
@@ -65,7 +63,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   menuLabel: {
-    color: PINK,
+    color: BLACK,
     fontSize: 20,
     padding: 0,
   },
@@ -83,7 +81,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: BACKGROUND,
     bottom: 0,
   },
   playlistButtons: {
@@ -93,7 +91,7 @@ export const styles = StyleSheet.create({
     width: deviceWidth,
   },
   tabItemContainer: {
-    backgroundColor: WHITE,
+    backgroundColor: BACKGROUND,
     borderRadius: 10,
   },
   deviceWidth: {
@@ -108,12 +106,12 @@ export const styles = StyleSheet.create({
   headerView: {
     flexDirection: "row",
     padding: 5,
-    borderBottomColor: PINK,
+    borderBottomColor: BLACK,
     alignItems: "center",
   },
   link: {
     textDecorationLine: "underline",
-    color: PINK,
+    color: FOREGROUND,
   },
   titleView: {
     width: 0,
@@ -126,8 +124,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    fontSize: 32,
-    color: PINK,
+    fontSize: 24,
+    color: FOREGROUND,
     margin: 5,
   },
   menu: {
@@ -144,7 +142,7 @@ export const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   textLink: {
-    color: PINK,
+    color: FOREGROUND,
   },
   header: {
     position: "absolute",
@@ -202,8 +200,8 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textInput: {
-    color: PINK,
-    borderColor: PINK,
+    color: BLACK,
+    borderColor: FOREGROUND,
     borderWidth: 1,
     height: 40,
     padding: 5,

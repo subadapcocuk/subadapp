@@ -8,8 +8,8 @@ import { styles } from "../helpers/styles";
 const About = ({ visible, close }) => {
   return (
     <Dialog.Container visible={visible} onBackdropPress={close}>
-      <Dialog.Title>ŞUBADAPP (Sürüm {Constants.manifest.version})</Dialog.Title>
-      <Dialog.Description>
+      <Dialog.Title style={styles.icon}>ŞUBADAPP (Sürüm {Constants.manifest.version})</Dialog.Title>
+      <Dialog.Description style={styles.text}>
         ŞUBADAPP,{" "}
         <Text
           onPress={() =>
@@ -47,7 +47,7 @@ const About = ({ visible, close }) => {
         </Text>
         'ne bakabilirsiniz.
       </Dialog.Description>
-      <Dialog.Button label="Tamam" onPress={close} />
+      <Dialog.Button label="Tamam" onPress={close} style={styles.text} />
     </Dialog.Container>
   );
 };

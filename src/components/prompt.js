@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Dialog from "react-native-dialog";
+import { styles } from "../helpers/styles";
 
 export default function PromptDialog({
   save,
@@ -20,11 +21,11 @@ export default function PromptDialog({
 
   return (
     <Dialog.Container visible={visible} onBackdropPress={handleCancel}>
-      <Dialog.Title>{title}</Dialog.Title>
-      <Dialog.Description>{description}</Dialog.Description>
-      <Dialog.Input value={value} onChangeText={setValue} />
-      <Dialog.Button label="Tamam" onPress={handleOk} />
-      <Dialog.Button label="İptal" onPress={handleCancel} />
+      <Dialog.Title style={styles.icon}>{title}</Dialog.Title>
+      <Dialog.Description style={styles.text}>{description}</Dialog.Description>
+      <Dialog.Input value={value} onChangeText={setValue} style={styles.text}/>
+      <Dialog.Button label="Tamam" onPress={handleOk} style={styles.text}/>
+      <Dialog.Button label="İptal" onPress={handleCancel} style={styles.text}/>
     </Dialog.Container>
   );
 }

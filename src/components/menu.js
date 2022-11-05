@@ -30,6 +30,7 @@ export const Menu = (props) => {
   return (
     <>
       <DrawerContentScrollView
+        accessibilityLabel="Şubadap Çocuk ile ilgili bağlantıları içeren menü"
         contentContainerStyle={{
           flexGrow: 1,
           justifyContent: "center",

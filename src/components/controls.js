@@ -12,13 +12,22 @@ import { IconPress } from "./buttons";
 const PlayerControls = ({ isPlaying, onBackward, onForward, onPlay }) => {
   return (
     <View style={styles.playlistButtons}>
-      <IconPress icon={faStepBackward} onPress={onBackward} />
+      <IconPress
+        icon={faStepBackward}
+        onPress={onBackward}
+        label={"önceki şarkı"}
+      />
       <IconPress
         icon={isPlaying ? faPause : faPlay}
         onPress={onPlay}
-        size={48}
+        size={50}
+        label={isPlaying ? "duraklat" : "oynat"}
       />
-      <IconPress icon={faStepForward} onPress={onForward} />
+      <IconPress
+        icon={faStepForward}
+        onPress={onForward}
+        label={"sonraki şarkı"}
+      />
     </View>
   );
 };

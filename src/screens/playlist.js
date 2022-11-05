@@ -159,7 +159,8 @@ export const Playlist = ({ navigation, route }) => {
                 placeholder={"şarkı ara"}
                 onChangeText={setFilter}
                 value={filter}
-                style={{ width: "65%" }}
+                style={{ width: "60%" }}
+                fontSize={20}
               />
               <IconPress
                 {...ORDER_TYPES[order]}
