@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.14.0](https://github.com/subadapcocuk/subadapp/compare/v0.13.0...v0.14.0) (2022-11-08)
+
+- Görsel arayüzde düzenlemeler yapıldı
+
 ## [0.13.0](https://github.com/subadapcocuk/subadapp/compare/v0.12.1...v0.13.0) (2022-11-05)
 
 - Görsel arayüzde düzenlemeler yapıldı
