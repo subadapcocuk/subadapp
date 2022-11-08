@@ -2,7 +2,6 @@ import { StyleSheet, Dimensions } from "react-native";
 export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
-export const BLACK = "#000000";
 
 export const deviceWidth = Dimensions.get("window").width;
 
@@ -12,17 +11,20 @@ export const tabItemTitleStyle = (currentTab) => {
     backgroundColor: currentTab ? FOREGROUND : BACKGROUND,
     borderRadius: 5,
     textTransform: "capitalize",
-    fontSize:25,
+    fontSize: 25,
   };
 };
 
 export const songStyle = (selected) => {
-  return { ...styles.itemStyle, backgroundColor: selected ? FOREGROUND : BACKGROUND };
+  return {
+    ...styles.itemStyle,
+    backgroundColor: selected ? FOREGROUND : BACKGROUND,
+  };
 };
 
 export const songText = (selected) => {
   return {
-    color: selected ? BACKGROUND : BLACK,
+    color: selected ? BACKGROUND : FOREGROUND,
     borderRadius: 5,
     padding: 5,
     fontSize: 22,
@@ -39,8 +41,8 @@ export const styles = StyleSheet.create({
     padding: 5,
   },
   text: {
-    color: BLACK,
-    fontSize:20,
+    color: FOREGROUND,
+    fontSize: 20,
   },
   slider: {
     marginTop: 0,
@@ -48,12 +50,12 @@ export const styles = StyleSheet.create({
     flexGrow: 1,
   },
   albumTitle: {
-    color: BLACK,
+    color: FOREGROUND,
     fontSize: 32,
     textAlign: "center",
   },
   albumYear: {
-    color: BLACK,
+    color: FOREGROUND,
     fontSize: 24,
     textAlign: "center",
   },
@@ -63,7 +65,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   menuLabel: {
-    color: BLACK,
+    color: FOREGROUND,
     fontSize: 20,
     padding: 0,
   },
@@ -94,9 +96,6 @@ export const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
     borderRadius: 10,
   },
-  deviceWidth: {
-    width: deviceWidth,
-  },
   topView: {
     justifyContent: "space-around",
     width: deviceWidth,
@@ -106,7 +105,7 @@ export const styles = StyleSheet.create({
   headerView: {
     flexDirection: "row",
     padding: 5,
-    borderBottomColor: BLACK,
+    borderBottomColor: FOREGROUND,
     alignItems: "center",
   },
   link: {
@@ -200,7 +199,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textInput: {
-    color: BLACK,
+    color: FOREGROUND,
     borderColor: FOREGROUND,
     borderWidth: 1,
     height: 40,
@@ -212,5 +211,10 @@ export const styles = StyleSheet.create({
     marginBottom: 0,
     marginLeft: 0,
     marginRight: 0,
+  },
+  seekBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: deviceWidth,
   },
 });

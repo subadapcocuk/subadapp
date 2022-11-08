@@ -23,7 +23,7 @@ export default function PromptDialog({
     <Dialog.Container visible={visible} onBackdropPress={handleCancel}>
       <Dialog.Title style={styles.icon}>{title}</Dialog.Title>
       <Dialog.Description style={styles.text}>{description}</Dialog.Description>
-      <Dialog.Input value={value} onChangeText={setValue} style={styles.text}/>
+      <Dialog.Input value={value} onChangeText={setValue} style={styles.text} accessibilityLabel={description}/>
       <Dialog.Button label="Tamam" onPress={handleOk} style={styles.text}/>
       <Dialog.Button label="İptal" onPress={handleCancel} style={styles.text}/>
     </Dialog.Container>

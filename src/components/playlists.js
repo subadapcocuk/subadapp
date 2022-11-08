@@ -27,7 +27,7 @@ const Playlists = ({ visible, open }) => {
   };
 
   const Item = ({ name, value }) => (
-    <View style={styles.itemStyle}>
+    <View style={styles.itemStyle} accessibilityLabel={"liste açma ve kaydetme düğmeleri"}>
       <IconPress
         onPress={() => open(name, value)}
         icon={faFolderOpen}
@@ -43,13 +43,13 @@ const Playlists = ({ visible, open }) => {
 
   return (
     <Dialog.Container visible={visible} onBackdropPress={open}>
-      <Dialog.Title>Kayıtlı Çalma Listeleri</Dialog.Title>
+      <Dialog.Title style={styles.icon}>Kayıtlı Çalma Listeleri</Dialog.Title>
       <FlatList
         data={playlists}
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.name}
       />
-      <Dialog.Button label="İptal" onPress={() => open(false)} />
+      <Dialog.Button style={styles.text} label="İptal" onPress={() => open(false)}/>
     </Dialog.Container>
   );
 };

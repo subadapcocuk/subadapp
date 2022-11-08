@@ -11,7 +11,7 @@ import { IconPress } from "./buttons";
 
 const PlayerControls = ({ isPlaying, onBackward, onForward, onPlay }) => {
   return (
-    <View style={styles.playlistButtons}>
+    <View style={styles.playlistButtons} accessibilityLabel={"oynatma düğmeleri"}>
       <IconPress
         icon={faStepBackward}
         onPress={onBackward}

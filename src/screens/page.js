@@ -11,7 +11,7 @@ export const Page = ({ route }) => {
   return url ? (
     <>
       {loading && (
-        <View style={styles.activityIndicatorStyle}>
+        <View style={styles.activityIndicatorStyle} accessibilityLabel={"işlem bildirimi"}>
           <ActivityIndicator color={FOREGROUND} size="large" />
         </View>
       )}
@@ -23,6 +23,7 @@ export const Page = ({ route }) => {
         domStorageEnabled={true}
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
+        accessibilityLabel={`${url} sayfasını açan tarayıcı`}
       />
     </>
   ) : (

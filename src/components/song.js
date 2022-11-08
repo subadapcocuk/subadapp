@@ -2,7 +2,13 @@ import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
-import { styles, songStyle, songText, BACKGROUND, FOREGROUND } from "../helpers/styles";
+import {
+  styles,
+  songStyle,
+  songText,
+  BACKGROUND,
+  FOREGROUND,
+} from "../helpers/styles";
 import { IconPress } from "./buttons";
 
 export const Song = ({ song, openUrl }) => (
@@ -22,10 +28,13 @@ export const SongItem = ({
   image = true,
   onPress = false,
 }) => (
-  <SwipeableRow {...{ onPress, selected, onLeftOpen: onSwipe }}>
+  <SwipeableRow
+    {...{ onPress, selected, onLeftOpen: onSwipe }}
+    accessibilityLabel={`${song.name} şarkısı`}
+  >
     <View style={songStyle(selected && playing)}>
       {image && (
-        <Image style={styles.playlistImage} source={{ uri: song.image }} />
+        <Image style={styles.playlistImage} source={{ uri: song.image }} accessibilityLabel={`${song.name} şarkısının resmi`}/>
       )}
       <Text style={songText(selected && playing)}>{song.name}</Text>
       {onSwipe && (
@@ -34,6 +43,7 @@ export const SongItem = ({
           icon={selected ? faMinus : faPlus}
           color={selected && playing ? BACKGROUND : FOREGROUND}
           style={{ marginLeft: "auto" }}
+          label={`${song.name} şarkısını ${selected ? "kaldır" : "ekle"}`}
         />
       )}
     </View>

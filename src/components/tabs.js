@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab, TabView } from "react-native-elements";
-import { styles, tabItemTitleStyle } from "../helpers";
+import { styles, tabItemTitleStyle, deviceWidth } from "../helpers";
 
 export const Tabs = ({ titles, value, onChange }) => (
   <Tab value={value} onChange={onChange} disableIndicator>
@@ -28,7 +28,7 @@ export const AnimatedTabView = ({ value, children }) => (
 export const TabViewItem = ({ selected, children }) =>
   selected && (
     <TabView.Item
-      style={styles.deviceWidth}
+      style={{width: deviceWidth}}
       //Fix from: https://github.com/react-native-elements/react-native-elements/issues/3091#issuecomment-866226005
       onMoveShouldSetResponder={(e) => e.stopPropagation()}
     >

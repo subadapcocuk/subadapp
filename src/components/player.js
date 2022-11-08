@@ -136,7 +136,7 @@ const Player = () => {
   };
 
   return (
-    <View style={styles.bottomView}>
+    <View style={styles.bottomView} accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}>
       <SeekBar
         isPlaying={status.isLoaded}
         onSeek={onSeek}

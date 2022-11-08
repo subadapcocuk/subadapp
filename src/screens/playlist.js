@@ -152,7 +152,7 @@ export const Playlist = ({ navigation, route }) => {
         titles={["Şarkılar", "Çalma Listesi"]}
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
-        <TabViewItem selected={tabIndex === 0}>
+        <TabViewItem selected={tabIndex === 0} accessibilityLabel={"Tüm Şarkıların Listesi"}>
           <>
             <View style={styles.centerView}>
               <TextInputIcon
@@ -182,7 +182,7 @@ export const Playlist = ({ navigation, route }) => {
             </ScrollView>
           </>
         </TabViewItem>
-        <TabViewItem selected={tabIndex === 1}>
+        <TabViewItem selected={tabIndex === 1} accessibilityLabel={"Oynatma Listesi"}>
           <ScrollView persistentScrollbar>
             {playlist?.current && (
               <SongDetail
@@ -248,7 +248,7 @@ export const Playlist = ({ navigation, route }) => {
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
       {saveDialogVisible && (
         <PromptDialog
-          description="Lütfen listenin adını giriniz"
+          description="Listenin adını giriniz"
           initialValue={playlist?.name}
           save={handleSavePlaylist}
         />
