@@ -30,6 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"],
       "package": "org.subadapp",
       "versionCode": 470001400
     },

@@ -11,7 +11,7 @@ export const tabItemTitleStyle = (currentTab) => {
     backgroundColor: currentTab ? FOREGROUND : BACKGROUND,
     borderRadius: 5,
     textTransform: "capitalize",
-    fontSize: 25,
+    fontSize: 22,
   };
 };
 
