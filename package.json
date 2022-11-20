@@ -39,7 +39,7 @@
     "@react-native-picker/picker": "2.4.8",
     "@react-navigation/drawer": "^6.5",
     "@react-navigation/native": "^6.0",
-    "expo": "^47.0.3",
+    "expo": "^47.0",
     "expo-av": "~13.0.1",
     "expo-constants": "~14.0.2",
     "expo-status-bar": "~1.4.2",

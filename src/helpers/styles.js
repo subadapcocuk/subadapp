@@ -11,7 +11,7 @@ export const tabItemTitleStyle = (currentTab) => {
     backgroundColor: currentTab ? FOREGROUND : BACKGROUND,
     borderRadius: 5,
     textTransform: "capitalize",
-    fontSize: 22,
+    fontSize: 20,
   };
 };
 
@@ -27,7 +27,7 @@ export const songText = (selected) => {
     color: selected ? BACKGROUND : FOREGROUND,
     borderRadius: 5,
     padding: 5,
-    fontSize: 22,
+    fontSize: 20,
   };
 };
 
@@ -123,7 +123,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    fontSize: 24,
+    fontSize: 20,
     color: FOREGROUND,
     margin: 5,
   },
