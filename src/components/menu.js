@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { Linking } from "react-native";
 import {
   faBook,
   faDonate,
@@ -15,7 +16,6 @@ import {
   faTwitter,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import * as WebBrowser from "expo-web-browser";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
 
@@ -54,40 +54,34 @@ export const Menu = (props) => {
         />
         <IconDrawerItem
           onPress={() =>
-            WebBrowser.openBrowserAsync("https://www.kreosus.com/subadapcocuk")
+            Linking.openURL("https://www.kreosus.com/subadapcocuk")
           }
           icon={faDonate}
           label="Kreosus"
         />
         <IconDrawerItem
           onPress={() =>
-            WebBrowser.openBrowserAsync(
-              "https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk"
-            )
+            Linking.openURL("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")
           }
           icon={faYoutube}
           label="Youtube"
         />
         <IconDrawerItem
           onPress={() =>
-            WebBrowser.openBrowserAsync("https://www.facebook.com/subadapcocuk")
+            Linking.openURL("https://www.facebook.com/subadapcocuk")
           }
           icon={faFacebook}
           label="Facebook"
         />
         <IconDrawerItem
           onPress={() =>
-            WebBrowser.openBrowserAsync(
-              "https://www.instagram.com/subadapcocuk"
-            )
+            Linking.openURL("https://www.instagram.com/subadapcocuk")
           }
           icon={faInstagram}
           label="Instagram"
         />
         <IconDrawerItem
-          onPress={() =>
-            WebBrowser.openBrowserAsync("https://twitter.com/subadap")
-          }
+          onPress={() => Linking.openURL("https://twitter.com/subadap")}
           icon={faTwitter}
           label="Twitter"
         />

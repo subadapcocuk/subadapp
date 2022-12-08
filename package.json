@@ -24,8 +24,8 @@
     "build:all": "eas build --platform all --non-interactive",
     "submit:android": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
-    "license:check": "yarn license-checker --production --json --out ./assets/licenses.json",
-    "release": "standard-version --release-as ",
+    "license:check": "yarn license-checker-rseidelsohn --production --json --out ./assets/licenses.json",
+    "release": "commit-and-tag-version --release-as ",
     "eject": "expo eject"
   },
   "dependencies": {
@@ -38,13 +38,12 @@
     "@react-native-community/slider": "4.2.4",
     "@react-native-picker/picker": "2.4.8",
     "@react-navigation/drawer": "^6.5",
-    "@react-navigation/native": "^6.0",
-    "expo": "^47.0",
-    "expo-av": "~13.0.1",
+    "@react-navigation/native": "^6.1",
+    "expo": "^47",
+    "expo-av": "~13.0.2",
     "expo-constants": "~14.0.2",
     "expo-status-bar": "~1.4.2",
     "expo-updates": "~0.15.6",
-    "expo-web-browser": "~12.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.5",
@@ -62,9 +61,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "eas-cli": "^2.7",
-    "license-checker": "^25.0",
-    "standard-version": "^9.5",
+    "commit-and-tag-version": "^10.1",
+    "eas-cli": "^3.0",
+    "license-checker-rseidelsohn": "^3.1",
     "standard-version-expo": "^1.0"
-  }
+  },
+  "packageManager": "yarn@3.3.0"
 }

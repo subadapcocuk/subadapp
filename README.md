@@ -40,36 +40,33 @@ tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 [React Native](https://reactnative.dev/) uygulamasıdır.
 
 Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için
-[Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Komut
-satırı işlemleri için [expo-cli](https://docs.expo.dev/workflow/expo-cli/) ve
-paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
-
-Özetle aşağıdaki uygulamaları sırayla kurmak gerekiyor:
+[Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir.
+Paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
+Bu uygulamaları aşağıdaki gibi kurabilirsiniz:
 
 - [node](https://nodejs.org/en/download/) (kurmak için
   [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
-- [yarn](https://classic.yarnpkg.com/en/docs/install):
-  `npm install --global yarn`
+- [yarn](https://yarnpkg.com/): `corepack prepare yarn@stable --activate`.
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/):
-  `npm install -g expo-cli` (bu aracı kurmanız zorunlu değil, sonraki adımda
-  geliştirme bağımlılığı olarak kurulacaktır)
+  `npm install -g expo-cli` (bu aracı kurmanız zorunlu değil)
 
 Ortam hazır olduktan sonra aşağıdaki betikleri projenin olduğu dizinde
 kullanabilirsiniz:
 
 - `yarn install`: Gerekli paketleri kurar, sadece `yarn` olarak da
   kullanabilirsiniz.
+- `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
+  pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
 - `yarn start`: Expo sunucusunu başlatır.
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
   başlatmanız gerekiyor.
-- `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
-  gerekiyor.
+- `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde
+  başlatmanız gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `yarn build:android`: Android paketi oluşturur. APK dosyasını yerelde
   kaydetmesi için `--local` argümanıyla çalıştırın.
 - `yarn build:ios`: IOS paket oluşturur.
-- `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
-  pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
+- `yarn build:all`: Tüm paketleri oluşturur.
 
 Tüm
 [albümler](<[./data/albums.json](https://ansiklopedi.subadapcocuk.org/albums.json)>)
