@@ -46,7 +46,7 @@ Bu uygulamaları aşağıdaki gibi kurabilirsiniz:
 
 - [node](https://nodejs.org/en/download/) (kurmak için
   [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
-- [yarn](https://yarnpkg.com/): `corepack prepare yarn@stable --activate`.
+- [yarn](https://classic.yarnpkg.com/): `npm install --global yarn`.
 - [expo-cli](https://docs.expo.dev/workflow/expo-cli/):
   `npm install -g expo-cli` (bu aracı kurmanız zorunlu değil)
 

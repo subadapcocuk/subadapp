@@ -65,6 +65,5 @@
     "eas-cli": "^3.0",
     "license-checker-rseidelsohn": "^3.1",
     "standard-version-expo": "^1.0"
-  },
-  "packageManager": "yarn@3.3.0"
+  }
 }
