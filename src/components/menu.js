@@ -3,6 +3,7 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { Linking } from "react-native";
 import {
   faBook,
+  faCalendarDays,
   faDonate,
   faEnvelope,
   faHome,
@@ -48,7 +49,7 @@ export const Menu = (props) => {
           label={"Ansiklopedi"}
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://subadapcocuk.org")}
+          onPress={() => Linking.openUrl("https://subadapcocuk.org")}
           icon={faHome}
           label="Şubadap Sitesi"
         />
@@ -58,6 +59,15 @@ export const Menu = (props) => {
           }
           icon={faDonate}
           label="Kreosus"
+        />
+        <IconDrawerItem
+          onPress={() =>
+            Linking.openUrl(
+              "https://www.songkick.com/artists/10186443-subadap-cocuk"
+            )
+          }
+          icon={faCalendarDays}
+          label="Yaklaşan Konserler"
         />
         <IconDrawerItem
           onPress={() =>
