@@ -1,10 +1,31 @@
 import React from "react";
-import { Text, Linking } from "react-native";
+import { Share, Text, Linking } from "react-native";
 import Dialog from "react-native-dialog";
 import Constants from "expo-constants";
+import Toast from "react-native-root-toast";
 import { styles } from "../helpers/styles";
 
 const About = ({ visible, close }) => {
+  const shareApp = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          "https://play.google.com/store/apps/details?id=org.subadapp&hl=tr&gl=TR",
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          Toast.show(`Yapılan işlem: ${result.activityType}`);
+        } else {
+          Toast.show("Paylaşıldı");
+        }
+      } else if (result.action === Share.dismissedAction) {
+        Toast.show("Paylaşım iptal edildi");
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+
   return (
     <Dialog.Container visible={visible} onBackdropPress={close}>
       <Dialog.Title style={styles.icon}>
@@ -48,6 +69,9 @@ const About = ({ visible, close }) => {
           Şubadap Çocuk Ansiklopedisi
         </Text>
         'ne bakabilirsiniz.
+        <Text onPress={shareApp} style={styles.link}>
+          Uygulamayı başkalarıyla paylaşın
+        </Text>
       </Dialog.Description>
       <Dialog.Button label="Tamam" onPress={close} style={styles.text} />
     </Dialog.Container>

@@ -15,7 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Picker } from "@react-native-picker/picker";
 import {
-  confirm,
   styles,
   turkishCompare,
   useAppContext,
@@ -134,14 +133,8 @@ export const Playlist = ({ navigation, route }) => {
   ];
 
   const clearAndPlay = (song) => {
-    confirm(
-      "Liste temizleme uyarısı",
-      "Liste temizlenecek bu şarkı listeye eklenerek çalınacak, devam etmek istediğinizden emin misiniz?",
-      () => {
-        setPlaylist({ list: [song.no], current: song, index: 0 });
-        Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
-      }
-    );
+    setPlaylist({ list: [song.no], current: song, index: 0 });
+    Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
   return (
@@ -152,7 +145,10 @@ export const Playlist = ({ navigation, route }) => {
         titles={["Şarkılar", "Çalma Listesi"]}
       />
       <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
-        <TabViewItem selected={tabIndex === 0} accessibilityLabel={"Tüm Şarkıların Listesi"}>
+        <TabViewItem
+          selected={tabIndex === 0}
+          accessibilityLabel={"Tüm Şarkıların Listesi"}
+        >
           <>
             <View style={styles.centerView}>
               <TextInputIcon
@@ -182,7 +178,10 @@ export const Playlist = ({ navigation, route }) => {
             </ScrollView>
           </>
         </TabViewItem>
-        <TabViewItem selected={tabIndex === 1} accessibilityLabel={"Oynatma Listesi"}>
+        <TabViewItem
+          selected={tabIndex === 1}
+          accessibilityLabel={"Oynatma Listesi"}
+        >
           <ScrollView persistentScrollbar>
             {playlist?.current && (
               <SongDetail
