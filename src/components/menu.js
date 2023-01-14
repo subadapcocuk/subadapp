@@ -62,7 +62,7 @@ export const Menu = (props) => {
         />
         <IconDrawerItem
           onPress={() =>
-            Linking.openUrl(
+            Linking.openURL(
               "https://www.songkick.com/artists/10186443-subadap-cocuk"
             )
           }

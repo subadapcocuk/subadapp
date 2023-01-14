@@ -24,7 +24,7 @@
     "build:all": "eas build --platform all --non-interactive",
     "submit:android": "eas submit --platform android",
     "submit:ios": "eas submit --platform ios",
-    "license:check": "yarn license-checker-rseidelsohn --production --json --out ./assets/licenses.json",
+    "license": "npx --yes license-report --only=prod",
     "release": "commit-and-tag-version --release-as ",
     "eject": "expo eject"
   },
@@ -51,6 +51,7 @@
     "react-native-elements": "^3.4",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-get-random-values": "~1.8.0",
+    "react-native-reanimated": "~2.12.0",
     "react-native-root-toast": "^3.4",
     "react-native-safe-area-context": "4.4.1",
     "react-native-screens": "~3.18.0",
@@ -62,7 +63,6 @@
     "@babel/core": "^7.19.3",
     "commit-and-tag-version": "^10.1",
     "eas-cli": "^3.1",
-    "license-checker-rseidelsohn": "^3.1",
     "standard-version-expo": "^1.0"
   }
 }
