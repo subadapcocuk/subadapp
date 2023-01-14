@@ -9,17 +9,17 @@ jobs:
     name: Build Android Locally
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
       - uses: WyriHaximus/github-action-get-previous-tag@v1
         id: currenttag
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: "lts/*"
-      - uses: expo/expo-github-action@v6
+      - uses: expo/expo-github-action@v7
         with:
-          expo-version: 4.x
+          expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
