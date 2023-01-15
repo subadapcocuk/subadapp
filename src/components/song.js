@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, TouchableOpacity, Text, View } from "react-native";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
 import { SwipeableRow } from "./swipeable";
 import {
   styles,
@@ -10,6 +10,7 @@ import {
   FOREGROUND,
 } from "../helpers/styles";
 import { IconPress } from "./buttons";
+import { shareUrl } from "../helpers";
 
 export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
@@ -34,18 +35,33 @@ export const SongItem = ({
   >
     <View style={songStyle(selected && playing)}>
       {image && (
-        <Image style={styles.playlistImage} source={{ uri: song.image }} accessibilityLabel={`${song.name} şarkısının resmi`}/>
-      )}
-      <Text style={songText(selected && playing)}>{song.name}</Text>
-      {onSwipe && (
-        <IconPress
-          onPress={onSwipe}
-          icon={selected ? faMinus : faPlus}
-          color={selected && playing ? BACKGROUND : FOREGROUND}
-          style={{ marginLeft: "auto" }}
-          label={`${song.name} şarkısını ${selected ? "kaldır" : "ekle"}`}
+        <Image
+          style={styles.playlistImage}
+          source={{ uri: song.image }}
+          accessibilityLabel={`${song.name} şarkısının resmi`}
         />
       )}
+      <Text style={songText(selected && playing)}>{song.name}</Text>
+      <View
+        style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
+      >
+        <IconPress
+          onPress={() => shareUrl(song.page)}
+          icon={faShare}
+          color={selected && playing ? BACKGROUND : FOREGROUND}
+          label={`${song.name} şarkısını paylaş`}
+        />
+        {onSwipe && (
+          <IconPress
+            onPress={onSwipe}
+            icon={selected ? faMinus : faPlus}
+            color={selected && playing ? BACKGROUND : FOREGROUND}
+            label={`${song.name} şarkısını ${
+              selected ? "listeden kaldır" : "listeye ekle"
+            }`}
+          />
+        )}
+      </View>
     </View>
   </SwipeableRow>
 );

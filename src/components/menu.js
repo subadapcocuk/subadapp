@@ -9,6 +9,7 @@ import {
   faHome,
   faMusic,
   faQuestion,
+  faShare,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCreativeCommonsNc,
@@ -19,6 +20,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { IconDrawerItem } from "../components/buttons";
 import About from "../components/about";
+import { shareApp } from "../helpers";
 
 export const Menu = (props) => {
   const [about, setAbout] = useState(false);
@@ -111,6 +113,11 @@ export const Menu = (props) => {
           onPress={() => setAbout(true)}
           icon={faQuestion}
           label="Hakkında"
+        />
+                <IconDrawerItem
+          onPress={() => shareApp()}
+          icon={faShare}
+          label="Paylaş"
         />
       </DrawerContentScrollView>
       <About visible={about} close={() => setAbout(false)} />
