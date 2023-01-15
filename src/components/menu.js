@@ -114,7 +114,7 @@ export const Menu = (props) => {
           icon={faQuestion}
           label="Hakkında"
         />
-                <IconDrawerItem
+        <IconDrawerItem
           onPress={() => shareApp()}
           icon={faShare}
           label="Paylaş"
