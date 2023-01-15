@@ -1,5 +1,6 @@
 # ŞubadApp
 
+[![Play Store](https://img.shields.io/endpoint?color=32ca55&logo=google-play&logoColor=32ca55&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dorg.subadapp%26l%3D%24name%26m%3D%24updated)](https://play.google.com/store/apps/details?id=org.subadapp)
 [![Latest Release](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Latest Release Download](https://img.shields.io/github/downloads/subadapcocuk/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Expo Publish](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
@@ -149,3 +150,7 @@ uygulamada kullanılan kütüphanelerle uyumlu bir
 [Özgür Yazılım](https://www.gnu.org/philosophy/free-sw.tr.html) lisansı olduğu
 tercih edilmiştir. Bu lisans
 [GNU GPL'nin 3. sürümüyle de uyumludur](https://www.gnu.org/licenses/license-list.tr.html#apache2).
+
+## Disclaimer
+
+Google Play and the Google Play logo are trademarks of Google LLC.

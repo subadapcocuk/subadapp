@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.15.0](https://github.com/subadapcocuk/subadapp/compare/v0.14.3...v0.15.0) (2023-01-15)
+
+- Menüye Paylaş bağlantısı eklendi
+- Şarkılara Paylaşma düğmesi eklendi [#86](https://github.com/subadapcocuk/subadapp/issues/86)
+
 ### [0.14.3](https://github.com/subadapcocuk/subadapp/compare/v0.14.2...v0.14.3) (2023-01-14)
 
 - Hakkında bölümüne uygulamayı paylaş bağlantısı eklendi
