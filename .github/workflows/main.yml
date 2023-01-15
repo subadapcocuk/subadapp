@@ -16,7 +16,7 @@ jobs:
         id: currenttag
       - uses: actions/setup-node@v3
         with:
-          node-version: "lts/*"
+          node-version: 16.x
       - uses: expo/expo-github-action@v7
         with:
           expo-version: latest
