@@ -6,7 +6,11 @@ import { styles } from "../helpers";
 
 const About = ({ visible, close }) => {
   return (
-    <Dialog.Container visible={visible} onBackdropPress={close}>
+    <Dialog.Container
+      visible={visible}
+      onBackdropPress={close}
+      accessibilityLabel="Uygulama Hakkında Bilgi"
+    >
       <Dialog.Title style={styles.icon}>
         ŞUBADAPP (Sürüm {Constants.manifest.version})
       </Dialog.Title>

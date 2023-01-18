@@ -51,7 +51,7 @@ export const Menu = (props) => {
           label={"Ansiklopedi"}
         />
         <IconDrawerItem
-          onPress={() => Linking.openUrl("https://subadapcocuk.org")}
+          onPress={() => Linking.openURL("https://subadapcocuk.org")}
           icon={faHome}
           label="Şubadap Sitesi"
         />

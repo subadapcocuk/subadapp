@@ -23,7 +23,7 @@ export const Page = ({ route }) => {
         domStorageEnabled={true}
         onLoadStart={() => setLoading(true)}
         onLoadEnd={() => setLoading(false)}
-        accessibilityLabel={`${url} sayfasını açan tarayıcı`}
+        accessibilityLabel={`${url} sayfası açık tarayıcı`}
       />
     </>
   ) : (

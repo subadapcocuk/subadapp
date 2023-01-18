@@ -8,8 +8,9 @@ const Drawer = createDrawerNavigator();
 
 export const NavigationService = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer accessibilityLabel="Uygulama gezinme">
       <Drawer.Navigator
+        accessibilityLabel="Uygulama menüsünnü içeren gezinti"
         drawerContent={(props) => <Menu {...props} />}
         screenOptions={{
           //headerShown: false,
