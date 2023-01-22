@@ -12,8 +12,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: WyriHaximus/github-action-get-previous-tag@v1
-        id: currenttag
       - uses: actions/setup-node@v3
         with:
           node-version: 16.x
@@ -25,6 +23,8 @@ jobs:
         run: yarn install
       - name: Build packages
         run: yarn build:android --local
+      - uses: WyriHaximus/github-action-get-previous-tag@v1
+        id: currenttag
       - name: Rename AAB
         run: mv build-*.aab subadapp-${{ steps.currenttag.outputs.tag }}.aab
       - uses: softprops/action-gh-release@v1
