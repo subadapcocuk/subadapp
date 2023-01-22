@@ -1,16 +1,16 @@
 import React from "react";
-import { Image, TouchableOpacity, Text, View } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { faMinus, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
-import { SwipeableRow } from "./swipeable";
+import { PLAY_STORE_URL, shareUrl } from "../helpers";
 import {
-  styles,
-  songStyle,
-  songText,
   BACKGROUND,
   FOREGROUND,
+  songStyle,
+  songText,
+  styles,
 } from "../helpers/styles";
 import { IconPress } from "./buttons";
-import { shareUrl } from "../helpers";
+import { SwipeableRow } from "./swipeable";
 
 export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
@@ -46,7 +46,11 @@ export const SongItem = ({
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >
         <IconPress
-          onPress={() => shareUrl(song.page)}
+          onPress={() =>
+            shareUrl(
+              `Şubadap'tan ${song.name} şarkısını dinle: subadapp://song?no=${song.no}. Şubadapp uygulamasını indir: ${PLAY_STORE_URL}`
+            )
+          }
           icon={faShare}
           color={selected && playing ? BACKGROUND : FOREGROUND}
           label={`${song.name} şarkısını paylaş`}

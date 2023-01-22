@@ -4,6 +4,7 @@
     "slug": "subadapp",
     "version": "0.15.1",
     "description": "",
+    "scheme": "subadapp",
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
     "owner": "subadap-cocuk",
     "privacy": "public",

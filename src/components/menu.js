@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
-import { Linking } from "react-native";
+import * as Linking from "expo-linking";
 import {
   faBook,
   faCalendarDays,
@@ -26,7 +26,25 @@ export const Menu = (props) => {
   const [about, setAbout] = useState(false);
   const { navigation } = props;
 
-  const openUrl = (url) => {
+  const url = Linking.useURL();
+
+  const handleUrl = (url) => {
+    if (url) {
+      const { path, queryParams } = Linking.parse(url);
+      if (path === "song" && queryParams["no"]) {
+        navigation.navigate("Playlist", {
+          tabIndex: 0,
+          song: queryParams["no"],
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    handleUrl(url);
+  }, [url]);
+
+  const openURL = (url) => {
     navigation.navigate("Page", { url });
   };
 
@@ -46,7 +64,7 @@ export const Menu = (props) => {
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://ansiklopedi.subadapcocuk.org")}
+          onPress={() => openURL("https://ansiklopedi.subadapcocuk.org")}
           icon={faBook}
           label={"Ansiklopedi"}
         />
@@ -63,11 +81,7 @@ export const Menu = (props) => {
           label="Kreosus"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL(
-              "https://www.songkick.com/artists/10186443-subadap-cocuk"
-            )
-          }
+          onPress={() => openURL("http://bio.biolinktr.com/subadap")}
           icon={faCalendarDays}
           label="Yaklaşan Konserler"
         />
@@ -98,13 +112,13 @@ export const Menu = (props) => {
           label="Twitter"
         />
         <IconDrawerItem
-          onPress={() => openUrl("https://subadapcocuk.org/iletisim")}
+          onPress={() => openURL("https://subadapcocuk.org/iletisim")}
           icon={faEnvelope}
           label="İletişim"
         />
         <IconDrawerItem
           onPress={() =>
-            openUrl("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
+            openURL("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
           }
           icon={faCreativeCommonsNc}
           label="Copyleft"
