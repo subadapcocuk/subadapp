@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.16.0](https://github.com/subadapcocuk/subadapp/compare/v0.15.1...v0.16.0) (2023-01-22)
+
+- Şubadap şarkılarını doğrudan gönderme eklendi [#86](https://github.com/subadapcocuk/subadapp/issues/86)
+- Yaklaşan konserler bağlantısı değiştirildi
+
 ## [0.15.1](https://github.com/subadapcocuk/subadapp/compare/v0.15.0...v0.15.1) (2023-01-18)
 
 - Şubadap sitesinin açılmaması hatası düzeltildi
