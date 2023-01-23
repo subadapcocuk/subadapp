@@ -1,13 +1,9 @@
 # ŞubadApp
-
 [![Play Store](https://img.shields.io/endpoint?color=32ca55&logo=google-play&logoColor=32ca55&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dorg.subadapp%26l%3D%24name%26m%3D%24updated)](https://play.google.com/store/apps/details?id=org.subadapp)
-[![Latest Release](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
-[![Latest Release Download](https://img.shields.io/github/downloads/subadapcocuk/subadapp/latest/total?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
-[![Expo Publish](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
-[![Runs with Expo Go](https://img.shields.io/badge/Runs%20with%20Expo%20Go-000.svg?logo=EXPO&labelColor=3b444c&logoColor=white&color=32ca55)](https://expo.dev/@subadap-coocuk/subadapp)
+[![Latest](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
-[![Github All Releases Downloads](https://img.shields.io/github/downloads/subadapcocuk/subadapp/total.svg?labelColor=3b444c&logoColor=white&color=32ca55)](https://somsubhra.github.io/github-release-stats/?username=subadapcocuk&repository=subadapp&page=1&per_page=5)
+[![Release](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
 [![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
 [ŞubadApp](https://github.com/subadapcocuk/subadapp),

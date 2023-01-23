@@ -4268,10 +4268,10 @@ dotgitignore@^2.1.0:
     find-up "^3.0.0"
     minimatch "^3.0.4"
 
-eas-cli@~3.3:
-  version "3.3.2"
-  resolved "https://registry.yarnpkg.com/eas-cli/-/eas-cli-3.3.2.tgz#63673fe5bb62ceb6de878bcd1457b383028b0f20"
-  integrity sha512-YHlGUS+qkSXOnwin67gC+6IfV87fkCUNUS/t8Lm9aXVTClLPNVOI3LPPJqnabPn6TzhYU3zSIP+S7IzOL8zqzA==
+eas-cli@^3.3:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/eas-cli/-/eas-cli-3.4.1.tgz#1d68af9ede67f8e5f1a3d5068e002f94503bb2e4"
+  integrity sha512-YLeowqdlv7xHh7JBo3uYOjh5g2nZJFH5l6xIY/MO/f3vEEgHDltE8oXwgZ8JHzQ8n/PntyRZwffxVDsxMMS7vw==
   dependencies:
     "@expo/apple-utils" "0.0.0-alpha.34"
     "@expo/code-signing-certificates" "0.0.5"

@@ -63,7 +63,7 @@
   "devDependencies": {
     "@babel/core": "^7.19.3",
     "commit-and-tag-version": "^11.0",
-    "eas-cli": "~3.3",
+    "eas-cli": "^3.3",
     "license-report": "^6.3",
     "standard-version-expo": "^1.0"
   }
