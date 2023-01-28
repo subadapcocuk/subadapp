@@ -1,15 +1,69 @@
-import React, { useEffect, useState } from "react";
-import { View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
+import * as Device from "expo-device";
+import * as Notifications from "expo-notifications";
 import Toast from "react-native-root-toast";
 import { styles, LoopType, randomInt, useAppContext } from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
+
+async function registerForPushNotificationsAsync() {
+  if (Device.isDevice) {
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      Toast.error("Failed to get push token for push notification!");
+      return;
+    }
+  } else {
+    Toast.show("Push notification needs physical device");
+  }
+
+  if (Platform.OS === "android") {
+    Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#FF231F7C",
+    });
+  }
+}
+
 const Player = () => {
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
   const { playlist, setPlaylist, loop, songs } = useAppContext();
+  const [notification, setNotification] = useState(null);
+  const notificationListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync();
+
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener((notification) => {
+        setNotification(notification);
+      });
+
+    return () => {
+      Notifications.removeNotificationSubscription(
+        notificationListener.current
+      );
+    };
+  }, []);
 
   const randomTrack = () => {
     if (playlist.list.length > 0) {
@@ -74,8 +128,8 @@ const Player = () => {
           console.debug(e);
         });
       player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-    } catch(e) {
-      console.warning(e)
+    } catch (e) {
+      console.warning(e);
     }
   }, [loop]);
 
@@ -136,7 +190,22 @@ const Player = () => {
   };
 
   return (
-    <View style={styles.bottomView} accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}>
+    <View
+      style={styles.bottomView}
+      accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}
+    >
+      {notification && (
+        <TouchableOpacity
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          onPress={() => setNotification(null)}
+        >
+          <Text>{notification.request.content.title}</Text>
+          <Text>{notification.request.content.body}</Text>
+        </TouchableOpacity>
+      )}
       <SeekBar
         isPlaying={status.isLoaded}
         onSeek={onSeek}

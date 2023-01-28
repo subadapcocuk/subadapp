@@ -30,11 +30,11 @@ export const Menu = (props) => {
 
   const handleUrl = (url) => {
     if (url) {
-      const { path, queryParams } = Linking.parse(url);
-      if (path === "song" && queryParams["no"]) {
+      const { queryParams } = Linking.parse(url);
+      if (queryParams["song"]) {
         navigation.navigate("Playlist", {
           tabIndex: 0,
-          song: queryParams["no"],
+          song: queryParams["song"],
         });
       }
     }
@@ -81,7 +81,7 @@ export const Menu = (props) => {
           label="Kreosus"
         />
         <IconDrawerItem
-          onPress={() => openURL("http://bio.biolinktr.com/subadap")}
+          onPress={() => openURL("https://bio.biolinktr.com/subadap")}
           icon={faCalendarDays}
           label="Yaklaşan Konserler"
         />

@@ -33,6 +33,7 @@ export const Playlist = ({ navigation, route }) => {
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
   const { playlist, setPlaylist, loop, setLoop, songs } = useAppContext();
+
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
       setTabIndex(route.params?.tabIndex);

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117252681067",
+    "project_id": "subadapp-e4046",
+    "storage_bucket": "subadapp-e4046.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117252681067:android:9cc8b20058befb6f30302e",
+        "android_client_info": {
+          "package_name": "org.subadapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117252681067-k3dm5t3e14ga17s8tv5nqmi36t6h5pdf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaJ-DiyAmMHr6vK2cuIn7gliACpzw-FsQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117252681067-k3dm5t3e14ga17s8tv5nqmi36t6h5pdf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
