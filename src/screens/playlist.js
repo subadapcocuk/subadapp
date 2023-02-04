@@ -27,12 +27,12 @@ import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
 
 export const Playlist = ({ navigation, route }) => {
-  const [order, setOrder] = useState(0);
+  const [order, setOrder] = useState(2);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist, loop, setLoop, songs } = useAppContext();
+  const { playlist, setPlaylist, loop, setLoop, songs, lastAlbumNo } = useAppContext();
 
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
@@ -177,6 +177,7 @@ export const Playlist = ({ navigation, route }) => {
                   selected={
                     playlist.list.find((no) => no === item.no) !== undefined
                   }
+                  lastAlbum={item.albumNo === lastAlbumNo}
                   onSwipe={() => toggleSong(item)}
                   onPress={() => clearAndPlay(item)}
                 />

@@ -125,11 +125,11 @@ const Player = () => {
         .setIsLoopingAsync(loop === LoopType.RepeatSong)
         .then()
         .catch((e) => {
-          console.debug(e);
+          console.error(e);
         });
       player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     } catch (e) {
-      console.warning(e);
+      console.error(e);
     }
   }, [loop]);
 

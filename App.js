@@ -7,8 +7,6 @@ import { ContextProvider } from "./src/helpers/context";
 import Player from "./src/components/player";
 
 export default function App() {
-
-
   return (
     <ContextProvider>
       <RootSiblingParent>

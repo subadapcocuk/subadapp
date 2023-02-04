@@ -28,6 +28,7 @@ export const SongItem = ({
   selected = true,
   image = true,
   onPress = false,
+  lastAlbum = false,
 }) => (
   <SwipeableRow
     {...{ onPress, selected, onLeftOpen: onSwipe }}
@@ -41,14 +42,14 @@ export const SongItem = ({
           accessibilityLabel={`${song.name} şarkısının resmi`}
         />
       )}
-      <Text style={songText(selected && playing)}>{song.name}</Text>
+      <Text style={songText(selected && playing, lastAlbum)}>{song.name}</Text>
       <View
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >
         <IconPress
           onPress={() =>
             shareUrl(
-              `Şubadap'tan ${song.name} şarkısını dinle: https://subadapp.page.link/?song=${song.no}. Şubadapp uygulamasını indir: ${PLAY_STORE_URL}`
+              `Şubadap'tan ${song.name} şarkısını dinle: subadapp://oynat?song=${song.no}. Şubadapp uygulamasını indir: ${PLAY_STORE_URL}`
             )
           }
           icon={faShare}

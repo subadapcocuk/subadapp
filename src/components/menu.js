@@ -32,9 +32,11 @@ export const Menu = (props) => {
     if (url) {
       const { queryParams } = Linking.parse(url);
       if (queryParams["song"]) {
+        const song = queryParams["song"];
+        console.log(`Loading song #${song}`);
         navigation.navigate("Playlist", {
           tabIndex: 0,
-          song: queryParams["song"],
+          song,
         });
       }
     }

@@ -9,6 +9,7 @@ const SONGS = "https://ansiklopedi.subadapcocuk.org/songs.json";
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
   const [songs, setSongs] = useState([]);
+  const [lastAlbumNo, setLastAlbumNo] = useState(1);
   const [playlist, setPlaylist] = useState({
     list: [],
     current: null,
@@ -16,12 +17,13 @@ export const ContextProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    AsyncStorage.getItem(SUBADAP_PLAYLIST).then((value) => {
-      if (value) {
-        console.debug(`Reading playlist from storage: ${value}`);
-        setPlaylist(JSON.parse(value));
-      }
-    });
+    AsyncStorage.getItem(SUBADAP_PLAYLIST)
+      .then((value) => {
+        if (value) {
+          setPlaylist(JSON.parse(value));
+        }
+      })
+      .catch((e) => console.error(`Error reading data: ${e}`));
   }, []);
 
   useEffect(() => {
@@ -31,18 +33,26 @@ export const ContextProvider = ({ children }) => {
       },
     })
       .then((response) => response.json())
-      .then((data) => setSongs(data));
+      .then((data) => {
+        setSongs(data);
+        setLastAlbumNo(
+          data.reduce((d, c) => (d.albumNo > c.albumNo ? d : c)).albumNo
+        );
+      })
+      .catch((e) => console.error(`Error loading songs: ${e}`));
   }, []);
 
   useEffect(() => {
     if (playlist) {
-      AsyncStorage.setItem(SUBADAP_PLAYLIST, JSON.stringify(playlist));
+      AsyncStorage.setItem(SUBADAP_PLAYLIST, JSON.stringify(playlist)).catch(
+        (e) => console.error(`Error saving playlist: ${e}`)
+      );
     }
   }, [playlist]);
 
   return (
     <AppContext.Provider
-      value={{ songs, playlist, setPlaylist, loop, setLoop }}
+      value={{ songs, lastAlbumNo, playlist, setPlaylist, loop, setLoop }}
     >
       {children}
     </AppContext.Provider>

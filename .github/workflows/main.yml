@@ -33,19 +33,22 @@ jobs:
           files: subadapp-${{ steps.currenttag.outputs.tag }}.aab
           tag_name: ${{ steps.currenttag.outputs.tag }}
 
-  #publish:
-  #  name: Publish
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #    - uses: actions/checkout@v2
-  #    - uses: actions/setup-node@v2
-  #      with:
-  #        node-version: "lts/*"
-  #    - uses: expo/expo-github-action@v6
-  #      with:
-  #        expo-version: 4.x
-  #        token: ${{ secrets.EXPO_TOKEN }}
-  #    - name: Install dependencies
-  #      run: yarn install
-  #    - name: Publish the app
-  #      run: expo publish
+  build-ios:
+    name: Build iOS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - uses: expo/expo-github-action@v7
+        with:
+          expo-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+      - name: Install dependencies
+        run: yarn install
+      - name: Build packages
+        run: yarn build:ios

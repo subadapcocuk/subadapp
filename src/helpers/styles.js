@@ -22,14 +22,13 @@ export const songStyle = (selected) => {
   };
 };
 
-export const songText = (selected) => {
-  return {
-    color: selected ? BACKGROUND : FOREGROUND,
-    borderRadius: 5,
-    padding: 5,
-    fontSize: 20,
-  };
-};
+export const songText = (selected, lastAlbum) => ({
+  color: selected ? BACKGROUND : FOREGROUND,
+  borderRadius: 5,
+  padding: 5,
+  fontSize: lastAlbum ? 22 : 20,
+  fontWeight: lastAlbum ? "bold" : "normal",
+});
 
 export const styles = StyleSheet.create({
   itemStyle: {
