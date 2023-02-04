@@ -30,20 +30,19 @@ export const SwipeableRow = ({
     );
   };
 
-  const onSwipeableRightOpen = () => {
-    onRightOpen && onRightOpen();
-  };
-
-  const onSwipeableLeftOpen = () => {
-    onLeftOpen && onLeftOpen();
-  };
-
   return (
     <Swipeable
       friction={1}
       enableTrackpadTwoFingerGesture
-      {...(onLeftOpen && { onSwipeableLeftOpen, renderLeftActions })}
-      {...(onRightOpen && { onSwipeableRightOpen, renderRightActions })}
+      onSwipeableOpen={(direction) => {
+        if (direction === "left" && onLeftOpen) {
+          onLeftOpen();
+        } else if (direction === "right" && onRightOpen) {
+          onRightOpen();
+        }
+      }}
+      {...(onLeftOpen && { renderLeftActions })}
+      {...(onRightOpen && { renderRightActions })}
       useNativeAnimations
     >
       {onPress && (

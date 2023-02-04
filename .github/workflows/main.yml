@@ -6,7 +6,7 @@ on:
 # https://github.com/expo/expo-github-action#publish-on-any-push-to-main
 jobs:
   build-android:
-    name: Build Android and Release
+    name: Build Android
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

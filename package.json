@@ -64,7 +64,6 @@
   },
   "devDependencies": {
     "@babel/core": "^7.19.3",
-    "@expo/webpack-config": "^0.17",
     "commit-and-tag-version": "^11.0",
     "eas-cli": "^3.5",
     "license-report": "^6.3",
