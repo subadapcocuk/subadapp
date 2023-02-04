@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.17.0](https://github.com/subadapcocuk/subadapp/compare/v0.16.1...v0.17.0) (2023-02-04)
+
+- Son albümdeki şarkıları öne çıkar [#89](https://github.com/subadapcocuk/subadapp/issues/89)
+
 ## [0.16.1](https://github.com/subadapcocuk/subadapp/compare/v0.16.0...v0.16.1) (2023-01-28)
 
 - Bildirim alma eklendi [#9](https://github.com/subadapcocuk/subadapp/issues/9)
