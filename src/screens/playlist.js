@@ -32,7 +32,8 @@ export const Playlist = ({ navigation, route }) => {
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist, loop, setLoop, songs, lastAlbumNo } = useAppContext();
+  const { playlist, setPlaylist, loop, setLoop, songs, lastAlbumNo } =
+    useAppContext();
 
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
@@ -65,7 +66,6 @@ export const Playlist = ({ navigation, route }) => {
       current: null,
       index: -1,
     });
-    Toast.show("Liste temizlendi");
   };
 
   const handleSavePlaylist = (playlistName) => {
