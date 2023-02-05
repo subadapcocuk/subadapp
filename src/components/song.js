@@ -49,7 +49,7 @@ export const SongItem = ({
         <IconPress
           onPress={() =>
             shareUrl(
-              `Şubadap'tan ${song.name} şarkısını dinle: subadapp://oynat?song=${song.no}. Şubadapp uygulamasını indir: ${PLAY_STORE_URL}`
+              `Şubadap'tan ${song.name} şarkısını (https://subadapp.page.link/oynat?song=${song.no}) dinlemelisin. Şubadapp uygulamasını indirmek için: ${PLAY_STORE_URL}`
             )
           }
           icon={faShare}

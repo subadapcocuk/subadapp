@@ -28,6 +28,8 @@ export const Menu = (props) => {
 
   const url = Linking.useURL();
 
+  console.log(`URL:${url}`);
+
   const handleUrl = (url) => {
     if (url) {
       const { queryParams } = Linking.parse(url);
