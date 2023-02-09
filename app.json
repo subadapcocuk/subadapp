@@ -40,6 +40,7 @@
       "intentFilters": [
         {
           "action": "VIEW",
+          "autoVerify": true,
           "data": [
             {
               "scheme": "https",
@@ -54,6 +55,7 @@
         },
         {
           "action": "VIEW",
+          "autoVerify": true,
           "data": [
             {
               "scheme": "subadapp",
