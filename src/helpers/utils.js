@@ -35,5 +35,5 @@ export const shareUrl = async (message) =>
 
 export const shareApp = () =>
   shareUrl(
-    `Arkadaşınız sizinle Şubadapp uygulamasını paylaştı: ${PLAY_STORE_URL}`
+    `ŞubadApp uygulamasını mutlaka denemelisin: ${PLAY_STORE_URL}`
   );

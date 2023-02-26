@@ -118,6 +118,8 @@ export const Playlist = ({ navigation, route }) => {
       case 1:
         return filtered.sort((a, b) => -turkishCompare(a.name, b.name));
       case 2:
+        return filtered.sort((a, b) => a.albumNo > b.albumNo);
+      case 3:
         return filtered.sort((a, b) => a.albumNo < b.albumNo);
     }
     return filtered;
