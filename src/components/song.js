@@ -4,6 +4,7 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   BACKGROUND,
   FOREGROUND,
+  highlightText,
   songStyle,
   songText,
   styles,
@@ -42,7 +43,9 @@ export const SongItem = ({
         />
       )}
       <Text style={songText(selected && playing, highlight)}>{song.name}</Text>
-      {highlight && <Text style={styles.highlightText}>🌈🎉YENİ🎉🌈</Text>}
+      {highlight && (
+        <Text style={highlightText(selected && playing)}>🥁⭐YENİ⭐🥁</Text>
+      )}
       <View
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >

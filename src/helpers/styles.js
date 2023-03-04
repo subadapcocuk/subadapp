@@ -26,8 +26,15 @@ export const songText = (selected, highlight) => ({
   color: selected ? BACKGROUND : FOREGROUND,
   borderRadius: 5,
   padding: 5,
-  fontSize: highlight ? 18 : 16,
+  fontSize: highlight ? 20 : 18,
   fontWeight: highlight ? "bold" : "normal",
+});
+
+export const highlightText = (selected) => ({
+  color: selected ? BACKGROUND : FOREGROUND,
+  fontSize: 12,
+  fontWeight: "bold",
+  paddingLeft: "auto",
 });
 
 export const styles = StyleSheet.create({
@@ -44,10 +51,10 @@ export const styles = StyleSheet.create({
     fontSize: 20,
   },
   highlightText: {
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: "bold",
     paddingLeft: "auto",
-    color: "#AC002B",
+    color: FOREGROUND,
   },
   slider: {
     marginTop: 0,
@@ -210,6 +217,11 @@ export const styles = StyleSheet.create({
     height: 40,
     padding: 5,
     width: "85%",
+    fontSize: 20,
+  },
+  iconPressText: {
+    fontSize: 20,
+    color: FOREGROUND,
   },
   zeroMargin: {
     marginTop: 0,

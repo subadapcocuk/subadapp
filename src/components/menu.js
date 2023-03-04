@@ -85,7 +85,7 @@ export const Menu = (props) => {
         <IconDrawerItem
           onPress={() => openURL("https://bio.biolinktr.com/subadap")}
           icon={faCalendarDays}
-          label="Yaklaşan Konserler"
+          label="Konserler"
         />
         <IconDrawerItem
           onPress={() =>
