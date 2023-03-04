@@ -32,7 +32,7 @@ export const Playlist = ({ navigation, route }) => {
   const [filter, setFilter] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist, loop, setLoop, songs, lastAlbumNo } =
+  const { playlist, setPlaylist, loop, setLoop, songs, highlights } =
     useAppContext();
 
   useEffect(() => {
@@ -93,36 +93,29 @@ export const Playlist = ({ navigation, route }) => {
     {
       icon: faSortAlphaDown,
       text: "A ➜ Z",
+      sorter: (a, b) => turkishCompare(a.name, b.name),
     },
     {
       icon: faSortAlphaDownAlt,
       text: "Z ➜ A",
+      sorter: (a, b) => -turkishCompare(a.name, b.name),
     },
     {
       icon: faSortDown,
       text: "yeni ➜ eski",
+      sorter: (a, b) => b.albumNo - a.albumNo,
     },
     {
       icon: faSortUp,
       text: "eski ➜ yeni",
+      sorter: (a, b) => a.albumNo - b.albumNo,
     },
   ];
 
   const sortSongs = () => {
-    const filtered = songs.filter((s) =>
-      s.name.toLowerCase().includes(filter.toLowerCase())
-    );
-    switch (order) {
-      case 0:
-        return filtered.sort((a, b) => turkishCompare(a.name, b.name));
-      case 1:
-        return filtered.sort((a, b) => -turkishCompare(a.name, b.name));
-      case 2:
-        return filtered.sort((a, b) => a.albumNo > b.albumNo);
-      case 3:
-        return filtered.sort((a, b) => a.albumNo < b.albumNo);
-    }
-    return filtered;
+    return songs
+      .filter((s) => s.name.toLowerCase().includes(filter.toLowerCase()))
+      .sort(ORDER_TYPES[order].sorter);
   };
 
   const LOOP_TYPES = [
@@ -179,7 +172,7 @@ export const Playlist = ({ navigation, route }) => {
                   selected={
                     playlist.list.find((no) => no === item.no) !== undefined
                   }
-                  lastAlbum={item.albumNo === lastAlbumNo}
+                  highlight={highlights.includes(item.no)}
                   onSwipe={() => toggleSong(item)}
                   onPress={() => clearAndPlay(item)}
                 />

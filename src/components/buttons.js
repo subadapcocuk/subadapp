@@ -8,7 +8,7 @@ export const IconPress = ({
   icon,
   onPress = null,
   color = FOREGROUND,
-  size = 40,
+  size = 36,
   text = null,
   label = null,
   style = {},
@@ -16,7 +16,7 @@ export const IconPress = ({
   return (
     <TouchableOpacity style={[styles.button, style]} onPress={onPress} accessibilityLabel={label ? label : text}>
       <FontAwesomeIcon style={styles.icon} {...{ icon, color, size }} />
-      {text && <Text style={{ fontSize: 20 }}>{text}</Text>}
+      {text && <Text style={styles.iconPressText}>{text}</Text>}
     </TouchableOpacity>
   );
 };
@@ -55,7 +55,6 @@ export const TextInputIcon = (props) => {
           style={styles.icon}
           icon={rest.icon}
           color={FOREGROUND}
-          size={30}
         />
       )}
       <TextInput

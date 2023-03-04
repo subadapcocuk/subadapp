@@ -4,12 +4,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AppContext = React.createContext();
 
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
-const SONGS = "https://ansiklopedi.subadapcocuk.org/songs.json";
+const SONGS = "https://ansiklopedi.subadapcocuk.org/subadapp.json";
 
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
   const [songs, setSongs] = useState([]);
-  const [lastAlbumNo, setLastAlbumNo] = useState(1);
+  const [albums, setAlbums] = useState([]);
+  const [highlights, setHighlights] = useState([]);
   const [playlist, setPlaylist] = useState({
     list: [],
     current: null,
@@ -34,10 +35,9 @@ export const ContextProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        setSongs(data);
-        setLastAlbumNo(
-          data.reduce((d, c) => (d.albumNo > c.albumNo ? d : c)).albumNo
-        );
+        setSongs(data["songs"]);
+        setAlbums(data["albums"]);
+        setHighlights(data["highlights"]);
       })
       .catch((e) => console.error(`Error loading songs: ${e}`));
   }, []);
@@ -52,7 +52,7 @@ export const ContextProvider = ({ children }) => {
 
   return (
     <AppContext.Provider
-      value={{ songs, lastAlbumNo, playlist, setPlaylist, loop, setLoop }}
+      value={{ albums, songs, highlights, playlist, setPlaylist, loop, setLoop }}
     >
       {children}
     </AppContext.Provider>
