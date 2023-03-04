@@ -22,12 +22,12 @@ export const songStyle = (selected) => {
   };
 };
 
-export const songText = (selected, lastAlbum) => ({
+export const songText = (selected, highlight) => ({
   color: selected ? BACKGROUND : FOREGROUND,
   borderRadius: 5,
   padding: 5,
-  fontSize: lastAlbum ? 22 : 20,
-  fontWeight: lastAlbum ? "bold" : "normal",
+  fontSize: highlight ? 18 : 16,
+  fontWeight: highlight ? "bold" : "normal",
 });
 
 export const styles = StyleSheet.create({
@@ -43,6 +43,12 @@ export const styles = StyleSheet.create({
     color: FOREGROUND,
     fontSize: 20,
   },
+  highlightText: {
+    fontSize: 10,
+    fontWeight: "bold",
+    paddingLeft: "auto",
+    color: "#AC002B",
+  },
   slider: {
     marginTop: 0,
     height: 50,
@@ -50,7 +56,7 @@ export const styles = StyleSheet.create({
   },
   albumTitle: {
     color: FOREGROUND,
-    fontSize: 32,
+    fontSize: 30,
     textAlign: "center",
   },
   albumYear: {

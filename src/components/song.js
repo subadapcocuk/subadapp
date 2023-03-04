@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { faMinus, faPlus, faShare } from "@fortawesome/free-solid-svg-icons";
-import { PLAY_STORE_URL, shareUrl } from "../helpers";
+import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   BACKGROUND,
   FOREGROUND,
@@ -28,7 +27,7 @@ export const SongItem = ({
   selected = true,
   image = true,
   onPress = false,
-  lastAlbum = false,
+  highlight = false,
 }) => (
   <SwipeableRow
     {...{ onPress, selected, onLeftOpen: onSwipe }}
@@ -42,11 +41,12 @@ export const SongItem = ({
           accessibilityLabel={`${song.name} şarkısının resmi`}
         />
       )}
-      <Text style={songText(selected && playing, lastAlbum)}>{song.name}</Text>
+      <Text style={songText(selected && playing, highlight)}>{song.name}</Text>
+      {highlight && <Text style={styles.highlightText}>🌈🎉YENİ🎉🌈</Text>}
       <View
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >
-        <IconPress
+        {/*<IconPress
           onPress={() =>
             shareUrl(
               `Şubadap Çocuk'tan ${song.name} şarkısını dinlemelisin: https://subadapp.page.link/oynat?song=${song.no}`
@@ -55,7 +55,7 @@ export const SongItem = ({
           icon={faShare}
           color={selected && playing ? BACKGROUND : FOREGROUND}
           label={`${song.name} şarkısını paylaş`}
-        />
+        />*/}
         {onSwipe && (
           <IconPress
             onPress={onSwipe}

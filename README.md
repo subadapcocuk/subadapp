@@ -38,9 +38,9 @@ tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 [React Native](https://reactnative.dev/) uygulamasıdır.
 
 Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için
-[Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir.
-Paket yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir.
-Bu uygulamaları aşağıdaki gibi kurabilirsiniz:
+[Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Paket
+yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir. Bu
+uygulamaları aşağıdaki gibi kurabilirsiniz:
 
 - [node](https://nodejs.org/en/download/) (kurmak için
   [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
@@ -58,20 +58,19 @@ kullanabilirsiniz:
 - `yarn start`: Expo sunucusunu başlatır.
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
   başlatmanız gerekiyor.
-- `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde
-  başlatmanız gerekiyor.
+- `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
+  gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `yarn build:android`: Android paketi oluşturur. APK dosyasını yerelde
   kaydetmesi için `--local` argümanıyla çalıştırın.
 - `yarn build:ios`: IOS paket oluşturur.
 - `yarn build:all`: Tüm paketleri oluşturur.
 
-Tüm
-[albümler](<[./data/albums.json](https://ansiklopedi.subadapcocuk.org/albums.json)>)
-ve
-[şarkılar](<[./data/songs.json](https://ansiklopedi.subadapcocuk.org/songs.json)>)
-JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için
-[data/songs.xlsx](./data/songs.xlsx) dosyasından yararlanılabilir.
+Tüm albümler ve şarkılar
+[subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json) olarak
+saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için
+[subadapp.xlsx](./data/subadapp.xlsx) dosyasından ve
+<https://codebeautify.org/excel-to-json> sitesinden yararlanılabilir.
 
 ### Kullanılan Önemli Kütüphaneler
 
@@ -84,8 +83,8 @@ JSON olarak saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak i
 
 Ana (`main`) dala gönderilen/itilen kod olması durumunda
 [`publish` görevi](.github/workflows/main.yml#L34) elle başlatılabiliyor ve
-Expo'ya [denenmeye hazır son sürümü](https://expo.io/@subadapcocuk/subadapp) itiyor.
-Bu yayınlama görevi Expo tarafından sunulan
+Expo'ya [denenmeye hazır son sürümü](https://expo.io/@subadapcocuk/subadapp)
+itiyor. Bu yayınlama görevi Expo tarafından sunulan
 [örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
 yararlanılarak eklendi. APK dosyası da
 [`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak

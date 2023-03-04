@@ -13,7 +13,7 @@ const Album = ({ album, openUrl }) => {
         <View style={styles.headerView}>
           <Image style={styles.albumImage} source={{ uri: album.image }} />
           <View style={styles.titleView}>
-            <Text style={styles.albumYear}>{album.releaseYear}</Text>
+            <Text style={styles.albumYear}>{album.year}</Text>
             <Text style={styles.albumTitle} onPress={() => openUrl(album.page)}>
               {album.name}
             </Text>
