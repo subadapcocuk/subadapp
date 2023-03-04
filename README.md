@@ -81,15 +81,6 @@ saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için
 
 ## Yayınlama ve test etme
 
-Ana (`main`) dala gönderilen/itilen kod olması durumunda
-[`publish` görevi](.github/workflows/main.yml#L34) elle başlatılabiliyor ve
-Expo'ya [denenmeye hazır son sürümü](https://expo.io/@subadapcocuk/subadapp)
-itiyor. Bu yayınlama görevi Expo tarafından sunulan
-[örnek akışlardan](https://github.com/expo/expo-github-action#example-workflows)
-yararlanılarak eklendi. APK dosyası da
-[`build-android` göreviyle](.github/workflows/main.yml#L8) otomatik olarak
-oluşturulup bir sürüm yayınlanıyor.
-
 Sürüm yükseltmeden önce lisans listesini gözden geçirebilirsiniz:
 
 ```bash
