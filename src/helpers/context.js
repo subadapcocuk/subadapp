@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-root-toast";
 
 export const AppContext = React.createContext();
 
@@ -24,7 +25,7 @@ export const ContextProvider = ({ children }) => {
           setPlaylist(JSON.parse(value));
         }
       })
-      .catch((e) => console.error(`Error reading data: ${e}`));
+      .catch((e) => Toast.error(`Error reading data: ${e}`));
   }, []);
 
   useEffect(() => {
@@ -39,20 +40,28 @@ export const ContextProvider = ({ children }) => {
         setAlbums(data["albums"]);
         setHighlights(data["highlights"]);
       })
-      .catch((e) => console.error(`Error loading songs: ${e}`));
+      .catch((e) => Toast.error(`Error loading songs: ${e}`));
   }, []);
 
   useEffect(() => {
     if (playlist) {
       AsyncStorage.setItem(SUBADAP_PLAYLIST, JSON.stringify(playlist)).catch(
-        (e) => console.error(`Error saving playlist: ${e}`)
+        (e) => Toast.error(`Error saving playlist: ${e}`)
       );
     }
   }, [playlist]);
 
   return (
     <AppContext.Provider
-      value={{ albums, songs, highlights, playlist, setPlaylist, loop, setLoop }}
+      value={{
+        albums,
+        songs,
+        highlights,
+        playlist,
+        setPlaylist,
+        loop,
+        setLoop,
+      }}
     >
       {children}
     </AppContext.Provider>

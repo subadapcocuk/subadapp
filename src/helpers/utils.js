@@ -31,7 +31,7 @@ export const shareUrl = async (message) =>
         console.log(message);
       }
     })
-    .catch((error) => console.error(error.message));
+    .catch((error) => Toast.error(error.message));
 
 export const shareApp = () =>
   shareUrl(

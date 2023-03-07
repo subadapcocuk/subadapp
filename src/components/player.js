@@ -66,41 +66,55 @@ const Player = () => {
   }, []);
 
   const randomTrack = () => {
-    if (playlist.list.length > 0) {
-      const index = randomInt(playlist.list.length, playlist.index);
-      setPlaylist({
-        ...playlist,
-        current: songs.filter((s) => s.no === playlist.list[index])[0],
-        index: index,
-      });
-    } else {
-      setPlaylist({
-        ...playlist,
-        current: songs[randomInt(songs.length)],
-        index: -1,
-      });
+    try {
+      if (playlist.list.length > 1) {
+        const index = randomInt(playlist.list.length, playlist.index);
+        setPlaylist({
+          ...playlist,
+          current: songs.filter((s) => s.no === playlist.list[index])[0],
+          index: index,
+        });
+      } else if (playlist.list.length == 0) {
+        setPlaylist({
+          ...playlist,
+          current: songs[randomInt(songs.length)],
+          index: -1,
+        });
+      } else {
+        playSong();
+      }
+    } catch (e) {
+      Toast.error(`Bir hata oluştu: ${e}`);
     }
   };
 
   const previousTrack = () => {
-    if (loop === LoopType.RandomList) {
-      randomTrack();
-    } else if (loop === LoopType.FollowList) {
-      const index =
-        playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
-      const current = songs.filter((s) => s.no === playlist.list[index])[0];
-      setPlaylist({ ...playlist, ...{ index, current } });
+    try {
+      if (loop === LoopType.RandomList) {
+        randomTrack();
+      } else if (loop === LoopType.FollowList) {
+        const index =
+          playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
+        const current = songs.filter((s) => s.no === playlist.list[index])[0];
+        setPlaylist({ ...playlist, ...{ index, current } });
+      }
+    } catch (e) {
+      Toast.error(`Bir hata oluştu: ${e}`);
     }
   };
 
   const nextTrack = () => {
-    if (loop === LoopType.RandomList) {
-      randomTrack();
-    } else if (loop === LoopType.FollowList) {
-      const index =
-        playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
-      const current = songs.filter((s) => s.no === playlist.list[index])[0];
-      setPlaylist({ ...playlist, ...{ index, current } });
+    try {
+      if (loop === LoopType.RandomList) {
+        randomTrack();
+      } else if (loop === LoopType.FollowList) {
+        const index =
+          playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
+        const current = songs.filter((s) => s.no === playlist.list[index])[0];
+        setPlaylist({ ...playlist, ...{ index, current } });
+      }
+    } catch (e) {
+      Toast.error(`Bir hata oluştu: ${e}`);
     }
   };
 
@@ -125,11 +139,11 @@ const Player = () => {
         .setIsLoopingAsync(loop === LoopType.RepeatSong)
         .then()
         .catch((e) => {
-          console.error(e);
+          Toast.error(`Bir hata oluştu: ${e}`);
         });
       player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     } catch (e) {
-      console.error(e);
+      Toast.error(`Bir hata oluştu: ${e}`);
     }
   }, [loop]);
 
@@ -142,51 +156,62 @@ const Player = () => {
     }
   };
 
-  const onSeek = async (positionMillis) => {
-    const result = await player.getStatusAsync();
-    result.isLoaded && player.setPositionAsync(positionMillis);
+  const onSeek = (positionMillis) => {
+    player
+      .getStatusAsync()
+      .then(
+        (result) => result.isLoaded && player.setPositionAsync(positionMillis)
+      )
+      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
   };
 
-  const onPlay = async () => {
-    const result = await player.getStatusAsync();
-    if (result.isLoaded) {
-      if (result.isPlaying) {
-        player.pauseAsync();
-      } else {
-        player.playAsync();
-      }
-    } else {
-      if (loop === LoopType.RandomList) {
-        randomTrack();
-      } else {
-        playSong();
-      }
-    }
-  };
-
-  const playSong = async () => {
-    try {
-      //unload previous song
-      await player.unloadAsync();
-      if (playlist?.current) {
-        await player.loadAsync(
-          { uri: playlist.current.url },
-          {
-            shouldPlay: true,
-            rate: status.rate,
-            shouldCorrectPitch: status.shouldCorrectPitch,
-            volume: status.volume,
-            isMuted: status.muted,
-            isLooping: loop === LoopType.RepeatSong,
-            progressUpdateIntervalMillis: 1000,
+  const onPlay = () => {
+    player
+      .getStatusAsync()
+      .then((result) => {
+        if (result.isLoaded) {
+          if (result.isPlaying) {
+            player.pauseAsync();
+          } else {
+            player.playAsync();
           }
-        );
-        player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-      }
-    } catch (e) {
-      Toast.show(`Bir hata oluştu: ${e}`);
-      console.error(e);
-    }
+        } else {
+          if (loop === LoopType.RandomList) {
+            randomTrack();
+          } else {
+            playSong();
+          }
+        }
+      })
+      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+  };
+
+  const playSong = () => {
+    //unload previous song
+    player
+      .unloadAsync()
+      .then(() => {
+        if (playlist?.current) {
+          player
+            .loadAsync(
+              { uri: playlist.current.url },
+              {
+                shouldPlay: true,
+                rate: status.rate,
+                shouldCorrectPitch: status.shouldCorrectPitch,
+                volume: status.volume,
+                isMuted: status.muted,
+                isLooping: loop === LoopType.RepeatSong,
+                progressUpdateIntervalMillis: 1000,
+              }
+            )
+            .then(() =>
+              player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
+            )
+            .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+        }
+      })
+      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
   };
 
   return (

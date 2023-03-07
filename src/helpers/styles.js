@@ -32,7 +32,7 @@ export const songText = (selected, highlight) => ({
 
 export const highlightText = (selected) => ({
   color: selected ? BACKGROUND : FOREGROUND,
-  fontSize: 12,
+  fontSize: 10,
   fontWeight: "bold",
   paddingLeft: "auto",
 });

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Linking from "expo-linking";
 import {
@@ -26,7 +26,7 @@ export const Menu = (props) => {
   const [about, setAbout] = useState(false);
   const { navigation } = props;
 
-  const url = Linking.useURL();
+  /*const url = Linking.useURL();
 
   const handleUrl = (url) => {
     if (url) {
@@ -44,7 +44,7 @@ export const Menu = (props) => {
 
   useEffect(() => {
     handleUrl(url);
-  }, [url]);
+  }, [url]);*/
 
   const openURL = (url) => {
     navigation.navigate("Page", { url });

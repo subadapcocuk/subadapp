@@ -18,9 +18,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "buildNumber": "0.20.0",
@@ -32,43 +30,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "blockedPermissions": [
-        "android.permission.RECORD_AUDIO"
-      ],
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"],
       "package": "org.subadapp",
-      "versionCode": 480002000,
-      "intentFilters": [
-        {
-          "action": "VIEW",
-          "autoVerify": true,
-          "data": [
-            {
-              "scheme": "https",
-              "host": "subadapp.page.link",
-              "path": "/oynat"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        },
-        {
-          "action": "VIEW",
-          "autoVerify": true,
-          "data": [
-            {
-              "scheme": "subadapp",
-              "host": "oynat",
-              "path": "/oynat"
-            }
-          ],
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ]
-        }
-      ]
+      "versionCode": 480002000
     },
     "extra": {
       "eas": {
