@@ -10,7 +10,7 @@ const SONGS = "https://ansiklopedi.subadapcocuk.org/subadapp.json";
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
   const [songs, setSongs] = useState([]);
-  const [albums, setAlbums] = useState([]);
+  //const [albums, setAlbums] = useState([]);
   const [highlights, setHighlights] = useState([]);
   const [playlist, setPlaylist] = useState({
     list: [],
@@ -37,7 +37,7 @@ export const ContextProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         setSongs(data["songs"]);
-        setAlbums(data["albums"]);
+        //setAlbums(data["albums"]);
         setHighlights(data["highlights"]);
       })
       .catch((e) => Toast.error(`Error loading songs: ${e}`));
@@ -54,7 +54,7 @@ export const ContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        albums,
+        //albums,
         songs,
         highlights,
         playlist,

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Platform } from "react-native";
 import { ScrollView, Text, View } from "react-native";
 import Toast from "react-native-root-toast";
 import {
@@ -188,8 +189,12 @@ export const Playlist = ({ navigation, route }) => {
             {playlist?.current && (
               <SongDetail
                 song={playlist.current}
-                openUrl={(url) => {
-                  navigation.navigate("Page", { url });
+                openURL={(url) => {
+                  if (Platform.OS === "ios") {
+                    Linking.openURL(url);
+                  } else {
+                    navigation.navigate("Page", { url });
+                  }
                 }}
               />
             )}

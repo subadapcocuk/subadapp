@@ -61,7 +61,7 @@ export const styles = StyleSheet.create({
     height: 50,
     flexGrow: 1,
   },
-  albumTitle: {
+  /*albumTitle: {
     color: FOREGROUND,
     fontSize: 30,
     textAlign: "center",
@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
     width: deviceWidth,
     justifyContent: "center",
     alignItems: "center",
-  },
+  },*/
   menuLabel: {
     color: FOREGROUND,
     fontSize: 20,
@@ -87,7 +87,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     flex: 1,
   },
-  albumImage: {
+  songDetailImage: {
     height: 100,
     width: 100,
   },

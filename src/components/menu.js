@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Platform } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Linking from "expo-linking";
 import {
@@ -47,7 +48,11 @@ export const Menu = (props) => {
   }, [url]);*/
 
   const openURL = (url) => {
-    navigation.navigate("Page", { url });
+    if (Platform.OS === "ios") {
+      Linking.openURL(url);
+    } else {
+      navigation.navigate("Page", { url });
+    }
   };
 
   return (

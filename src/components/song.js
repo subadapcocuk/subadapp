@@ -74,15 +74,15 @@ export const SongItem = ({
   </SwipeableRow>
 );
 
-export const SongDetail = ({ song, openUrl }) => {
+export const SongDetail = ({ song, openURL }) => {
   return (
     <>
       {song && (
         <TouchableOpacity
           style={styles.songStyle}
-          onPress={() => openUrl(`${song.page}#Şarkı_Sözleri`)}
+          onPress={() => openURL(`${song.page}#Şarkı_Sözleri`)}
         >
-          <Image style={styles.albumImage} source={{ uri: song.image }} />
+          <Image style={styles.songDetailImage} source={{ uri: song.image }} />
           <Text style={styles.text}>{song.name} Sözleri</Text>
         </TouchableOpacity>
       )}
