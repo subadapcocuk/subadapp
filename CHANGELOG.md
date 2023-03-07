@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.20.1](https://github.com/subadapcocuk/subadapp/compare/v0.20.0...v0.20.1) (2023-03-07)
+
+- Yeni şarkıya geçme hatası düzeltildi
+
 ## [0.20.0](https://github.com/subadapcocuk/subadapp/compare/v0.19.0...v0.20.0) (2023-03-04)
 
 - Yeni şarkıları vurgulama
