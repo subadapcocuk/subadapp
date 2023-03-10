@@ -24,7 +24,11 @@
     "ios": {
       "supportsTablet": true,
       "buildNumber": "0.20.2",
-      "bundleIdentifier": "subadapp"
+      "bundleIdentifier": "subadapp",
+      "config": {
+        "usesNonExemptEncryption": false,
+        "supportsTablet": true
+      }
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -36,7 +40,8 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "org.subadapp",
-      "versionCode": 480002002
+      "versionCode": 480002002,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=org.subadapp"
     },
     "extra": {
       "eas": {
