@@ -1,7 +1,7 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "license": "Apache-2.0",
-  "version": "0.20.3",
+  "version": "0.20.4",
   "repository": {
     "type": "git",
     "url": "https://github.com/subadapcocuk/subadapp.git"
@@ -61,10 +61,10 @@
     "react-native-webview": "11.26.0"
   },
   "devDependencies": {
-    "@apercky/standard-version-expo": "^1.0",
     "@babel/core": "^7.19.3",
     "commit-and-tag-version": "^11.0",
     "eas-cli": "^3.7",
-    "license-report": "^6.3"
+    "license-report": "^6.3",
+    "standard-version-expo": "^1.0"
   }
 }
