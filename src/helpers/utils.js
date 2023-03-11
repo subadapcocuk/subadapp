@@ -23,7 +23,7 @@ export const turkishCompare = (a, b) => {
 };
 
 export const shareUrl = async (message) =>
-  Share.share({message})
+  Share.share({ message })
     .then((result) => {
       if (result.action === Share.sharedAction) {
         console.log(message);
@@ -31,9 +31,7 @@ export const shareUrl = async (message) =>
         console.log(message);
       }
     })
-    .catch((error) => Toast.error(error.message));
+    .catch((error) => Toast.error(`Bir hata oluştu:${e}`));
 
 export const shareApp = () =>
-  shareUrl(
-    `ŞubadApp uygulamasını mutlaka denemelisin: ${PLAY_STORE_URL}`
-  );
+  shareUrl(`ŞubadApp uygulamasını mutlaka denemelisin: ${PLAY_STORE_URL}`);

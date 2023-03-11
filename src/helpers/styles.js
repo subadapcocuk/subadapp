@@ -1,41 +1,62 @@
-import { StyleSheet, Dimensions } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio } from "react-native";
 export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
 
 export const deviceWidth = Dimensions.get("window").width;
 
-export const tabItemTitleStyle = (currentTab) => {
+export const isLargeScreen = deviceWidth >= 768;
+
+const scale = deviceWidth / 768;
+
+export function normalize(size) {
+  if (isLargeScreen) {
+    const newSize = size * scale;
+    if (Platform.OS === "ios") {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize));
+    } else {
+      return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+    }
+  } else {
+    return size;
+  }
+}
+
+export function tabItemTitleStyle(currentTab) {
   return {
     color: currentTab ? BACKGROUND : FOREGROUND,
     backgroundColor: currentTab ? FOREGROUND : BACKGROUND,
     borderRadius: 5,
     textTransform: "capitalize",
-    fontSize: 20,
+    fontSize: normalize(20),
   };
-};
+}
 
-export const songStyle = (selected) => {
+export function songStyle(selected) {
   return {
     ...styles.itemStyle,
     backgroundColor: selected ? FOREGROUND : BACKGROUND,
   };
-};
+}
 
-export const songText = (selected, highlight) => ({
-  color: selected ? BACKGROUND : FOREGROUND,
-  borderRadius: 5,
-  padding: 5,
-  fontSize: highlight ? 20 : 18,
-  fontWeight: highlight ? "bold" : "normal",
-});
+export function songText(selected, highlight) {
+  return {
+    color: selected ? BACKGROUND : FOREGROUND,
+    borderRadius: 5,
+    padding: 5,
+    fontSize: normalize(highlight ? 20 : 18),
+    fontWeight: highlight ? "bold" : "normal",
+  };
+}
 
-export const highlightText = (selected) => ({
-  color: selected ? BACKGROUND : FOREGROUND,
-  fontSize: 10,
-  fontWeight: "bold",
-  paddingLeft: "auto",
-});
+export function highlightText(selected) {
+  return {
+    color: selected ? BACKGROUND : FOREGROUND,
+    fontSize: normalize(10),
+    fontWeight: "bold",
+    paddingLeft: "auto",
+  };
+}
 
 export const styles = StyleSheet.create({
   itemStyle: {
@@ -48,10 +69,10 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: FOREGROUND,
-    fontSize: 20,
+    fontSize: normalize(20),
   },
   highlightText: {
-    fontSize: 12,
+    fontSize: normalize(12),
     fontWeight: "bold",
     paddingLeft: "auto",
     color: FOREGROUND,
@@ -63,12 +84,12 @@ export const styles = StyleSheet.create({
   },
   /*albumTitle: {
     color: FOREGROUND,
-    fontSize: 30,
+    fontSize: normalize(30),
     textAlign: "center",
   },
   albumYear: {
     color: FOREGROUND,
-    fontSize: 24,
+    fontSize: normalize(24),
     textAlign: "center",
   },
   albumView: {
@@ -78,7 +99,7 @@ export const styles = StyleSheet.create({
   },*/
   menuLabel: {
     color: FOREGROUND,
-    fontSize: 20,
+    fontSize: normalize(20),
     padding: 0,
   },
   webview: {
@@ -88,8 +109,8 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   songDetailImage: {
-    height: 100,
-    width: 100,
+    height: normalize(100),
+    width: normalize(100),
   },
   bottomView: {
     justifyContent: "center",
@@ -135,7 +156,7 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
   },
   icon: {
-    fontSize: 20,
+    fontSize: normalize(20),
     color: FOREGROUND,
     margin: 5,
   },
@@ -185,18 +206,17 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   playlistImage: {
-    height: 50,
-    width: 50,
+    height: normalize(50),
+    width: normalize(50),
   },
   songStyle: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center",
   },
-  songImage: {
-    height: 125,
-    width: 125,
-  },
+  /*songImage: {
+    height: 150,
+    width: 150,
+  },*/
   activityIndicatorStyle: {
     flex: 1,
     position: "absolute",
@@ -217,10 +237,10 @@ export const styles = StyleSheet.create({
     height: 40,
     padding: 5,
     width: "85%",
-    fontSize: 20,
+    fontSize: normalize(20),
   },
   iconPressText: {
-    fontSize: 20,
+    fontSize: normalize(20),
     color: FOREGROUND,
   },
   zeroMargin: {

@@ -61,7 +61,6 @@ export const Menu = (props) => {
         accessibilityLabel="Şubadap Çocuk ile ilgili bağlantıları içeren menü"
         contentContainerStyle={{
           flexGrow: 1,
-          justifyContent: "center",
         }}
         {...props}
       >

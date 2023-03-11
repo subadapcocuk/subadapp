@@ -71,8 +71,9 @@ export const Playlist = ({ navigation, route }) => {
 
   const handleSavePlaylist = (playlistName) => {
     if (playlistName) {
-      savePlaylist(playlistName, playlist.list);
-      Toast.show(`${playlistName} listesi kaydedildi`);
+      savePlaylist(playlistName, playlist.list).then(() =>
+        Toast.show(`${playlistName} listesi kaydedildi`)
+      );
     }
     setSaveDialogVisible(false);
   };

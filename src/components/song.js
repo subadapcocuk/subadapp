@@ -12,14 +12,14 @@ import {
 import { IconPress } from "./buttons";
 import { SwipeableRow } from "./swipeable";
 
-export const Song = ({ song, openUrl }) => (
+/*export const Song = ({ song, openUrl }) => (
   <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
     <Image style={styles.songImage} source={{ uri: song.image }} />
     <Text>
       {song.no} - {song.name}
     </Text>
   </TouchableOpacity>
-);
+);*/
 
 export const SongItem = ({
   song,

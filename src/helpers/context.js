@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
           setPlaylist(JSON.parse(value));
         }
       })
-      .catch((e) => Toast.error(`Error reading data: ${e}`));
+      .catch((e) => Toast.error(`Veri okunamadı: ${e}`));
   }, []);
 
   useEffect(() => {
@@ -35,12 +35,13 @@ export const ContextProvider = ({ children }) => {
       },
     })
       .then((response) => response.json())
+      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`))
       .then((data) => {
         setSongs(data["songs"]);
         //setAlbums(data["albums"]);
         setHighlights(data["highlights"]);
       })
-      .catch((e) => Toast.error(`Error loading songs: ${e}`));
+      .catch((e) => Toast.error(`Şarkılar okunamadı: ${e}`));
   }, []);
 
   useEffect(() => {

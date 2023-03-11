@@ -9,25 +9,32 @@ const Playlists = ({ visible, open }) => {
   const [playlists, setPlaylists] = useState({});
 
   const updatePlaylists = () =>
-    getPlaylists().then((value) => {
-      setPlaylists(
-        Object.keys(value).map((key) => ({
-          name: key,
-          value: value[key],
-        }))
-      );
-    });
+    getPlaylists()
+      .then((value) => {
+        setPlaylists(
+          Object.keys(value).map((key) => ({
+            name: key,
+            value: value[key],
+          }))
+        );
+      })
+      .catch((e) => console.error(`Bir hata oluştu:${e}`));
 
   useEffect(() => {
     updatePlaylists();
   }, [visible]);
 
   const handleDelete = (name) => {
-    deletePlaylist(name).then(() => updatePlaylists());
+    deletePlaylist(name)
+      .then(() => updatePlaylists())
+      .catch((e) => console.error(`Bir hata oluştu:${e}`));
   };
 
   const Item = ({ name, value }) => (
-    <View style={styles.itemStyle} accessibilityLabel={"liste açma ve kaydetme düğmeleri"}>
+    <View
+      style={styles.itemStyle}
+      accessibilityLabel={"liste açma ve kaydetme düğmeleri"}
+    >
       <IconPress
         onPress={() => open(name, value)}
         icon={faFolderOpen}
@@ -49,7 +56,11 @@ const Playlists = ({ visible, open }) => {
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.name}
       />
-      <Dialog.Button style={styles.text} label="İptal" onPress={() => open(false)}/>
+      <Dialog.Button
+        style={styles.text}
+        label="İptal"
+        onPress={() => open(false)}
+      />
     </Dialog.Container>
   );
 };
