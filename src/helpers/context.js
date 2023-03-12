@@ -35,7 +35,6 @@ export const ContextProvider = ({ children }) => {
       },
     })
       .then((response) => response.json())
-      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`))
       .then((data) => {
         setSongs(data["songs"]);
         //setAlbums(data["albums"]);

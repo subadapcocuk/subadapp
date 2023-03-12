@@ -21,11 +21,30 @@ export default function PromptDialog({
 
   return (
     <Dialog.Container visible={visible} onBackdropPress={handleCancel}>
-      <Dialog.Title style={styles.icon}>{title}</Dialog.Title>
-      <Dialog.Description style={styles.text}>{description}</Dialog.Description>
-      <Dialog.Input value={value} onChangeText={setValue} style={styles.text} accessibilityLabel={description}/>
-      <Dialog.Button label="Tamam" onPress={handleOk} style={styles.text}/>
-      <Dialog.Button label="İptal" onPress={handleCancel} style={styles.text}/>
+      <Dialog.Title accessibilityLabel={title} style={styles.icon}>
+        {title}
+      </Dialog.Title>
+      <Dialog.Description accessibilityLabel={title} style={styles.text}>
+        {description}
+      </Dialog.Description>
+      <Dialog.Input
+        accessibilityLabel={description}
+        value={value}
+        onChangeText={setValue}
+        style={styles.text}
+      />
+      <Dialog.Button
+        accessibilityLabel="Tamam düğmesi"
+        label="Tamam"
+        onPress={handleOk}
+        style={styles.text}
+      />
+      <Dialog.Button
+        accessibilityLabel="İptal düğmesi"
+        label="İptal"
+        onPress={handleCancel}
+        style={styles.text}
+      />
     </Dialog.Container>
   );
 }

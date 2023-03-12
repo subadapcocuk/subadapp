@@ -41,7 +41,7 @@ export const IconText = ({
   return (
     <View style={[styles.button, style]} accessibilityLabel={text}>
       <FontAwesomeIcon style={styles.icon} size={normalize(size)} icon={icon} color={color} />
-      {text && <Text style={{ fontSize: 16 }}>{text}</Text>}
+      {text && <Text style={{ fontSize: normalize(16) }}>{text}</Text>}
     </View>
   );
 };

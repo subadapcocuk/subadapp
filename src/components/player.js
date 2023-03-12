@@ -17,29 +17,33 @@ Notifications.setNotificationHandler({
 });
 
 async function registerForPushNotificationsAsync() {
-  if (Device.isDevice) {
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
-    let finalStatus = existingStatus;
-    if (existingStatus !== "granted") {
-      const { status } = await Notifications.requestPermissionsAsync();
-      finalStatus = status;
+  try {
+    if (Device.isDevice) {
+      const { status: existingStatus } =
+        await Notifications.getPermissionsAsync();
+      let finalStatus = existingStatus;
+      if (existingStatus !== "granted") {
+        const { status } = await Notifications.requestPermissionsAsync();
+        finalStatus = status;
+      }
+      if (finalStatus !== "granted") {
+        Toast.error("Failed to get push token for push notification!");
+        return;
+      }
+    } else {
+      Toast.show("Push notification needs physical device");
     }
-    if (finalStatus !== "granted") {
-      Toast.error("Failed to get push token for push notification!");
-      return;
-    }
-  } else {
-    Toast.show("Push notification needs physical device");
-  }
 
-  if (Platform.OS === "android") {
-    Notifications.setNotificationChannelAsync("default", {
-      name: "default",
-      importance: Notifications.AndroidImportance.MAX,
-      vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#FF231F7C",
-    });
+    if (Platform.OS === "android") {
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
+        importance: Notifications.AndroidImportance.MAX,
+        vibrationPattern: [0, 250, 250, 250],
+        lightColor: "#FF231F7C",
+      });
+    }
+  } catch (e) {
+    Toast.error(`Bir hata oluştur: ${e}`);
   }
 }
 

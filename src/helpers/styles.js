@@ -36,6 +36,7 @@ export function songStyle(selected) {
   return {
     ...styles.itemStyle,
     backgroundColor: selected ? FOREGROUND : BACKGROUND,
+    width: isLargeScreen ? "75%" : null,
   };
 }
 
@@ -102,6 +103,7 @@ export const styles = StyleSheet.create({
     fontSize: normalize(20),
     padding: 0,
   },
+  scrollView: { backgroundColor: BACKGROUND },
   webview: {
     width: deviceWidth,
     justifyContent: "center",
@@ -172,6 +174,8 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
+    backgroundColor: BACKGROUND,
+    width: isLargeScreen ? "75%" : null,
   },
   textLink: {
     color: FOREGROUND,

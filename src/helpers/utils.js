@@ -31,7 +31,7 @@ export const shareUrl = async (message) =>
         console.log(message);
       }
     })
-    .catch((error) => Toast.error(`Bir hata oluştu:${e}`));
+    .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
 
 export const shareApp = () =>
   shareUrl(`ŞubadApp uygulamasını mutlaka denemelisin: ${PLAY_STORE_URL}`);

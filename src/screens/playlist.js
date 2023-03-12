@@ -20,6 +20,8 @@ import {
   turkishCompare,
   useAppContext,
   savePlaylist,
+  normalize,
+  BACKGROUND,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -159,14 +161,14 @@ export const Playlist = ({ navigation, route }) => {
                 onChangeText={setFilter}
                 value={filter}
                 style={{ width: "60%" }}
-                fontSize={20}
+                fontSize={normalize(20)}
               />
               <IconPress
                 {...ORDER_TYPES[order]}
                 onPress={() => setOrder(order < 3 ? order + 1 : 0)}
               />
             </View>
-            <ScrollView persistentScrollbar>
+            <ScrollView style={styles.scrollView} persistentScrollbar>
               {sortSongs().map((item) => (
                 <SongItem
                   key={`playlist_song_${item.no}`}
@@ -186,7 +188,7 @@ export const Playlist = ({ navigation, route }) => {
           selected={tabIndex === 1}
           accessibilityLabel={"Oynatma Listesi"}
         >
-          <ScrollView persistentScrollbar>
+          <ScrollView style={styles.scrollView} persistentScrollbar>
             {playlist?.current && (
               <SongDetail
                 song={playlist.current}
@@ -220,7 +222,7 @@ export const Playlist = ({ navigation, route }) => {
               />
             </View>
             <Picker
-              style={{ margin: "auto" }}
+              style={{ margin: "auto", backgroundColor: BACKGROUND }}
               selectedValue={loop}
               onValueChange={(value) => {
                 setLoop(value);
@@ -231,7 +233,7 @@ export const Playlist = ({ navigation, route }) => {
                   key={`LoopType_${item.text}_${index}`}
                   label={item.text}
                   value={index}
-                  style={{ fontSize: 20 }}
+                  style={{ fontSize: normalize(20) }}
                 />
               ))}
             </Picker>
@@ -255,6 +257,7 @@ export const Playlist = ({ navigation, route }) => {
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
       {saveDialogVisible && (
         <PromptDialog
+          accessibilityLabel="Kaydedilecek listenin adını gireceğiniz diyalog"
           description="Listenin adını giriniz"
           initialValue={playlist?.name}
           save={handleSavePlaylist}

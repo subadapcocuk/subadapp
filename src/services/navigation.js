@@ -21,7 +21,7 @@ export const NavigationService = () => {
             height: Constants.statusBarHeight,
           },
           drawerType: isLargeScreen ? "permanent" : "front",
-          drawerStyle: isLargeScreen ? null : { width: 250 },
+          drawerStyle: isLargeScreen ? null : { width: "25%" },
         }}
       >
         <Drawer.Screen

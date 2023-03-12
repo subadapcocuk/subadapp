@@ -2,6 +2,7 @@ import { faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import Dialog from "react-native-dialog";
+import Toast from "react-native-root-toast";
 import { styles, deletePlaylist, getPlaylists } from "../helpers";
 import { IconPress } from "./buttons";
 
@@ -18,7 +19,7 @@ const Playlists = ({ visible, open }) => {
           }))
         );
       })
-      .catch((e) => console.error(`Bir hata oluştu:${e}`));
+      .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
 
   useEffect(() => {
     updatePlaylists();
@@ -27,7 +28,7 @@ const Playlists = ({ visible, open }) => {
   const handleDelete = (name) => {
     deletePlaylist(name)
       .then(() => updatePlaylists())
-      .catch((e) => console.error(`Bir hata oluştu:${e}`));
+      .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
   };
 
   const Item = ({ name, value }) => (
@@ -52,6 +53,7 @@ const Playlists = ({ visible, open }) => {
     <Dialog.Container visible={visible} onBackdropPress={open}>
       <Dialog.Title style={styles.icon}>Kayıtlı Çalma Listeleri</Dialog.Title>
       <FlatList
+        accessibilityLabel="Kayıtlı çalma listelerinizi gösteren liste"
         data={playlists}
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.name}
