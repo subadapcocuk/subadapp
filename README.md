@@ -1,5 +1,5 @@
 # ŞubadApp
-
+<a href="https://apps.apple.com/tr/app/%C5%9Fubadapp/id1669825799"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/tr-tr?size=250x21" alt="App Store" style="height: 21px;"></a>
 [![Play Store](https://img.shields.io/endpoint?color=32ca55&logo=google-play&logoColor=32ca55&url=https%3A%2F%2Fplay.cuzi.workers.dev%2Fplay%3Fi%3Dorg.subadapp%26l%3D%24name%26m%3D%24updated)](https://play.google.com/store/apps/details?id=org.subadapp)
 [![Latest](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE)
