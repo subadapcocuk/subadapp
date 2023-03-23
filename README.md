@@ -4,7 +4,8 @@
 [![Latest](https://img.shields.io/github/release/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/releases/latest)
 [![Licensed by Apache](https://img.shields.io/github/license/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/blob/main/LICENSE)
 [![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
-[![Release](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/subadapcocuk/subadapp/actions/workflows/main.yml)
+[![Android Build](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml)
+[![iOS Build](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml)
 [![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
 [ŞubadApp](https://github.com/subadapcocuk/subadapp),

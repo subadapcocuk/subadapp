@@ -1,4 +1,4 @@
-name: "Build Android and Release"
+name: "Android"
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
         run: yarn install
-      - name: Build packages
+      - name: Build package
         run: yarn build:android --local
       - uses: WyriHaximus/github-action-get-previous-tag@v1
         id: currenttag
