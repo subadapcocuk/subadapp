@@ -2,7 +2,7 @@
   "expo": {
     "name": "ŞubadApp",
     "slug": "subadapp",
-    "version": "0.20.5",
+    "version": "0.20.6",
     "description": "",
     "scheme": "subadapp",
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
@@ -23,7 +23,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.20.5",
+      "buildNumber": "0.20.6",
       "bundleIdentifier": "subadapp",
       "config": {
         "usesNonExemptEncryption": false,
@@ -40,7 +40,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "org.subadapp",
-      "versionCode": 480002005,
+      "versionCode": 480002006,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=org.subadapp"
     },
     "extra": {
