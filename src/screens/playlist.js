@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { ScrollView, Text, View } from "react-native";
-import Toast from "react-native-root-toast";
 import {
   faFolderOpen,
   faRandom,
@@ -22,6 +21,7 @@ import {
   savePlaylist,
   normalize,
   BACKGROUND,
+  show,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -56,10 +56,10 @@ export const Playlist = ({ navigation, route }) => {
         ...playlist,
         list: [...playlist.list.filter((o) => o !== no)],
       });
-      Toast.show(`${name} listeden kaldırıldı`);
+      show(`${name} listeden kaldırıldı`);
     } else {
       setPlaylist({ ...playlist, list: [...playlist.list, no] });
-      Toast.show(`${name} listeye eklendi`);
+      show(`${name} listeye eklendi`);
     }
   };
 
@@ -74,7 +74,7 @@ export const Playlist = ({ navigation, route }) => {
   const handleSavePlaylist = (playlistName) => {
     if (playlistName) {
       savePlaylist(playlistName, playlist.list).then(() =>
-        Toast.show(`${playlistName} listesi kaydedildi`)
+        show(`${playlistName} listesi kaydedildi`)
       );
     }
     setSaveDialogVisible(false);
@@ -88,7 +88,7 @@ export const Playlist = ({ navigation, route }) => {
         current: null,
         index: -1,
       });
-      Toast.show(`${name} listesi açıldı`);
+      show(`${name} listesi açıldı`);
     }
     setOpenDialogVisible(false);
   };
@@ -139,7 +139,7 @@ export const Playlist = ({ navigation, route }) => {
 
   const clearAndPlay = (song) => {
     setPlaylist({ list: [song.no], current: song, index: 0 });
-    Toast.show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
+    show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
   return (

@@ -26,8 +26,7 @@
       "buildNumber": "0.21.0",
       "bundleIdentifier": "subadapp",
       "config": {
-        "usesNonExemptEncryption": false,
-        "supportsTablet": true
+        "usesNonExemptEncryption": false
       }
     },
     "android": {
