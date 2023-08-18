@@ -2,7 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
-## [0.21.0](https://github.com/subadapcocuk/subadapp/compare/v0.20.6...v0.21.0) (2023-08-18)ç
+## [0.21.1](https://github.com/subadapcocuk/subadapp/compare/v0.21.0...v0.21.1) (2023-08-18)
+
+- Geliştirme paketleri güncellendi
+
+## [0.21.0](https://github.com/subadapcocuk/subadapp/compare/v0.20.6...v0.21.0) (2023-08-18)
 
 - Uygulamanın kullandığı Expo'yu sürüm 49'a yükselttik
 
