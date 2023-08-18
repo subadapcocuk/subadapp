@@ -61,8 +61,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@mccraveiro/standard-version-expo": "^2.0",
     "commit-and-tag-version": "^11.0",
-    "eas-cli": "^4.0",
-    "standard-version-expo": "^1.0"
+    "eas-cli": "^4.0"
   }
 }
