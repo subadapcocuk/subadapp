@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Toast from "react-native-root-toast";
+import { error } from "./dialog";
 
 export const AppContext = React.createContext();
 
@@ -25,7 +25,7 @@ export const ContextProvider = ({ children }) => {
           setPlaylist(JSON.parse(value));
         }
       })
-      .catch((e) => Toast.error(`Veri okunamadı: ${e}`));
+      .catch((e) => error(`Veri okunamadı: ${e}`));
   }, []);
 
   useEffect(() => {
@@ -40,13 +40,13 @@ export const ContextProvider = ({ children }) => {
         //setAlbums(data["albums"]);
         setHighlights(data["highlights"]);
       })
-      .catch((e) => Toast.error(`Şarkılar okunamadı: ${e}`));
+      .catch((e) => error(`Şarkılar okunamadı: ${e}`));
   }, []);
 
   useEffect(() => {
     if (playlist) {
       AsyncStorage.setItem(SUBADAP_PLAYLIST, JSON.stringify(playlist)).catch(
-        (e) => Toast.error(`Error saving playlist: ${e}`)
+        (e) => error(`Error saving playlist: ${e}`)
       );
     }
   }, [playlist]);

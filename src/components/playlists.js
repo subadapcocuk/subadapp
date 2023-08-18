@@ -2,8 +2,7 @@ import { faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, View } from "react-native";
 import Dialog from "react-native-dialog";
-import Toast from "react-native-root-toast";
-import { styles, deletePlaylist, getPlaylists } from "../helpers";
+import { styles, deletePlaylist, getPlaylists, error } from "../helpers";
 import { IconPress } from "./buttons";
 
 const Playlists = ({ visible, open }) => {
@@ -19,7 +18,7 @@ const Playlists = ({ visible, open }) => {
           }))
         );
       })
-      .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
+      .catch((e) => error(`Bir hata oluştu:${e}`));
 
   useEffect(() => {
     updatePlaylists();
@@ -28,7 +27,7 @@ const Playlists = ({ visible, open }) => {
   const handleDelete = (name) => {
     deletePlaylist(name)
       .then(() => updatePlaylists())
-      .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
+      .catch((e) => error(`Bir hata oluştu:${e}`));
   };
 
   const Item = ({ name, value }) => (

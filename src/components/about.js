@@ -12,7 +12,7 @@ const About = ({ visible, close }) => {
       accessibilityLabel="Uygulama Hakkında Bilgi"
     >
       <Dialog.Title style={styles.icon}>
-        ŞUBADAPP (Sürüm {Constants.manifest.version})
+        ŞUBADAPP (Sürüm {Constants.expoConfig.version})
       </Dialog.Title>
       <Dialog.Description style={styles.text}>
         ŞUBADAPP,{" "}

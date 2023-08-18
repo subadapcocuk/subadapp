@@ -180,20 +180,6 @@ export const styles = StyleSheet.create({
   textLink: {
     color: FOREGROUND,
   },
-  header: {
-    position: "absolute",
-    width: "100%",
-    height: 150,
-    top: 0,
-  },
-  footer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    justifyContent: "center",
-    alignItems: "center",
-  },
   button: {
     alignItems: "center",
     flexDirection: "row",

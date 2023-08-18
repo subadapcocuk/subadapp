@@ -1,5 +1,6 @@
 import { Share } from "react-native";
 import { deburr } from "lodash";
+import { error } from "./dialog";
 
 export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=org.subadapp";
@@ -31,7 +32,7 @@ export const shareUrl = async (message) =>
         console.log(message);
       }
     })
-    .catch((e) => Toast.error(`Bir hata oluştu:${e}`));
+    .catch((e) => error(`Bir hata oluştu:${e}`));
 
 export const shareApp = () =>
   shareUrl(`ŞubadApp uygulamasını mutlaka denemelisin: ${PLAY_STORE_URL}`);

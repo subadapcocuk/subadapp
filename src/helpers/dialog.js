@@ -1,4 +1,5 @@
 import { Alert } from "react-native";
+import Toast from "react-native-root-toast";
 
 export const confirm = (
   title,
@@ -17,4 +18,16 @@ export const confirm = (
       onPress: onCancel,
     },
   ]);
+};
+
+export const show = (
+  message
+) => {
+  Toast.show(message);
+};
+
+export const error = (
+  message
+) => {
+  Toast.show(message);
 };

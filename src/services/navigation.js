@@ -5,23 +5,26 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
 import { Page, Playlist } from "../screens";
 import { FOREGROUND, isLargeScreen } from "../helpers";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { IconPress } from "../components/buttons";
 
 const Drawer = createDrawerNavigator();
 
 export const NavigationService = () => {
 
   return (
-    <NavigationContainer accessibilityLabel="Uygulama gezintisi">
+    <NavigationContainer accessibilityLabel="Uygulama gezintisi" >
       <Drawer.Navigator
         accessibilityLabel="Uygulama menüsünü içeren gezinti"
         drawerContent={(props) => <Menu {...props} />}
         screenOptions={{
           headerTintColor: FOREGROUND,
+          headerLeftContainerStyle: { transform: [{ scale: 2 }] },
           headerStyle: {
             height: Constants.statusBarHeight,
           },
           drawerType: isLargeScreen ? "permanent" : "front",
-          drawerStyle: isLargeScreen ? null : { width: "25%" },
+          drawerStyle: isLargeScreen ? null : { width: "60%" },
         }}
       >
         <Drawer.Screen

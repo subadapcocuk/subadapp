@@ -27,26 +27,6 @@ export const Menu = (props) => {
   const [about, setAbout] = useState(false);
   const { navigation } = props;
 
-  /*const url = Linking.useURL();
-
-  const handleUrl = (url) => {
-    if (url) {
-      const { queryParams } = Linking.parse(url);
-      if (queryParams["song"]) {
-        const song = queryParams["song"];
-        console.log(`Loading song #${song}`);
-        navigation.navigate("Playlist", {
-          tabIndex: 0,
-          song,
-        });
-      }
-    }
-  };
-
-  useEffect(() => {
-    handleUrl(url);
-  }, [url]);*/
-
   const openURL = (url) => {
     if (Platform.OS === "ios") {
       Linking.openURL(url);
@@ -59,9 +39,6 @@ export const Menu = (props) => {
     <>
       <DrawerContentScrollView
         accessibilityLabel="Şubadap Çocuk ile ilgili bağlantıları içeren menü"
-        contentContainerStyle={{
-          flexGrow: 1,
-        }}
         {...props}
       >
         <IconDrawerItem

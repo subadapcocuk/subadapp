@@ -3,8 +3,7 @@ import { Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import Toast from "react-native-root-toast";
-import { styles, LoopType, randomInt, useAppContext } from "../helpers";
+import { styles, LoopType, randomInt, useAppContext, error, show } from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
@@ -27,11 +26,11 @@ async function registerForPushNotificationsAsync() {
         finalStatus = status;
       }
       if (finalStatus !== "granted") {
-        Toast.error("Failed to get push token for push notification!");
+        error("Failed to get push token for push notification!");
         return;
       }
     } else {
-      Toast.show("Push notification needs physical device");
+      show("Push notification needs physical device");
     }
 
     if (Platform.OS === "android") {
@@ -43,7 +42,7 @@ async function registerForPushNotificationsAsync() {
       });
     }
   } catch (e) {
-    Toast.error(`Bir hata oluştur: ${e}`);
+    error(`Bir hata oluştur: ${e}`);
   }
 }
 
@@ -88,7 +87,7 @@ const Player = () => {
         playSong();
       }
     } catch (e) {
-      Toast.error(`Bir hata oluştu: ${e}`);
+      error(`Bir hata oluştu: ${e}`);
     }
   };
 
@@ -103,7 +102,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      Toast.error(`Bir hata oluştu: ${e}`);
+      error(`Bir hata oluştu: ${e}`);
     }
   };
 
@@ -118,7 +117,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      Toast.error(`Bir hata oluştu: ${e}`);
+      error(`Bir hata oluştu: ${e}`);
     }
   };
 
@@ -143,11 +142,11 @@ const Player = () => {
         .setIsLoopingAsync(loop === LoopType.RepeatSong)
         .then()
         .catch((e) => {
-          Toast.error(`Bir hata oluştu: ${e}`);
+          error(`Bir hata oluştu: ${e}`);
         });
       player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     } catch (e) {
-      Toast.error(`Bir hata oluştu: ${e}`);
+      error(`Bir hata oluştu: ${e}`);
     }
   }, [loop]);
 
@@ -166,7 +165,7 @@ const Player = () => {
       .then(
         (result) => result.isLoaded && player.setPositionAsync(positionMillis)
       )
-      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`Bir hata oluştu: ${e}`));
   };
 
   const onPlay = () => {
@@ -187,7 +186,7 @@ const Player = () => {
           }
         }
       })
-      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`Bir hata oluştu: ${e}`));
   };
 
   const playSong = () => {
@@ -212,10 +211,10 @@ const Player = () => {
             .then(() =>
               player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
             )
-            .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+            .catch((e) => error(`Bir hata oluştu: ${e}`));
         }
       })
-      .catch((e) => Toast.error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`Bir hata oluştu: ${e}`));
   };
 
   return (
