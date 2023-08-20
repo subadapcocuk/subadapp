@@ -29,5 +29,5 @@ export const show = (
 export const error = (
   message
 ) => {
-  Toast.show(message);
+  console.error(message);
 };

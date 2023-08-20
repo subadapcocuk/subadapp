@@ -83,11 +83,10 @@ const Player = () => {
           current: songs[randomInt(songs.length)],
           index: -1,
         });
-      } else {
-        playSong();
       }
+      playSong();
     } catch (e) {
-      error(`Bir hata oluştu: ${e}`);
+      error(`${e}`);
     }
   };
 
@@ -102,7 +101,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      error(`Bir hata oluştu: ${e}`);
+      error(`${e}`);
     }
   };
 
@@ -117,7 +116,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      error(`Bir hata oluştu: ${e}`);
+      error(`${e}`);
     }
   };
 
@@ -133,20 +132,16 @@ const Player = () => {
   });
 
   useEffect(() => {
-    playSong();
-  }, [playlist?.current]);
-
-  useEffect(() => {
     try {
       player
         .setIsLoopingAsync(loop === LoopType.RepeatSong)
         .then()
         .catch((e) => {
-          error(`Bir hata oluştu: ${e}`);
+          error(`${e}`);
         });
       player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
     } catch (e) {
-      error(`Bir hata oluştu: ${e}`);
+      error(`${e}`);
     }
   }, [loop]);
 
@@ -165,7 +160,7 @@ const Player = () => {
       .then(
         (result) => result.isLoaded && player.setPositionAsync(positionMillis)
       )
-      .catch((e) => error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`${e}`));
   };
 
   const onPlay = () => {
@@ -186,7 +181,7 @@ const Player = () => {
           }
         }
       })
-      .catch((e) => error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`${e}`));
   };
 
   const playSong = () => {
@@ -211,10 +206,10 @@ const Player = () => {
             .then(() =>
               player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
             )
-            .catch((e) => error(`Bir hata oluştu: ${e}`));
+            .catch((e) => error(`${e}`));
         }
       })
-      .catch((e) => error(`Bir hata oluştu: ${e}`));
+      .catch((e) => error(`${e}`));
   };
 
   return (
