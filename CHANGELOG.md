@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.21.2](https://github.com/subadapcocuk/subadapp/compare/v0.21.1...v0.21.2) (2023-08-20)
+
+- Her başlatmada şarkıyı hemen başlatma düzeltildi
+
 ## [0.21.1](https://github.com/subadapcocuk/subadapp/compare/v0.21.0...v0.21.1) (2023-08-18)
 
 - Geliştirme paketleri güncellendi
