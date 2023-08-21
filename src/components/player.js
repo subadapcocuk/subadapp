@@ -61,12 +61,47 @@ const Player = () => {
         setNotification(notification);
       });
 
+    Audio.setAudioModeAsync({
+      staysActiveInBackground: true,
+      playsInSilentModeIOS: true,
+      // reduce sound of other apps
+      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
+      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
+    })
+
     return () => {
       Notifications.removeNotificationSubscription(
         notificationListener.current
       );
     };
   }, []);
+
+  useEffect(() => {
+    playSong();
+  }, [playlist?.current]);
+
+  useEffect(() => {
+    try {
+      player
+        .setIsLoopingAsync(loop === LoopType.RepeatSong)
+        .then()
+        .catch((e) => {
+          error(`${e}`);
+        });
+      player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
+    } catch (e) {
+      error(`${e}`);
+    }
+  }, [loop]);
+
+  const onPlaybackStatusUpdate = (status) => {
+    if (status.isLoaded) {
+      setStatus(status);
+    }
+    if (status.didJustFinish && !status.isLooping) {
+      nextTrack();
+    }
+  };
 
   const randomTrack = () => {
     try {
@@ -84,7 +119,9 @@ const Player = () => {
           index: -1,
         });
       }
-      playSong();
+      else {
+        playSong();
+      }
     } catch (e) {
       error(`${e}`);
     }
@@ -117,40 +154,6 @@ const Player = () => {
       }
     } catch (e) {
       error(`${e}`);
-    }
-  };
-
-  useEffect(() => {
-    Audio.setAudioModeAsync({
-      staysActiveInBackground: true,
-      playsInSilentModeIOS: true,
-      // reduce sound of other apps
-      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
-      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
-    }),
-      [];
-  });
-
-  useEffect(() => {
-    try {
-      player
-        .setIsLoopingAsync(loop === LoopType.RepeatSong)
-        .then()
-        .catch((e) => {
-          error(`${e}`);
-        });
-      player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-    } catch (e) {
-      error(`${e}`);
-    }
-  }, [loop]);
-
-  const onPlaybackStatusUpdate = (status) => {
-    if (status.isLoaded) {
-      setStatus(status);
-    }
-    if (status.didJustFinish && !status.isLooping) {
-      nextTrack();
     }
   };
 

@@ -10,7 +10,6 @@ const SONGS = "https://ansiklopedi.subadapcocuk.org/subadapp.json";
 export const ContextProvider = ({ children }) => {
   const [loop, setLoop] = useState(0);
   const [songs, setSongs] = useState([]);
-  //const [albums, setAlbums] = useState([]);
   const [highlights, setHighlights] = useState([]);
   const [playlist, setPlaylist] = useState({
     list: [],
@@ -22,7 +21,7 @@ export const ContextProvider = ({ children }) => {
     AsyncStorage.getItem(SUBADAP_PLAYLIST)
       .then((value) => {
         if (value) {
-          setPlaylist(JSON.parse(value));
+          setPlaylist({ ...JSON.parse(value), current: null });
         }
       })
       .catch((e) => error(`Veri okunamadı: ${e}`));
@@ -37,7 +36,6 @@ export const ContextProvider = ({ children }) => {
       .then((response) => response.json())
       .then((data) => {
         setSongs(data["songs"]);
-        //setAlbums(data["albums"]);
         setHighlights(data["highlights"]);
       })
       .catch((e) => error(`Şarkılar okunamadı: ${e}`));
@@ -54,7 +52,6 @@ export const ContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        //albums,
         songs,
         highlights,
         playlist,

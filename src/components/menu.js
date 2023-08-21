@@ -11,6 +11,7 @@ import {
   faMusic,
   faQuestion,
   faShare,
+  faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCreativeCommonsNc,
@@ -105,6 +106,13 @@ export const Menu = (props) => {
           }
           icon={faCreativeCommonsNc}
           label="Copyleft"
+        />
+        <IconDrawerItem
+          onPress={() =>
+            openURL("https://subadapcocuk.org/gizlilik-politikasi/")
+          }
+          icon={faUserShield}
+          label="Gizlilik Politikası"
         />
         <IconDrawerItem
           onPress={() => setAbout(true)}
