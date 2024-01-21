@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.23.1](https://github.com/subadapcocuk/subadapp/compare/v0.23.0...v0.23.1) (2024-01-21)
+
 ## [0.23.0](https://github.com/subadapcocuk/subadapp/compare/v0.22.0...v0.23.0) (2024-01-20)
 
 - Exponun son sürümüne ([v50](https://github.com/expo/expo/blob/main/CHANGELOG.md#5000--2023-12-12)) yükseltildi
