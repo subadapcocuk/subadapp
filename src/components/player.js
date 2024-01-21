@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
@@ -42,7 +42,7 @@ async function registerForPushNotificationsAsync() {
       });
     }
   } catch (e) {
-    error(`Bir hata oluştur: ${e}`);
+    error(`Bir hata oluştu: ${e}`);
   }
 }
 

@@ -1,4 +1,4 @@
-import { StyleSheet, Dimensions, PixelRatio } from "react-native";
+import { StyleSheet, Dimensions, PixelRatio, Platform } from "react-native";
 export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
