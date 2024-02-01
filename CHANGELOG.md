@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.23.2](https://github.com/subadapcocuk/subadapp/compare/v0.23.1...v0.23.2) (2024-02-01)
+
 ## [0.23.1](https://github.com/subadapcocuk/subadapp/compare/v0.23.0...v0.23.1) (2024-01-21)
 
 ## [0.23.0](https://github.com/subadapcocuk/subadapp/compare/v0.22.0...v0.23.0) (2024-01-20)
