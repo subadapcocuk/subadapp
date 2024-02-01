@@ -65,7 +65,7 @@ export const Menu = (props) => {
           label="Kreosus"
         />
         <IconDrawerItem
-          onPress={() => openURL("https://bio.biolinktr.com/subadap")}
+          onPress={() => openURL("https://www.songkick.com/artists/10186443-subadap-cocuk/calendar")}
           icon={faCalendarDays}
           label="Konserler"
         />
