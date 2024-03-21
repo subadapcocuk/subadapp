@@ -7,7 +7,7 @@
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
-        "resourceClass": "m1-medium"
+        "resourceClass": "medium"
       }
     },
     "production": {
@@ -15,7 +15,7 @@
         "buildType": "app-bundle"
       },
       "ios": {
-        "resourceClass": "m1-medium"
+        "resourceClass": "medium"
       }
     }
   },
