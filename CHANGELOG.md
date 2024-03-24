@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.23.4](https://github.com/subadapcocuk/subadapp/compare/v0.23.3...v0.23.4) (2024-03-24)
+
 ## [0.23.3](https://github.com/subadapcocuk/subadapp/compare/v0.23.2...v0.23.3) (2024-02-01)
 
 - Konser bağlantısı güncellendi.
