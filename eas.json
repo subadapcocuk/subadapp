@@ -15,7 +15,8 @@
         "buildType": "app-bundle"
       },
       "ios": {
-        "resourceClass": "medium"
+        "resourceClass": "medium",
+        "image": "latest"
       }
     }
   },

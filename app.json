@@ -18,9 +18,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "plugins": [
       [
         "expo-av",
@@ -36,7 +34,10 @@
       "config": {
         "usesNonExemptEncryption": false
       },
-      "appStoreUrl": "https://apps.apple.com/tr/app/%C5%9Fubadapp/id1669825799"
+      "appStoreUrl": "https://apps.apple.com/tr/app/%C5%9Fubadapp/id1669825799",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "This app doesn't use the microphone, this permission is required for Audio playing."
+      }
     },
     "android": {
       "googleServicesFile": "./google-services.json",
@@ -44,9 +45,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "blockedPermissions": [
-        "android.permission.RECORD_AUDIO"
-      ],
+      "blockedPermissions": ["android.permission.RECORD_AUDIO"],
       "package": "org.subadapp",
       "versionCode": 500002304,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=org.subadapp"
