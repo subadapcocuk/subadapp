@@ -22,6 +22,7 @@ import {
   normalize,
   BACKGROUND,
   show,
+  error,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
 import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
@@ -194,7 +195,11 @@ export const Playlist = ({ navigation, route }) => {
                 song={playlist.current}
                 openURL={(url) => {
                   if (Platform.OS === "ios") {
-                    Linking.openURL(url);
+                    try {
+                      Linking.openURL(url);
+                    } catch (e) {
+                      error(`${url} açılamıyor: ${e}`);
+                    }
                   } else {
                     navigation.navigate("Page", { url });
                   }

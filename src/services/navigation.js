@@ -5,8 +5,6 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
 import { Page, Playlist } from "../screens";
 import { FOREGROUND, isLargeScreen } from "../helpers";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { IconPress } from "../components/buttons";
 
 const Drawer = createDrawerNavigator();
 
