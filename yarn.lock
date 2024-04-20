@@ -3,9 +3,9 @@
 
 
 "@0no-co/graphql.web@^1.0.1", "@0no-co/graphql.web@^1.0.5":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@0no-co/graphql.web/-/graphql.web-1.0.6.tgz#3def68bbaf654a301bd910ce3744506cad97ab9a"
-  integrity sha512-KZ7TnwMcQJcFgzjoY623AVxtlDQonkqp3rSz0wb15/jHPyU1v5gynUibEpuutDeoyGJ5Tp+FwxjGyDGDwq3vIw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@0no-co/graphql.web/-/graphql.web-1.0.7.tgz#c7a762c887b3482a79ffa68f63de5e96059a62e4"
+  integrity sha512-E3Qku4mTzdrlwVWGPxklDnME5ANrEGetvYw4i2GCRlppWXXE4QD66j7pwb8HelZwS6LnqEChhrSOGCXpbiu6MQ==
 
 "@ampproject/remapping@^2.2.0":
   version "2.3.0"
@@ -2666,9 +2666,9 @@
     wonka "^6.3.2"
 
 "@urql/core@>=2.3.1", "@urql/core@>=4.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@urql/core/-/core-5.0.0.tgz#690e664cf66f733077c558bf685adbdac2b25823"
-  integrity sha512-kFkZxusq/VBQKEUcQFtf7AilMotLO+oGpE4WFhCiminZm8ZU2aulXSDWla50TaD0pj704FnWlXts6lRm0uHdDg==
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@urql/core/-/core-5.0.1.tgz#05c429ad24fda80b5d78ce746dfec407af98306b"
+  integrity sha512-bTtJDbPGF7UNynGt0E0DgokBeGUL9IU33+k7s/c6dvBUjwO2mOxB0GWNe7fhUcqIJAU1sONYkabTep/OGaxhsQ==
   dependencies:
     "@0no-co/graphql.web" "^1.0.5"
     wonka "^6.3.2"
@@ -3568,9 +3568,9 @@ commander@^9.4.1:
   integrity sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==
 
 commit-and-tag-version@^12.0:
-  version "12.2.0"
-  resolved "https://registry.yarnpkg.com/commit-and-tag-version/-/commit-and-tag-version-12.2.0.tgz#08f3796e86f168397db2d9a987e3c7cf005dbb76"
-  integrity sha512-t8kvDy8dVTCF/j2u7Elt/J3tzCPyh16ssK8ECpj44R6jJiCUJMhWwZ36L652iChvqz4BAem9XU7WyuMYHlmSvA==
+  version "12.4.0"
+  resolved "https://registry.yarnpkg.com/commit-and-tag-version/-/commit-and-tag-version-12.4.0.tgz#4e6792d4be0e1286a5685b54b97cfa7ef5abcce2"
+  integrity sha512-8uZyuGmVPCyq2Bzg/1GkUCdbCTRPrx0bP2hCYyYHTRTruq960WgCf7hYwg2/UiqSrdoZMrRBsHK5eLYeanSTkA==
   dependencies:
     chalk "^2.4.2"
     conventional-changelog "3.1.25"
@@ -3586,6 +3586,7 @@ commit-and-tag-version@^12.0:
     jsdom "^23.2.0"
     semver "^7.5.4"
     w3c-xmlserializer "^5.0.0"
+    yaml "^2.4.1"
     yargs "^17.7.2"
 
 commondir@^1.0.1:
@@ -4387,9 +4388,9 @@ ejs@^3.1.6, ejs@^3.1.7, ejs@^3.1.8:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.668:
-  version "1.4.740"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.740.tgz#89c82421332ee425e5b193e3db2dea019d423419"
-  integrity sha512-Yvg5i+iyv7Xm18BRdVPVm8lc7kgxM3r6iwqCH2zB7QZy1kZRNmd0Zqm0zcD9XoFREE5/5rwIuIAOT+/mzGcnZg==
+  version "1.4.745"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.745.tgz#9c202ce9cbf18a5b5e0ca47145fd127cc4dd2290"
+  integrity sha512-tRbzkaRI5gbUn5DEvF0dV4TQbMZ5CLkWeTAXmpC9IrYT+GE+x76i9p+o3RJ5l9XmdQlI1pPhVtE9uNcJJ0G0EA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -4655,9 +4656,9 @@ expo-asset@~9.0.2:
     md5-file "^3.2.3"
 
 expo-av@~13.10.3:
-  version "13.10.5"
-  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-13.10.5.tgz#cdce4db8c0f896be88cc881994704a251a1e63ff"
-  integrity sha512-w45oCoe+8PunDeM0rh/Ut6UaGh7OjEJOCjAiQy3nCxpA8FaXB17KaqpsvkAXIMvceHYWndH8+D29esUTS6wEsA==
+  version "13.10.6"
+  resolved "https://registry.yarnpkg.com/expo-av/-/expo-av-13.10.6.tgz#ca1b5d0c46a016069f653c1740a25516ffc730a2"
+  integrity sha512-h3c1fg5yhWnP0RIGO+fhgPx6cmh4B4lnKdXR2i69aC3vs5D5Cu+JlzBon1gLIu6eUo2IVfC0RjSLpfQbcJ4doQ==
 
 expo-constants@~15.4.0, expo-constants@~15.4.3, expo-constants@~15.4.5:
   version "15.4.6"
@@ -9569,7 +9570,7 @@ yallist@^4.0.0:
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-4.0.0.tgz#9bb92790d9c0effec63be73519e11a35019a3a72"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml@^2.2.1, yaml@^2.3.4:
+yaml@^2.2.1, yaml@^2.3.4, yaml@^2.4.1:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/yaml/-/yaml-2.4.1.tgz#2e57e0b5e995292c25c75d2658f0664765210eed"
   integrity sha512-pIXzoImaqmfOrL7teGUBt/T7ZDnyeGBWyXQBvOVhLkWLN37GXv8NMLK406UY6dS51JfcQHsmcW5cJ441bHg6Lg==
@@ -9646,6 +9647,6 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zod@^3.22.4:
-  version "3.22.4"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
-  integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
+  version "3.22.5"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.5.tgz#b9b09db03f6700b0d0b75bf0dbf0c5fc46155220"
+  integrity sha512-HqnGsCdVZ2xc0qWPLdO25WnseXThh0kEYKIdV5F/hTHO75hNZFp8thxSeHhiPrHZKrFTo1SOgkAj9po5bexZlw==
