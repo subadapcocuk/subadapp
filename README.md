@@ -7,7 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
 [![Android](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml)
 [![iOS](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml)
-[![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
 [ŞubadApp](https://github.com/subadapcocuk/subadapp),
 [Şubadap Çocuk](https://github.com/subadapcocuk) tarafından
