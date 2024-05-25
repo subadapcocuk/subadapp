@@ -7,7 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/subadapcocuk/subadapp?labelColor=3b444c&logoColor=white&color=32ca55)](https://github.com/subadapcocuk/subadapp/issues)
 [![Android](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/android.yml)
 [![iOS](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/ios.yml)
-[![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/subadapcocuk/subadapp/actions/workflows/codeql-analysis.yml)
 
 [ŞubadApp](https://github.com/subadapcocuk/subadapp),
 [Şubadap Çocuk](https://github.com/subadapcocuk) tarafından
@@ -60,13 +60,15 @@ kullanabilirsiniz:
 - `yarn start`: Expo sunucusunu başlatır.
 - `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
   başlatmanız gerekiyor.
-- `yarn ios`: IOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
+- `yarn ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
   gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
 - `yarn build:android`: Android paketi oluşturur. APK dosyasını yerelde
   kaydetmesi için `--local` argümanıyla çalıştırın.
-- `yarn build:ios`: IOS paket oluşturur.
+- `yarn build:ios`: iOS paket oluşturur.
 - `yarn build:all`: Tüm paketleri oluşturur.
+- `yarn submit:android`: Android paketini Play Store'a gönderir.
+- `yarn submit:ios`: iOS paketini App Store'a gönderir.
 
 Tüm albümler ve şarkılar
 [subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json) olarak
