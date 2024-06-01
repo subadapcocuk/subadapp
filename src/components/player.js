@@ -3,7 +3,14 @@ import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
 import * as Notifications from "expo-notifications";
-import { styles, LoopType, randomInt, useAppContext, error, show } from "../helpers";
+import {
+  styles,
+  LoopType,
+  randomInt,
+  useAppContext,
+  error,
+  show,
+} from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
@@ -42,7 +49,7 @@ async function registerForPushNotificationsAsync() {
       });
     }
   } catch (e) {
-    error(`Bir hata oluştu: ${e}`);
+    error(`registerForPushNotificationsAsync: ${e}`);
   }
 }
 
@@ -67,7 +74,7 @@ const Player = () => {
       // reduce sound of other apps
       interruptionModeIOS: InterruptionModeIOS.DuckOthers,
       interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
-    })
+    });
 
     return () => {
       Notifications.removeNotificationSubscription(
@@ -81,17 +88,13 @@ const Player = () => {
   }, [playlist?.current]);
 
   useEffect(() => {
-    try {
-      player
-        .setIsLoopingAsync(loop === LoopType.RepeatSong)
-        .then()
-        .catch((e) => {
-          error(`${e}`);
-        });
-      player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-    } catch (e) {
-      error(`${e}`);
-    }
+    player
+      .setStatusAsync({ isLooping: loop === LoopType.RepeatSong })
+      .then()
+      .catch((e) => {
+        error(`setIsLoopingAsync ${e}`);
+      });
+    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
   }, [loop]);
 
   const onPlaybackStatusUpdate = (status) => {
@@ -118,12 +121,11 @@ const Player = () => {
           current: songs[randomInt(songs.length)],
           index: -1,
         });
-      }
-      else {
+      } else {
         playSong();
       }
     } catch (e) {
-      error(`${e}`);
+      error(`randomTrack ${e}`);
     }
   };
 
@@ -138,7 +140,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      error(`${e}`);
+      error(`previousTrack ${e}`);
     }
   };
 
@@ -153,7 +155,7 @@ const Player = () => {
         setPlaylist({ ...playlist, ...{ index, current } });
       }
     } catch (e) {
-      error(`${e}`);
+      error(`nextTrack ${e}`);
     }
   };
 
@@ -163,7 +165,7 @@ const Player = () => {
       .then(
         (result) => result.isLoaded && player.setPositionAsync(positionMillis)
       )
-      .catch((e) => error(`${e}`));
+      .catch((e) => error(`onSeek ${e}`));
   };
 
   const onPlay = () => {
@@ -184,7 +186,7 @@ const Player = () => {
           }
         }
       })
-      .catch((e) => error(`${e}`));
+      .catch((e) => error(`onPlay ${e}`));
   };
 
   const playSong = () => {
@@ -209,10 +211,10 @@ const Player = () => {
             .then(() =>
               player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
             )
-            .catch((e) => error(`${e}`));
+            .catch((e) => error(`loadAsync ${e}`));
         }
       })
-      .catch((e) => error(`${e}`));
+      .catch((e) => error(`unloadAsync ${e}`));
   };
 
   return (
