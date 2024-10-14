@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
+import * as FileSystem from "expo-file-system";
 import * as Notifications from "expo-notifications";
 import {
   styles,
@@ -14,6 +15,8 @@ import {
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
+const DOCUMENT_FOLDER = `${FileSystem.documentDirectory}`;
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -21,6 +24,22 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+
+const saveRecording = async (uri) => {
+  // Get just the name and extension of the recording file created from the URI path.
+  const fileName = uri.match(/\/Library\/Caches\/AV\/([^\/]+)$/)[1];
+  const fileUri = `${DOCUMENT_FOLDER}/subadapp/${fileName}`
+  const fileInfo = await FileSystem.getInfoAsync(fileUri);
+
+  // Check if file already exists, if not download it
+  if (!fileInfo.exists) {
+    // Download the file that were in the URI to the file path.
+    console.log(`Download ${uri} to ${fileUri}`);
+    await FileSystem.downloadAsync({ uri: uri, fileUri: filePath });
+  }
+  console.log(`Returning ${fileUri}`);
+  return fileUri;
+}
 
 async function registerForPushNotificationsAsync() {
   try {
@@ -195,23 +214,26 @@ const Player = () => {
       .unloadAsync()
       .then(() => {
         if (playlist?.current) {
-          player
-            .loadAsync(
-              { uri: playlist.current.url },
-              {
-                shouldPlay: true,
-                rate: status.rate,
-                shouldCorrectPitch: status.shouldCorrectPitch,
-                volume: status.volume,
-                isMuted: status.muted,
-                isLooping: loop === LoopType.RepeatSong,
-                progressUpdateIntervalMillis: 1000,
-              }
-            )
-            .then(() =>
-              player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
-            )
-            .catch((e) => error(`loadAsync ${e}`));
+          // first download the song
+          saveRecording(playlist.current.url).then((filePath) => {
+            player
+              .loadAsync(
+                { uri: filePath },
+                {
+                  shouldPlay: true,
+                  rate: status.rate,
+                  shouldCorrectPitch: status.shouldCorrectPitch,
+                  volume: status.volume,
+                  isMuted: status.muted,
+                  isLooping: loop === LoopType.RepeatSong,
+                  progressUpdateIntervalMillis: 1000,
+                }
+              )
+              .then(() =>
+                player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
+              )
+              .catch((e) => error(`loadAsync ${e}`));
+          }).catch((e) => error(`saveRecording ${e}`))
         }
       })
       .catch((e) => error(`unloadAsync ${e}`));
