@@ -15,8 +15,6 @@ import {
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-const DOCUMENT_FOLDER = `${FileSystem.documentDirectory}`;
-
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -25,10 +23,10 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const saveRecording = async (uri) => {
+const saveSong = async (uri) => {
   // Get just the name and extension of the recording file created from the URI path.
   const fileName = uri.match(/\/Library\/Caches\/AV\/([^\/]+)$/)[1];
-  const fileUri = `${DOCUMENT_FOLDER}/subadapp/${fileName}`
+  const fileUri = `${FileSystem.cacheDirectory}subadapp/${fileName}`
   const fileInfo = await FileSystem.getInfoAsync(fileUri);
 
   // Check if file already exists, if not download it
@@ -215,7 +213,7 @@ const Player = () => {
       .then(() => {
         if (playlist?.current) {
           // first download the song
-          saveRecording(playlist.current.url).then((filePath) => {
+          saveSong(playlist.current.url).then((filePath) => {
             player
               .loadAsync(
                 { uri: filePath },
