@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
+import * as FileSystem from "expo-file-system";
 import * as Notifications from "expo-notifications";
 import {
   styles,
@@ -21,6 +22,25 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   }),
 });
+
+async function saveSong(uri) {
+  const fileName = uri.substring(uri.lastIndexOf('/') + 1);
+  const fileFolder = `${FileSystem.cacheDirectory}subadapp/`
+  const folderInfo = await FileSystem.getInfoAsync(fileFolder);
+  if (!folderInfo.exists) {
+    // create cache folder if it doesn't exists
+    await FileSystem.makeDirectoryAsync(fileFolder)
+  }
+  const fileUri = `${fileFolder}${fileName}`
+  const fileInfo = await FileSystem.getInfoAsync(fileUri);
+  if (!fileInfo.exists) {
+    // Download if file doesn't exist
+    await FileSystem.downloadAsync(uri, fileUri);
+    return fileUri;
+  } else {
+    return fileUri;
+  }
+}
 
 async function registerForPushNotificationsAsync() {
   try {
@@ -195,23 +215,27 @@ const Player = () => {
       .unloadAsync()
       .then(() => {
         if (playlist?.current) {
-          player
-            .loadAsync(
-              { uri: playlist.current.url },
-              {
-                shouldPlay: true,
-                rate: status.rate,
-                shouldCorrectPitch: status.shouldCorrectPitch,
-                volume: status.volume,
-                isMuted: status.muted,
-                isLooping: loop === LoopType.RepeatSong,
-                progressUpdateIntervalMillis: 1000,
-              }
-            )
-            .then(() =>
-              player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
-            )
-            .catch((e) => error(`loadAsync ${e}`));
+          // first download the song
+          saveSong(playlist.current.url).then((filePath) => {
+            console.log(filePath)
+            player
+              .loadAsync(
+                { uri: filePath },
+                {
+                  shouldPlay: true,
+                  rate: status.rate,
+                  shouldCorrectPitch: status.shouldCorrectPitch,
+                  volume: status.volume,
+                  isMuted: status.muted,
+                  isLooping: loop === LoopType.RepeatSong,
+                  progressUpdateIntervalMillis: 1000,
+                }
+              )
+              .then(() =>
+                player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
+              )
+              .catch((e) => error(`loadAsync ${e}`));
+          }).catch((e) => error(`saveSong ${e}`))
         }
       })
       .catch((e) => error(`unloadAsync ${e}`));
