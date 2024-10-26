@@ -23,20 +23,23 @@ Notifications.setNotificationHandler({
   }),
 });
 
-const saveSong = async (uri) => {
-  // Get just the name and extension of the recording file created from the URI path.
-  const fileName = uri.match(/\/Library\/Caches\/AV\/([^\/]+)$/)[1];
-  const fileUri = `${FileSystem.cacheDirectory}subadapp/${fileName}`
-  const fileInfo = await FileSystem.getInfoAsync(fileUri);
-
-  // Check if file already exists, if not download it
-  if (!fileInfo.exists) {
-    // Download the file that were in the URI to the file path.
-    console.log(`Download ${uri} to ${fileUri}`);
-    await FileSystem.downloadAsync({ uri: uri, fileUri: filePath });
+async function saveSong(uri) {
+  const fileName = uri.substring(uri.lastIndexOf('/') + 1);
+  const fileFolder = `${FileSystem.cacheDirectory}subadapp/`
+  const folderInfo = await FileSystem.getInfoAsync(fileFolder);
+  if (!folderInfo.exists) {
+    // create cache folder if it doesn't exists
+    await FileSystem.makeDirectoryAsync(fileFolder)
   }
-  console.log(`Returning ${fileUri}`);
-  return fileUri;
+  const fileUri = `${fileFolder}${fileName}`
+  const fileInfo = await FileSystem.getInfoAsync(fileUri);
+  if (!fileInfo.exists) {
+    // Download if file doesn't exist
+    await FileSystem.downloadAsync(uri, fileUri);
+    return fileUri;
+  } else {
+    return fileUri;
+  }
 }
 
 async function registerForPushNotificationsAsync() {
@@ -214,6 +217,7 @@ const Player = () => {
         if (playlist?.current) {
           // first download the song
           saveSong(playlist.current.url).then((filePath) => {
+            console.log(filePath)
             player
               .loadAsync(
                 { uri: filePath },
