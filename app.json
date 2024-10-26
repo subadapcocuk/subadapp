@@ -2,7 +2,7 @@
   "expo": {
     "name": "ŞubadApp",
     "slug": "subadapp",
-    "version": "0.23.6",
+    "version": "0.24.0",
     "description": "",
     "scheme": "subadapp",
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
@@ -31,7 +31,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "0.23.6",
+      "buildNumber": "0.24.0",
       "bundleIdentifier": "subadapp",
       "config": {
         "usesNonExemptEncryption": false
@@ -44,19 +44,27 @@
         "NSPrivacyAccessedAPITypes": [
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategorySystemBootTime",
-            "NSPrivacyAccessedAPITypeReasons": ["35F9.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "35F9.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryUserDefaults",
-            "NSPrivacyAccessedAPITypeReasons": ["CA92.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "CA92.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryFileTimestamp",
-            "NSPrivacyAccessedAPITypeReasons": ["DDA9.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "DDA9.1"
+            ]
           },
           {
             "NSPrivacyAccessedAPIType": "NSPrivacyAccessedAPICategoryDiskSpace",
-            "NSPrivacyAccessedAPITypeReasons": ["E174.1"]
+            "NSPrivacyAccessedAPITypeReasons": [
+              "E174.1"
+            ]
           }
         ]
       }
@@ -71,7 +79,7 @@
         "android.permission.RECORD_AUDIO"
       ],
       "package": "org.subadapp",
-      "versionCode": 500002306,
+      "versionCode": 510002400,
       "playStoreUrl": "https://play.google.com/store/apps/details?id=org.subadapp"
     },
     "extra": {
