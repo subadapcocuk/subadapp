@@ -235,7 +235,7 @@ const Player = () => {
                 player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
               )
               .catch((e) => error(`loadAsync ${e}`));
-          }).catch((e) => error(`saveRecording ${e}`))
+          }).catch((e) => error(`saveSong ${e}`))
         }
       })
       .catch((e) => error(`unloadAsync ${e}`));
