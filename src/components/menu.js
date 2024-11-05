@@ -39,7 +39,7 @@ export const Menu = (props) => {
   return (
     <>
       <DrawerContentScrollView
-        accessibilityLabel="Şubadap Çocuk ile ilgili bağlantıları içeren menü"
+        accessibilityLabel="Tüm bağlantıları içeren menü"
         {...props}
       >
         <IconDrawerItem

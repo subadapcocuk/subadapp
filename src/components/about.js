@@ -43,15 +43,7 @@ const About = ({ visible, close }) => {
           özgür bir yazılımdır
         </Text>{" "}
         . Tüm şarkılara, kitaplara ve ek bilgilere ulaşmak için{" "}
-        <Text
-          onPress={() =>
-            Linking.openURL("https://ansiklopedi.subadapcocuk.org")
-          }
-          style={styles.link}
-        >
-          Şubadap Çocuk Ansiklopedisi
-        </Text>
-        'ne bakabilirsiniz.
+        <Text onPress={() => Linking.openURL("https://ansiklopedi.subadapcocuk.org")} style={styles.link}>ansiklopediye</Text> bakabilirsiniz.
       </Dialog.Description>
       <Dialog.Button label="Tamam" onPress={close} style={styles.text} />
     </Dialog.Container>
