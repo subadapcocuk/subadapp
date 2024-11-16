@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
-import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
+import TrackPlayer, { Capability, AppKilledPlaybackBehavior, useProgress, usePlaybackState, State } from "react-native-track-player";
 import * as Device from "expo-device";
 import * as FileSystem from "expo-file-system";
 import * as Notifications from "expo-notifications";
@@ -74,13 +74,33 @@ async function registerForPushNotificationsAsync() {
 }
 
 const Player = () => {
-  const [status, setStatus] = useState({});
-  const [player, setPlayer] = useState(new Audio.Sound());
   const { playlist, setPlaylist, loop, songs } = useAppContext();
   const [notification, setNotification] = useState(null);
   const notificationListener = useRef();
+  const progress = useProgress();
+  const state = usePlaybackState();
 
-  useEffect(() => {
+  const setupPlayer = async () => {
+    await TrackPlayer.setupPlayer();
+    TrackPlayer.updateOptions({
+      android: {
+        appKilledPlaybackBehavior: AppKilledPlaybackBehavior.ContinuePlayback,
+      },
+      capabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.JumpForward,
+        Capability.JumpBackward,
+      ],
+      compactCapabilities: [
+        Capability.Play,
+        Capability.Pause,
+        Capability.SkipToNext,
+      ],
+    });
+  };
+
+  const setupNotifications = () => {
     registerForPushNotificationsAsync();
 
     notificationListener.current =
@@ -88,26 +108,26 @@ const Player = () => {
         setNotification(notification);
       });
 
-    Audio.setAudioModeAsync({
-      staysActiveInBackground: true,
-      playsInSilentModeIOS: true,
-      // reduce sound of other apps
-      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
-      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
-    });
-
     return () => {
       Notifications.removeNotificationSubscription(
         notificationListener.current
       );
     };
+  }
+
+  useEffect(() => {
+    setupPlayer();
+  }, [])
+
+  useEffect(() => {
+    setupNotifications();
   }, []);
 
   useEffect(() => {
     playSong();
   }, [playlist?.current]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     player
       .setStatusAsync({ isLooping: loop === LoopType.RepeatSong })
       .then()
@@ -124,7 +144,7 @@ const Player = () => {
     if (status.didJustFinish && !status.isLooping) {
       nextTrack();
     }
-  };
+  };*/
 
   const randomTrack = () => {
     try {
@@ -180,61 +200,45 @@ const Player = () => {
   };
 
   const onSeek = (positionMillis) => {
-    player
-      .getStatusAsync()
-      .then(
-        (result) => result.isLoaded && player.setPositionAsync(positionMillis)
-      )
-      .catch((e) => error(`onSeek ${e}`));
+    try {
+      if (state === State.Ready) {
+        TrackPlayer.seekTo(positionMillis);
+      }
+    } catch (e) {
+      error(`onSeek ${e}`);
+    }
   };
 
   const onPlay = () => {
-    player
-      .getStatusAsync()
-      .then((result) => {
-        if (result.isLoaded) {
-          if (result.isPlaying) {
-            player.pauseAsync();
-          } else {
-            player.playAsync();
-          }
-        } else {
-          if (loop === LoopType.RandomList) {
-            randomTrack();
-          } else {
-            playSong();
-          }
-        }
-      })
-      .catch((e) => error(`onPlay ${e}`));
+    //TODO state.ended?
+    if (state === State.Ready) {
+      if (state === State.Playing) {
+        TrackPlayer.pause();
+      } else {
+        TrackPlayer.play();
+      }
+    } else {
+      if (loop === LoopType.RandomList) {
+        randomTrack();
+      } else {
+        playSong();
+      }
+    }
   };
 
   const playSong = () => {
     //unload previous song
-    player
-      .unloadAsync()
+    TrackPlayer
+      .reset()
       .then(() => {
         if (playlist?.current) {
           // first download the song
           saveSong(playlist.current.url).then((filePath) => {
-            console.log(filePath)
-            player
-              .loadAsync(
-                { uri: filePath },
-                {
-                  shouldPlay: true,
-                  rate: status.rate,
-                  shouldCorrectPitch: status.shouldCorrectPitch,
-                  volume: status.volume,
-                  isMuted: status.muted,
-                  isLooping: loop === LoopType.RepeatSong,
-                  progressUpdateIntervalMillis: 1000,
-                }
-              )
-              .then(() =>
-                player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
-              )
-              .catch((e) => error(`loadAsync ${e}`));
+            TrackPlayer.add([
+              {
+                url: filePath
+              }
+            ]).then(() => TrackPlayer.play()).catch((e) => error(`add and play ${e}`))
           }).catch((e) => error(`saveSong ${e}`))
         }
       })
@@ -259,13 +263,13 @@ const Player = () => {
         </TouchableOpacity>
       )}
       <SeekBar
-        isPlaying={status.isLoaded}
+        isPlaying={state === State.Playing}
         onSeek={onSeek}
-        trackLength={status.positionMillis ? status.durationMillis : 1}
-        currentPosition={status.positionMillis ? status.positionMillis : 0}
+        trackLength={progress.duration ? progress.duration : 1}
+        currentPosition={progress.position ? progress.position : 0}
       />
       <PlayerControls
-        isPlaying={playlist?.current && status.isPlaying}
+        isPlaying={playlist?.current && state === State.Playing}
         onForward={nextTrack}
         onBackward={previousTrack}
         onPlay={onPlay}
