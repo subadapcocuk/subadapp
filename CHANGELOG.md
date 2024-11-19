@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.24.2](https://github.com/subadapcocuk/subadapp/compare/v0.24.1...v0.24.2) (2024-11-19)
+
+- Logo boyutları düzenlendi
+- Expo'nun son sürümüne yükseltildi
+
 ## [0.24.1](https://github.com/subadapcocuk/subadapp/compare/v0.23.6...v0.24.1) (2024-11-05)
 
 - Ufak düzeltmeler yapıldı.

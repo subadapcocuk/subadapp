@@ -29,8 +29,6 @@ tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 
 - Hata bildirimlerini şu bağlantıdan yapabilirsiniz:
   <https://github.com/subadapcocuk/subadapp/issues>
-- Mevcut geliştirme ve sonraki sürüm hedeflerini projeler sayfasında
-  görebilirsiniz: <https://github.com/subadapcocuk/subadapp/projects/>
 - Fikirleriniz, sorularınız, genel düşünceleriniz varsa tartışma kısmına
   bakabilirsiniz: <https://github.com/subadapcocuk/subadapp/discussions>
 
