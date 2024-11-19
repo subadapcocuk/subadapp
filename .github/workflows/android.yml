@@ -33,7 +33,7 @@ jobs:
         id: currenttag
       - name: Rename AAB
         run: mv build-*.aab subadapp-${{ steps.currenttag.outputs.tag }}.aab
-      - uses: softprops/action-gh-release@v1
+      - uses: softprops/action-gh-release@v2
         with:
           files: subadapp-${{ steps.currenttag.outputs.tag }}.aab
           tag_name: ${{ steps.currenttag.outputs.tag }}
