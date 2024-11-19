@@ -38,7 +38,8 @@
       },
       "appStoreUrl": "https://apps.apple.com/tr/app/%C5%9Fubadapp/id1669825799",
       "infoPlist": {
-        "NSMicrophoneUsageDescription": "This app doesn't use the microphone, this permission is required for Audio playing."
+        "NSMicrophoneUsageDescription": "This app doesn't use the microphone, this permission is required for Audio playing.",
+        "UIBackgroundModes": ["audio"]
       },
       "privacyManifests": {
         "NSPrivacyAccessedAPITypes": [
