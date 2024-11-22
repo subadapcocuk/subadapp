@@ -45,8 +45,7 @@ uygulamaları aşağıdaki gibi kurabilirsiniz:
 - [node](https://nodejs.org/en/download/) (kurmak için
   [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
 - [yarn](https://classic.yarnpkg.com/): `npm install --global yarn`.
-- [expo-cli](https://docs.expo.dev/workflow/expo-cli/):
-  `npm install -g expo-cli` (bu aracı kurmanız zorunlu değil)
+- [eas-cli](https://github.com/expo/eas-cli): `npm install -g eas-cli`
 
 Ortam hazır olduktan sonra aşağıdaki betikleri projenin olduğu dizinde
 kullanabilirsiniz:
@@ -61,8 +60,8 @@ kullanabilirsiniz:
 - `yarn ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
   gerekiyor.
 - `yarn web`: Tarayıcıda görüntülemek için.
-- `yarn build:android`: Android paketi oluşturur. APK dosyasını yerelde
-  kaydetmesi için `--local` argümanıyla çalıştırın.
+- `yarn build:android`: Android paketi oluşturur.
+- `yarn build:apk`: APK dosyasını yerelde oluşturur.
 - `yarn build:ios`: iOS paket oluşturur.
 - `yarn build:all`: Tüm paketleri oluşturur.
 - `yarn submit:android`: Android paketini Play Store'a gönderir.

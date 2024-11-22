@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { ScrollView, Text, View } from "react-native";
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
   faFolderOpen,
   faRandom,
@@ -25,10 +26,12 @@ import {
   error,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
+//import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
 import { IconPress, TextInputIcon } from "../components/buttons";
 import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
+
+const Tab = createMaterialTopTabNavigator();
 
 export const Playlist = ({ navigation, route }) => {
   const [order, setOrder] = useState(2);
@@ -145,17 +148,9 @@ export const Playlist = ({ navigation, route }) => {
 
   return (
     <>
-      <Tabs
-        value={tabIndex}
-        onChange={setTabIndex}
-        titles={["Şarkılar", "Çalma Listesi"]}
-      />
-      <AnimatedTabView value={tabIndex} onChange={setTabIndex}>
-        <TabViewItem
-          selected={tabIndex === 0}
-          accessibilityLabel={"Tüm Şarkıların Listesi"}
-        >
-          <>
+      <Tab.Navigator>
+        <Tab.Screen name="Şarkılar"
+          component={<>
             <View style={styles.centerView}>
               <TextInputIcon
                 placeholder={"şarkı ara"}
@@ -183,13 +178,10 @@ export const Playlist = ({ navigation, route }) => {
                 />
               ))}
             </ScrollView>
-          </>
-        </TabViewItem>
-        <TabViewItem
-          selected={tabIndex === 1}
-          accessibilityLabel={"Oynatma Listesi"}
-        >
-          <ScrollView style={styles.scrollView} persistentScrollbar>
+          </>}
+        />
+        <Tab.Screen name="Çalma Listesi"
+          component={<ScrollView style={styles.scrollView} persistentScrollbar>
             {playlist?.current && (
               <SongDetail
                 song={playlist.current}
@@ -256,18 +248,20 @@ export const Playlist = ({ navigation, route }) => {
                 />
               );
             })}
-          </ScrollView>
-        </TabViewItem>
-      </AnimatedTabView>
-      <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
-      {saveDialogVisible && (
-        <PromptDialog
-          accessibilityLabel="Kaydedilecek listenin adını gireceğiniz diyalog"
-          description="Listenin adını giriniz"
-          initialValue={playlist?.name}
-          save={handleSavePlaylist}
+          </ScrollView>}
         />
-      )}
+      </Tab.Navigator>
+      <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
+      {
+        saveDialogVisible && (
+          <PromptDialog
+            accessibilityLabel="Kaydedilecek listenin adını gireceğiniz diyalog"
+            description="Listenin adını giriniz"
+            initialValue={playlist?.name}
+            save={handleSavePlaylist}
+          />
+        )
+      }
     </>
   );
 };

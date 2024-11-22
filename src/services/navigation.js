@@ -30,7 +30,11 @@ export const NavigationService = () => {
           component={Playlist}
           options={{ title: "" }}
         />
-        <Drawer.Screen name="Page" component={Page} options={{ title: "" }} />
+        <Drawer.Screen
+          name="Page"
+          component={Page}
+          options={{ title: "" }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
