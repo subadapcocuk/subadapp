@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Platform } from "react-native";
 import { ScrollView, Text, View } from "react-native";
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   faFolderOpen,
+  faList,
+  faMusic,
   faRandom,
   faReplyAll,
   faSave,
@@ -26,14 +28,15 @@ import {
   error,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-//import { AnimatedTabView, Tabs, TabViewItem } from "../components/tabs";
-import { IconPress, TextInputIcon } from "../components/buttons";
+import { IconPress, TextInputIcon, IconText } from "../components/buttons";
 import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createBottomTabNavigator();
 
-export const Playlist = ({ navigation, route }) => {
+
+
+export const PlaylistScreen = ({ navigation, route }) => {
   const [order, setOrder] = useState(2);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
@@ -146,110 +149,114 @@ export const Playlist = ({ navigation, route }) => {
     show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
+  const Songs = () => <>
+    <View style={styles.centerView}>
+      <TextInputIcon
+        placeholder={"şarkı ara"}
+        onChangeText={setFilter}
+        value={filter}
+        style={{ width: "60%" }}
+        fontSize={normalize(20)}
+      />
+      <IconPress
+        {...ORDER_TYPES[order]}
+        onPress={() => setOrder(order < 3 ? order + 1 : 0)}
+      />
+    </View>
+    <ScrollView style={styles.scrollView} persistentScrollbar>
+      {sortSongs().map((item) => (
+        <SongItem
+          key={`playlist_song_${item.no}`}
+          song={item}
+          selected={
+            playlist.list.find((no) => no === item.no) !== undefined
+          }
+          highlight={highlights.includes(item.no)}
+          onSwipe={() => toggleSong(item)}
+          onPress={() => clearAndPlay(item)}
+        />
+      ))}
+    </ScrollView>
+  </>
+
+  const Playlist = () => <ScrollView style={styles.scrollView} persistentScrollbar>
+    {playlist?.current && (
+      <SongDetail
+        song={playlist.current}
+        openURL={(url) => {
+          if (Platform.OS === "ios") {
+            try {
+              Linking.openURL(url);
+            } catch (e) {
+              error(`${url} açılamıyor: ${e}`);
+            }
+          } else {
+            navigation.navigate("Page", { url });
+          }
+        }}
+      />
+    )}
+    {playlist?.name && (
+      <Text>Şu an açık olan liste: {playlist.name}</Text>
+    )}
+    <View style={styles.centerView}>
+      <IconPress
+        icon={faFolderOpen}
+        onPress={() => setOpenDialogVisible(true)}
+        text="aç"
+      />
+      <IconPress
+        icon={faSave}
+        onPress={() => setSaveDialogVisible(true)}
+        text="kaydet"
+      />
+      <IconPress
+        icon={faTrash}
+        onPress={clearPlaylist}
+        text="temizle"
+      />
+    </View>
+    <Picker
+      style={{ margin: "auto", backgroundColor: BACKGROUND }}
+      selectedValue={loop}
+      onValueChange={(value) => {
+        setLoop(value);
+      }}
+    >
+      {LOOP_TYPES.map((item, index) => (
+        <Picker.Item
+          key={`LoopType_${item.text}_${index}`}
+          label={item.text}
+          value={index}
+          style={{ fontSize: normalize(20) }}
+        />
+      ))}
+    </Picker>
+    {playlist?.list.map((no, index) => {
+      const item = songs.filter((s) => no === s.no)[0];
+      return (
+        <SongItem
+          key={`playlist_detail_${no}`}
+          song={item}
+          playing={no === playlist?.current?.no}
+          onSwipe={() => toggleSong(item)}
+          onPress={() =>
+            setPlaylist({ ...playlist, current: item, index: index })
+          }
+        />
+      );
+    })}
+  </ScrollView>
+
   return (
     <>
       <Tab.Navigator>
-        <Tab.Screen name="Şarkılar"
-          component={<>
-            <View style={styles.centerView}>
-              <TextInputIcon
-                placeholder={"şarkı ara"}
-                onChangeText={setFilter}
-                value={filter}
-                style={{ width: "60%" }}
-                fontSize={normalize(20)}
-              />
-              <IconPress
-                {...ORDER_TYPES[order]}
-                onPress={() => setOrder(order < 3 ? order + 1 : 0)}
-              />
-            </View>
-            <ScrollView style={styles.scrollView} persistentScrollbar>
-              {sortSongs().map((item) => (
-                <SongItem
-                  key={`playlist_song_${item.no}`}
-                  song={item}
-                  selected={
-                    playlist.list.find((no) => no === item.no) !== undefined
-                  }
-                  highlight={highlights.includes(item.no)}
-                  onSwipe={() => toggleSong(item)}
-                  onPress={() => clearAndPlay(item)}
-                />
-              ))}
-            </ScrollView>
-          </>}
-        />
-        <Tab.Screen name="Çalma Listesi"
-          component={<ScrollView style={styles.scrollView} persistentScrollbar>
-            {playlist?.current && (
-              <SongDetail
-                song={playlist.current}
-                openURL={(url) => {
-                  if (Platform.OS === "ios") {
-                    try {
-                      Linking.openURL(url);
-                    } catch (e) {
-                      error(`${url} açılamıyor: ${e}`);
-                    }
-                  } else {
-                    navigation.navigate("Page", { url });
-                  }
-                }}
-              />
-            )}
-            {playlist?.name && (
-              <Text>Şu an açık olan liste: {playlist.name}</Text>
-            )}
-            <View style={styles.centerView}>
-              <IconPress
-                icon={faFolderOpen}
-                onPress={() => setOpenDialogVisible(true)}
-                text="aç"
-              />
-              <IconPress
-                icon={faSave}
-                onPress={() => setSaveDialogVisible(true)}
-                text="kaydet"
-              />
-              <IconPress
-                icon={faTrash}
-                onPress={clearPlaylist}
-                text="temizle"
-              />
-            </View>
-            <Picker
-              style={{ margin: "auto", backgroundColor: BACKGROUND }}
-              selectedValue={loop}
-              onValueChange={(value) => {
-                setLoop(value);
-              }}
-            >
-              {LOOP_TYPES.map((item, index) => (
-                <Picker.Item
-                  key={`LoopType_${item.text}_${index}`}
-                  label={item.text}
-                  value={index}
-                  style={{ fontSize: normalize(20) }}
-                />
-              ))}
-            </Picker>
-            {playlist?.list.map((no, index) => {
-              const item = songs.filter((s) => no === s.no)[0];
-              return (
-                <SongItem
-                  key={`playlist_detail_${no}`}
-                  song={item}
-                  playing={no === playlist?.current?.no}
-                  onSwipe={() => toggleSong(item)}
-                  onPress={() =>
-                    setPlaylist({ ...playlist, current: item, index: index })
-                  }
-                />
-              );
-            })}
-          </ScrollView>}
-        />
+        <Tab.Screen name="Şarkılar" component={Songs} options={{
+          tabBarIcon: ({ color, size }) => <IconText icon={faMusic} size={size} color={color} />
+        }} />
+        <Tab.Screen name="Çalma Listesi" component={Playlist} options={{
+          tabBarIcon: ({ color, size }) => <IconText icon={faList} size={size} color={color} />
+        }} />
       </Tab.Navigator>
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
       {
@@ -266,4 +273,4 @@ export const Playlist = ({ navigation, route }) => {
   );
 };
 
-export default Playlist;
+export default PlaylistScreen;

@@ -3,7 +3,7 @@ import Constants from "expo-constants";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
-import { Page, Playlist } from "../screens";
+import { Page, PlaylistScreen } from "../screens";
 import { FOREGROUND, isLargeScreen } from "../helpers";
 
 const Drawer = createDrawerNavigator();
@@ -27,7 +27,7 @@ export const NavigationService = () => {
       >
         <Drawer.Screen
           name="Playlist"
-          component={Playlist}
+          component={PlaylistScreen}
           options={{ title: "" }}
         />
         <Drawer.Screen
