@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.25.0](https://github.com/subadapcocuk/subadapp/compare/v0.24.2...v0.25.0) (2024-12-02)
+
+- Üstteki tablar aşağı taşındı 
+
 ## [0.24.2](https://github.com/subadapcocuk/subadapp/compare/v0.24.1...v0.24.2) (2024-11-19)
 
 - Logo boyutları düzenlendi
