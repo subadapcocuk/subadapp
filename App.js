@@ -1,20 +1,19 @@
-import "react-native-gesture-handler";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { RootSiblingParent } from "react-native-root-siblings";
+import "react-native-gesture-handler";
 import "react-native-get-random-values";
-import { NavigationService } from "./src/services/navigation";
-import { ContextProvider } from "./src/helpers/context";
+import Toast from "react-native-toast-message";
 import Player from "./src/components/player";
+import { ContextProvider } from "./src/helpers/context";
+import { NavigationService } from "./src/services/navigation";
 
 export default function App() {
   return (
     <ContextProvider>
-      <RootSiblingParent>
-        <NavigationService />
-        <Player />
-        <StatusBar style="auto" />
-      </RootSiblingParent>
+      <NavigationService />
+      <Player />
+      <StatusBar style="auto" />
+      <Toast />
     </ContextProvider>
   );
 }

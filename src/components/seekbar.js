@@ -27,7 +27,7 @@ const SeekBar = ({
       style={styles.seekBar}
       accessibilityLabel={"şarkı çalma bilgi çubuğu"}
     >
-      <Text style={styles.icon}>{elapsed[0] + ":" + elapsed[1]}</Text>
+      <Text style={styles.text}>{elapsed[0] + ":" + elapsed[1]}</Text>
       <Slider
         style={styles.slider}
         disabled={!isPlaying}
@@ -40,7 +40,7 @@ const SeekBar = ({
         thumbTintColor={isPlaying ? FOREGROUND : GRAY}
         accessibilityLabel={"şarkı çalma çubuğu"}
       />
-      <Text style={styles.icon}>
+      <Text style={styles.text}>
         {trackLength > 1 && "-" + remaining[0] + ":" + remaining[1]}
       </Text>
     </View>

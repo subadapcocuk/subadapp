@@ -45,7 +45,7 @@ export function songText(selected, highlight) {
     color: selected ? BACKGROUND : FOREGROUND,
     borderRadius: 5,
     padding: 5,
-    fontSize: normalize(highlight ? 20 : 18),
+    fontSize: normalize(highlight ? 24 : 20),
     fontWeight: highlight ? "bold" : "normal",
   };
 }
@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: FOREGROUND,
-    fontSize: normalize(20),
+    fontSize: normalize(24),
   },
   highlightText: {
     fontSize: normalize(12),
@@ -100,7 +100,7 @@ export const styles = StyleSheet.create({
   },*/
   menuLabel: {
     color: FOREGROUND,
-    fontSize: normalize(20),
+    fontSize: normalize(18),
     padding: 0,
   },
   scrollView: { backgroundColor: BACKGROUND },

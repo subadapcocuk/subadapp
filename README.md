@@ -39,33 +39,32 @@ tamamen sizin sorumluluğunuzda olduğunu kabul etmeniz gerekiyor.
 
 Geliştirme ortamı olarak [Expo](https://expo.dev/)'yu kurmak için
 [Introduction to Expo](https://docs.expo.dev/) sayfasına bakılabilir. Paket
-yöneticisi olarak da [yarn](https://yarnpkg.com/) tercih edilmiştir. Bu
+yöneticisi olarak da [pnpm](https://pnpm.io/) tercih edilmiştir. Bu
 uygulamaları aşağıdaki gibi kurabilirsiniz:
 
 - [node](https://nodejs.org/en/download/) (kurmak için
   [NVM](https://github.com/nvm-sh/nvm) de kullanabilirsiniz)
-- [yarn](https://classic.yarnpkg.com/): `npm install --global yarn`.
-- [eas-cli](https://github.com/expo/eas-cli): `npm install -g eas-cli`
+- [pnpm](https://pnpm.io/): `npm install --global pnpm`.
+- [eas-cli](https://github.com/expo/eas-cli): `npm install --global eas-cli`
 
 Ortam hazır olduktan sonra aşağıdaki betikleri projenin olduğu dizinde
 kullanabilirsiniz:
 
-- `yarn install`: Gerekli paketleri kurar, sadece `yarn` olarak da
-  kullanabilirsiniz.
-- `yarn add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
+- `pnpm install`: Gerekli paketleri kurar.
+- `pnpm add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
   pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
-- `yarn start`: Expo sunucusunu başlatır.
-- `yarn android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
+- `pnpm start`: Expo sunucusunu başlatır.
+- `pnpm android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
   başlatmanız gerekiyor.
-- `yarn ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
+- `pnpm ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
   gerekiyor.
-- `yarn web`: Tarayıcıda görüntülemek için.
-- `yarn build:android`: Android paketi oluşturur.
-- `yarn build:apk`: APK dosyasını yerelde oluşturur.
-- `yarn build:ios`: iOS paket oluşturur.
-- `yarn build:all`: Tüm paketleri oluşturur.
-- `yarn submit:android`: Android paketini Play Store'a gönderir.
-- `yarn submit:ios`: iOS paketini App Store'a gönderir.
+- `pnpm web`: Tarayıcıda görüntülemek için.
+- `pnpm build:android`: Android paketi oluşturur.
+- `pnpm build:apk`: APK dosyasını yerelde oluşturur.
+- `pnpm build:ios`: iOS paket oluşturur.
+- `pnpm build:all`: Tüm paketleri oluşturur.
+- `pnpm submit:android`: Android paketini Play Store'a gönderir.
+- `pnpm submit:ios`: iOS paketini App Store'a gönderir.
 
 Tüm albümler ve şarkılar
 [subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json) olarak

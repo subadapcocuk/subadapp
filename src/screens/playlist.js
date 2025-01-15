@@ -32,9 +32,18 @@ import { IconPress, TextInputIcon, IconText } from "../components/buttons";
 import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
 
+function tabScreenOptions(label, icon) {
+  return {
+    tabBarLabel: label,
+    tabBarLabelPosition: "beside-icon",
+    tabBarLabelStyle: {
+      fontSize: normalize(22)
+    },
+    tabBarIcon: ({ color, size }) => <IconText icon={icon} size={size} color={color} />
+  }
+}
+
 const Tab = createBottomTabNavigator();
-
-
 
 export const PlaylistScreen = ({ navigation, route }) => {
   const [order, setOrder] = useState(2);
@@ -156,7 +165,7 @@ export const PlaylistScreen = ({ navigation, route }) => {
         onChangeText={setFilter}
         value={filter}
         style={{ width: "60%" }}
-        fontSize={normalize(20)}
+        fontSize={normalize(24)}
       />
       <IconPress
         {...ORDER_TYPES[order]}
@@ -251,12 +260,8 @@ export const PlaylistScreen = ({ navigation, route }) => {
   return (
     <>
       <Tab.Navigator>
-        <Tab.Screen name="Şarkılar" component={Songs} options={{
-          tabBarIcon: ({ color, size }) => <IconText icon={faMusic} size={size} color={color} />
-        }} />
-        <Tab.Screen name="Çalma Listesi" component={Playlist} options={{
-          tabBarIcon: ({ color, size }) => <IconText icon={faList} size={size} color={color} />
-        }} />
+        <Tab.Screen name="şarkılar" component={Songs} options={tabScreenOptions("Şarkılar", faMusic)} />
+        <Tab.Screen name="çalma listesi" component={Playlist} options={tabScreenOptions("Çalma Listesi", faList)} />
       </Tab.Navigator>
       <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
       {

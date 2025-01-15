@@ -1,11 +1,11 @@
 import { Alert } from "react-native";
-import Toast from "react-native-root-toast";
+import Toast from "react-native-toast-message";
 
 export const confirm = (
   title,
   message,
-  onOK = () => {},
-  onCancel = () => {}
+  onOK = () => { },
+  onCancel = () => { }
 ) => {
   Alert.alert(title, message, [
     {
@@ -23,7 +23,9 @@ export const confirm = (
 export const show = (
   message
 ) => {
-  Toast.show(message);
+  Toast.show({
+    text2: message,
+  });
 };
 
 export const error = (
