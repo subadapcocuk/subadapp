@@ -14,6 +14,7 @@
     "type": "Şubadap Çocuk Kreosus",
     "url": "https://www.kreosus.com/subadapcocuk"
   },
+  "packageManager": "pnpm@9.15.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "expo start",
