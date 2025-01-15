@@ -91,18 +91,17 @@ npx license-report --only=prod --output=table
 Daha sonra sürümü değiştirin:
 
 ```bash
-yarn release <patch, minor, major>
+pnpm release <patch, minor, major>
 git push --follow-tags origin main
 ```
 
 Yerelde test etmek için şu komutlar kullanılabilir:
 
 ```bash
-yarn
-yarn start
+pnpm start
 ```
 
-⚠️ Bu komutların çalışması için yukarıda bağlantıları verilen `node`, `yarn` ve
+⚠️ Bu komutların çalışması için yukarıda bağlantıları verilen `node`, `pnpm` ve
 `expo-cli` araçlarının kurulu olması gerekiyor.
 
 Komut satırındaki yönergelere uyulabilir veya açılacak pencereden telefonda
