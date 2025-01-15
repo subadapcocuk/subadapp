@@ -19,16 +19,16 @@ jobs:
           distribution: temurin
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'yarn'
+          node-version: 22
+          cache: 'pnpm'
       - uses: expo/expo-github-action@v8
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
       - name: Install dependencies
-        run: yarn install
+        run: pnpm install
       - name: Build package
-        run: yarn build:android --local
+        run: pnpm build:android --local
       - uses: WyriHaximus/github-action-get-previous-tag@v1
         id: currenttag
       - name: Rename AAB
