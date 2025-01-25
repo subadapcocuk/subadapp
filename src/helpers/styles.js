@@ -4,6 +4,7 @@ export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
 
 export const deviceWidth = Dimensions.get("window").width;
+export const deviceHeight = Dimensions.get("window").height;
 
 export const isLargeScreen = deviceWidth >= 768;
 
@@ -225,6 +226,7 @@ export const styles = StyleSheet.create({
     borderColor: FOREGROUND,
     borderWidth: 1,
     height: 40,
+    margin: 5,
     padding: 5,
     width: "85%",
     fontSize: normalize(20),
@@ -244,4 +246,20 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: deviceWidth,
   },
+  modalView: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.2)"
+  },
+  modalInnerView: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    elevation: 5,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+  }
 });

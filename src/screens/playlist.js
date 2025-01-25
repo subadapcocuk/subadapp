@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Platform } from "react-native";
-import { ScrollView, Text, View } from "react-native";
+import { Button, Platform, ScrollView, Text, View, TextInput } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
+  faClose,
   faFolderOpen,
   faList,
   faMusic,
@@ -26,11 +26,12 @@ import {
   BACKGROUND,
   show,
   error,
+  ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
 import { IconPress, TextInputIcon, IconText } from "../components/buttons";
-import PromptDialog from "../components/prompt";
 import Playlists from "../components/playlists";
+
 
 function tabScreenOptions(label, icon) {
   return {
@@ -49,6 +50,7 @@ export const PlaylistScreen = ({ navigation, route }) => {
   const [order, setOrder] = useState(2);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
+  const [playlistName, setPlaylistName] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
   const { playlist, setPlaylist, loop, setLoop, songs, highlights } =
@@ -87,16 +89,20 @@ export const PlaylistScreen = ({ navigation, route }) => {
     });
   };
 
-  const handleSavePlaylist = (playlistName) => {
+  const closeSaveDialog = () => {
+    setSaveDialogVisible(false);
+  }
+
+  const handleSavePlaylist = () => {
     if (playlistName) {
       savePlaylist(playlistName, playlist.list).then(() =>
         show(`${playlistName} listesi kaydedildi`)
       );
     }
-    setSaveDialogVisible(false);
+    closeSaveDialog();
   };
 
-  const handleOpenPlaylist = (name, playlist) => {
+  const openPlaylist = (name, playlist) => {
     if (playlist) {
       setPlaylist({
         name: name,
@@ -263,17 +269,23 @@ export const PlaylistScreen = ({ navigation, route }) => {
         <Tab.Screen name="şarkılar" component={Songs} options={tabScreenOptions("Şarkılar", faMusic)} />
         <Tab.Screen name="çalma listesi" component={Playlist} options={tabScreenOptions("Çalma Listesi", faList)} />
       </Tab.Navigator>
-      <Playlists open={handleOpenPlaylist} visible={openDialogVisible} />
-      {
-        saveDialogVisible && (
-          <PromptDialog
-            accessibilityLabel="Kaydedilecek listenin adını gireceğiniz diyalog"
-            description="Listenin adını giriniz"
-            initialValue={playlist?.name}
-            save={handleSavePlaylist}
+      <Playlists open={openPlaylist} visible={openDialogVisible} />
+      <ModalDialog onDismiss={closeSaveDialog} visible={saveDialogVisible}>
+        <TextInput placeholder="Listenin adını giriniz:" value={playlistName} style={styles.textInput}
+          onChangeText={(value) => setPlaylistName(value)} />
+        <View style={styles.itemStyle}>
+          <IconPress
+            icon={faSave}
+            text="Kaydet"
+            onPress={handleSavePlaylist}
           />
-        )
-      }
+          <IconPress
+            icon={faClose}
+            text="İptal"
+            onPress={closeSaveDialog}
+          />
+        </View>
+      </ModalDialog>
     </>
   );
 };

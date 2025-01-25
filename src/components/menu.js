@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Platform } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Linking from "expo-linking";
@@ -21,11 +21,9 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import { IconDrawerItem } from "../components/buttons";
-import About from "../components/about";
 import { shareApp } from "../helpers";
 
 export const Menu = (props) => {
-  const [about, setAbout] = useState(false);
   const { navigation } = props;
 
   const openURL = (url) => {
@@ -115,7 +113,7 @@ export const Menu = (props) => {
           label="Gizlilik Politikası"
         />
         <IconDrawerItem
-          onPress={() => setAbout(true)}
+          onPress={() => openURL("https://subadapcocuk.org/subadapp/")}
           icon={faQuestion}
           label="Hakkında"
         />
@@ -125,7 +123,6 @@ export const Menu = (props) => {
           label="Paylaş"
         />
       </DrawerContentScrollView>
-      <About visible={about} close={() => setAbout(false)} />
     </>
   );
 };

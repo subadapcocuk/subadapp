@@ -1,8 +1,7 @@
-import { faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faCancel, faClose, faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
-import { FlatList, View } from "react-native";
-import Dialog from "react-native-dialog";
-import { styles, deletePlaylist, getPlaylists, error } from "../helpers";
+import { FlatList, Text, View } from "react-native";
+import { styles, deletePlaylist, getPlaylists, error, ModalDialog, deviceHeight } from "../helpers";
 import { IconPress } from "./buttons";
 
 const Playlists = ({ visible, open }) => {
@@ -49,20 +48,20 @@ const Playlists = ({ visible, open }) => {
   );
 
   return (
-    <Dialog.Container visible={visible} onBackdropPress={open}>
-      <Dialog.Title style={styles.icon}>Kayıtlı Çalma Listeleri</Dialog.Title>
+    <ModalDialog visible={visible} onDismiss={open} height={deviceHeight*0.8}>
+      <Text style={styles.icon}>Kayıtlı Çalma Listeleri</Text>
       <FlatList
         accessibilityLabel="Kayıtlı çalma listelerinizi gösteren liste"
         data={playlists}
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.name}
       />
-      <Dialog.Button
-        style={styles.text}
-        label="İptal"
+      <IconPress
+        icon={faClose}
+        text="Kapat"
         onPress={() => open(false)}
       />
-    </Dialog.Container>
+    </ModalDialog>
   );
 };
 
