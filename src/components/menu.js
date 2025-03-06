@@ -55,13 +55,16 @@ export const Menu = (props) => {
           icon={faHome}
           label="Subadap.Org"
         />
-        <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://www.kreosus.com/subadapcocuk")
-          }
-          icon={faDonate}
-          label="Kreosus"
-        />
+        if (Platform.OS !== "ios") {
+          <IconDrawerItem
+            onPress={() =>
+              Linking.openURL("https://www.kreosus.com/subadapcocuk")
+            }
+
+            icon={faDonate}
+            label="Kreosus"
+          />
+        }
         <IconDrawerItem
           onPress={() => openURL("https://subadapcocuk.org/konserler/")}
           icon={faCalendarDays}

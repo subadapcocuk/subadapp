@@ -14,7 +14,7 @@
     "type": "Şubadap Çocuk Kreosus",
     "url": "https://www.kreosus.com/subadapcocuk"
   },
-  "packageManager": "pnpm@9.15.0",
+  "packageManager": "pnpm@10.0.0",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "start": "expo start",
@@ -39,19 +39,19 @@
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/slider": "4.5.5",
     "@react-native-picker/picker": "2.9.0",
-    "@react-navigation/bottom-tabs": "^7.2.0",
-    "@react-navigation/drawer": "^7.1.1",
-    "@react-navigation/native": "^7.0.14",
-    "expo": "~52.0.27",
+    "@react-navigation/bottom-tabs": "^7.2.1",
+    "@react-navigation/drawer": "^7.1.2",
+    "@react-navigation/native": "^7.0.15",
+    "expo": "~52.0.37",
     "expo-av": "~15.0.2",
-    "expo-constants": "~17.0.4",
+    "expo-constants": "~17.0.7",
     "expo-device": "~7.0.2",
-    "expo-linking": "~7.0.4",
-    "expo-notifications": "~0.29.12",
+    "expo-linking": "~7.0.5",
+    "expo-notifications": "~0.29.13",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.6",
+    "react-native": "0.76.7",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-get-random-values": "~1.11.0",
     "react-native-pager-view": "6.5.1",
@@ -65,7 +65,7 @@
   },
   "devDependencies": {
     "@expo/metro-runtime": "~4.0.1",
-    "@mccraveiro/standard-version-expo": "^2.0.5",
-    "commit-and-tag-version": "^12.5.0"
+    "commit-and-tag-version": "^12.5.0",
+    "standard-version-expo": "github:krisgerhard/standard-version-expo"
   }
 }

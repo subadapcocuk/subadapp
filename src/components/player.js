@@ -89,11 +89,13 @@ const Player = () => {
       });
 
     Audio.setAudioModeAsync({
+      allowsRecordingIOS: false,
       staysActiveInBackground: true,
+      interruptionModeIOS: InterruptionModeIOS.DoNotMix,
       playsInSilentModeIOS: true,
-      // reduce sound of other apps
-      interruptionModeIOS: InterruptionModeIOS.DuckOthers,
-      interruptionModeAndroid: InterruptionModeAndroid.DuckOthers,
+      shouldDuckAndroid: true,
+      interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
+      playThroughEarpieceAndroid: false
     });
 
     return () => {

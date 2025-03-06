@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Platform, ScrollView, Text, View, TextInput } from "react-native";
+import { Platform, ScrollView, Text, View, TextInput } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
   faClose,
