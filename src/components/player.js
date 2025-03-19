@@ -219,7 +219,6 @@ const Player = () => {
         if (playlist?.current) {
           // first download the song
           saveSong(playlist.current.url).then((filePath) => {
-            console.log(filePath)
             player
               .loadAsync(
                 { uri: filePath },
