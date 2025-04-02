@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file. See [commit
 
 ## [0.26.2](https://github.com/subadapcocuk/subadapp/compare/v0.26.1...v0.26.2) (2025-04-02)
 
+- Ufak hatalar düzeltildi
+
 ## [0.26.1](https://github.com/subadapcocuk/subadapp/compare/v0.26.0...v0.26.1) (2025-01-25)
 
 - Hakkında dialogu düzeltildi.
