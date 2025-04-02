@@ -12,15 +12,6 @@ import {
 import { IconPress } from "./buttons";
 import { SwipeableRow } from "./swipeable";
 
-/*export const Song = ({ song, openUrl }) => (
-  <TouchableOpacity style={styles.songStyle} onPress={() => openUrl(song.page)}>
-    <Image style={styles.songImage} source={{ uri: song.image }} />
-    <Text>
-      {song.no} - {song.name}
-    </Text>
-  </TouchableOpacity>
-);*/
-
 export const SongItem = ({
   song,
   onSwipe,
@@ -49,16 +40,6 @@ export const SongItem = ({
       <View
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >
-        {/*<IconPress
-          onPress={() =>
-            shareUrl(
-              `Şubadap Çocuk'tan ${song.name} şarkısını dinlemelisin: https://subadapp.page.link/oynat?song=${song.no}`
-            )
-          }
-          icon={faShare}
-          color={selected && playing ? BACKGROUND : FOREGROUND}
-          label={`${song.name} şarkısını paylaş`}
-        />*/}
         {onSwipe && (
           <IconPress
             onPress={onSwipe}

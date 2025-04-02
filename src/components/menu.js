@@ -55,7 +55,7 @@ export const Menu = (props) => {
           icon={faHome}
           label="Subadap.Org"
         />
-        if (Platform.OS !== "ios") {
+        {(Platform.OS !== "ios") &&
           <IconDrawerItem
             onPress={() =>
               Linking.openURL("https://www.kreosus.com/subadapcocuk")

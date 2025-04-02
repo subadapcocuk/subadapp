@@ -1,6 +1,7 @@
 import React from "react";
-import { Animated, StyleSheet, TouchableOpacity } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import Reanimated from 'react-native-reanimated';
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 export const SwipeableRow = ({
   children,
@@ -8,32 +9,25 @@ export const SwipeableRow = ({
   onRightOpen,
   onPress,
 }) => {
-  const renderLeftActions = (_progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [0, 100],
-      outputRange: [0, 1],
-      extrapolate: "clamp",
-    });
+
+  const renderLeftActions = (_progress, translation) => {
     return (
-      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
+      <Reanimated.View style={[styles.action, {
+        transform: [{ translateX: translation.value - 50 }],
+      }]} />
     );
   };
 
-  const renderRightActions = (_progress, dragX) => {
-    const scale = dragX.interpolate({
-      inputRange: [-100, 0],
-      outputRange: [1, 0],
-      extrapolate: "clamp",
-    });
+  const renderRightActions = (_progress, translation) => {
     return (
-      <Animated.View style={[styles.action, { transform: [{ scale }] }]} />
+      <Reanimated.View style={[styles.action, {
+        transform: [{ translateX: translation.value + 50 }],
+      }]} />
     );
   };
 
   return (
     <Swipeable
-      friction={1}
-      enableTrackpadTwoFingerGesture
       onSwipeableOpen={(direction) => {
         if (direction === "left" && onLeftOpen) {
           onLeftOpen();
@@ -41,9 +35,8 @@ export const SwipeableRow = ({
           onRightOpen();
         }
       }}
-      {...(onLeftOpen && { renderLeftActions })}
-      {...(onRightOpen && { renderRightActions })}
-      useNativeAnimations
+      renderLeftActions={renderLeftActions}
+      renderRightActions={renderRightActions}
     >
       {onPress && (
         <TouchableOpacity {...{ onPress }}>{children}</TouchableOpacity>
