@@ -16,14 +16,12 @@ import {
   faTrash,
   faUndoAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { Picker } from "@react-native-picker/picker";
 import {
   styles,
   turkishCompare,
   useAppContext,
   savePlaylist,
   normalize,
-  BACKGROUND,
   show,
   error,
   ModalDialog,
@@ -147,15 +145,15 @@ export const PlaylistScreen = ({ navigation, route }) => {
   const LOOP_TYPES = [
     {
       icon: faRandom,
-      text: "listeyi rastgele çal",
+      text: "liste rastgele çalınıyor",
     },
     {
       icon: faReplyAll,
-      text: "listeyi sırayla çal",
+      text: "liste sırayla çalınıyor",
     },
     {
       icon: faUndoAlt,
-      text: "aynı şarkıyı çal",
+      text: "aynı şarkı çalınıyor",
     },
   ];
 
@@ -231,22 +229,10 @@ export const PlaylistScreen = ({ navigation, route }) => {
         text="temizle"
       />
     </View>
-    <Picker
-      style={{ margin: "auto", backgroundColor: BACKGROUND }}
-      selectedValue={loop}
-      onValueChange={(value) => {
-        setLoop(value);
-      }}
-    >
-      {LOOP_TYPES.map((item, index) => (
-        <Picker.Item
-          key={`LoopType_${item.text}_${index}`}
-          label={item.text}
-          value={index}
-          style={{ fontSize: normalize(20) }}
-        />
-      ))}
-    </Picker>
+    <IconPress
+      {...LOOP_TYPES[loop]}
+      onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
+    />
     {playlist?.list.map((no, index) => {
       const item = songs.filter((s) => no === s.no)[0];
       return (

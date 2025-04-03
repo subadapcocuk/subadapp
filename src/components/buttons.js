@@ -8,7 +8,7 @@ export const IconPress = ({
   icon,
   onPress = null,
   color = FOREGROUND,
-  size = 36,
+  size = 40,
   text = null,
   label = null,
   style = {},

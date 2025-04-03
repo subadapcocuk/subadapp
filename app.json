@@ -7,7 +7,6 @@
     "scheme": "subadapp",
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
     "owner": "kolektif",
-    "orientation": "portrait",
     "icon": "./assets/icon.png",
     "newArchEnabled": true,
     "splash": {
