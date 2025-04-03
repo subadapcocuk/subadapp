@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.26.3](https://github.com/subadapcocuk/subadapp/compare/v0.26.2...v0.26.3) (2025-04-03)
+
+- Ufak hatalar düzeltildi, kullanılmayan kütüphaneler kaldırıldı, bazı bileşenler sadeleştirildi
+
 ## [0.26.2](https://github.com/subadapcocuk/subadapp/compare/v0.26.1...v0.26.2) (2025-04-02)
 
 - Ufak hatalar düzeltildi
