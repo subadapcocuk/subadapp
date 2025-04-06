@@ -72,13 +72,6 @@ saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için
 [subadapp.xlsx](./data/subadapp.xlsx) dosyasından ve
 <https://codebeautify.org/excel-to-json> sitesinden yararlanılabilir.
 
-### Kullanılan Önemli Kütüphaneler
-
-- [FontAwesome](https://github.com/FortAwesome/react-native-fontawesome)
-  tarafından sunulan ücretsiz simgeler kullanılıyor
-- [Expo AV](https://docs.expo.dev/versions/latest/sdk/av/) ortam dosyaları için
-  kullanılıyor
-
 ## Yayınlama ve test etme
 
 Sürüm yükseltmeden önce lisans listesini [license-report](https://www.npmjs.com/package/license-report)
