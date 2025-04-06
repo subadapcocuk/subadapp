@@ -2,21 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Platform, ScrollView, Text, View, TextInput } from "react-native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import {
-  faClose,
-  faFolderOpen,
-  faList,
-  faMusic,
-  faRandom,
-  faReplyAll,
-  faSave,
-  faSortAlphaDown,
-  faSortAlphaDownAlt,
-  faSortDown,
-  faSortUp,
-  faTrash,
-  faUndoAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import {
   styles,
   turkishCompare,
   useAppContext,
@@ -27,18 +12,18 @@ import {
   ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-import { IconPress, TextInputIcon, IconText } from "../components/buttons";
+import { IconPress, TextInputIcon } from "../components/buttons";
 import Playlists from "../components/playlists";
 
 
-function tabScreenOptions(label, icon) {
+function tabScreenOptions(label) {
   return {
     tabBarLabel: label,
     tabBarLabelPosition: "beside-icon",
     tabBarLabelStyle: {
-      fontSize: normalize(22)
+      fontSize: normalize(24)
     },
-    tabBarIcon: ({ color, size }) => <IconText icon={icon} size={size} color={color} />
+    tabBarIconStyle: { display: "none" }
   }
 }
 
@@ -115,22 +100,22 @@ export const PlaylistScreen = ({ navigation, route }) => {
 
   const ORDER_TYPES = [
     {
-      icon: faSortAlphaDown,
+      icon: "sort-alpha-asc",
       text: "A ➜ Z",
       sorter: (a, b) => turkishCompare(a.name, b.name),
     },
     {
-      icon: faSortAlphaDownAlt,
+      icon: "sort-alpha-desc",
       text: "Z ➜ A",
       sorter: (a, b) => -turkishCompare(a.name, b.name),
     },
     {
-      icon: faSortDown,
+      icon: "sort-down",
       text: "yeni ➜ eski",
       sorter: (a, b) => b.albumNo - a.albumNo,
     },
     {
-      icon: faSortUp,
+      icon: "sort-up",
       text: "eski ➜ yeni",
       sorter: (a, b) => a.albumNo - b.albumNo,
     },
@@ -144,15 +129,15 @@ export const PlaylistScreen = ({ navigation, route }) => {
 
   const LOOP_TYPES = [
     {
-      icon: faRandom,
+      icon: "shuffle",
       text: "liste rastgele çalınıyor",
     },
     {
-      icon: faReplyAll,
+      icon: "reply-all",
       text: "liste sırayla çalınıyor",
     },
     {
-      icon: faUndoAlt,
+      icon: "undo-alt",
       text: "aynı şarkı çalınıyor",
     },
   ];
@@ -214,17 +199,17 @@ export const PlaylistScreen = ({ navigation, route }) => {
     )}
     <View style={styles.centerView}>
       <IconPress
-        icon={faFolderOpen}
+        icon={"folder-open"}
         onPress={() => setOpenDialogVisible(true)}
         text="aç"
       />
       <IconPress
-        icon={faSave}
+        icon={"save"}
         onPress={() => setSaveDialogVisible(true)}
         text="kaydet"
       />
       <IconPress
-        icon={faTrash}
+        icon={"trash"}
         onPress={clearPlaylist}
         text="temizle"
       />
@@ -252,8 +237,8 @@ export const PlaylistScreen = ({ navigation, route }) => {
   return (
     <>
       <Tab.Navigator>
-        <Tab.Screen name="şarkılar" component={Songs} options={tabScreenOptions("Şarkılar", faMusic)} />
-        <Tab.Screen name="çalma listesi" component={Playlist} options={tabScreenOptions("Çalma Listesi", faList)} />
+        <Tab.Screen name="şarkılar" component={Songs} options={tabScreenOptions("Şarkılar")} />
+        <Tab.Screen name="çalma listesi" component={Playlist} options={tabScreenOptions("Çalma Listesi")} />
       </Tab.Navigator>
       <Playlists open={openPlaylist} visible={openDialogVisible} />
       <ModalDialog onDismiss={closeSaveDialog} visible={saveDialogVisible}>
@@ -261,12 +246,12 @@ export const PlaylistScreen = ({ navigation, route }) => {
           onChangeText={(value) => setPlaylistName(value)} />
         <View style={styles.itemStyle}>
           <IconPress
-            icon={faSave}
+            icon={"save"}
             text="Kaydet"
             onPress={handleSavePlaylist}
           />
           <IconPress
-            icon={faClose}
+            icon={"close"}
             text="İptal"
             onPress={closeSaveDialog}
           />

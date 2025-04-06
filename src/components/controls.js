@@ -1,11 +1,5 @@
 import React from "react";
 import { View } from "react-native";
-import {
-  faPause,
-  faPlay,
-  faStepBackward,
-  faStepForward,
-} from "@fortawesome/free-solid-svg-icons";
 import { styles } from "../helpers/styles";
 import { IconPress } from "./buttons";
 
@@ -16,17 +10,17 @@ const PlayerControls = ({ isPlaying, onBackward, onForward, onPlay }) => {
       accessibilityLabel={"oynatma düğmeleri"}
     >
       <IconPress
-        icon={faStepBackward}
+        icon={"backward"}
         onPress={onBackward}
         label={"önceki şarkı"}
       />
       <IconPress
-        icon={isPlaying ? faPause : faPlay}
+        icon={isPlaying ? "pause" : "play"}
         onPress={onPlay}
         label={isPlaying ? "duraklat" : "oynat"}
       />
       <IconPress
-        icon={faStepForward}
+        icon={"forward"}
         onPress={onForward}
         label={"sonraki şarkı"}
       />

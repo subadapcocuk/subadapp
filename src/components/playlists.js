@@ -1,4 +1,3 @@
-import { faCancel, faClose, faFolderOpen, faTrash } from "@fortawesome/free-solid-svg-icons";
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { styles, deletePlaylist, getPlaylists, error, ModalDialog, deviceHeight } from "../helpers";
@@ -36,19 +35,19 @@ const Playlists = ({ visible, open }) => {
     >
       <IconPress
         onPress={() => open(name, value)}
-        icon={faFolderOpen}
+        icon={"folder-open"}
         text={name}
       />
       <IconPress
         onPress={() => handleDelete(name)}
-        icon={faTrash}
+        icon={"trash"}
         style={{ marginLeft: "auto" }}
       />
     </View>
   );
 
   return (
-    <ModalDialog visible={visible} onDismiss={open} height={deviceHeight*0.8}>
+    <ModalDialog visible={visible} onDismiss={open} height={deviceHeight * 0.8}>
       <Text style={styles.icon}>Kayıtlı Çalma Listeleri</Text>
       <FlatList
         accessibilityLabel="Kayıtlı çalma listelerinizi gösteren liste"
@@ -57,7 +56,7 @@ const Playlists = ({ visible, open }) => {
         keyExtractor={(item) => item.name}
       />
       <IconPress
-        icon={faClose}
+        icon={"window-close"}
         text="Kapat"
         onPress={() => open(false)}
       />

@@ -1,6 +1,5 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
-import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import {
   BACKGROUND,
   FOREGROUND,
@@ -43,7 +42,7 @@ export const SongItem = ({
         {onSwipe && (
           <IconPress
             onPress={onSwipe}
-            icon={selected ? faMinus : faPlus}
+            icon={selected ? "minus" : "plus"}
             color={selected && playing ? BACKGROUND : FOREGROUND}
             label={`${song.name} şarkısını ${
               selected ? "listeden kaldır" : "listeye ekle"
