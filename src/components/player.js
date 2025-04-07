@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Platform, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
 import * as Device from "expo-device";
 import * as FileSystem from "expo-file-system";
@@ -243,7 +244,7 @@ const Player = () => {
   };
 
   return (
-    <View
+    <SafeAreaView
       style={styles.bottomView}
       accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}
     >
@@ -271,7 +272,7 @@ const Player = () => {
         onBackward={previousTrack}
         onPlay={onPlay}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
 import "react-native-get-random-values";
 import ToastManager from "toastify-react-native";
@@ -11,6 +12,7 @@ export default function App() {
     <ContextProvider>
       <NavigationService />
       <Player />
+      <StatusBar style="auto" />
       <ToastManager />
     </ContextProvider>
   );
