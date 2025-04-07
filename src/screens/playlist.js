@@ -21,7 +21,7 @@ function tabScreenOptions(label) {
     tabBarLabel: label,
     tabBarLabelPosition: "beside-icon",
     tabBarLabelStyle: {
-      fontSize: normalize(24)
+      fontSize: normalize(22)
     },
     tabBarIconStyle: { display: "none" }
   }
@@ -100,23 +100,19 @@ export const PlaylistScreen = ({ navigation, route }) => {
 
   const ORDER_TYPES = [
     {
-      icon: "sort-alpha-asc",
-      text: "A ➜ Z",
+      title: "A ➜ Z",
       sorter: (a, b) => turkishCompare(a.name, b.name),
     },
     {
-      icon: "sort-alpha-desc",
-      text: "Z ➜ A",
+      title: "Z ➜ A",
       sorter: (a, b) => -turkishCompare(a.name, b.name),
     },
     {
-      icon: "sort-down",
-      text: "yeni ➜ eski",
+      title: "yeni ➜ eski",
       sorter: (a, b) => b.albumNo - a.albumNo,
     },
     {
-      icon: "sort-up",
-      text: "eski ➜ yeni",
+      title: "eski ➜ yeni",
       sorter: (a, b) => a.albumNo - b.albumNo,
     },
   ];
@@ -130,15 +126,15 @@ export const PlaylistScreen = ({ navigation, route }) => {
   const LOOP_TYPES = [
     {
       icon: "shuffle",
-      text: "liste rastgele çalınıyor",
+      title: "liste rastgele çalınıyor",
     },
     {
       icon: "reply-all",
-      text: "liste sırayla çalınıyor",
+      title: "liste sırayla çalınıyor",
     },
     {
       icon: "undo-alt",
-      text: "aynı şarkı çalınıyor",
+      title: "aynı şarkı çalınıyor",
     },
   ];
 
@@ -201,17 +197,17 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <IconPress
         icon={"folder-open"}
         onPress={() => setOpenDialogVisible(true)}
-        text="aç"
+        title="aç"
       />
       <IconPress
         icon={"save"}
         onPress={() => setSaveDialogVisible(true)}
-        text="kaydet"
+        title="kaydet"
       />
       <IconPress
         icon={"trash"}
         onPress={clearPlaylist}
-        text="temizle"
+        title="temizle"
       />
     </View>
     <IconPress
@@ -247,12 +243,12 @@ export const PlaylistScreen = ({ navigation, route }) => {
         <View style={styles.itemStyle}>
           <IconPress
             icon={"save"}
-            text="Kaydet"
+            title="Kaydet"
             onPress={handleSavePlaylist}
           />
           <IconPress
-            icon={"close"}
-            text="İptal"
+            icon={"window-close"}
+            title="İptal"
             onPress={closeSaveDialog}
           />
         </View>

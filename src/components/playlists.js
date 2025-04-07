@@ -36,7 +36,7 @@ const Playlists = ({ visible, open }) => {
       <IconPress
         onPress={() => open(name, value)}
         icon={"folder-open"}
-        text={name}
+        title={name}
       />
       <IconPress
         onPress={() => handleDelete(name)}
@@ -57,7 +57,7 @@ const Playlists = ({ visible, open }) => {
       />
       <IconPress
         icon={"window-close"}
-        text="Kapat"
+        title="Kapat"
         onPress={() => open(false)}
       />
     </ModalDialog>

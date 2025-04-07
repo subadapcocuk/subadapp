@@ -8,12 +8,12 @@ export const IconPress = ({
   icon,
   onPress = null,
   size = 40,
-  text = null,
+  title = null,
   label = null,
 }) => {
   return (
-    <FontAwesome.Button fontSize={normalize(size)} name={icon} backgroundColor={BACKGROUND} color={FOREGROUND} onPress={onPress} accessibilityLabel={label ? label : text}>
-      {text && <Text style={styles.iconPressText}>{text}</Text>}
+    <FontAwesome.Button fontSize={normalize(size)} name={icon} backgroundColor={BACKGROUND} color={FOREGROUND} onPress={onPress} accessibilityLabel={label ? label : title}>
+      {title && <Text style={styles.iconPressText}>{title}</Text>}
     </FontAwesome.Button>
   );
 };

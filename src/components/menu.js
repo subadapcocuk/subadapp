@@ -28,14 +28,14 @@ export const Menu = (props) => {
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
         <IconDrawerItem
+          onPress={() => Linking.openURL("https://subadapcocuk.org")}
+          icon={"bookmark"}
+          label="Subadap.Org"
+        />
+        <IconDrawerItem
           onPress={() => openURL("https://ansiklopedi.subadapcocuk.org")}
           icon={"book"}
           label={"Ansiklopedi"}
-        />
-        <IconDrawerItem
-          onPress={() => Linking.openURL("https://subadapcocuk.org")}
-          icon={"home"}
-          label="Subadap.Org"
         />
         {(Platform.OS !== "ios") &&
           <IconDrawerItem
@@ -43,7 +43,7 @@ export const Menu = (props) => {
               Linking.openURL("https://www.kreosus.com/subadapcocuk")
             }
 
-            icon={"donate"}
+            icon={"hand-holding-dollar"}
             label="Kreosus"
           />
         }
