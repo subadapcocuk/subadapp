@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.26.8](https://github.com/subadapcocuk/subadapp/compare/v0.26.7...v0.26.8) (2025-04-09)
+
+- Düğmeler ve liste güncellendi
+
 ## [0.26.7](https://github.com/subadapcocuk/subadapp/compare/v0.26.6...v0.26.7) (2025-04-07)
 
 - Eksik simgeler eklendi
