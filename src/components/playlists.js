@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FlatList, Text, View } from "react-native";
 import { styles, deletePlaylist, getPlaylists, error, ModalDialog, deviceHeight } from "../helpers";
-import { IconPress } from "./buttons";
+import { IconButton } from "./buttons";
 
 const Playlists = ({ visible, open }) => {
   const [playlists, setPlaylists] = useState({});
@@ -33,12 +33,12 @@ const Playlists = ({ visible, open }) => {
       style={styles.itemStyle}
       accessibilityLabel={"liste açma ve kaydetme düğmeleri"}
     >
-      <IconPress
+      <IconButton
         onPress={() => open(name, value)}
         icon={"folder-open"}
         title={name}
       />
-      <IconPress
+      <IconButton
         onPress={() => handleDelete(name)}
         icon={"trash"}
         style={{ marginLeft: "auto" }}
@@ -55,7 +55,7 @@ const Playlists = ({ visible, open }) => {
         renderItem={({ item }) => <Item {...item} />}
         keyExtractor={(item) => item.name}
       />
-      <IconPress
+      <IconButton
         icon={"window-close"}
         title="Kapat"
         onPress={() => open(false)}

@@ -84,26 +84,6 @@ export const styles = StyleSheet.create({
     height: 50,
     flexGrow: 1,
   },
-  /*albumTitle: {
-    color: FOREGROUND,
-    fontSize: normalize(30),
-    textAlign: "center",
-  },
-  albumYear: {
-    color: FOREGROUND,
-    fontSize: normalize(24),
-    textAlign: "center",
-  },
-  albumView: {
-    width: deviceWidth,
-    justifyContent: "center",
-    alignItems: "center",
-  },*/
-  menuLabel: {
-    color: FOREGROUND,
-    fontSize: normalize(18),
-    padding: 0,
-  },
   scrollView: { backgroundColor: BACKGROUND },
   webview: {
     width: deviceWidth,
@@ -230,10 +210,6 @@ export const styles = StyleSheet.create({
     padding: 5,
     width: "85%",
     fontSize: normalize(20),
-  },
-  iconPressText: {
-    fontSize: normalize(20),
-    color: FOREGROUND,
   },
   zeroMargin: {
     marginTop: 0,

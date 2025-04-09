@@ -1,7 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import { styles } from "../helpers/styles";
-import { IconPress } from "./buttons";
+import { IconButton } from "./buttons";
 
 const PlayerControls = ({ isPlaying, onBackward, onForward, onPlay }) => {
   return (
@@ -9,17 +9,17 @@ const PlayerControls = ({ isPlaying, onBackward, onForward, onPlay }) => {
       style={styles.playlistButtons}
       accessibilityLabel={"oynatma düğmeleri"}
     >
-      <IconPress
+      <IconButton
         icon={"backward"}
         onPress={onBackward}
         label={"önceki şarkı"}
       />
-      <IconPress
+      <IconButton
         icon={isPlaying ? "pause" : "play"}
         onPress={onPlay}
         label={isPlaying ? "duraklat" : "oynat"}
       />
-      <IconPress
+      <IconButton
         icon={"forward"}
         onPress={onForward}
         label={"sonraki şarkı"}

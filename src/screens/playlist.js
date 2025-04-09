@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Platform, ScrollView, Text, View, TextInput } from "react-native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import React, { useEffect, useRef, useState } from "react";
+import { Platform, ScrollView, Text, View, TextInput, FlatList } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   styles,
   turkishCompare,
@@ -12,19 +12,34 @@ import {
   ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-import { IconPress, TextInputIcon } from "../components/buttons";
+import { IconButton, TextButton } from "../components/buttons";
 import Playlists from "../components/playlists";
 
 
 function tabScreenOptions(label) {
   return {
     tabBarLabel: label,
-    tabBarLabelPosition: "beside-icon",
     tabBarLabelStyle: {
       fontSize: normalize(22)
     },
     tabBarIconStyle: { display: "none" }
   }
+}
+
+function ListHeader({ setFilter, title, setOrder }) {
+  const [text, setText] = useState("")
+
+  return <View style={styles.centerView}>
+    <TextInput
+      style={[styles.textInput, { width: "60%" }]}
+      placeholder="şarkı ara"
+      onChangeText={setText}
+      value={text}
+      fontSize={normalize(20)}
+      onSubmitEditing={() => setFilter(text)}
+    />
+    <TextButton title={title} onPress={() => setOrder(order < 3 ? order + 1 : 0)} />
+  </View>
 }
 
 const Tab = createBottomTabNavigator();
@@ -51,16 +66,14 @@ export const PlaylistScreen = ({ navigation, route }) => {
     }
   }, [route.params]);
 
-  const toggleSong = ({ name, no }) => {
+  const toggleSong = ({ no }) => {
     if (playlist.list.find((n) => n === no)) {
       setPlaylist({
         ...playlist,
         list: [...playlist.list.filter((o) => o !== no)],
       });
-      show(`${name} listeden kaldırıldı`);
     } else {
       setPlaylist({ ...playlist, list: [...playlist.list, no] });
-      show(`${name} listeye eklendi`);
     }
   };
 
@@ -117,12 +130,6 @@ export const PlaylistScreen = ({ navigation, route }) => {
     },
   ];
 
-  const sortSongs = () => {
-    return songs
-      .filter((s) => s.name.toLowerCase().includes(filter.toLowerCase()))
-      .sort(ORDER_TYPES[order].sorter);
-  };
-
   const LOOP_TYPES = [
     {
       icon: "shuffle",
@@ -143,35 +150,27 @@ export const PlaylistScreen = ({ navigation, route }) => {
     show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
   };
 
-  const Songs = () => <>
-    <View style={styles.centerView}>
-      <TextInputIcon
-        placeholder={"şarkı ara"}
-        onChangeText={setFilter}
-        value={filter}
-        style={{ width: "60%" }}
-        fontSize={normalize(24)}
-      />
-      <IconPress
-        {...ORDER_TYPES[order]}
-        onPress={() => setOrder(order < 3 ? order + 1 : 0)}
-      />
-    </View>
-    <ScrollView style={styles.scrollView} persistentScrollbar>
-      {sortSongs().map((item) => (
-        <SongItem
-          key={`playlist_song_${item.no}`}
-          song={item}
-          selected={
-            playlist.list.find((no) => no === item.no) !== undefined
-          }
-          highlight={highlights.includes(item.no)}
-          onSwipe={() => toggleSong(item)}
-          onPress={() => clearAndPlay(item)}
-        />
-      ))}
-    </ScrollView>
-  </>
+  const filterSongs = () => {
+    return songs
+      .filter((s) => s.name.toLowerCase().includes(filter.toLowerCase()))
+      .sort(ORDER_TYPES[order].sorter);
+  }
+
+  const Songs = () =>
+    <FlatList
+      data={filterSongs()}
+      renderItem={({ item }) => <SongItem
+        song={item}
+        selected={
+          playlist.list.find((no) => no === item.no) !== undefined
+        }
+        highlight={highlights.includes(item.no)}
+        onSwipe={() => toggleSong(item)}
+        onPress={() => clearAndPlay(item)}
+      />}
+      keyExtractor={item => item.no}
+      ListHeaderComponent={<ListHeader filter={filter} setFilter={setFilter} title={ORDER_TYPES[order].title} setOrder={setOrder} />}
+    />
 
   const Playlist = () => <ScrollView style={styles.scrollView} persistentScrollbar>
     {playlist?.current && (
@@ -194,23 +193,23 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <Text>Şu an açık olan liste: {playlist.name}</Text>
     )}
     <View style={styles.centerView}>
-      <IconPress
+      <IconButton
         icon={"folder-open"}
         onPress={() => setOpenDialogVisible(true)}
         title="aç"
       />
-      <IconPress
+      <IconButton
         icon={"save"}
         onPress={() => setSaveDialogVisible(true)}
         title="kaydet"
       />
-      <IconPress
+      <IconButton
         icon={"trash"}
         onPress={clearPlaylist}
         title="temizle"
       />
     </View>
-    <IconPress
+    <IconButton
       {...LOOP_TYPES[loop]}
       onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
     />
@@ -241,12 +240,12 @@ export const PlaylistScreen = ({ navigation, route }) => {
         <TextInput placeholder="Listenin adını giriniz:" value={playlistName} style={styles.textInput}
           onChangeText={(value) => setPlaylistName(value)} />
         <View style={styles.itemStyle}>
-          <IconPress
+          <IconButton
             icon={"save"}
             title="Kaydet"
             onPress={handleSavePlaylist}
           />
-          <IconPress
+          <IconButton
             icon={"window-close"}
             title="İptal"
             onPress={closeSaveDialog}

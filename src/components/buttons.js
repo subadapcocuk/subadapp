@@ -1,19 +1,19 @@
 import React from "react";
-import { Text, TextInput, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { DrawerItem } from "@react-navigation/drawer";
 import FontAwesome from "@expo/vector-icons/FontAwesome6";
 import { BACKGROUND, FOREGROUND, normalize, styles } from "../helpers/styles";
 
-export const IconPress = ({
+export const IconButton = ({
   icon,
   onPress = null,
-  size = 40,
+  size = 20,
   title = null,
   label = null,
 }) => {
   return (
     <FontAwesome.Button fontSize={normalize(size)} name={icon} backgroundColor={BACKGROUND} color={FOREGROUND} onPress={onPress} accessibilityLabel={label ? label : title}>
-      {title && <Text style={styles.iconPressText}>{title}</Text>}
+      {title && <Text style={{ color: FOREGROUND, fontSize: normalize(size) }}>{title}</Text>}
     </FontAwesome.Button>
   );
 };
@@ -21,31 +21,16 @@ export const IconPress = ({
 export const IconDrawerItem = ({ onPress, icon = null, label = null }) => (
   <DrawerItem
     style={styles.zeroMargin}
-    icon={() => icon && <FontAwesome color={FOREGROUND} size={normalize(30)} name={icon} />}
-    label={() => label && <Text style={styles.menuLabel}>{label}</Text>}
+    icon={() => icon && <FontAwesome color={FOREGROUND} size={normalize(20)} name={icon} />}
+    label={() => label && <Text style={{ color: FOREGROUND, fontSize: normalize(20) }}>{label}</Text>}
     onPress={onPress}
     accessibilityLabel={label}
   />
 );
 
-export const TextInputIcon = (props) => {
-  const { style, ...rest } = props;
-  return (
-    <View style={[styles.button, style]} accessibilityLabel={rest.value}>
-      {rest?.icon && (
-        <FontAwesome
-          style={styles.icon}
-          name={rest.icon}
-          color={FOREGROUND}
-        />
-      )}
-      <TextInput
-        style={styles.textInput}
-        selectionColor={FOREGROUND}
-        selectTextOnFocus
-        caretHidden={true}
-        {...rest}
-      />
-    </View>
-  );
-};
+export const TextButton = ({ title, onPress, label = null }) => <TouchableOpacity
+  style={styles.button}
+  onPress={onPress}
+  accessibilityLabel={label ? label : title}>
+  <Text>{title}</Text>
+</TouchableOpacity>

@@ -8,7 +8,7 @@ import {
   songText,
   styles,
 } from "../helpers/styles";
-import { IconPress } from "./buttons";
+import { IconButton } from "./buttons";
 import { SwipeableRow } from "./swipeable";
 
 export const SongItem = ({
@@ -40,7 +40,7 @@ export const SongItem = ({
         style={{ marginLeft: "auto", display: "flex", flexDirection: "row" }}
       >
         {onSwipe && (
-          <IconPress
+          <IconButton
             onPress={onSwipe}
             icon={selected ? "minus" : "plus"}
             color={selected && playing ? BACKGROUND : FOREGROUND}
