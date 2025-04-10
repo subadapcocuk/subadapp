@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import { styles, deletePlaylist, getPlaylists, error, ModalDialog, deviceHeight } from "../helpers";
-import { IconButton } from "./buttons";
+import { IconButton, TextButton } from "./buttons";
 
 const Playlists = ({ visible, open }) => {
-  const [playlists, setPlaylists] = useState({});
+  const [playlists, setPlaylists] = useState([]);
 
   const updatePlaylists = () =>
     getPlaylists()
@@ -29,37 +29,35 @@ const Playlists = ({ visible, open }) => {
   };
 
   const Item = ({ name, value }) => (
-    <View
-      style={styles.itemStyle}
+    <View style={styles.itemStyle}
       accessibilityLabel={"liste açma ve kaydetme düğmeleri"}
     >
       <IconButton
         onPress={() => open(name, value)}
         icon={"folder-open"}
-        title={name}
       />
       <IconButton
         onPress={() => handleDelete(name)}
         icon={"trash"}
-        style={{ marginLeft: "auto" }}
       />
+      <Text>{name}</Text>
     </View>
   );
 
   return (
     <ModalDialog visible={visible} onDismiss={open} height={deviceHeight * 0.8}>
-      <Text style={styles.icon}>Kayıtlı Çalma Listeleri</Text>
-      <FlatList
-        accessibilityLabel="Kayıtlı çalma listelerinizi gösteren liste"
-        data={playlists}
-        renderItem={({ item }) => <Item {...item} />}
-        keyExtractor={(item) => item.name}
-      />
-      <IconButton
-        icon={"window-close"}
-        title="Kapat"
-        onPress={() => open(false)}
-      />
+      <View style={styles.centerView}>
+        <Text style={styles.icon}>Kayıtlı Çalma Listeleri</Text>
+      </View>
+      <ScrollView style={styles.scrollView} persistentScrollbar>
+        {playlists.map((item) => <Item key={`playlist_${item.name}`} {...item} />)}
+      </ScrollView>
+      <View style={styles.centerView}>
+        <TextButton
+          title="Kapat"
+          onPress={() => open(false)}
+        />
+      </View>
     </ModalDialog>
   );
 };

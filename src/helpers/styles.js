@@ -164,6 +164,10 @@ export const styles = StyleSheet.create({
   button: {
     alignItems: "center",
     flexDirection: "row",
+    backgroundColor: FOREGROUND,
+    borderRadius: 5,
+    padding: 5,
+    margin: 5,
   },
   playButton: {
     flexDirection: "row",
@@ -229,7 +233,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "rgba(0, 0, 0, 0.2)"
   },
   modalInnerView: {
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "center",
     position: "absolute",
     top: "50%",

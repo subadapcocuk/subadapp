@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Platform, ScrollView, Text, View, TextInput, FlatList } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Platform, ScrollView, Text, View, TextInput } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   styles,
@@ -12,7 +12,7 @@ import {
   ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-import { IconButton, TextButton } from "../components/buttons";
+import { TextButton } from "../components/buttons";
 import Playlists from "../components/playlists";
 
 
@@ -26,21 +26,18 @@ function tabScreenOptions(label) {
   }
 }
 
-function ListHeader({ setFilter, title, setOrder }) {
-  const [text, setText] = useState("")
-
-  return <View style={styles.centerView}>
-    <TextInput
-      style={[styles.textInput, { width: "60%" }]}
-      placeholder="şarkı ara"
-      onChangeText={setText}
-      value={text}
-      fontSize={normalize(20)}
-      onSubmitEditing={() => setFilter(text)}
-    />
-    <TextButton title={title} onPress={() => setOrder(order < 3 ? order + 1 : 0)} />
-  </View>
+const FilterInput = ({ onSubmit }) => {
+  const [text, setText] = useState("");
+  return <TextInput
+    style={[styles.textInput, { width: "60%" }]}
+    placeholder="şarkı ara"
+    onChangeText={setText}
+    value={text}
+    fontSize={normalize(20)}
+    onSubmitEditing={() => onSubmit(text)}
+  />
 }
+
 
 const Tab = createBottomTabNavigator();
 
@@ -132,15 +129,12 @@ export const PlaylistScreen = ({ navigation, route }) => {
 
   const LOOP_TYPES = [
     {
-      icon: "shuffle",
-      title: "liste rastgele çalınıyor",
+      title: "rastgele çalınıyor",
     },
     {
-      icon: "reply-all",
-      title: "liste sırayla çalınıyor",
+      title: "sırayla çalınıyor",
     },
     {
-      icon: "undo-alt",
       title: "aynı şarkı çalınıyor",
     },
   ];
@@ -157,20 +151,26 @@ export const PlaylistScreen = ({ navigation, route }) => {
   }
 
   const Songs = () =>
-    <FlatList
-      data={filterSongs()}
-      renderItem={({ item }) => <SongItem
-        song={item}
-        selected={
-          playlist.list.find((no) => no === item.no) !== undefined
-        }
-        highlight={highlights.includes(item.no)}
-        onSwipe={() => toggleSong(item)}
-        onPress={() => clearAndPlay(item)}
-      />}
-      keyExtractor={item => item.no}
-      ListHeaderComponent={<ListHeader filter={filter} setFilter={setFilter} title={ORDER_TYPES[order].title} setOrder={setOrder} />}
-    />
+    <>
+      <View style={styles.centerView}>
+        <FilterInput onSubmit={setFilter} />
+        <TextButton title={ORDER_TYPES[order].title} onPress={() => setOrder(order < 3 ? order + 1 : 0)} />
+      </View>
+      <ScrollView style={styles.scrollView} persistentScrollbar>
+        {filterSongs().map((item) => (
+          <SongItem
+            key={`playlist_song_${item.no}`}
+            song={item}
+            selected={
+              playlist.list.find((no) => no === item.no) !== undefined
+            }
+            highlight={highlights.includes(item.no)}
+            onSwipe={() => toggleSong(item)}
+            onPress={() => clearAndPlay(item)}
+          />
+        ))}
+      </ScrollView>
+    </>
 
   const Playlist = () => <ScrollView style={styles.scrollView} persistentScrollbar>
     {playlist?.current && (
@@ -193,26 +193,23 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <Text>Şu an açık olan liste: {playlist.name}</Text>
     )}
     <View style={styles.centerView}>
-      <IconButton
-        icon={"folder-open"}
+      <TextButton
         onPress={() => setOpenDialogVisible(true)}
         title="aç"
       />
-      <IconButton
-        icon={"save"}
+      <TextButton
         onPress={() => setSaveDialogVisible(true)}
         title="kaydet"
       />
-      <IconButton
-        icon={"trash"}
+      <TextButton
         onPress={clearPlaylist}
         title="temizle"
       />
+      <TextButton
+        {...LOOP_TYPES[loop]}
+        onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
+      />
     </View>
-    <IconButton
-      {...LOOP_TYPES[loop]}
-      onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
-    />
     {playlist?.list.map((no, index) => {
       const item = songs.filter((s) => no === s.no)[0];
       return (
@@ -239,14 +236,12 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <ModalDialog onDismiss={closeSaveDialog} visible={saveDialogVisible}>
         <TextInput placeholder="Listenin adını giriniz:" value={playlistName} style={styles.textInput}
           onChangeText={(value) => setPlaylistName(value)} />
-        <View style={styles.itemStyle}>
-          <IconButton
-            icon={"save"}
+        <View style={styles.centerView}>
+          <TextButton
             title="Kaydet"
             onPress={handleSavePlaylist}
           />
-          <IconButton
-            icon={"window-close"}
+          <TextButton
             title="İptal"
             onPress={closeSaveDialog}
           />

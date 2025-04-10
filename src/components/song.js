@@ -1,8 +1,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
-  BACKGROUND,
-  FOREGROUND,
   highlightText,
   songStyle,
   songText,
@@ -43,10 +41,8 @@ export const SongItem = ({
           <IconButton
             onPress={onSwipe}
             icon={selected ? "minus" : "plus"}
-            color={selected && playing ? BACKGROUND : FOREGROUND}
-            label={`${song.name} şarkısını ${
-              selected ? "listeden kaldır" : "listeye ekle"
-            }`}
+            label={`${song.name} şarkısını ${selected ? "listeden kaldır" : "listeye ekle"
+              }`}
           />
         )}
       </View>
