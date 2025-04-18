@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.26.10](https://github.com/subadapcocuk/subadapp/compare/v0.26.9...v0.26.10) (2025-04-18)
+
+- Webview kaldırıldı, döngü düğmesi çalma çubuğuna taşındı
+
 ## [0.26.9](https://github.com/subadapcocuk/subadapp/compare/v0.26.8...v0.26.9) (2025-04-10)
 
 - Çalışmayan düğmeler düzeltildi
