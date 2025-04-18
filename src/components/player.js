@@ -77,7 +77,8 @@ async function registerForPushNotificationsAsync() {
 const Player = () => {
   const [status, setStatus] = useState({});
   const [player, setPlayer] = useState(new Audio.Sound());
-  const { playlist, setPlaylist, loop, songs } = useAppContext();
+  const { playlist, setPlaylist, songs } = useAppContext();
+  const [loop, setLoop] = useState(0);
   const [notification, setNotification] = useState(null);
   const notificationListener = useRef();
 
@@ -115,7 +116,7 @@ const Player = () => {
       .setStatusAsync({ isLooping: loop === LoopType.RepeatSong })
       .then()
       .catch((e) => {
-        error(`setIsLoopingAsync ${e}`);
+        console.log(`setIsLoopingAsync ${e}`);
       });
     player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
   }, [loop]);
@@ -271,6 +272,8 @@ const Player = () => {
         onForward={nextTrack}
         onBackward={previousTrack}
         onPlay={onPlay}
+        loop={loop}
+        onLoop={() => setLoop(loop < 2 ? loop + 1 : 0)}
       />
     </SafeAreaView>
   );

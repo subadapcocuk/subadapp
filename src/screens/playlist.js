@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Platform, ScrollView, Text, View, TextInput } from "react-native";
+import { ScrollView, Text, View, TextInput } from "react-native";
+import * as Linking from "expo-linking";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   styles,
@@ -8,7 +9,6 @@ import {
   savePlaylist,
   normalize,
   show,
-  error,
   ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
@@ -41,14 +41,14 @@ const FilterInput = ({ onSubmit }) => {
 
 const Tab = createBottomTabNavigator();
 
-export const PlaylistScreen = ({ navigation, route }) => {
+export const PlaylistScreen = ({ route }) => {
   const [order, setOrder] = useState(2);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
   const [playlistName, setPlaylistName] = useState("");
   const [saveDialogVisible, setSaveDialogVisible] = useState(false);
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
-  const { playlist, setPlaylist, loop, setLoop, songs, highlights } =
+  const { playlist, setPlaylist, songs, highlights } =
     useAppContext();
 
   useEffect(() => {
@@ -127,18 +127,6 @@ export const PlaylistScreen = ({ navigation, route }) => {
     },
   ];
 
-  const LOOP_TYPES = [
-    {
-      title: "rastgele çalınıyor",
-    },
-    {
-      title: "sırayla çalınıyor",
-    },
-    {
-      title: "aynı şarkı çalınıyor",
-    },
-  ];
-
   const clearAndPlay = (song) => {
     setPlaylist({ list: [song.no], current: song, index: 0 });
     show(`Liste temizlendi ve ${song.name} şarkısı eklendi`);
@@ -177,15 +165,7 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <SongDetail
         song={playlist.current}
         openURL={(url) => {
-          if (Platform.OS === "ios") {
-            try {
-              Linking.openURL(url);
-            } catch (e) {
-              error(`${url} açılamıyor: ${e}`);
-            }
-          } else {
-            navigation.navigate("Page", { url });
-          }
+          Linking.openURL(url);
         }}
       />
     )}
@@ -204,10 +184,6 @@ export const PlaylistScreen = ({ navigation, route }) => {
       <TextButton
         onPress={clearPlaylist}
         title="temizle"
-      />
-      <TextButton
-        {...LOOP_TYPES[loop]}
-        onPress={() => setLoop(loop < 2 ? loop + 1 : 0)}
       />
     </View>
     {playlist?.list.map((no, index) => {

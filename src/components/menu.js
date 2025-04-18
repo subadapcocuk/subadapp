@@ -8,14 +8,6 @@ import { shareApp } from "../helpers";
 export const Menu = (props) => {
   const { navigation } = props;
 
-  const openURL = (url) => {
-    if (Platform.OS === "ios") {
-      Linking.openURL(url);
-    } else {
-      navigation.navigate("Page", { url });
-    }
-  };
-
   return (
     <>
       <DrawerContentScrollView
@@ -48,7 +40,7 @@ export const Menu = (props) => {
           />
         }
         <IconDrawerItem
-          onPress={() => openURL("https://subadapcocuk.org/konserler/")}
+          onPress={() => Linking.openURL("https://subadapcocuk.org/konserler/")}
           icon={"calendar-days"}
           label="Konserler"
         />
@@ -79,26 +71,26 @@ export const Menu = (props) => {
           label="Twitter"
         />
         <IconDrawerItem
-          onPress={() => openURL("https://subadapcocuk.org/iletisim")}
+          onPress={() => Linking.openURL("https://subadapcocuk.org/iletisim")}
           icon={"envelope"}
           label="İletişim"
         />
         <IconDrawerItem
           onPress={() =>
-            openURL("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
+            Linking.openURL("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
           }
           icon={"creative-commons-nc"}
           label="Copyleft"
         />
         <IconDrawerItem
           onPress={() =>
-            openURL("https://subadapcocuk.org/gizlilik-politikasi/")
+            Linking.openURL("https://subadapcocuk.org/gizlilik-politikasi/")
           }
           icon={"user-shield"}
           label="Gizlilik Politikası"
         />
         <IconDrawerItem
-          onPress={() => openURL("https://subadapcocuk.org/subadapp/")}
+          onPress={() => Linking.openURL("https://subadapcocuk.org/subadapp/")}
           icon={"question"}
           label="Hakkında"
         />
