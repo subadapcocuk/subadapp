@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.26.11](https://github.com/subadapcocuk/subadapp/compare/v0.26.10...v0.26.11) (2025-07-05)
+
+- Expo son sürüme (v53) yükseltildi
+
 ## [0.26.10](https://github.com/subadapcocuk/subadapp/compare/v0.26.9...v0.26.10) (2025-04-18)
 
 - Webview kaldırıldı, döngü düğmesi çalma çubuğuna taşındı
@@ -54,7 +58,7 @@ All notable changes to this project will be documented in this file. See [commit
 ## [0.24.2](https://github.com/subadapcocuk/subadapp/compare/v0.24.1...v0.24.2) (2024-11-19)
 
 - Logo boyutları düzenlendi
-- Expo'nun son sürümüne yükseltildi
+- Expo son sürümüne yükseltildi
 
 ## [0.24.1](https://github.com/subadapcocuk/subadapp/compare/v0.23.6...v0.24.1) (2024-11-05)
 
