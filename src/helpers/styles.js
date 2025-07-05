@@ -100,7 +100,7 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: BACKGROUND,
-    bottom: 0,
+    bottom: 10,
   },
   playlistButtons: {
     flexDirection: "row",
