@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Platform, Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
+import * as Audio from "expo-audio";
 import * as Device from "expo-device";
-import * as FileSystem from "expo-file-system";
+import { File, Directory, Paths } from "expo-file-system";
 import * as Notifications from "expo-notifications";
 import {
   styles,
@@ -26,21 +26,16 @@ Notifications.setNotificationHandler({
 
 async function saveSong(uri) {
   const fileName = uri.substring(uri.lastIndexOf('/') + 1);
-  const fileFolder = `${FileSystem.cacheDirectory}subadapp/`
-  const folderInfo = await FileSystem.getInfoAsync(fileFolder);
-  if (!folderInfo.exists) {
+  const fileFolder = new Directory(Paths.cache, "subadapp");
+  if (!fileFolder.exists) {
     // create cache folder if it doesn't exists
-    await FileSystem.makeDirectoryAsync(fileFolder)
+    fileFolder.create()
   }
-  const fileUri = `${fileFolder}${fileName}`
-  const fileInfo = await FileSystem.getInfoAsync(fileUri);
-  if (!fileInfo.exists) {
-    // Download if file doesn't exist
-    await FileSystem.downloadAsync(uri, fileUri);
-    return fileUri;
-  } else {
-    return fileUri;
+  const file = new File(fileFolder, fileName);
+  if (!file.exists) {
+    await File.downloadFileAsync(uri, file);
   }
+  return file.uri;
 }
 
 async function registerForPushNotificationsAsync() {
@@ -76,58 +71,92 @@ async function registerForPushNotificationsAsync() {
 
 const Player = () => {
   const [status, setStatus] = useState({});
-  const [player, setPlayer] = useState(new Audio.Sound());
+  const [player, setPlayer] = useState(null);
   const { playlist, setPlaylist, songs } = useAppContext();
   const [loop, setLoop] = useState(0);
   const [notification, setNotification] = useState(null);
-  const notificationListener = useRef();
 
   useEffect(() => {
+    Audio.setAudioModeAsync({
+      allowsRecording: false,
+      shouldPlayInBackground: true,
+      interruptionMode: "doNotMix",
+      playsInSilentMode: true,
+      shouldDuckAndroid: true,
+      shouldRouteThroughEarpiece: false,
+    }).catch(() => { });
+
+    // create a long-lived player instance
+    try {
+      const p = Audio.createAudioPlayer(null);
+      setPlayer(p);
+    } catch (e) {
+      console.log(`createAudioPlayer ${e}`);
+    }
+
     registerForPushNotificationsAsync();
 
-    notificationListener.current =
+    const notificationListener =
       Notifications.addNotificationReceivedListener((notification) => {
         setNotification(notification);
       });
 
-    Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      staysActiveInBackground: true,
-      interruptionModeIOS: InterruptionModeIOS.DoNotMix,
-      playsInSilentModeIOS: true,
-      shouldDuckAndroid: true,
-      interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
-      playThroughEarpieceAndroid: false
-    });
 
     return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
+      notificationListener.remove();
     };
   }, []);
+
+  // remove player when component unmounts
+  useEffect(() => {
+    return () => {
+      try {
+        if (player && player.remove) player.remove();
+      } catch (e) { }
+    };
+  }, [player]);
 
   useEffect(() => {
     playSong();
   }, [playlist?.current]);
 
   useEffect(() => {
-    player
-      .setStatusAsync({ isLooping: loop === LoopType.RepeatSong })
-      .then()
-      .catch((e) => {
-        console.log(`setIsLoopingAsync ${e}`);
-      });
-    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-  }, [loop]);
+    if (!player) return;
+
+    try {
+      player.loop = loop === LoopType.RepeatSong;
+    } catch (e) {
+      console.log(`set loop ${e}`);
+    }
+
+    const listener = player.addListener(
+      "playbackStatusUpdate",
+      (s) => onPlaybackStatusUpdate(s)
+    );
+    return () => {
+      try {
+        if (listener && listener.remove) listener.remove();
+      } catch (e) { }
+    };
+  }, [player, loop]);
 
   const onPlaybackStatusUpdate = (status) => {
-    if (status.isLoaded) {
-      setStatus(status);
-    }
-    if (status.didJustFinish && !status.isLooping) {
-      nextTrack();
-    }
+    // Normalize expo-audio status to the shape used by the component
+    if (!status) return;
+    const normalized = {
+      isLoaded: !!status.isLoaded,
+      isPlaying: !!status.playing,
+      positionMillis: typeof status.currentTime === 'number' ? Math.round(status.currentTime * 1000) : 0,
+      durationMillis: typeof status.duration === 'number' ? Math.round(status.duration * 1000) : 0,
+      rate: status.playbackRate || 1,
+      shouldCorrectPitch: status.shouldCorrectPitch,
+      volume: status.volume,
+      muted: !!status.mute,
+      isLooping: !!status.loop,
+      didJustFinish: !!status.didJustFinish,
+    };
+    setStatus(normalized);
+    if (normalized.didJustFinish && !normalized.isLooping) nextTrack();
   };
 
   const randomTrack = () => {
@@ -183,65 +212,52 @@ const Player = () => {
     }
   };
 
-  const onSeek = (positionMillis) => {
-    player
-      .getStatusAsync()
-      .then(
-        (result) => result.isLoaded && player.setPositionAsync(positionMillis)
-      )
-      .catch((e) => error(`onSeek ${e}`));
+  const onSeek = async (positionMillis) => {
+    try {
+      if (!player) return;
+      await player.seekTo(positionMillis / 1000);
+      // optimistically update UI
+      setStatus((s) => ({ ...s, positionMillis }));
+    } catch (e) {
+      error(`onSeek ${e}`);
+    }
   };
 
   const onPlay = () => {
-    player
-      .getStatusAsync()
-      .then((result) => {
-        if (result.isLoaded) {
-          if (result.isPlaying) {
-            player.pauseAsync();
-          } else {
-            player.playAsync();
-          }
-        } else {
-          if (loop === LoopType.RandomList) {
-            randomTrack();
-          } else {
-            playSong();
-          }
-        }
-      })
-      .catch((e) => error(`onPlay ${e}`));
+    try {
+      if (!player) return;
+      if (status.isLoaded) {
+        if (status.isPlaying) player.pause();
+        else player.play();
+      } else {
+        if (loop === LoopType.RandomList) randomTrack();
+        else playSong();
+      }
+    } catch (e) {
+      error(`onPlay ${e}`);
+    }
   };
 
-  const playSong = () => {
-    //unload previous song
-    player
-      .unloadAsync()
-      .then(() => {
-        if (playlist?.current) {
-          // first download the song
-          saveSong(playlist.current.url).then((filePath) => {
-            player
-              .loadAsync(
-                { uri: filePath },
-                {
-                  shouldPlay: true,
-                  rate: status.rate,
-                  shouldCorrectPitch: status.shouldCorrectPitch,
-                  volume: status.volume,
-                  isMuted: status.muted,
-                  isLooping: loop === LoopType.RepeatSong,
-                  progressUpdateIntervalMillis: 1000,
-                }
-              )
-              .then(() =>
-                player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
-              )
-              .catch((e) => error(`loadAsync ${e}`));
-          }).catch((e) => error(`saveSong ${e}`))
-        }
-      })
-      .catch((e) => error(`unloadAsync ${e}`));
+  const playSong = async () => {
+    try {
+      if (!player) return;
+      if (!playlist?.current) return;
+      const filePath = await saveSong(playlist.current.url);
+      try {
+        // pause any current playback before replacing
+        try {
+          if (player.playing) player.pause();
+        } catch (e) { }
+
+        player.replace(filePath);
+        player.loop = loop === LoopType.RepeatSong;
+        player.play();
+      } catch (e) {
+        error(`replace/play ${e}`);
+      }
+    } catch (e) {
+      error(`playSong ${e}`);
+    }
   };
 
   return (
