@@ -69,10 +69,11 @@ async function registerForPushNotificationsAsync() {
   }
 }
 
+const player = Audio.createAudioPlayer(null);
+
 const Player = () => {
   const [status, setStatus] = useState({});
-  const [player, setPlayer] = useState(null);
-  const { playlist, setPlaylist, songs } = useAppContext();
+  const { playlist, setPlaylist, songs, albums } = useAppContext();
   const [loop, setLoop] = useState(0);
   const [notification, setNotification] = useState(null);
 
@@ -85,14 +86,6 @@ const Player = () => {
       shouldDuckAndroid: true,
       shouldRouteThroughEarpiece: false,
     }).catch(() => { });
-
-    // create a long-lived player instance
-    try {
-      const p = Audio.createAudioPlayer(null);
-      setPlayer(p);
-    } catch (e) {
-      console.log(`createAudioPlayer ${e}`);
-    }
 
     registerForPushNotificationsAsync();
 
@@ -107,11 +100,14 @@ const Player = () => {
     };
   }, []);
 
-  // remove player when component unmounts
   useEffect(() => {
     return () => {
       try {
-        if (player && player.remove) player.remove();
+        if (player) {
+          if (player.pause) player.pause();
+          if (player.remove) player.remove();
+          player = null;
+        }
       } catch (e) { }
     };
   }, [player]);
@@ -252,6 +248,23 @@ const Player = () => {
         player.replace(filePath);
         player.loop = loop === LoopType.RepeatSong;
         player.play();
+
+        const metadata = {
+          title: playlist.current.name || "Bilinmeyen Şarkı",
+          artist: "Şubadap Müzik Grubu",
+          albumTitle: albums[playlist.current.albumNo - 1].name,
+          artworkUrl: playlist.current.image,
+        }
+
+        try {
+          player.setActiveForLockScreen(true, metadata, {
+            showPlayPause: true,
+            showSeekBackward: true,
+            showSeekForward: true,
+          });
+        } catch (e) {
+          console.log(`setActiveForLockScreen ${e}`);
+        }
       } catch (e) {
         error(`replace/play ${e}`);
       }

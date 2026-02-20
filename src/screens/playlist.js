@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import Constants from "expo-constants";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { ScrollView, Text, View, TextInput } from "react-native";
 import * as Linking from "expo-linking";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useNavigation } from "@react-navigation/native";
 import {
   styles,
   turkishCompare,
@@ -12,7 +15,7 @@ import {
   ModalDialog,
 } from "../helpers";
 import { SongDetail, SongItem } from "../components/song";
-import { TextButton } from "../components/buttons";
+import { TextButton, DrawerMenuButton } from "../components/buttons";
 import Playlists from "../components/playlists";
 
 
@@ -20,10 +23,15 @@ function tabScreenOptions(label) {
   return {
     tabBarLabel: label,
     tabBarLabelStyle: {
-      fontSize: normalize(22)
+      fontSize: normalize(22),
+      textAlign: "center",
+      alignSelf: "center",
     },
-    tabBarIconStyle: { display: "none" }
-  }
+    tabBarIconStyle: { display: "none" },
+    tabBarItemStyle: { alignItems: "center", justifyContent: "center" },
+    headerShown: false,
+    paddingTop: Constants.statusBarHeight,
+  };
 }
 
 const FilterInput = ({ onSubmit }) => {
@@ -50,6 +58,8 @@ export const PlaylistScreen = ({ route }) => {
   const [openDialogVisible, setOpenDialogVisible] = useState(false);
   const { playlist, setPlaylist, songs, highlights } =
     useAppContext();
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (tabIndex !== route.params?.tabIndex)
@@ -203,11 +213,12 @@ export const PlaylistScreen = ({ route }) => {
   </ScrollView>
 
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
       <Tab.Navigator>
         <Tab.Screen name="şarkılar" component={Songs} options={tabScreenOptions("Şarkılar")} />
         <Tab.Screen name="çalma listesi" component={Playlist} options={tabScreenOptions("Çalma Listesi")} />
       </Tab.Navigator>
+      <DrawerMenuButton navigation={navigation} />
       <Playlists open={openPlaylist} visible={openDialogVisible} />
       <ModalDialog onDismiss={closeSaveDialog} visible={saveDialogVisible}>
         <TextInput placeholder="Listenin adını giriniz:" value={playlistName} style={styles.textInput}
@@ -223,7 +234,7 @@ export const PlaylistScreen = ({ route }) => {
           />
         </View>
       </ModalDialog>
-    </>
+    </SafeAreaView>
   );
 };
 

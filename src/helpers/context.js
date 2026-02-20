@@ -8,6 +8,7 @@ const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
 const SONGS = "https://ansiklopedi.subadapcocuk.org/subadapp.json";
 
 export const ContextProvider = ({ children }) => {
+  const [albums, setAlbums] = useState([]);
   const [songs, setSongs] = useState([]);
   const [highlights, setHighlights] = useState([]);
   const [playlist, setPlaylist] = useState({
@@ -34,6 +35,7 @@ export const ContextProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
+        setAlbums(data["albums"]);
         setSongs(data["songs"]);
         setHighlights(data["highlights"]);
       })
@@ -51,6 +53,7 @@ export const ContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
+        albums,
         songs,
         highlights,
         playlist,
