@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.27.0](https://github.com/subadapcocuk/subadapp/compare/v0.26.11...v0.27.0) (2026-08-01)
+
+- Expo SDK 55’e yükseltildi.
+- Oynatma altyapısı expo-av yerine expo-audio ile güncellendi.
+- Arka planda çalma ve kilit ekranı medya bilgisi için ses oturumu düzenlemeleri yapıldı.
+- Ön belleğe alınan ses dosyalarının yönetimi yeni expo-file-system API’leriyle güncellendi.
+- Çalma ekranı ve çalma listesi arayüzünde görsel/yerleşim iyileştirmeleri yapıldı.
+
 ## [0.26.11](https://github.com/subadapcocuk/subadapp/compare/v0.26.10...v0.26.11) (2025-07-05)
 
 - Expo son sürüme (v53) yükseltildi
