@@ -27,7 +27,9 @@
           "recordAudioAndroid": false,
           "enableBackgroundRecording": false
         }
-      ]
+      ],
+      "expo-asset",
+      "expo-font"
     ],
     "platforms": [
       "ios",
