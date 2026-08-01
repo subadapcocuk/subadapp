@@ -1,10 +1,8 @@
-import React from "react";
-import Constants from "expo-constants";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Menu from "../components/menu";
 import { PlaylistScreen } from "../screens";
-import { FOREGROUND, isLargeScreen } from "../helpers";
+import { isLargeScreen } from "../helpers";
 
 const Drawer = createDrawerNavigator();
 
@@ -16,11 +14,7 @@ export const NavigationService = () => {
         accessibilityLabel="Uygulama menüsünü içeren gezinti"
         drawerContent={(props) => <Menu {...props} />}
         screenOptions={{
-          headerTintColor: FOREGROUND,
-          headerLeftContainerStyle: { transform: [{ scale: 2 }] },
-          headerStyle: {
-            height: Constants.statusBarHeight,
-          },
+          headerShown: false,
           drawerType: isLargeScreen ? "permanent" : "front",
           drawerStyle: isLargeScreen ? null : { width: "60%" },
         }}

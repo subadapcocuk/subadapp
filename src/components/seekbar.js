@@ -27,7 +27,7 @@ const SeekBar = ({
       style={styles.seekBar}
       accessibilityLabel={"şarkı çalma bilgi çubuğu"}
     >
-      <Text style={styles.text}>{elapsed[0] + ":" + elapsed[1]}</Text>
+      <Text style={[styles.text, { paddingLeft: 10 }]}>{elapsed[0] + ":" + elapsed[1]}</Text>
       <Slider
         style={styles.slider}
         disabled={!isPlaying}

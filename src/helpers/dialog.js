@@ -1,5 +1,5 @@
 import { Alert, Modal, View } from "react-native";
-import { Toast } from "toastify-react-native";
+import Toast from "react-native-toast-message";
 import { deviceWidth, styles } from "./styles";
 
 export const confirm = (
@@ -21,16 +21,18 @@ export const confirm = (
   ]);
 };
 
-export const show = (
-  message
-) => {
-  Toast.info(message);
+export const show = (message) => {
+  Toast.show({
+    type: "info",
+    text1: message
+  });
 };
 
-export const error = (
-  message
-) => {
-  Toast.error(message);
+export const error = (message) => {
+  Toast.show({
+    type: "error",
+    text1: message
+  });
 };
 
 export const ModalDialog = ({ children, visible, onDismiss, height = null }) => <Modal

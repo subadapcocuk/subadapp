@@ -1,133 +1,107 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Audio, InterruptionModeAndroid, InterruptionModeIOS } from "expo-av";
-import * as Device from "expo-device";
-import * as FileSystem from "expo-file-system";
-import * as Notifications from "expo-notifications";
+import * as Audio from "expo-audio";
+import { File, Directory, Paths } from "expo-file-system";
+
 import {
   styles,
   LoopType,
   randomInt,
   useAppContext,
   error,
-  show,
 } from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
 
 async function saveSong(uri) {
   const fileName = uri.substring(uri.lastIndexOf('/') + 1);
-  const fileFolder = `${FileSystem.cacheDirectory}subadapp/`
-  const folderInfo = await FileSystem.getInfoAsync(fileFolder);
-  if (!folderInfo.exists) {
+  const fileFolder = new Directory(Paths.cache, "subadapp");
+  if (!fileFolder.exists) {
     // create cache folder if it doesn't exists
-    await FileSystem.makeDirectoryAsync(fileFolder)
+    fileFolder.create()
   }
-  const fileUri = `${fileFolder}${fileName}`
-  const fileInfo = await FileSystem.getInfoAsync(fileUri);
-  if (!fileInfo.exists) {
-    // Download if file doesn't exist
-    await FileSystem.downloadAsync(uri, fileUri);
-    return fileUri;
-  } else {
-    return fileUri;
+  const file = new File(fileFolder, fileName);
+  if (!file.exists) {
+    await File.downloadFileAsync(uri, file);
   }
+  return file.uri;
 }
 
-async function registerForPushNotificationsAsync() {
-  try {
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted") {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== "granted") {
-        error("Failed to get push token for push notification!");
-        return;
-      }
-    } else {
-      show("Push notification needs physical device");
-    }
 
-    if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#FF231F7C",
-      });
-    }
-  } catch (e) {
-    error(`registerForPushNotificationsAsync: ${e}`);
-  }
-}
+
+const player = Audio.createAudioPlayer(null);
 
 const Player = () => {
   const [status, setStatus] = useState({});
-  const [player, setPlayer] = useState(new Audio.Sound());
-  const { playlist, setPlaylist, songs } = useAppContext();
+  const { playlist, setPlaylist, songs, albums } = useAppContext();
   const [loop, setLoop] = useState(0);
-  const [notification, setNotification] = useState(null);
-  const notificationListener = useRef();
 
   useEffect(() => {
-    registerForPushNotificationsAsync();
-
-    notificationListener.current =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
-
     Audio.setAudioModeAsync({
-      allowsRecordingIOS: false,
-      staysActiveInBackground: true,
-      interruptionModeIOS: InterruptionModeIOS.DoNotMix,
-      playsInSilentModeIOS: true,
+      allowsRecording: false,
+      shouldPlayInBackground: true,
+      interruptionMode: "doNotMix",
+      playsInSilentMode: true,
       shouldDuckAndroid: true,
-      interruptionModeAndroid: InterruptionModeAndroid.DoNotMix,
-      playThroughEarpieceAndroid: false
-    });
-
-    return () => {
-      Notifications.removeNotificationSubscription(
-        notificationListener.current
-      );
-    };
+      shouldRouteThroughEarpiece: false,
+    }).catch(() => { });
   }, []);
+
+  useEffect(() => {
+    return () => {
+      try {
+        if (player) {
+          if (player.pause) player.pause();
+          if (player.remove) player.remove();
+          player = null;
+        }
+      } catch (e) { }
+    };
+  }, [player]);
 
   useEffect(() => {
     playSong();
   }, [playlist?.current]);
 
   useEffect(() => {
-    player
-      .setStatusAsync({ isLooping: loop === LoopType.RepeatSong })
-      .then()
-      .catch((e) => {
-        console.log(`setIsLoopingAsync ${e}`);
-      });
-    player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate);
-  }, [loop]);
+    if (!player) return;
+
+    try {
+      player.loop = loop === LoopType.RepeatSong;
+    } catch (e) {
+      console.log(`set loop ${e}`);
+    }
+
+    const listener = player.addListener(
+      "playbackStatusUpdate",
+      (s) => onPlaybackStatusUpdate(s)
+    );
+    return () => {
+      try {
+        if (listener && listener.remove) listener.remove();
+      } catch (e) { }
+    };
+  }, [player, loop]);
 
   const onPlaybackStatusUpdate = (status) => {
-    if (status.isLoaded) {
-      setStatus(status);
-    }
-    if (status.didJustFinish && !status.isLooping) {
-      nextTrack();
-    }
+    // Normalize expo-audio status to the shape used by the component
+    if (!status) return;
+    const normalized = {
+      isLoaded: !!status.isLoaded,
+      isPlaying: !!status.playing,
+      positionMillis: typeof status.currentTime === 'number' ? Math.round(status.currentTime * 1000) : 0,
+      durationMillis: typeof status.duration === 'number' ? Math.round(status.duration * 1000) : 0,
+      rate: status.playbackRate || 1,
+      shouldCorrectPitch: status.shouldCorrectPitch,
+      volume: status.volume,
+      muted: !!status.mute,
+      isLooping: !!status.loop,
+      didJustFinish: !!status.didJustFinish,
+    };
+    setStatus(normalized);
+    if (normalized.didJustFinish && !normalized.isLooping) nextTrack();
   };
 
   const randomTrack = () => {
@@ -183,65 +157,70 @@ const Player = () => {
     }
   };
 
-  const onSeek = (positionMillis) => {
-    player
-      .getStatusAsync()
-      .then(
-        (result) => result.isLoaded && player.setPositionAsync(positionMillis)
-      )
-      .catch((e) => error(`onSeek ${e}`));
+  const onSeek = async (positionMillis) => {
+    try {
+      if (!player) return;
+      await player.seekTo(positionMillis / 1000);
+      // optimistically update UI
+      setStatus((s) => ({ ...s, positionMillis }));
+    } catch (e) {
+      error(`onSeek ${e}`);
+    }
   };
 
   const onPlay = () => {
-    player
-      .getStatusAsync()
-      .then((result) => {
-        if (result.isLoaded) {
-          if (result.isPlaying) {
-            player.pauseAsync();
-          } else {
-            player.playAsync();
-          }
-        } else {
-          if (loop === LoopType.RandomList) {
-            randomTrack();
-          } else {
-            playSong();
-          }
-        }
-      })
-      .catch((e) => error(`onPlay ${e}`));
+    try {
+      if (!player) return;
+      if (status.isLoaded) {
+        if (status.isPlaying) player.pause();
+        else player.play();
+      } else {
+        if (loop === LoopType.RandomList) randomTrack();
+        else playSong();
+      }
+    } catch (e) {
+      error(`onPlay ${e}`);
+    }
   };
 
-  const playSong = () => {
-    //unload previous song
-    player
-      .unloadAsync()
-      .then(() => {
-        if (playlist?.current) {
-          // first download the song
-          saveSong(playlist.current.url).then((filePath) => {
-            player
-              .loadAsync(
-                { uri: filePath },
-                {
-                  shouldPlay: true,
-                  rate: status.rate,
-                  shouldCorrectPitch: status.shouldCorrectPitch,
-                  volume: status.volume,
-                  isMuted: status.muted,
-                  isLooping: loop === LoopType.RepeatSong,
-                  progressUpdateIntervalMillis: 1000,
-                }
-              )
-              .then(() =>
-                player.setOnPlaybackStatusUpdate(onPlaybackStatusUpdate)
-              )
-              .catch((e) => error(`loadAsync ${e}`));
-          }).catch((e) => error(`saveSong ${e}`))
+  const playSong = async () => {
+    try {
+      if (!player) return;
+      if (!playlist?.current) return;
+      const filePath = await saveSong(playlist.current.url);
+      try {
+        // pause any current playback before replacing
+        try {
+          if (player.playing) player.pause();
+        } catch (e) { }
+
+        player.replace(filePath);
+        player.loop = loop === LoopType.RepeatSong;
+
+        const metadata = {
+          title: playlist.current.name || "Bilinmeyen Şarkı",
+          artist: "Şubadap Müzik Grubu",
+          albumTitle: albums?.[playlist.current.albumNo - 1]?.name || "Şubadap Müzik Grubu",
+          artworkUrl: playlist.current.image,
+        };
+
+        try {
+          player.setActiveForLockScreen(true, metadata, {
+            showPlayPause: true,
+            showSeekBackward: true,
+            showSeekForward: true,
+          });
+        } catch (e) {
+          console.log(`setActiveForLockScreen ${e}`);
         }
-      })
-      .catch((e) => error(`unloadAsync ${e}`));
+
+        player.play();
+      } catch (e) {
+        error(`replace/play ${e}`);
+      }
+    } catch (e) {
+      error(`playSong ${e}`);
+    }
   };
 
   return (
@@ -249,18 +228,6 @@ const Player = () => {
       style={styles.bottomView}
       accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}
     >
-      {notification && (
-        <TouchableOpacity
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => setNotification(null)}
-        >
-          <Text>{notification.request.content.title}</Text>
-          <Text>{notification.request.content.body}</Text>
-        </TouchableOpacity>
-      )}
       <SeekBar
         isPlaying={status.isLoaded}
         onSeek={onSeek}

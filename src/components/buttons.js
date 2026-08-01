@@ -36,3 +36,17 @@ export const TextButton = ({ title, onPress, label = null }) => <TouchableOpacit
   accessibilityLabel={label ? label : title}>
   <Text style={{ color: BACKGROUND, fontSize: normalize(20) }}>{title}</Text>
 </TouchableOpacity>
+
+export const DrawerMenuButton = ({ navigation }) => <TouchableOpacity
+  accessibilityLabel="Dolaşım Menüsünü Aç"
+  onPress={() => navigation.toggleDrawer && navigation.toggleDrawer()}
+  style={{
+    position: "absolute",
+    left: 10,
+    bottom: 10,
+    zIndex: 1000,
+    padding: 0
+  }}
+>
+  <FontAwesome name="bars" size={normalize(36)} color={FOREGROUND} />
+</TouchableOpacity>

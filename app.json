@@ -8,7 +8,6 @@
     "githubUrl": "https://github.com/subadapcocuk/subadapp",
     "owner": "kolektif",
     "icon": "./assets/icon.png",
-    "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -22,11 +21,17 @@
     ],
     "plugins": [
       [
-        "expo-av",
+        "expo-audio",
         {
-          "microphonePermission": false
+          "enableBackgroundPlayback": true,
+          "recordAudioAndroid": false,
+          "enableBackgroundRecording": false
         }
       ]
+    ],
+    "platforms": [
+      "ios",
+      "android"
     ],
     "ios": {
       "supportsTablet": true,
