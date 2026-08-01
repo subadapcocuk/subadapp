@@ -58,7 +58,6 @@ kullanabilirsiniz:
   başlatmanız gerekiyor.
 - `pnpm ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
   gerekiyor.
-- `pnpm web`: Tarayıcıda görüntülemek için.
 - `pnpm build:android`: Android paketi oluşturur.
 - `pnpm build:apk`: APK dosyasını yerelde oluşturur.
 - `pnpm build:ios`: iOS paket oluşturur.

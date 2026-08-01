@@ -1,28 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Platform, Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Audio from "expo-audio";
-import * as Device from "expo-device";
 import { File, Directory, Paths } from "expo-file-system";
-import * as Notifications from "expo-notifications";
+
 import {
   styles,
   LoopType,
   randomInt,
   useAppContext,
   error,
-  show,
 } from "../helpers";
 import PlayerControls from "./controls";
 import SeekBar from "./seekbar";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-  }),
-});
 
 async function saveSong(uri) {
   const fileName = uri.substring(uri.lastIndexOf('/') + 1);
@@ -38,36 +29,7 @@ async function saveSong(uri) {
   return file.uri;
 }
 
-async function registerForPushNotificationsAsync() {
-  try {
-    if (Device.isDevice) {
-      const { status: existingStatus } =
-        await Notifications.getPermissionsAsync();
-      let finalStatus = existingStatus;
-      if (existingStatus !== "granted") {
-        const { status } = await Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
-      if (finalStatus !== "granted") {
-        error("Failed to get push token for push notification!");
-        return;
-      }
-    } else {
-      show("Push notification needs physical device");
-    }
 
-    if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync("default", {
-        name: "default",
-        importance: Notifications.AndroidImportance.MAX,
-        vibrationPattern: [0, 250, 250, 250],
-        lightColor: "#FF231F7C",
-      });
-    }
-  } catch (e) {
-    error(`registerForPushNotificationsAsync: ${e}`);
-  }
-}
 
 const player = Audio.createAudioPlayer(null);
 
@@ -75,7 +37,6 @@ const Player = () => {
   const [status, setStatus] = useState({});
   const { playlist, setPlaylist, songs, albums } = useAppContext();
   const [loop, setLoop] = useState(0);
-  const [notification, setNotification] = useState(null);
 
   useEffect(() => {
     Audio.setAudioModeAsync({
@@ -86,18 +47,6 @@ const Player = () => {
       shouldDuckAndroid: true,
       shouldRouteThroughEarpiece: false,
     }).catch(() => { });
-
-    registerForPushNotificationsAsync();
-
-    const notificationListener =
-      Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
-      });
-
-
-    return () => {
-      notificationListener.remove();
-    };
   }, []);
 
   useEffect(() => {
@@ -247,14 +196,13 @@ const Player = () => {
 
         player.replace(filePath);
         player.loop = loop === LoopType.RepeatSong;
-        player.play();
 
         const metadata = {
           title: playlist.current.name || "Bilinmeyen Şarkı",
           artist: "Şubadap Müzik Grubu",
-          albumTitle: albums[playlist.current.albumNo - 1].name,
+          albumTitle: albums?.[playlist.current.albumNo - 1]?.name || "Şubadap Müzik Grubu",
           artworkUrl: playlist.current.image,
-        }
+        };
 
         try {
           player.setActiveForLockScreen(true, metadata, {
@@ -265,6 +213,8 @@ const Player = () => {
         } catch (e) {
           console.log(`setActiveForLockScreen ${e}`);
         }
+
+        player.play();
       } catch (e) {
         error(`replace/play ${e}`);
       }
@@ -278,18 +228,6 @@ const Player = () => {
       style={styles.bottomView}
       accessibilityLabel={"çalma bilgi çubuğu ve oynatma düğmeleri"}
     >
-      {notification && (
-        <TouchableOpacity
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-          onPress={() => setNotification(null)}
-        >
-          <Text>{notification.request.content.title}</Text>
-          <Text>{notification.request.content.body}</Text>
-        </TouchableOpacity>
-      )}
       <SeekBar
         isPlaying={status.isLoaded}
         onSeek={onSeek}
