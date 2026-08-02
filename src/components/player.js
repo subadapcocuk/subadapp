@@ -17,10 +17,10 @@ import SeekBar from "./seekbar";
 
 async function saveSong(uri) {
   const fileName = uri.substring(uri.lastIndexOf('/') + 1);
-  const fileFolder = new Directory(Paths.cache, "subadapp");
+  const fileFolder = new Directory(Paths.document, "subadapp");
   if (!fileFolder.exists) {
-    // create cache folder if it doesn't exists
-    fileFolder.create()
+    // create persistent app folder if it doesn't exist
+    fileFolder.create();
   }
   const file = new File(fileFolder, fileName);
   if (!file.exists) {
@@ -206,7 +206,6 @@ const Player = () => {
 
         try {
           player.setActiveForLockScreen(true, metadata, {
-            showPlayPause: true,
             showSeekBackward: true,
             showSeekForward: true,
           });
