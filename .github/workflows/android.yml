@@ -29,6 +29,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Build package
+        env:
+          GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
         run: pnpm build:android:local
       - uses: WyriHaximus/github-action-get-previous-tag@v1
         id: currenttag
