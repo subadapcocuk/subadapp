@@ -2,7 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.27.3](https://github.com/subadapcocuk/subadapp/compare/v0.27.1...v0.27.3) (2026-08-03)
+
+- Sürüm yükseltme betiği değiştirildi.
+- Eksik bağımlılık eklendi.
+
 ## [0.27.2](https://github.com/subadapcocuk/subadapp/compare/v0.27.1...v0.27.2) (2026-08-03)
+
+- Eski bağımlılıklar kaldırıldı.
+
 ## [0.27.1](https://github.com/subadapcocuk/subadapp/compare/v0.27.0...v0.27.1) (2026-08-03)
 
 - Expo SDK 57'ye yükseltildi.
