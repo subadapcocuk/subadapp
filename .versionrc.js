@@ -5,15 +5,7 @@ module.exports = {
     },
     {
       filename: "app.json",
-      updater: require.resolve("@mccraveiro/standard-version-expo"),
-    },
-    {
-      filename: "app.json",
-      updater: require.resolve("@mccraveiro/standard-version-expo/android"),
-    },
-    {
-      filename: "app.json",
-      updater: require.resolve("@mccraveiro/standard-version-expo/ios"),
+      updater: require.resolve("./app-json-updater.js"),
     },
   ],
 };
