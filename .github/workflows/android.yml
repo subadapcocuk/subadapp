@@ -3,40 +3,44 @@ name: "Android"
 on:
   workflow_dispatch:
 
-# https://github.com/expo/expo-github-action#publish-on-any-push-to-main
 jobs:
   build-android:
     name: Build Android
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
       - name: Set up JDK
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: 21
           distribution: temurin
-      - uses: pnpm/action-setup@v2
-      - uses: actions/setup-node@v4
+      - uses: pnpm/action-setup@v6
+      - uses: actions/setup-node@v7
         with:
-          node-version: 26
+          node-version: 26.x
           cache: 'pnpm'
-      - uses: expo/expo-github-action@v8
+      - name: Install dependencies
+        run: pnpm install
+      - uses: expo/expo-github-action@v9
         with:
           eas-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
-      - name: Install dependencies
-        run: pnpm install
+      - name: Setup Global Gradle Memory and Repositories
+        run: |
+          mkdir -p ~/.gradle
+          echo "org.gradle.jvmargs=-Xmx4096m -XX:MaxMetaspaceSize=1024m -XX:+HeapDumpOnOutOfMemoryError" >> ~/.gradle/gradle.properties
+          echo "settingsEvaluated { settings -> settings.pluginManagement.repositories { google(); mavenCentral(); gradlePluginPortal() } }" > ~/.gradle/init.gradle
       - name: Build package
         env:
           GRADLE_OPTS: "-Xmx4096m -XX:MaxMetaspaceSize=1024m"
         run: pnpm build:android:local
-      - uses: WyriHaximus/github-action-get-previous-tag@v1
+      - uses: WyriHaximus/github-action-get-previous-tag@v2
         id: currenttag
       - name: Rename AAB
         run: mv build-*.aab subadapp-${{ steps.currenttag.outputs.tag }}.aab
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: subadapp-${{ steps.currenttag.outputs.tag }}.aab
           tag_name: ${{ steps.currenttag.outputs.tag }}
