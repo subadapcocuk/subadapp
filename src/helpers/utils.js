@@ -1,11 +1,12 @@
 import { Share } from "react-native";
 import { deburr } from "lodash";
 import { error } from "./dialog";
+import { URLS } from "../constants/urls";
 
-export const PLAY_STORE_URL =
-  "https://play.google.com/store/apps/details?id=org.subadapp";
+export const PLAY_STORE_URL = URLS.PLAY_STORE;
 
 export const randomInt = (length, previous) => {
+  if (!length || length <= 1) return 0;
   let current = Math.floor(Math.random() * length);
   while (current === previous) {
     current = Math.floor(Math.random() * length);

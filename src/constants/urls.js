@@ -1,0 +1,16 @@
+export const URLS = {
+  SONGS_JSON: "https://ansiklopedi.subadapcocuk.org/subadapp.json",
+  PLAY_STORE: "https://play.google.com/store/apps/details?id=org.subadapp",
+  WEBSITE: "https://subadapcocuk.org",
+  ENCYCLOPEDIA: "https://ansiklopedi.subadapcocuk.org",
+  KREOSUS: "https://www.kreosus.com/subadapcocuk",
+  CONCERTS: "https://subadapcocuk.org/konserler/",
+  YOUTUBE: "https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk",
+  FACEBOOK: "https://www.facebook.com/subadapcocuk",
+  INSTAGRAM: "https://www.instagram.com/subadapcocuk",
+  TWITTER: "https://twitter.com/subadap",
+  CONTACT: "https://subadapcocuk.org/iletisim",
+  COPYLEFT: "https://ansiklopedi.subadapcocuk.org/index.php/Copyleft",
+  PRIVACY: "https://subadapcocuk.org/gizlilik-politikasi/",
+  ABOUT: "https://subadapcocuk.org/subadapp/",
+};

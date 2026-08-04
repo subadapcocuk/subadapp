@@ -1,6 +1,6 @@
 import { Alert, Modal, View } from "react-native";
 import Toast from "react-native-toast-message";
-import { deviceWidth, styles } from "./styles";
+import { deviceWidth, deviceHeight, styles } from "./styles";
 
 export const confirm = (
   title,
@@ -35,7 +35,7 @@ export const error = (message) => {
   });
 };
 
-export const ModalDialog = ({ children, visible, onDismiss, height = null }) => <Modal
+export const ModalDialog = ({ children, visible, onDismiss, height = deviceHeight * 0.5 }) => <Modal
   animationType="fade"
   transparent
   visible={visible}

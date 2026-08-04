@@ -9,8 +9,8 @@ function pad(n, width, z = 0) {
 }
 
 const minutesAndSeconds = (position) => [
-  Math.floor(position / 60000, 0),
-  pad(Math.floor((position / 1000) % 60, 2), 2),
+  Math.floor(Math.max(0, position) / 60000),
+  pad(Math.floor((Math.max(0, position) / 1000) % 60), 2),
 ];
 
 const SeekBar = ({

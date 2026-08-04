@@ -50,7 +50,7 @@ const Playlists = ({ visible, open }) => {
         <Text style={styles.icon}>Kayıtlı Çalma Listeleri</Text>
       </View>
       <ScrollView style={styles.scrollView} persistentScrollbar>
-        {playlists.map((item) => <Item key={`playlist_${item.name}`} {...item} />)}
+        {playlists.map((item, index) => <Item key={`playlist_${item.name}_${index}`} {...item} />)}
       </ScrollView>
       <View style={styles.centerView}>
         <TextButton

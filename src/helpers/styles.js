@@ -3,10 +3,15 @@ export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
 
-export const deviceWidth = Dimensions.get("window").width;
-export const deviceHeight = Dimensions.get("window").height;
+export let deviceWidth = Dimensions.get("window").width;
+export let deviceHeight = Dimensions.get("window").height;
+export let isLargeScreen = deviceWidth >= 768;
 
-export const isLargeScreen = deviceWidth >= 768;
+Dimensions.addEventListener("change", ({ window }) => {
+  deviceWidth = window.width;
+  deviceHeight = window.height;
+  isLargeScreen = deviceWidth >= 768;
+});
 
 const scale = deviceWidth / 768;
 

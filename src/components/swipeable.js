@@ -1,7 +1,21 @@
 import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import Reanimated from 'react-native-reanimated';
-import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import Reanimated, { useAnimatedStyle } from "react-native-reanimated";
+import Swipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+
+const LeftActionView = ({ translation }) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translation.value - 50 }],
+  }));
+  return <Reanimated.View style={[styles.action, animatedStyle]} />;
+};
+
+const RightActionView = ({ translation }) => {
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ translateX: translation.value + 50 }],
+  }));
+  return <Reanimated.View style={[styles.action, animatedStyle]} />;
+};
 
 export const SwipeableRow = ({
   children,
@@ -9,22 +23,13 @@ export const SwipeableRow = ({
   onRightOpen,
   onPress,
 }) => {
+  const renderLeftActions = (_progress, translation) => (
+    <LeftActionView translation={translation} />
+  );
 
-  const renderLeftActions = (_progress, translation) => {
-    return (
-      <Reanimated.View style={[styles.action, {
-        transform: [{ translateX: translation.value - 50 }],
-      }]} />
-    );
-  };
-
-  const renderRightActions = (_progress, translation) => {
-    return (
-      <Reanimated.View style={[styles.action, {
-        transform: [{ translateX: translation.value + 50 }],
-      }]} />
-    );
-  };
+  const renderRightActions = (_progress, translation) => (
+    <RightActionView translation={translation} />
+  );
 
   return (
     <Swipeable

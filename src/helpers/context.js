@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { error } from "./dialog";
+import { URLS } from "../constants/urls";
 
 export const AppContext = React.createContext();
 
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
-const SONGS = "https://ansiklopedi.subadapcocuk.org/subadapp.json";
+const SONGS = URLS.SONGS_JSON;
 
 export const ContextProvider = ({ children }) => {
   const [albums, setAlbums] = useState([]);

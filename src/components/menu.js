@@ -4,6 +4,7 @@ import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Linking from "expo-linking";
 import { IconDrawerItem } from "../components/buttons";
 import { shareApp } from "../helpers";
+import { URLS } from "../constants/urls";
 
 export const Menu = (props) => {
   const { navigation } = props;
@@ -20,77 +21,64 @@ export const Menu = (props) => {
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://subadapcocuk.org")}
+          onPress={() => Linking.openURL(URLS.WEBSITE)}
           icon={"bookmark"}
           label="Subadap.Org"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://ansiklopedi.subadapcocuk.org")}
+          onPress={() => Linking.openURL(URLS.ENCYCLOPEDIA)}
           icon={"book"}
           label={"Ansiklopedi"}
         />
-        {(Platform.OS !== "ios") &&
+        {Platform.OS !== "ios" && (
           <IconDrawerItem
-            onPress={() =>
-              Linking.openURL("https://www.kreosus.com/subadapcocuk")
-            }
-
+            onPress={() => Linking.openURL(URLS.KREOSUS)}
             icon={"hand-holding-dollar"}
             label="Kreosus"
           />
-        }
+        )}
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://subadapcocuk.org/konserler/")}
+          onPress={() => Linking.openURL(URLS.CONCERTS)}
           icon={"calendar-days"}
           label="Konserler"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://www.youtube.com/c/%C5%9Eubadap%C3%87ocuk")
-          }
+          onPress={() => Linking.openURL(URLS.YOUTUBE)}
           icon={"youtube"}
           label="Youtube"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://www.facebook.com/subadapcocuk")
-          }
+          onPress={() => Linking.openURL(URLS.FACEBOOK)}
           icon={"facebook"}
           label="Facebook"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://www.instagram.com/subadapcocuk")
-          }
+          onPress={() => Linking.openURL(URLS.INSTAGRAM)}
           icon={"instagram"}
           label="Instagram"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://twitter.com/subadap")}
+          onPress={() => Linking.openURL(URLS.TWITTER)}
           icon={"twitter"}
           label="Twitter"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://subadapcocuk.org/iletisim")}
+          onPress={() => Linking.openURL(URLS.CONTACT)}
           icon={"envelope"}
           label="İletişim"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://ansiklopedi.subadapcocuk.org/index.php/Copyleft")
-          }
+          onPress={() => Linking.openURL(URLS.COPYLEFT)}
           icon={"creative-commons-nc"}
           label="Copyleft"
         />
         <IconDrawerItem
-          onPress={() =>
-            Linking.openURL("https://subadapcocuk.org/gizlilik-politikasi/")
-          }
+          onPress={() => Linking.openURL(URLS.PRIVACY)}
           icon={"user-shield"}
           label="Gizlilik Politikası"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL("https://subadapcocuk.org/subadapp/")}
+          onPress={() => Linking.openURL(URLS.ABOUT)}
           icon={"question"}
           label="Hakkında"
         />

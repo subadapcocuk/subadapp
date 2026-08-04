@@ -31,7 +31,8 @@ async function saveSong(uri) {
 
 
 
-const player = Audio.createAudioPlayer(null);
+let player = Audio.createAudioPlayer(null);
+let playRequestId = 0;
 
 const Player = () => {
   const [status, setStatus] = useState({});
@@ -106,19 +107,36 @@ const Player = () => {
 
   const randomTrack = () => {
     try {
+      if (!songs || songs.length === 0) return;
       if (playlist.list.length > 1) {
         const index = randomInt(playlist.list.length, playlist.index);
-        setPlaylist({
-          ...playlist,
-          current: songs.filter((s) => s.no === playlist.list[index])[0],
-          index: index,
-        });
-      } else if (playlist.list.length == 0) {
-        setPlaylist({
-          ...playlist,
-          current: songs[randomInt(songs.length)],
-          index: -1,
-        });
+        const songToPlay = songs.find((s) => s.no === playlist.list[index]);
+        if (songToPlay) {
+          if (playlist.current?.no === songToPlay.no) {
+            playSong();
+          } else {
+            setPlaylist({
+              ...playlist,
+              current: songToPlay,
+              index: index,
+            });
+          }
+        }
+      } else if (playlist.list.length === 0) {
+        const currentIndex = songs.findIndex((s) => s.no === playlist?.current?.no);
+        const nextIndex = randomInt(songs.length, currentIndex);
+        const songToPlay = songs[nextIndex];
+        if (songToPlay) {
+          if (playlist.current?.no === songToPlay.no) {
+            playSong();
+          } else {
+            setPlaylist({
+              ...playlist,
+              current: songToPlay,
+              index: -1,
+            });
+          }
+        }
       } else {
         playSong();
       }
@@ -129,13 +147,16 @@ const Player = () => {
 
   const previousTrack = () => {
     try {
-      if (loop === LoopType.RandomList) {
+      if (!songs || songs.length === 0) return;
+      if (loop === LoopType.RandomList || playlist.list.length === 0) {
         randomTrack();
       } else if (loop === LoopType.FollowList) {
         const index =
           playlist.index > 0 ? playlist.index - 1 : playlist.list.length - 1;
-        const current = songs.filter((s) => s.no === playlist.list[index])[0];
-        setPlaylist({ ...playlist, ...{ index, current } });
+        const current = songs.find((s) => s.no === playlist.list[index]);
+        if (current) {
+          setPlaylist({ ...playlist, index, current });
+        }
       }
     } catch (e) {
       error(`previousTrack ${e}`);
@@ -144,13 +165,16 @@ const Player = () => {
 
   const nextTrack = () => {
     try {
-      if (loop === LoopType.RandomList) {
+      if (!songs || songs.length === 0) return;
+      if (loop === LoopType.RandomList || playlist.list.length === 0) {
         randomTrack();
       } else if (loop === LoopType.FollowList) {
         const index =
           playlist.index + 1 < playlist.list.length ? playlist.index + 1 : 0;
-        const current = songs.filter((s) => s.no === playlist.list[index])[0];
-        setPlaylist({ ...playlist, ...{ index, current } });
+        const current = songs.find((s) => s.no === playlist.list[index]);
+        if (current) {
+          setPlaylist({ ...playlist, index, current });
+        }
       }
     } catch (e) {
       error(`nextTrack ${e}`);
@@ -187,7 +211,9 @@ const Player = () => {
     try {
       if (!player) return;
       if (!playlist?.current) return;
+      const thisRequestId = ++playRequestId;
       const filePath = await saveSong(playlist.current.url);
+      if (thisRequestId !== playRequestId) return; // stale request guard
       try {
         // pause any current playback before replacing
         try {
