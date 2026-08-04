@@ -87,9 +87,9 @@ Yeni bir sürüm yayınlamak için `commit-and-tag-version` entegrasyonu kullan�
 pnpm release patch --dry-run
 
 # Gerçek sürüm yükseltme:
-pnpm release patch   # 0.27.3 -> 0.27.4
-pnpm release minor   # 0.27.3 -> 0.28.0
-pnpm release major   # 0.27.3 -> 1.0.0
+pnpm release patch   # 0.27.5 -> 0.27.6
+pnpm release minor   # 0.27.5 -> 0.28.0
+pnpm release major   # 0.27.5 -> 1.0.0
 
 # Değişiklikleri ve etiketleri uzak sunucuya gönderme:
 git push --follow-tags origin main
@@ -113,7 +113,7 @@ karekod okutularak uygulama denenebilir.
 grubudur. 2013 yılında İzmir'de kurulmuştur. Çocukların, kendi hayatlarına
 değen, onların karşılaştıkları durumları/çelişkileri konu alan ve içinde
 yaşadıkları dünyaya dair kendi sözlerini söylemesini hedefleyen tematik şarkılar
-yapmaktadır. Bugüne kadar yayınlanmış 6 albümü ve toplam 40 şarkısı
+yapmaktadır. Bugüne kadar yayınlanmış 8 albümü ve toplam 51 şarkısı
 bulunmaktadır. Yalnızca kendi şarkılarını seslendirdiği çocuk şarkıları
 konserleriyle Türkiye, Kıbrıs, Almanya ve Hollanda'nın çeşitli yerlerinde bugüne
 dek 500'ün üzerinde yerde çocuklarla buluşmuştur. Konserleri yalnızca kentlerde

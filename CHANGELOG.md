@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.28.0](https://github.com/subadapcocuk/subadapp/compare/v0.27.5...v0.28.0) (2026-08-04)
+
+- Oynatıcı çökme hatası düzeltildi ve liste boşken otomatik rastgele sonraki şarkıya geçiş eklendi.
+- Tek şarkılı veya boş listelerde oluşan kilitlenme hatası düzeltildi.
+- Yüklenemeyen şarkı verilerinde uygulamanın çökmesi engellendi.
+- Sekme bileşenleri optimize edilerek gereksiz sayfa yenilemeleri önlendi.
+- Diyalog konumlandırma, süre çubuğu ve Reanimated uyarısı düzeltildi.
+- Cihaz döndürüldüğünde ekran boyutlarının anlık güncellenmesi sağlandı.
+- Tüm harici web bağlantıları merkezi urls.js dosyasına taşındı.
+
 ## [0.27.5](https://github.com/subadapcocuk/subadapp/compare/v0.27.4...v0.27.5) (2026-08-04)
 
 - Expo paketleri son sürüme yükseltildi.
