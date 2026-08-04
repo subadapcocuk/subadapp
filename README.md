@@ -84,15 +84,15 @@ Yeni bir sürüm yayınlamak için `commit-and-tag-version` entegrasyonu kullan�
 
 ```bash
 # Sürüm yükseltme simülasyonu (test etmek için):
-pnpm release:patch --dry-run
+pnpm release patch --dry-run
 
 # Gerçek sürüm yükseltme:
-pnpm release:patch   # 0.27.3 -> 0.27.4
-pnpm release:minor   # 0.27.3 -> 0.28.0
-pnpm release:major   # 0.27.3 -> 1.0.0
+pnpm release patch   # 0.27.3 -> 0.27.4
+pnpm release minor   # 0.27.3 -> 0.28.0
+pnpm release major   # 0.27.3 -> 1.0.0
 
 # Değişiklikleri ve etiketleri uzak sunucuya gönderme:
-git push --follow-tags origin mai
+git push --follow-tags origin main
 ```
 
 Yerelde test etmek için şu komutlar kullanılabilir:

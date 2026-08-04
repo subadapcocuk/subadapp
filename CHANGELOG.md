@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.27.5](https://github.com/subadapcocuk/subadapp/compare/v0.27.4...v0.27.5) (2026-08-04)
+
+- Expo paketleri son sürüme yükseltildi.
+
 ## [0.27.4](https://github.com/subadapcocuk/subadapp/compare/v0.27.3...v0.27.4) (2026-08-03)
 
 - Gradle OOM sorunu çözüldü.
