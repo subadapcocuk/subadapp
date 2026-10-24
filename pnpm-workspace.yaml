@@ -1,9 +1,11 @@
 allowBuilds:
   dtrace-provider: true
 minimumReleaseAgeExclude:
-  - '@expo/cli@57.0.12'
-  - '@expo/router-server@57.0.5'
+  - '@expo/cli@57.0.12 || 57.0.25'
+  - '@expo/router-server@57.0.5 || 57.0.10'
   - expo-constants@57.0.9
   - expo-modules-core@57.0.9
-  - expo@57.0.10
+  - expo@57.0.10 || 57.0.23
   - expo-linking@57.0.5
+  - babel-preset-expo@57.0.12
+  - expo-build-properties@57.0.19
