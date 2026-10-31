@@ -1,5 +1,5 @@
 export const URLS = {
-  SONGS_JSON: "https://ansiklopedi.subadapcocuk.org/subadapp.json",
+  SONGS_JSON: "https://www.subadapcocuk.org/subadapp/subadapp.json",
   PLAY_STORE: "https://play.google.com/store/apps/details?id=org.subadapp",
   WEBSITE: "https://subadapcocuk.org",
   ENCYCLOPEDIA: "https://ansiklopedi.subadapcocuk.org",

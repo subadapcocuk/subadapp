@@ -81,10 +81,11 @@ adresi doğrudan bir resim dosyasına gitmiyorsa betik uyarı verir; şarkı iç
 geçerli albüm görselini, o da geçersizse uygulama ikonunu kullanır. Doğru
 görseli eklemek için Excel'deki `image` hücresine doğrudan resim adresi girin.
 Web kataloğundaki değişiklikleri yayımlamak için önce bu komutu, ardından
-`pnpm build:web` komutunu çalıştırıp `dist/` klasörünü yayımlayın. Diğer
-platformlar kataloğu
-[ansiklopedi.subadapcocuk.org/subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json)
-adresinden okumaya devam eder.
+`pnpm build:web` komutunu çalıştırıp `dist/` klasörünü yayımlayın. Web sürümü
+kataloğu aynı alandaki `subadapp.json` dosyasından, Android ve iOS sürümleri ise
+[www.subadapcocuk.org/subadapp/subadapp.json](https://www.subadapcocuk.org/subadapp/subadapp.json)
+adresinden okur. Excel'deki değişiklikleri yerel uygulamalara iletmek için
+JSON dosyasını da bu adrese yükleyin.
 
 Statik web çıktısının tamamını sunucudaki `subadapp/` klasörüne yükleyin; `dist`
 klasörünün kendisini değil, içindeki dosya ve klasörleri kopyalayın. Uygulama
