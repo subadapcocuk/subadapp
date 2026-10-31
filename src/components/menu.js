@@ -30,6 +30,13 @@ export const Menu = (props) => {
           label="Tüm Şarkılar"
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
+        {Platform.OS === "web" && (
+          <IconDrawerItem
+            onPress={() => setInstallHelpVisible(true)}
+            icon={"mobile-screen-button"}
+            label="Telefona ekle"
+          />
+        )}
         <IconDrawerItem
           onPress={() => openLink(URLS.WEBSITE)}
           icon={"bookmark"}
@@ -97,13 +104,6 @@ export const Menu = (props) => {
           icon={"share"}
           label="Paylaş"
         />
-        {Platform.OS === "web" && (
-          <IconDrawerItem
-            onPress={() => setInstallHelpVisible(true)}
-            icon={"mobile-screen-button"}
-            label="Telefona ekle"
-          />
-        )}
       </DrawerContentScrollView>
       {Platform.OS === "web" && (
         <ModalDialog

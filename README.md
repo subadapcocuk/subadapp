@@ -87,6 +87,13 @@ kataloğu aynı alandaki `subadapp.json` dosyasından, Android ve iOS sürümler
 adresinden okur. Excel'deki değişiklikleri yerel uygulamalara iletmek için
 JSON dosyasını da bu adrese yükleyin.
 
+Web derlemesi, FontAwesome yazı tiplerini uygulamada kullanılan simgelerle
+sınırlandırır. İlk derlemeden önce gereken Python paketini bir kez yükleyin:
+
+```bash
+python3 -m pip install -r requirements-web.txt
+```
+
 Statik web çıktısının tamamını sunucudaki `subadapp/` klasörüne yükleyin; `dist`
 klasörünün kendisini değil, içindeki dosya ve klasörleri kopyalayın. Uygulama
 `https://www.subadapcocuk.org/subadapp/` ve
