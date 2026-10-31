@@ -94,6 +94,13 @@ sınırlandırır. İlk derlemeden önce gereken Python paketini bir kez yükley
 python3 -m pip install -r requirements-web.txt
 ```
 
+Web derlemesi ayrıca uygulama kabuğunu ve katalog JSON dosyasını ilk çevrimiçi
+açılışta önbelleğe alan bir service worker üretir. Sonraki açılışlarda bağlantı
+yoksa uygulama ve önceden yayımlanmış katalog kullanılabilir. Katalog internete
+bağlıyken ağdan güncellenir; harici görseller ve şarkı sesleri çevrimdışı
+indirilmez. Yeni web sürümleri yayımlandığında service worker uygulama
+dosyalarını yeniler ve eski önbelleği temizler.
+
 Statik web çıktısının tamamını sunucudaki `subadapp/` klasörüne yükleyin; `dist`
 klasörünün kendisini değil, içindeki dosya ve klasörleri kopyalayın. Uygulama
 `https://www.subadapcocuk.org/subadapp/` ve
@@ -145,10 +152,12 @@ karekod okutularak uygulama denenebilir.
 Web çıktısı, HTTPS destekleyen bir statik barındırma hizmetinde yayımlanabilir.
 PWA olarak iPhone'da kullanmak için siteyi Safari'de açıp paylaş menüsünden
 “Ana Ekrana Ekle” seçeneğini kullanın. Web sürümü şarkıları internet üzerinden
-çalacağı için internet bağlantısı gerekir; arka planda çalma ve kilit ekranı
-kontrolleri yerel iOS uygulamasındaki gibi garanti edilmez. Web sürümü şarkı
-kataloğunu aynı alan adındaki `public/subadapp.json` dosyasından yükler; yeni
-web yayını öncesinde bu dosyayı güncel katalogla eşitleyin.
+çalacağı için şarkıları dinlemek üzere internet bağlantısı gerekir; arka planda
+çalma ve kilit ekranı kontrolleri yerel iOS uygulamasındaki gibi garanti
+edilmez. Web sürümü şarkı kataloğunu aynı alan adındaki `public/subadapp.json`
+dosyasından yükler; yeni web yayını öncesinde bu dosyayı güncel katalogla
+eşitleyin. Uygulama kabuğu ve katalog ilk çevrimiçi açılıştan sonra çevrimdışı
+da açılabilir; harici görseller ve sesler çevrimdışı kullanılamaz.
 
 ## Şubadap Çocuk
 

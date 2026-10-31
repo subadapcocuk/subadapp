@@ -20,7 +20,7 @@
     "preinstall": "npx only-allow pnpm",
     "start": "expo start",
     "web": "expo start --web",
-    "build:web": "expo export --platform web && python3 scripts/subset_web_icons.py",
+    "build:web": "expo export --platform web && python3 scripts/subset_web_icons.py && python3 scripts/generate_pwa_service_worker.py",
     "fix": "expo install --fix",
     "doctor": "expo doctor",
     "android": "expo run:android",

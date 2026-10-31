@@ -32,5 +32,24 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          const manifest = document.querySelector('link[rel="manifest"]');
+          const serviceWorkerUrl = new URL(
+            "service-worker.js",
+            manifest.href
+          );
+          navigator.serviceWorker
+            .register(serviceWorkerUrl)
+            .catch((error) => {
+              console.error(
+                "ŞubadApp çevrimdışı desteği etkinleştirilemedi:",
+                error
+              );
+            });
+        });
+      }
+    </script>
   </body>
 </html>
