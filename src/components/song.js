@@ -2,6 +2,7 @@ import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import {
   highlightText,
+  playlistImageStyle,
   songStyle,
   songText,
   styles,
@@ -25,7 +26,7 @@ export const SongItem = ({
     <View style={songStyle(selected && playing)}>
       {image && (
         <Image
-          style={styles.playlistImage}
+          style={playlistImageStyle()}
           source={{ uri: song.image }}
           accessibilityLabel={`${song.name} şarkısının resmi`}
         />

@@ -1,7 +1,14 @@
 import { useEffect, useState, useMemo } from "react";
 import Constants from "expo-constants";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ScrollView, Text, View, TextInput } from "react-native";
+import {
+  Platform,
+  ScrollView,
+  Text,
+  View,
+  TextInput,
+  useWindowDimensions,
+} from "react-native";
 import * as Linking from "expo-linking";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useNavigation } from "@react-navigation/native";
@@ -18,9 +25,10 @@ import { SongDetail, SongItem } from "../components/song";
 import { TextButton, DrawerMenuButton } from "../components/buttons";
 import Playlists from "../components/playlists";
 
-function tabScreenOptions(label) {
+function tabScreenOptions(label, reserveMenuSpace) {
   return {
     tabBarLabel: label,
+    tabBarStyle: reserveMenuSpace ? { paddingLeft: 48 } : undefined,
     tabBarLabelStyle: {
       fontSize: normalize(22),
       textAlign: "center",
@@ -69,6 +77,8 @@ const ORDER_TYPES = [
 const Tab = createBottomTabNavigator();
 
 export const PlaylistScreen = ({ route }) => {
+  const { width } = useWindowDimensions();
+  const reserveMenuSpace = Platform.OS === "web" && width < 768;
   const [order, setOrder] = useState(2);
   const [tabIndex, setTabIndex] = useState(0);
   const [filter, setFilter] = useState("");
@@ -222,10 +232,16 @@ export const PlaylistScreen = ({ route }) => {
   return (
     <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
       <Tab.Navigator>
-        <Tab.Screen name="şarkılar" options={tabScreenOptions("Şarkılar")}>
+        <Tab.Screen
+          name="şarkılar"
+          options={tabScreenOptions("Şarkılar", reserveMenuSpace)}
+        >
           {renderSongsScreen}
         </Tab.Screen>
-        <Tab.Screen name="çalma listesi" options={tabScreenOptions("Çalma Listesi")}>
+        <Tab.Screen
+          name="çalma listesi"
+          options={tabScreenOptions("Çalma Listesi", reserveMenuSpace)}
+        >
           {renderPlaylistScreen}
         </Tab.Screen>
       </Tab.Navigator>

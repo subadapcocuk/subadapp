@@ -1,12 +1,14 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Platform, useWindowDimensions } from "react-native";
 import Menu from "../components/menu";
 import { PlaylistScreen } from "../screens";
-import { isLargeScreen } from "../helpers";
 
 const Drawer = createDrawerNavigator();
 
 export const NavigationService = () => {
+  const { width } = useWindowDimensions();
+  const isLargeScreen = width >= 768;
 
   return (
     <NavigationContainer accessibilityLabel="Uygulama gezintisi" >
@@ -16,7 +18,13 @@ export const NavigationService = () => {
         screenOptions={{
           headerShown: false,
           drawerType: isLargeScreen ? "permanent" : "front",
-          drawerStyle: isLargeScreen ? null : { width: "60%" },
+          drawerStyle: isLargeScreen
+            ? Platform.OS === "web"
+              ? { width: 240 }
+              : null
+            : Platform.OS === "web"
+              ? { width: Math.min(width * 0.82, 320) }
+              : { width: "60%" },
         }}
       >
         <Drawer.Screen

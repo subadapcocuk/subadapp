@@ -3,24 +3,24 @@ export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
 
-const MAX_WEB_APP_WIDTH = 600;
+const MAX_WEB_APP_WIDTH = 960;
 const getDeviceWidth = (width) =>
   Platform.OS === "web" ? Math.min(width, MAX_WEB_APP_WIDTH) : width;
 
-export let deviceWidth = getDeviceWidth(Dimensions.get("window").width);
-export let deviceHeight = Dimensions.get("window").height;
-export let isLargeScreen = deviceWidth >= 768;
+const initialWindow = Dimensions.get("window");
+export let deviceWidth = getDeviceWidth(initialWindow.width);
+export let deviceHeight = initialWindow.height;
+export let isLargeScreen = initialWindow.width >= 768;
 
 Dimensions.addEventListener("change", ({ window }) => {
   deviceWidth = getDeviceWidth(window.width);
   deviceHeight = window.height;
-  isLargeScreen = deviceWidth >= 768;
+  isLargeScreen = window.width >= 768;
 });
-
-const scale = deviceWidth / 768;
 
 export function normalize(size) {
   if (isLargeScreen) {
+    const scale = deviceWidth / 768;
     const newSize = size * scale;
     if (Platform.OS === "ios") {
       return Math.round(PixelRatio.roundToNearestPixel(newSize));
@@ -46,8 +46,14 @@ export function songStyle(selected) {
   return {
     ...styles.itemStyle,
     backgroundColor: selected ? FOREGROUND : BACKGROUND,
-    width: isLargeScreen ? "75%" : null,
+    width: Platform.OS === "web" ? "100%" : isLargeScreen ? "75%" : null,
+    maxWidth: Platform.OS === "web" ? 760 : undefined,
   };
+}
+
+export function playlistImageStyle() {
+  const size = normalize(Platform.OS === "web" && isLargeScreen ? 64 : 50);
+  return { height: size, width: size, flexShrink: 0 };
 }
 
 export function songText(selected, highlight) {
@@ -92,6 +98,9 @@ export const styles = StyleSheet.create({
     marginTop: 0,
     height: 50,
     flexGrow: 1,
+    ...(Platform.OS === "web"
+      ? { flexShrink: 1, width: 1, minWidth: 0 }
+      : {}),
   },
   scrollView: { backgroundColor: BACKGROUND },
   webview: {
@@ -109,13 +118,24 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     width: "100%",
     backgroundColor: BACKGROUND,
-    bottom: 10,
+    ...(Platform.OS === "web"
+      ? {
+          maxWidth: 960,
+          alignSelf: "center",
+          paddingHorizontal: 8,
+          paddingTop: 6,
+          paddingBottom: 8,
+          borderTopWidth: 1,
+          borderTopColor: GRAY,
+        }
+      : { bottom: 10 }),
   },
   playlistButtons: {
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
     width: "100%",
+    ...(Platform.OS === "web" ? { maxWidth: 560, alignSelf: "center" } : {}),
   },
   tabItemContainer: {
     backgroundColor: BACKGROUND,
@@ -162,10 +182,19 @@ export const styles = StyleSheet.create({
   },
   centerView: {
     flexDirection: "row",
-    alignSelf: "stretch",
     justifyContent: "space-around",
     backgroundColor: BACKGROUND,
-    width: isLargeScreen ? "75%" : null,
+    width:
+      Platform.OS === "web" ? "100%" : isLargeScreen ? "75%" : null,
+    maxWidth: Platform.OS === "web" ? 760 : undefined,
+    alignSelf: Platform.OS === "web" ? "center" : "stretch",
+    paddingHorizontal: Platform.OS === "web" ? 8 : 0,
+  },
+  iconButtonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: BACKGROUND,
   },
   textLink: {
     color: FOREGROUND,
@@ -188,10 +217,6 @@ export const styles = StyleSheet.create({
   playlistSongView: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  playlistImage: {
-    height: normalize(50),
-    width: normalize(50),
   },
   songStyle: {
     flexDirection: "row",

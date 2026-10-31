@@ -1,5 +1,11 @@
 import React from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  Text,
+  TouchableOpacity,
+  useWindowDimensions,
+  View,
+} from "react-native";
 import { DrawerItem } from "@react-navigation/drawer";
 import FontAwesome from "@expo/vector-icons/FontAwesome6";
 import { BACKGROUND, FOREGROUND, normalize, styles } from "../helpers/styles";
@@ -13,7 +19,11 @@ export const IconButton = ({
   fontSize = 20,
 }) => {
   return (
-    <View style={styles.centerView}>
+    <View
+      style={
+        Platform.OS === "web" ? styles.iconButtonContainer : styles.centerView
+      }
+    >
       <FontAwesome style={{ padding: 5 }} size={normalize(size)} name={icon} backgroundColor={BACKGROUND} color={FOREGROUND} onPress={onPress} accessibilityLabel={label ? label : title} />
       {title && <Text style={{ color: FOREGROUND, fontSize: normalize(fontSize) }}>{title}</Text>}
     </View>
@@ -37,16 +47,23 @@ export const TextButton = ({ title, onPress, label = null }) => <TouchableOpacit
   <Text style={{ color: BACKGROUND, fontSize: normalize(20) }}>{title}</Text>
 </TouchableOpacity>
 
-export const DrawerMenuButton = ({ navigation }) => <TouchableOpacity
-  accessibilityLabel="Dolaşım Menüsünü Aç"
-  onPress={() => navigation.toggleDrawer && navigation.toggleDrawer()}
-  style={{
-    position: "absolute",
-    left: 10,
-    bottom: 10,
-    zIndex: 1000,
-    padding: 0
-  }}
->
-  <FontAwesome name="bars" size={normalize(36)} color={FOREGROUND} />
-</TouchableOpacity>
+export const DrawerMenuButton = ({ navigation }) => {
+  const { width } = useWindowDimensions();
+  if (Platform.OS === "web" && width >= 768) return null;
+
+  return (
+    <TouchableOpacity
+      accessibilityLabel="Dolaşım Menüsünü Aç"
+      onPress={() => navigation.toggleDrawer && navigation.toggleDrawer()}
+      style={{
+        position: "absolute",
+        left: 10,
+        bottom: 10,
+        zIndex: 1000,
+        padding: 0,
+      }}
+    >
+      <FontAwesome name="bars" size={normalize(36)} color={FOREGROUND} />
+    </TouchableOpacity>
+  );
+};
