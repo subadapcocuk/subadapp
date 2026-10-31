@@ -1,4 +1,4 @@
-import { Alert, Modal, View } from "react-native";
+import { Alert, Modal, Platform, View } from "react-native";
 import Toast from "react-native-toast-message";
 import { deviceWidth, deviceHeight, styles } from "./styles";
 
@@ -8,6 +8,15 @@ export const confirm = (
   onOK = () => { },
   onCancel = () => { }
 ) => {
+  if (Platform.OS === "web") {
+    if (window.confirm(`${title}\n\n${message}`)) {
+      onOK();
+    } else {
+      onCancel();
+    }
+    return;
+  }
+
   Alert.alert(title, message, [
     {
       text: "Evet",

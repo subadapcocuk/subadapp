@@ -8,10 +8,13 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
+dist/
+.~lock.*#
 .vscode
 .idea
 android/
 ios/
+*.pyc
 
 # macOS
 .DS_Store

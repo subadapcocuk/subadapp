@@ -54,6 +54,8 @@ kullanabilirsiniz:
 - `pnpm add <paket adı>`: Yeni bir paket/kütüphane eklemek için, belli bir
   pakete ihtiyacınız varsa <https://www.npmjs.com/> sayfasında arayabilirsiniz.
 - `pnpm start`: Expo sunucusunu başlatır.
+- `pnpm web`: Uygulamayı web tarayıcısında geliştirir ve test eder.
+- `pnpm build:web`: Statik web çıktısını `dist/` klasörüne oluşturur.
 - `pnpm android`: Android emülatörünü başlatır, bunu ayrı bir terminalde
   başlatmanız gerekiyor.
 - `pnpm ios`: iOS emülatörünü başlatır, bunu ayrı bir terminalde başlatmanız
@@ -65,11 +67,30 @@ kullanabilirsiniz:
 - `pnpm submit:android`: Android paketini Play Store'a gönderir.
 - `pnpm submit:ios`: iOS paketini App Store'a gönderir.
 
-Tüm albümler ve şarkılar
-[subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json) olarak
-saklanıyor. Kolayca güncelleme ve JSON dosyalarını oluşturmak için
-[subadapp.xlsx](./data/subadapp.xlsx) dosyasından ve
-<https://codebeautify.org/excel-to-json> sitesinden yararlanılabilir.
+Tüm albüm ve şarkı bilgileri [data/subadapp.xlsx](./data/subadapp.xlsx)
+dosyasında tutulur. Web sürümünün kullanacağı JSON'u güncellemek için proje
+kök dizininde şu komutu çalıştırın:
+
+```bash
+python3 data/export_subadapp.py
+```
+
+URL'ler Excel hücrelerinde köprü olarak değil, düz metin olarak tutulmalıdır.
+Komut bu hücre metinlerini `public/subadapp.json` dosyasına aktarır. Görsel
+adresi doğrudan bir resim dosyasına gitmiyorsa betik uyarı verir; şarkı için
+geçerli albüm görselini, o da geçersizse uygulama ikonunu kullanır. Doğru
+görseli eklemek için Excel'deki `image` hücresine doğrudan resim adresi girin.
+Web kataloğundaki değişiklikleri yayımlamak için önce bu komutu, ardından
+`pnpm build:web` komutunu çalıştırıp `dist/` klasörünü yayımlayın. Diğer
+platformlar kataloğu
+[ansiklopedi.subadapcocuk.org/subadapp.json](https://ansiklopedi.subadapcocuk.org/subadapp.json)
+adresinden okumaya devam eder.
+
+Statik web çıktısının tamamını sunucudaki `subadapp/` klasörüne yükleyin; `dist`
+klasörünün kendisini değil, içindeki dosya ve klasörleri kopyalayın. Uygulama
+`https://www.subadapcocuk.org/subadapp/` ve
+`https://ansiklopedi.subadapcocuk.org/subadapp/` adreslerinde çalışacak şekilde
+yapılandırılmıştır.
 
 ## Yayınlama ve test etme
 
@@ -95,10 +116,16 @@ pnpm release major   # 0.27.5 -> 1.0.0
 git push --follow-tags origin main
 ```
 
-Yerelde test etmek için şu komutlar kullanılabilir:
+Yerel uygulamayı Expo üzerinden başlatmak için:
 
 ```bash
 pnpm start
+```
+
+Web uygulamasını tarayıcıda geliştirmek ve test etmek için:
+
+```bash
+pnpm web
 ```
 
 ⚠️ Bu komutların çalışması için yukarıda bağlantıları verilen `node`, `pnpm` ve
@@ -106,6 +133,14 @@ pnpm start
 
 Komut satırındaki yönergelere uyulabilir veya açılacak pencereden telefonda
 karekod okutularak uygulama denenebilir.
+
+Web çıktısı, HTTPS destekleyen bir statik barındırma hizmetinde yayımlanabilir.
+PWA olarak iPhone'da kullanmak için siteyi Safari'de açıp paylaş menüsünden
+“Ana Ekrana Ekle” seçeneğini kullanın. Web sürümü şarkıları internet üzerinden
+çalacağı için internet bağlantısı gerekir; arka planda çalma ve kilit ekranı
+kontrolleri yerel iOS uygulamasındaki gibi garanti edilmez. Web sürümü şarkı
+kataloğunu aynı alan adındaki `public/subadapp.json` dosyasından yükler; yeni
+web yayını öncesinde bu dosyayı güncel katalogla eşitleyin.
 
 ## Şubadap Çocuk
 

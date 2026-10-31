@@ -1,0 +1,25 @@
+{
+  "id": "./",
+  "name": "ŞubadApp",
+  "short_name": "ŞubadApp",
+  "description": "Şubadap Çocuk şarkıları",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#3D0C71",
+  "icons": [
+    {
+      "src": "./subadapp-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./subadapp-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

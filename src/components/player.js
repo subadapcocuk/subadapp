@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as Audio from "expo-audio";
 import { File, Directory, Paths } from "expo-file-system";
@@ -40,6 +40,8 @@ const Player = () => {
   const [loop, setLoop] = useState(0);
 
   useEffect(() => {
+    if (Platform.OS === "web") return;
+
     Audio.setAudioModeAsync({
       allowsRecording: false,
       shouldPlayInBackground: true,
@@ -212,7 +214,9 @@ const Player = () => {
       if (!player) return;
       if (!playlist?.current) return;
       const thisRequestId = ++playRequestId;
-      const filePath = await saveSong(playlist.current.url);
+      const filePath = Platform.OS === "web"
+        ? playlist.current.url
+        : await saveSong(playlist.current.url);
       if (thisRequestId !== playRequestId) return; // stale request guard
       try {
         // pause any current playback before replacing
@@ -230,13 +234,15 @@ const Player = () => {
           artworkUrl: playlist.current.image,
         };
 
-        try {
-          player.setActiveForLockScreen(true, metadata, {
-            showSeekBackward: true,
-            showSeekForward: true,
-          });
-        } catch (e) {
-          console.log(`setActiveForLockScreen ${e}`);
+        if (Platform.OS !== "web") {
+          try {
+            player.setActiveForLockScreen(true, metadata, {
+              showSeekBackward: true,
+              showSeekForward: true,
+            });
+          } catch (e) {
+            console.log(`setActiveForLockScreen ${e}`);
+          }
         }
 
         player.play();

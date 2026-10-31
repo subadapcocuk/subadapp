@@ -1,13 +1,23 @@
 import React from "react";
-import { Platform } from "react-native";
+import { Platform, ScrollView, Text, View } from "react-native";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import * as Linking from "expo-linking";
-import { IconDrawerItem } from "../components/buttons";
-import { shareApp } from "../helpers";
+import { IconDrawerItem, TextButton } from "../components/buttons";
+import { deviceHeight, ModalDialog, shareApp, styles } from "../helpers";
 import { URLS } from "../constants/urls";
 
 export const Menu = (props) => {
   const { navigation } = props;
+  const [installHelpVisible, setInstallHelpVisible] = React.useState(false);
+
+  const openLink = (url) => {
+    if (Platform.OS === "web") {
+      window.open(url, "_blank", "noopener,noreferrer");
+      return;
+    }
+
+    return Linking.openURL(url);
+  };
 
   return (
     <>
@@ -21,64 +31,64 @@ export const Menu = (props) => {
           onPress={() => navigation.navigate("Playlist", { tabIndex: 0 })}
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.WEBSITE)}
+          onPress={() => openLink(URLS.WEBSITE)}
           icon={"bookmark"}
           label="Subadap.Org"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.ENCYCLOPEDIA)}
+          onPress={() => openLink(URLS.ENCYCLOPEDIA)}
           icon={"book"}
           label={"Ansiklopedi"}
         />
         {Platform.OS !== "ios" && (
           <IconDrawerItem
-            onPress={() => Linking.openURL(URLS.KREOSUS)}
+            onPress={() => openLink(URLS.KREOSUS)}
             icon={"hand-holding-dollar"}
             label="Kreosus"
           />
         )}
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.CONCERTS)}
+          onPress={() => openLink(URLS.CONCERTS)}
           icon={"calendar-days"}
           label="Konserler"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.YOUTUBE)}
+          onPress={() => openLink(URLS.YOUTUBE)}
           icon={"youtube"}
           label="Youtube"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.FACEBOOK)}
+          onPress={() => openLink(URLS.FACEBOOK)}
           icon={"facebook"}
           label="Facebook"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.INSTAGRAM)}
+          onPress={() => openLink(URLS.INSTAGRAM)}
           icon={"instagram"}
           label="Instagram"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.TWITTER)}
+          onPress={() => openLink(URLS.TWITTER)}
           icon={"twitter"}
           label="Twitter"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.CONTACT)}
+          onPress={() => openLink(URLS.CONTACT)}
           icon={"envelope"}
           label="İletişim"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.COPYLEFT)}
+          onPress={() => openLink(URLS.COPYLEFT)}
           icon={"creative-commons-nc"}
           label="Copyleft"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.PRIVACY)}
+          onPress={() => openLink(URLS.PRIVACY)}
           icon={"user-shield"}
           label="Gizlilik Politikası"
         />
         <IconDrawerItem
-          onPress={() => Linking.openURL(URLS.ABOUT)}
+          onPress={() => openLink(URLS.ABOUT)}
           icon={"question"}
           label="Hakkında"
         />
@@ -87,7 +97,51 @@ export const Menu = (props) => {
           icon={"share"}
           label="Paylaş"
         />
+        {Platform.OS === "web" && (
+          <IconDrawerItem
+            onPress={() => setInstallHelpVisible(true)}
+            icon={"mobile-screen-button"}
+            label="Telefona ekle"
+          />
+        )}
       </DrawerContentScrollView>
+      {Platform.OS === "web" && (
+        <ModalDialog
+          visible={installHelpVisible}
+          onDismiss={() => setInstallHelpVisible(false)}
+          height={deviceHeight * 0.8}
+        >
+          <ScrollView style={{ width: "100%" }}>
+            <View style={{ padding: 16 }}>
+              <Text style={[styles.text, { fontWeight: "bold", marginBottom: 12 }]}>
+                ŞubadApp’ı telefona ekle
+              </Text>
+              <Text style={{ color: "#3D0C71", fontSize: 18, fontWeight: "bold" }}>
+                iPhone (Safari)
+              </Text>
+              <Text style={{ color: "#3D0C71", fontSize: 16, marginBottom: 16 }}>
+                1. Bu sayfayı Safari’de açın.{"\n"}
+                2. Paylaş düğmesine dokunun.{"\n"}
+                3. “Ana Ekrana Ekle”yi seçin ve “Ekle”ye dokunun.
+              </Text>
+              <Text style={{ color: "#3D0C71", fontSize: 18, fontWeight: "bold" }}>
+                Android (Chrome)
+              </Text>
+              <Text style={{ color: "#3D0C71", fontSize: 16 }}>
+                1. Chrome menüsünü (⋮) açın.{"\n"}
+                2. “Ana ekrana ekle” veya “Uygulamayı yükle”yi seçin.{"\n"}
+                3. Onaylamak için “Ekle” ya da “Yükle”ye dokunun.
+              </Text>
+            </View>
+          </ScrollView>
+          <View style={styles.centerView}>
+            <TextButton
+              title="Kapat"
+              onPress={() => setInstallHelpVisible(false)}
+            />
+          </View>
+        </ModalDialog>
+      )}
     </>
   );
 };

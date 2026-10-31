@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Platform } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { error } from "./dialog";
 import { URLS } from "../constants/urls";
@@ -6,7 +7,7 @@ import { URLS } from "../constants/urls";
 export const AppContext = React.createContext();
 
 const SUBADAP_PLAYLIST = "SUBADAP::PLAYLIST";
-const SONGS = URLS.SONGS_JSON;
+const SONGS = Platform.OS === "web" ? "./subadapp.json" : URLS.SONGS_JSON;
 
 export const ContextProvider = ({ children }) => {
   const [albums, setAlbums] = useState([]);
@@ -29,11 +30,7 @@ export const ContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    fetch(SONGS, {
-      headers: {
-        "Cache-Control": "no-cache",
-      },
-    })
+    fetch(SONGS)
       .then((response) => response.json())
       .then((data) => {
         setAlbums(data["albums"]);

@@ -3,12 +3,16 @@ export const GRAY = "#F0F0F0";
 export const FOREGROUND = "#3D0C71";
 export const BACKGROUND = "#FFFFFF";
 
-export let deviceWidth = Dimensions.get("window").width;
+const MAX_WEB_APP_WIDTH = 600;
+const getDeviceWidth = (width) =>
+  Platform.OS === "web" ? Math.min(width, MAX_WEB_APP_WIDTH) : width;
+
+export let deviceWidth = getDeviceWidth(Dimensions.get("window").width);
 export let deviceHeight = Dimensions.get("window").height;
 export let isLargeScreen = deviceWidth >= 768;
 
 Dimensions.addEventListener("change", ({ window }) => {
-  deviceWidth = window.width;
+  deviceWidth = getDeviceWidth(window.width);
   deviceHeight = window.height;
   isLargeScreen = deviceWidth >= 768;
 });
@@ -91,7 +95,7 @@ export const styles = StyleSheet.create({
   },
   scrollView: { backgroundColor: BACKGROUND },
   webview: {
-    width: deviceWidth,
+    width: "100%",
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
@@ -111,7 +115,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignSelf: "stretch",
     justifyContent: "space-around",
-    width: deviceWidth,
+    width: "100%",
   },
   tabItemContainer: {
     backgroundColor: BACKGROUND,
@@ -119,7 +123,7 @@ export const styles = StyleSheet.create({
   },
   topView: {
     justifyContent: "space-around",
-    width: deviceWidth,
+    width: "100%",
     position: "absolute",
     top: 0,
   },
@@ -229,7 +233,7 @@ export const styles = StyleSheet.create({
   seekBar: {
     flexDirection: "row",
     alignItems: "center",
-    width: deviceWidth,
+    width: "100%",
   },
   modalView: {
     flex: 1,

@@ -46,8 +46,17 @@
     ],
     "platforms": [
       "ios",
-      "android"
+      "android",
+      "web"
     ],
+    "web": {
+      "bundler": "metro",
+      "output": "single",
+      "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "baseUrl": "/subadapp"
+    },
     "ios": {
       "supportsTablet": true,
       "buildNumber": "0.28.0",
